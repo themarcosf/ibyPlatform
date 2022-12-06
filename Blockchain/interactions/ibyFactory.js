@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "./config.env" });
+require("dotenv").config({ path: `${__dirname}/../config.env` });
 const { ethers } = require("ethers");
 const { getWallet } = require("./../utils/utils");
 const IbyFactory = require("./../artifacts/contracts/ibyFactory.sol/IbyFactory.json");
@@ -100,10 +100,11 @@ const factoryEventListener = async function () {
 };
 
 (async function () {
-  for (let i = 0; i < (await factoryContract("realtyCounter")); i++) {
-    console.log(await factoryContract("realtyInventory", i));
-  }
+  console.log(await factoryContract("realtyCounter"));
 
+  // for (let i = 0; i < (await factoryContract("realtyCounter")); i++) {
+  //   console.log(await factoryContract("realtyInventory", i));
+  // }
   /*
   factoryContract EXAMPLES :
     1. console.log(await factoryContract("realtyCounter"));
