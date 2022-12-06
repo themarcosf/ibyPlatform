@@ -1,0 +1,20 @@
+.navbar{
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 60%;
+
+    li {
+        color: #2e65bc;
+        font-size: medium;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+
+        img{
+            width: 2rem;
+        }
+        
+    }
+}
