@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import Router from 'next/router'
 import { useForm } from "react-hook-form";
 
@@ -19,7 +18,7 @@ export default function Home() {
 
   const login = (data) => {
     if(data.CPF == 17097167700 && data.password == 123456){
-      Router.push('/home')
+      Router.push('/pf')
     }
   }
 
@@ -27,12 +26,12 @@ export default function Home() {
     <>
       <Header>
         <Image src="/gov_logo.svg" width={89} height={32} alt="gov_logo" />
-        <Link
+        <a
           target={"_blank"}
           href={"https://www.gov.br/governodigital/pt-br/vlibras"}
         >
           <strong>VLibras</strong>
-        </Link>
+        </a>
       </Header>
       <div className={styles.content}>
         <div className={styles.imgContainer}>

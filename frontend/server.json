@@ -1,0 +1,121 @@
+{
+  "properties": [
+    {
+      "isBuilding": false,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsSRtpghzqTqt3K0sQ3rzOTYkMUwz-MsIKXCMZjgHtjExmg4WIZ7-lP9f_PsBGbSgCrsA&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzSlzX4SPwngqFgPuOFci1NixCyBGM9c4K1-ARZUMR9Smv7bZVB-2Qxsd0_4RFracvOVk&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaBJCYdOqroTH_uJ-DPa2YBIFSktcD7vHJR29-z9wW-50BeF8F1K4tw5InTHCnGr__LTk&usqp=CAU"
+      ]
+    },
+    {
+      "isBuilding": false,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsSRtpghzqTqt3K0sQ3rzOTYkMUwz-MsIKXCMZjgHtjExmg4WIZ7-lP9f_PsBGbSgCrsA&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzSlzX4SPwngqFgPuOFci1NixCyBGM9c4K1-ARZUMR9Smv7bZVB-2Qxsd0_4RFracvOVk&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaBJCYdOqroTH_uJ-DPa2YBIFSktcD7vHJR29-z9wW-50BeF8F1K4tw5InTHCnGr__LTk&usqp=CAU"
+      ]
+    },
+    {
+      "isBuilding": true,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsSRtpghzqTqt3K0sQ3rzOTYkMUwz-MsIKXCMZjgHtjExmg4WIZ7-lP9f_PsBGbSgCrsA&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzSlzX4SPwngqFgPuOFci1NixCyBGM9c4K1-ARZUMR9Smv7bZVB-2Qxsd0_4RFracvOVk&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaBJCYdOqroTH_uJ-DPa2YBIFSktcD7vHJR29-z9wW-50BeF8F1K4tw5InTHCnGr__LTk&usqp=CAU"
+      ]
+    },
+    {
+      "isBuilding": true,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsSRtpghzqTqt3K0sQ3rzOTYkMUwz-MsIKXCMZjgHtjExmg4WIZ7-lP9f_PsBGbSgCrsA&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzSlzX4SPwngqFgPuOFci1NixCyBGM9c4K1-ARZUMR9Smv7bZVB-2Qxsd0_4RFracvOVk&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaBJCYdOqroTH_uJ-DPa2YBIFSktcD7vHJR29-z9wW-50BeF8F1K4tw5InTHCnGr__LTk&usqp=CAU"
+      ]
+    },
+    {
+      "isBuilding": true,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsSRtpghzqTqt3K0sQ3rzOTYkMUwz-MsIKXCMZjgHtjExmg4WIZ7-lP9f_PsBGbSgCrsA&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzSlzX4SPwngqFgPuOFci1NixCyBGM9c4K1-ARZUMR9Smv7bZVB-2Qxsd0_4RFracvOVk&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaBJCYdOqroTH_uJ-DPa2YBIFSktcD7vHJR29-z9wW-50BeF8F1K4tw5InTHCnGr__LTk&usqp=CAU"
+      ]
+    },
+    {
+      "isBuilding": true,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsSRtpghzqTqt3K0sQ3rzOTYkMUwz-MsIKXCMZjgHtjExmg4WIZ7-lP9f_PsBGbSgCrsA&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzSlzX4SPwngqFgPuOFci1NixCyBGM9c4K1-ARZUMR9Smv7bZVB-2Qxsd0_4RFracvOVk&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaBJCYdOqroTH_uJ-DPa2YBIFSktcD7vHJR29-z9wW-50BeF8F1K4tw5InTHCnGr__LTk&usqp=CAU"
+      ]
+    },
+    {
+      "isBuilding": true,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsSRtpghzqTqt3K0sQ3rzOTYkMUwz-MsIKXCMZjgHtjExmg4WIZ7-lP9f_PsBGbSgCrsA&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzSlzX4SPwngqFgPuOFci1NixCyBGM9c4K1-ARZUMR9Smv7bZVB-2Qxsd0_4RFracvOVk&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaBJCYdOqroTH_uJ-DPa2YBIFSktcD7vHJR29-z9wW-50BeF8F1K4tw5InTHCnGr__LTk&usqp=CAU"
+      ]
+    },
+    {
+      "isBuilding": true,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsSRtpghzqTqt3K0sQ3rzOTYkMUwz-MsIKXCMZjgHtjExmg4WIZ7-lP9f_PsBGbSgCrsA&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzSlzX4SPwngqFgPuOFci1NixCyBGM9c4K1-ARZUMR9Smv7bZVB-2Qxsd0_4RFracvOVk&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaBJCYdOqroTH_uJ-DPa2YBIFSktcD7vHJR29-z9wW-50BeF8F1K4tw5InTHCnGr__LTk&usqp=CAU"
+      ]
+    },
+    {
+      "isBuilding": false,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsSRtpghzqTqt3K0sQ3rzOTYkMUwz-MsIKXCMZjgHtjExmg4WIZ7-lP9f_PsBGbSgCrsA&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzSlzX4SPwngqFgPuOFci1NixCyBGM9c4K1-ARZUMR9Smv7bZVB-2Qxsd0_4RFracvOVk&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaBJCYdOqroTH_uJ-DPa2YBIFSktcD7vHJR29-z9wW-50BeF8F1K4tw5InTHCnGr__LTk&usqp=CAU"
+      ]
+    }
+  ]
+}

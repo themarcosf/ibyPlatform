@@ -1,0 +1,50 @@
+.buildingCard{
+    margin-bottom: 1rem;
+}
+
+.imgCard {
+  background: #f9f9f9;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 2rem;
+  padding-left: 0.5rem;
+  margin-bottom: 1rem;
+
+  img {
+    border-radius: 2rem;
+  }
+}
+
+.streetBx {
+  display: flex;
+  justify-content: space-between;
+
+  h3 {
+    font-weight: 600;
+  }
+}
+
+.address {
+  color: #747474;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.buildingInfos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+
+  p {
+    font-weight: 600;
+  }
+}
+
+.meters {
+  display: flex;
+  align-items: center;
+  p,
+  sup {
+    color: #2e65bc;
+  }
+}
