@@ -1,54 +1,85 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.15;
 
-/**
- * CONVENTIONS:
- *
- * function parameters start with _
- * private function names start with _
- */
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "./helpers.sol";
 
-contract IbyFactory {
-    event NewRealty(uint realtyId, string location, uint value);
+contract IbyFactory is Ownable, Helpers {
+    using SafeMath for uint256;
 
-    uint public realtyCounter = 0;
-    realty[] public realtyInventory;
+    event NewRealty(realtyDescription);
 
-    struct realty {
+    uint public totalRealtyCounter = 0;
+    realtyDescription[] public totalRealty;
+    mapping(uint => address) public realtyToOwner;
+    mapping(address => uint) public ownerToRealtyCount;
+
+    struct realtyDescription {
         uint id;
-        string location;
-        uint value;
+        uint32 value;
+        string streetAddress;
+        string neighborhood;
+        string city;
+        string state;
+        string sqMeters;
+        address legalOwner;
     }
 
-    function _createRealty(
-        uint _id,
-        string memory _location,
-        uint _value
-    ) private {
-        realtyInventory.push(realty(_id, _location, _value));
-        emit NewRealty(
-            realtyInventory[realtyCounter].id,
-            realtyInventory[realtyCounter].location,
-            realtyInventory[realtyCounter].value
+    function createRealty(
+        uint32 _value,
+        string memory _streetAddress,
+        string memory _neighborhood,
+        string memory _city,
+        string memory _state,
+        string memory _sqMeters
+    ) public onlyOwner {
+        uint _id = _generateID(
+            string.concat(
+                _streetAddress,
+                _neighborhood,
+                _city,
+                _state,
+                _sqMeters
+            )
         );
-        realtyCounter++;
+        realtyDescription memory _newRealty = realtyDescription(
+            _id,
+            _value,
+            _streetAddress,
+            _neighborhood,
+            _city,
+            _state,
+            _sqMeters,
+            msg.sender
+        );
+
+        totalRealty.push(_newRealty);
+        realtyToOwner[_newRealty.id] = msg.sender;
+        ownerToRealtyCount[msg.sender]++;
+        totalRealtyCounter++;
+        emit NewRealty(_newRealty);
     }
 
-    function _generateID(
-        string memory _placeholder
-    ) private pure returns (uint) {
-        return uint(keccak256(abi.encodePacked(_placeholder)));
+    function updateValue(
+        realtyDescription storage _realty,
+        uint32 _newValue
+    ) internal onlyOwner {
+        _realty.value = _newValue;
     }
 
-    function _valuationTick(
-        uint _value,
-        uint _ratio
-    ) private pure returns (uint) {
-        return uint(_value * (1 + (1 / _ratio)));
-    }
-
-    function createRealty(string memory _location, uint _value) public {
-        uint id = _generateID(_location);
-        _createRealty(id, _location, _value);
+    function updateOwner(
+        realtyDescription storage _realty,
+        address _newOwner
+    ) internal onlyOwner {
+        address _prevOwner = _realty.legalOwner;
+        _realty.legalOwner = _newOwner;
+        realtyToOwner[_realty.id] = _newOwner;
+        ownerToRealtyCount[_newOwner]++;
+        ownerToRealtyCount[_prevOwner] = SafeMath.sub(
+            ownerToRealtyCount[_prevOwner],
+            1,
+            "Error: underflow @IbyFactory.updateOwner"
+        );
     }
 }
