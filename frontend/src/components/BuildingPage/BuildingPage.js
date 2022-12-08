@@ -59,19 +59,14 @@ function BuildingPage(props) {
           <div className={styles.infoContainer}>
             <p className={styles.minimumValue}>Valor mínimo: {brlPrice}</p>
             <p className={styles.currentValue}>
-              Valor Atual:{" "}
-              <b>
-                <u>
-                  <i>Ultimo lançe</i>
-                </u>
-              </b>
+              Valor Atual: <i>Ultimo lance</i>
             </p>
             <p className={styles.period}>
               Período: {props.startDate}, {props.endDate}
             </p>
           </div>
           <div className={styles.moneyContainer}>
-            <input placeholder="Digiteo valor"r type="number"/>
+            <input placeholder="Digite o valor" r type="number" />
             <button type="button">Fazer meu lance</button>
           </div>
         </Card>
