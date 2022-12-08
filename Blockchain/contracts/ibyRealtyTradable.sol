@@ -11,12 +11,14 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  * @notice implement ERC721 standard to create unique token for each realty property
  */
 contract IbyRealtyID is ERC721URIStorage, Ownable {
+    using Strings for string;
+
     /**
      * @notice stardard constructor ERC721
      *         tokenName : Iby Realty ID
      *         tokenSymbol : IBY
      */
-    constructor() ERC721("Iby Realty ID", "IBY") {}
+    constructor() ERC721("Iby Realty Tradable", "IBY-T") {}
 
     /**
      * @notice mints a new token and store metadata
@@ -38,7 +40,11 @@ contract IbyRealtyID is ERC721URIStorage, Ownable {
         uint _tokenId,
         string memory _tokenUri
     ) public onlyOwner {
-        _safeMint(owner(), _tokenId);
-        _setTokenURI(_tokenId, _tokenUri);
+        uint _id = _tokenId + 1;
+        for (uint i = 0; i < 20; i++) {
+            _safeMint(owner(), _id);
+            _setTokenURI(_id, _tokenUri);
+            _id++;
+        }
     }
 }
