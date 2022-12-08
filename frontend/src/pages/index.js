@@ -14,7 +14,6 @@ export default function Home() {
     formState: { errors },
   } = useForm();
 
-  const a = 1
 
   const login = (data) => {
     if(data.CPF == 17097167700 && data.password == 123456){
@@ -33,7 +32,7 @@ export default function Home() {
           <strong>VLibras</strong>
         </a>
       </Header>
-      <div className={styles.content}>
+      <div className={styles.loginContent}>
         <div className={styles.imgContainer}>
           <h1>
             Cuide do que realmente <br />

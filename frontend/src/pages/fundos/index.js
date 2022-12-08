@@ -3,7 +3,7 @@ import BuildingCard from "../../components/BuildingCard/BuildingCard";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import NavBar from "../../components/NavBar/NavBar";
-import styles from "./pf.module.scss";
+import styles from "./fundos.module.scss";
 
 function pf({ data }) {
   return (
@@ -19,11 +19,11 @@ function pf({ data }) {
         <NavBar />
       </Header>
       <div className={styles.content}>
-        <h1>Pessoa Física</h1>
+        <h1>Fundos</h1>
         <div className={styles.filters}>Filtros</div>
         <div className={styles.cardsContainer}>
-          {data.map((build) => {
-            if (!build.isBuilding) {
+        {data.map((build) => {
+            if (build.isBuilding) {
               return (
                 <BuildingCard
                   image={build.images[0]}
@@ -55,6 +55,6 @@ export const getStaticProps = async () => {
     props: {
       data,
     },
-    revalidate: 60 * 5,
+    revalidate: 60 * 5
   };
 };

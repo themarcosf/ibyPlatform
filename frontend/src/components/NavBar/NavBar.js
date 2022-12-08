@@ -4,8 +4,8 @@ import styles from "./NavBar.module.scss";
 function NavBar() {
   return (
     <ul className={styles.navbar}>
-      <li><Link className={styles.linkItem} href={'/pessoa-fisica'}>Pessoa Física</Link></li>
-      <li><Link className={styles.linkItem} href={'/pessoa-juridica'}>Pessoa Jurídica</Link></li>
+      <li><Link className={styles.linkItem} href={'/pj'}>Pessoa Jurídica</Link></li>
+      <li><Link className={styles.linkItem} href={'/pf'}>Pessoa Física</Link></li>
       <li><Link className={styles.linkItem} href={'/fundos'}>Fundos</Link></li>
       <li><Link className={styles.linkItem} href={'/sobre'}>Sobre</Link></li>
       <li>

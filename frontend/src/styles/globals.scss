@@ -30,6 +30,12 @@
   }
 }
 
+#__next{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 body {
   background: var(--white);
 }

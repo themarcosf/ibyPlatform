@@ -3,7 +3,7 @@ import BuildingCard from "../../components/BuildingCard/BuildingCard";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import NavBar from "../../components/NavBar/NavBar";
-import styles from "./pf.module.scss";
+import styles from "./pj.module.scss";
 
 function pf({ data }) {
   return (
@@ -19,28 +19,24 @@ function pf({ data }) {
         <NavBar />
       </Header>
       <div className={styles.content}>
-        <h1>Pessoa Física</h1>
+        <h1>Pessoa Jurídica</h1>
         <div className={styles.filters}>Filtros</div>
         <div className={styles.cardsContainer}>
-          {data.map((build) => {
-            if (!build.isBuilding) {
-              return (
-                <BuildingCard
-                  image={build.images[0]}
-                  isBuilding={build.isBuilding}
-                  street={build.street}
-                  district={build.district}
-                  state={build.state}
-                  price={build.price}
-                  area={build.area}
-                  id={build.id}
-                />
-              );
-            }
-          })}
+          {data.map((build) => (
+            <BuildingCard
+              image={build.images[0]}
+              isBuilding={build.isBuilding}
+              street={build.street}
+              district={build.district}
+              state={build.state}
+              price={build.price}
+              area={build.area}
+              id={build.id}
+            />
+          ))}
         </div>
       </div>
-      <Footer />
+      <Footer/>
     </>
   );
 }
@@ -55,6 +51,6 @@ export const getStaticProps = async () => {
     props: {
       data,
     },
-    revalidate: 60 * 5,
+    revalidate: 60 * 5
   };
 };
