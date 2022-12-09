@@ -1,14 +1,13 @@
 require("dotenv").config({ path: `${__dirname}/../config.env` });
 const { ethers } = require("ethers");
-const { getWallet } = require("./../utils/utils");
+const { getWallet, realtyPoolDestruct } = require("./../utils/utils");
 const IbyFactory = require("./../artifacts/contracts/ibyFactory.sol/IbyFactory.json");
 
 /**
- * returns smart contract public functions
- * @param {string} arg :
- *     realtyCounter : CALL uint public
- * @param {number} idx : zero-based index of realty in realtyInventory
- * @param {array} params : create new realty params
+ * smart contract public functions
+ * @param {string} arg : * @param {string} arg : name of function to be called from contract
+ * @param {number} idx : zero-based index of realty properties
+ * @param {array} params : contract function params
  */
 const factoryContract = async function (arg, idx, params) {
   // wallet address
@@ -26,35 +25,6 @@ const factoryContract = async function (arg, idx, params) {
     wallet
   );
 
-  // invoke read method: realtyCounter
-  if (arg === "realtyCounter") {
-    return parseInt(
-      JSON.parse(JSON.stringify(await factory.functions.realtyCounter()))[0]
-        .hex,
-      16
-    );
-  }
-
-  // invoke read method: realtyInventory
-  if (arg === "realtyInventory") {
-    const id = JSON.parse(
-      JSON.stringify(await factory.functions.realtyInventory(idx))
-    )[0].hex;
-
-    const location = JSON.parse(
-      JSON.stringify(await factory.functions.realtyInventory(idx))
-    )[1];
-
-    const value = parseInt(
-      JSON.parse(
-        JSON.stringify(await factory.functions.realtyInventory(idx))
-      )[2].hex,
-      16
-    );
-
-    return { id, location, value };
-  }
-
   // invoke write method: createRealty
   if (arg === "createRealty") {
     const estimateGasLimit = await factory.estimateGas.createRealty(...params);
@@ -69,51 +39,82 @@ const factoryContract = async function (arg, idx, params) {
 
     return await submittedTx.wait();
   }
-};
 
-/**
- * watches for events emitted by factoryContract
- */
-const factoryEventListener = async function () {
-  // connect to Alfajores websocket provider
-  const provider = new ethers.providers.WebSocketProvider(
-    "wss://alfajores-forno.celo-testnet.org/ws"
-  );
+  // invoke write method: updateOwner
+  if (arg === "updateOwner") {
+    const estimateGasLimit = await factory.estimateGas.updateOwner(...params);
 
-  // connect to Factory contract
-  const contract = new ethers.Contract(
-    process.env.IBY_FACTORY_ADDRESS,
-    IbyFactory.abi,
-    provider
-  );
+    const updateOwnerTxUnsigned = await factory.populateTransaction.updateOwner(
+      ...params
+    );
 
-  // event listener
-  contract.on("NewRealty", (realtyId, location, value, event) => {
-    const info = {
-      realtyId,
-      location,
-      value,
-      data: event,
+    updateOwnerTxUnsigned.gasLimit = estimateGasLimit;
+    updateOwnerTxUnsigned.gasPrice = await provider.getGasPrice();
+
+    const submittedTx = await wallet.sendTransaction(updateOwnerTxUnsigned);
+
+    return await submittedTx.wait();
+  }
+
+  // invoke read method: owner
+  if (arg === "owner") {
+    const [owner] = await factory.functions.owner();
+    return owner;
+  }
+
+  // invoke read method: realtyPool
+  if (arg === "realtyPoolCounter") {
+    return parseInt(
+      JSON.parse(JSON.stringify(await factory.functions.realtyPoolCounter()))[0]
+        .hex,
+      16
+    );
+  }
+
+  // invoke read method: realtyInventory
+  if (arg === "realtyPool") {
+    const id = await realtyPoolDestruct(factory, idx, 0);
+    const sqMeters = await realtyPoolDestruct(factory, idx, 1);
+    const lastValuation = await realtyPoolDestruct(factory, idx, 2);
+    const streetAddress = await realtyPoolDestruct(factory, idx, 3);
+    const neighborhood = await realtyPoolDestruct(factory, idx, 4);
+    const city = await realtyPoolDestruct(factory, idx, 5);
+    const state = await realtyPoolDestruct(factory, idx, 6);
+    const legalOwner = await realtyPoolDestruct(factory, idx, 7);
+
+    return {
+      id,
+      sqMeters,
+      lastValuation,
+      streetAddress,
+      neighborhood,
+      city,
+      state,
+      legalOwner,
     };
-    console.log(`Event listener: ${JSON.stringify(info, null, 4)}`);
-  });
+  }
+
+  // invoke read method: realtyToOwner
+  if (arg === "realtyToOwner") {
+    const [owner] = JSON.parse(
+      JSON.stringify(await factory.functions.realtyToOwner(params))
+    );
+    return owner;
+  }
 };
 
 (async function () {
-  console.log(await factoryContract("realtyCounter"));
-
-  // for (let i = 0; i < (await factoryContract("realtyCounter")); i++) {
-  //   console.log(await factoryContract("realtyInventory", i));
-  // }
   /*
-  factoryContract EXAMPLES :
-    1. console.log(await factoryContract("realtyCounter"));
-    2. console.log(await factoryContract("realtyInventory", 0));
-    3. console.log(
-      await factoryContract("createRealty", 0, ["Rua Americo 123", 1_000_000])
-    );
-
-  factoryEventListener EXAMPLES :
-    4. factoryEventListener();
-  */
+   * factoryContract EXAMPLES : detailed comments in the contract
+   *
+   * .. write methods :
+   * 1. console.log(await factoryContract("createRealty", 0, [1_000_000,200,"Rua XPTO, 123","Bairro A","Cidade Alfa","Estado 0x1a9",]));
+   * 2. console.log(await factoryContract("updateOwner", 0, ["0x9fa52c0aa55f4a9c5e6981a2cebd619d35a2f00c1e4526d0997b43d54fb8c200","0x4b20993bc481177ec7e8f571cecae8a9e22c02db",]));
+   *
+   * .. read methods :
+   * 1. console.log(await factoryContract("owner"));
+   * 2. console.log(await factoryContract("realtyPoolCounter"));
+   * 3. console.log(await factoryContract("realtyPool", 0));
+   * 4. console.log(await factoryContract("realtyToOwner",0,"0x9fa52c0aa55f4a9c5e6981a2cebd619d35a2f00c1e4526d0997b43d54fb8c200"));
+   */
 })();

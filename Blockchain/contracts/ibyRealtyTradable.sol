@@ -10,7 +10,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  *
  * @notice implement ERC721 standard to create unique token for each realty property
  */
-contract IbyRealtyID is ERC721URIStorage, Ownable {
+contract IbyRealtyTradable is ERC721URIStorage, Ownable {
     using Strings for string;
 
     /**

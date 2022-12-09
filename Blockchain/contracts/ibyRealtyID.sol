@@ -21,12 +21,7 @@ contract IbyRealtyID is ERC721URIStorage, Ownable {
     /**
      * @notice mints a new token and store metadata
      *         1. safely mint new token and set gov't address as initial owner
-     *         2. set token URI provided by IPFS [optional]
-     *         3. include new token in token collection
-     *         4. set gov't address as initial owner
-     *         5. increase count of gov't owned tokens by 1
-     *         6. increase token counter by 1
-     *         7. automatically emits a event Transfer(address from, address to, uint256 tokenId)
+     *         2. set token URI provided by IPFS
      *
      * @param _tokenId : same as realtyId deployed using IbyFactory
      * @param _tokenUri : graphic resource URI on IPFS
