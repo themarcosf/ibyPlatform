@@ -1,4 +1,3 @@
-require("dotenv").config({ path: "./config.env" });
 const { ContractFactory } = require("ethers");
 const IbyRealtyTradable = require("../artifacts/contracts/IbyRealtyTradable.sol/IbyRealtyTradable.json");
 const { getWallet } = require("../utils/utils");

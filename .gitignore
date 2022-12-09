@@ -1,2 +1,17 @@
-node_modules
+# alfajores testnet | Celo mainnet
+/alfajores/artifacts
+/alfajores/cache
+
+# dependencies
+/node_modules
+/alfajores/node_modules
+
+# misc
+.DS_Store
+
+# debug
+npm-debug.log*
+.pnpm-debug.log*
+
+# local env files
 config.env

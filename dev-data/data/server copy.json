@@ -1,0 +1,192 @@
+{
+  "properties": [
+    {
+      "id": 1,
+      "isBuilding": false,
+      "toRetrofit": false,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel accumsan turpis. Fusce at tristique tortor. Nulla nec dictum urna. Ut facilisis eget neque et ultricies. Suspendisse potenti. Vestibulum pharetra, lectus et rhoncus tempor, turpis magna eleifend tortor, at sollicitudin lacus nibh sed neque. Vestibulum mattis libero quis metus consequat, non laoreet urna euismod. Aenean et ipsum est. Etiam nec lacinia lacus, a pellentesque elit. Praesent bibendum tellus ac faucibus dignissim. Pellentesque at diam eleifend, bibendum quam at, pharetra velit. Morbi eget enim semper, pretium leo eu, convallis felis. Praesent rutrum elit purus, sit amet semper magna ullamcorper sed. Vestibulum eu dapibus arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://classic.exame.com/wp-content/uploads/2020/07/Mitre-empreendimento-Freguesia.jpg?quality=70&strip=info&w=1024",
+        "https://classic.exame.com/wp-content/uploads/2020/09/Apartamento-compacto-incorporadora-You-Inc-mercado-imobiliario.jpg?quality=70&strip=info&w=1024",
+        "https://classic.exame.com/wp-content/uploads/2017/09/apto-decorado-even1.jpg?quality=70&strip=info&w=1000"
+      ],
+      "startDate": "01-01-2023",
+      "endDate": "01-06-2023"
+    },
+    {
+      "id": 2,
+      "isBuilding": true,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel accumsan turpis. Fusce at tristique tortor. Nulla nec dictum urna. Ut facilisis eget neque et ultricies. Suspendisse potenti. Vestibulum pharetra, lectus et rhoncus tempor, turpis magna eleifend tortor, at sollicitudin lacus nibh sed neque. Vestibulum mattis libero quis metus consequat, non laoreet urna euismod. Aenean et ipsum est. Etiam nec lacinia lacus, a pellentesque elit. Praesent bibendum tellus ac faucibus dignissim. Pellentesque at diam eleifend, bibendum quam at, pharetra velit. Morbi eget enim semper, pretium leo eu, convallis felis. Praesent rutrum elit purus, sit amet semper magna ullamcorper sed. Vestibulum eu dapibus arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzSlzX4SPwngqFgPuOFci1NixCyBGM9c4K1-ARZUMR9Smv7bZVB-2Qxsd0_4RFracvOVk&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsSRtpghzqTqt3K0sQ3rzOTYkMUwz-MsIKXCMZjgHtjExmg4WIZ7-lP9f_PsBGbSgCrsA&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaBJCYdOqroTH_uJ-DPa2YBIFSktcD7vHJR29-z9wW-50BeF8F1K4tw5InTHCnGr__LTk&usqp=CAU"
+      ],
+      "startDate": "01-01-2023",
+      "endDate": "01-06-2023"
+    },
+    {
+      "id": 3,
+      "isBuilding": true,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel accumsan turpis. Fusce at tristique tortor. Nulla nec dictum urna. Ut facilisis eget neque et ultricies. Suspendisse potenti. Vestibulum pharetra, lectus et rhoncus tempor, turpis magna eleifend tortor, at sollicitudin lacus nibh sed neque. Vestibulum mattis libero quis metus consequat, non laoreet urna euismod. Aenean et ipsum est. Etiam nec lacinia lacus, a pellentesque elit. Praesent bibendum tellus ac faucibus dignissim. Pellentesque at diam eleifend, bibendum quam at, pharetra velit. Morbi eget enim semper, pretium leo eu, convallis felis. Praesent rutrum elit purus, sit amet semper magna ullamcorper sed. Vestibulum eu dapibus arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaBJCYdOqroTH_uJ-DPa2YBIFSktcD7vHJR29-z9wW-50BeF8F1K4tw5InTHCnGr__LTk&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsSRtpghzqTqt3K0sQ3rzOTYkMUwz-MsIKXCMZjgHtjExmg4WIZ7-lP9f_PsBGbSgCrsA&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzSlzX4SPwngqFgPuOFci1NixCyBGM9c4K1-ARZUMR9Smv7bZVB-2Qxsd0_4RFracvOVk&usqp=CAU"
+      ],
+      "startDate": "01-01-20230",
+      "endDate": "01-06-2023"
+    },
+    {
+      "id": 4,
+      "isBuilding": true,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel accumsan turpis. Fusce at tristique tortor. Nulla nec dictum urna. Ut facilisis eget neque et ultricies. Suspendisse potenti. Vestibulum pharetra, lectus et rhoncus tempor, turpis magna eleifend tortor, at sollicitudin lacus nibh sed neque. Vestibulum mattis libero quis metus consequat, non laoreet urna euismod. Aenean et ipsum est. Etiam nec lacinia lacus, a pellentesque elit. Praesent bibendum tellus ac faucibus dignissim. Pellentesque at diam eleifend, bibendum quam at, pharetra velit. Morbi eget enim semper, pretium leo eu, convallis felis. Praesent rutrum elit purus, sit amet semper magna ullamcorper sed. Vestibulum eu dapibus arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzSlzX4SPwngqFgPuOFci1NixCyBGM9c4K1-ARZUMR9Smv7bZVB-2Qxsd0_4RFracvOVk&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsSRtpghzqTqt3K0sQ3rzOTYkMUwz-MsIKXCMZjgHtjExmg4WIZ7-lP9f_PsBGbSgCrsA&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaBJCYdOqroTH_uJ-DPa2YBIFSktcD7vHJR29-z9wW-50BeF8F1K4tw5InTHCnGr__LTk&usqp=CAU"
+      ],
+      "startDate": "01-01-2023",
+      "endDate": "01-06-2023"
+    },
+    {
+      "id": 5,
+      "isBuilding": true,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel accumsan turpis. Fusce at tristique tortor. Nulla nec dictum urna. Ut facilisis eget neque et ultricies. Suspendisse potenti. Vestibulum pharetra, lectus et rhoncus tempor, turpis magna eleifend tortor, at sollicitudin lacus nibh sed neque. Vestibulum mattis libero quis metus consequat, non laoreet urna euismod. Aenean et ipsum est. Etiam nec lacinia lacus, a pellentesque elit. Praesent bibendum tellus ac faucibus dignissim. Pellentesque at diam eleifend, bibendum quam at, pharetra velit. Morbi eget enim semper, pretium leo eu, convallis felis. Praesent rutrum elit purus, sit amet semper magna ullamcorper sed. Vestibulum eu dapibus arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsSRtpghzqTqt3K0sQ3rzOTYkMUwz-MsIKXCMZjgHtjExmg4WIZ7-lP9f_PsBGbSgCrsA&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzSlzX4SPwngqFgPuOFci1NixCyBGM9c4K1-ARZUMR9Smv7bZVB-2Qxsd0_4RFracvOVk&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaBJCYdOqroTH_uJ-DPa2YBIFSktcD7vHJR29-z9wW-50BeF8F1K4tw5InTHCnGr__LTk&usqp=CAU"
+      ],
+      "startDate": "01-01-2023",
+      "endDate": "01-06-2023"
+    },
+    {
+      "id": 6,
+      "isBuilding": false,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel accumsan turpis. Fusce at tristique tortor. Nulla nec dictum urna. Ut facilisis eget neque et ultricies. Suspendisse potenti. Vestibulum pharetra, lectus et rhoncus tempor, turpis magna eleifend tortor, at sollicitudin lacus nibh sed neque. Vestibulum mattis libero quis metus consequat, non laoreet urna euismod. Aenean et ipsum est. Etiam nec lacinia lacus, a pellentesque elit. Praesent bibendum tellus ac faucibus dignissim. Pellentesque at diam eleifend, bibendum quam at, pharetra velit. Morbi eget enim semper, pretium leo eu, convallis felis. Praesent rutrum elit purus, sit amet semper magna ullamcorper sed. Vestibulum eu dapibus arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://classic.exame.com/wp-content/uploads/2017/09/apto-decorado-even1.jpg?quality=70&strip=info&w=1000",
+        "https://classic.exame.com/wp-content/uploads/2020/09/Apartamento-compacto-incorporadora-You-Inc-mercado-imobiliario.jpg?quality=70&strip=info&w=1024",
+        "https://classic.exame.com/wp-content/uploads/2020/07/Mitre-empreendimento-Freguesia.jpg?quality=70&strip=info&w=1024"
+      ],
+      "startDate": "01-01-2023",
+      "endDate": "01-06-2023"
+    },
+    {
+      "id": 7,
+      "isBuilding": false,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel accumsan turpis. Fusce at tristique tortor. Nulla nec dictum urna. Ut facilisis eget neque et ultricies. Suspendisse potenti. Vestibulum pharetra, lectus et rhoncus tempor, turpis magna eleifend tortor, at sollicitudin lacus nibh sed neque. Vestibulum mattis libero quis metus consequat, non laoreet urna euismod. Aenean et ipsum est. Etiam nec lacinia lacus, a pellentesque elit. Praesent bibendum tellus ac faucibus dignissim. Pellentesque at diam eleifend, bibendum quam at, pharetra velit. Morbi eget enim semper, pretium leo eu, convallis felis. Praesent rutrum elit purus, sit amet semper magna ullamcorper sed. Vestibulum eu dapibus arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://classic.exame.com/wp-content/uploads/2020/09/Apartamento-compacto-incorporadora-You-Inc-mercado-imobiliario.jpg?quality=70&strip=info&w=1024",
+        "https://classic.exame.com/wp-content/uploads/2020/07/Mitre-empreendimento-Freguesia.jpg?quality=70&strip=info&w=1024",
+        "https://classic.exame.com/wp-content/uploads/2017/09/apto-decorado-even1.jpg?quality=70&strip=info&w=1000"
+      ],
+      "startDate": "01-01-2023",
+      "endDate": "01-06-2023"
+    },
+    {
+      "id": 8,
+      "isBuilding": true,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel accumsan turpis. Fusce at tristique tortor. Nulla nec dictum urna. Ut facilisis eget neque et ultricies. Suspendisse potenti. Vestibulum pharetra, lectus et rhoncus tempor, turpis magna eleifend tortor, at sollicitudin lacus nibh sed neque. Vestibulum mattis libero quis metus consequat, non laoreet urna euismod. Aenean et ipsum est. Etiam nec lacinia lacus, a pellentesque elit. Praesent bibendum tellus ac faucibus dignissim. Pellentesque at diam eleifend, bibendum quam at, pharetra velit. Morbi eget enim semper, pretium leo eu, convallis felis. Praesent rutrum elit purus, sit amet semper magna ullamcorper sed. Vestibulum eu dapibus arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaBJCYdOqroTH_uJ-DPa2YBIFSktcD7vHJR29-z9wW-50BeF8F1K4tw5InTHCnGr__LTk&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsSRtpghzqTqt3K0sQ3rzOTYkMUwz-MsIKXCMZjgHtjExmg4WIZ7-lP9f_PsBGbSgCrsA&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzSlzX4SPwngqFgPuOFci1NixCyBGM9c4K1-ARZUMR9Smv7bZVB-2Qxsd0_4RFracvOVk&usqp=CAU"
+      ],
+      "startDate": "01-01-20230",
+      "endDate": "01-06-2023"
+    },
+    {
+      "id": 9,
+      "isBuilding": true,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel accumsan turpis. Fusce at tristique tortor. Nulla nec dictum urna. Ut facilisis eget neque et ultricies. Suspendisse potenti. Vestibulum pharetra, lectus et rhoncus tempor, turpis magna eleifend tortor, at sollicitudin lacus nibh sed neque. Vestibulum mattis libero quis metus consequat, non laoreet urna euismod. Aenean et ipsum est. Etiam nec lacinia lacus, a pellentesque elit. Praesent bibendum tellus ac faucibus dignissim. Pellentesque at diam eleifend, bibendum quam at, pharetra velit. Morbi eget enim semper, pretium leo eu, convallis felis. Praesent rutrum elit purus, sit amet semper magna ullamcorper sed. Vestibulum eu dapibus arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzSlzX4SPwngqFgPuOFci1NixCyBGM9c4K1-ARZUMR9Smv7bZVB-2Qxsd0_4RFracvOVk&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsSRtpghzqTqt3K0sQ3rzOTYkMUwz-MsIKXCMZjgHtjExmg4WIZ7-lP9f_PsBGbSgCrsA&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaBJCYdOqroTH_uJ-DPa2YBIFSktcD7vHJR29-z9wW-50BeF8F1K4tw5InTHCnGr__LTk&usqp=CAU"
+      ],
+      "startDate": "01-01-2023",
+      "endDate": "01-06-2023"
+    },
+    {
+      "id": 10,
+      "isBuilding": false,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel accumsan turpis. Fusce at tristique tortor. Nulla nec dictum urna. Ut facilisis eget neque et ultricies. Suspendisse potenti. Vestibulum pharetra, lectus et rhoncus tempor, turpis magna eleifend tortor, at sollicitudin lacus nibh sed neque. Vestibulum mattis libero quis metus consequat, non laoreet urna euismod. Aenean et ipsum est. Etiam nec lacinia lacus, a pellentesque elit. Praesent bibendum tellus ac faucibus dignissim. Pellentesque at diam eleifend, bibendum quam at, pharetra velit. Morbi eget enim semper, pretium leo eu, convallis felis. Praesent rutrum elit purus, sit amet semper magna ullamcorper sed. Vestibulum eu dapibus arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://classic.exame.com/wp-content/uploads/2020/07/Mitre-empreendimento-Freguesia.jpg?quality=70&strip=info&w=1024",
+        "https://classic.exame.com/wp-content/uploads/2020/09/Apartamento-compacto-incorporadora-You-Inc-mercado-imobiliario.jpg?quality=70&strip=info&w=1024",
+        "https://classic.exame.com/wp-content/uploads/2017/09/apto-decorado-even1.jpg?quality=70&strip=info&w=1000"
+      ],
+      "startDate": "01-01-2023",
+      "endDate": "01-06-2023"
+    },
+    {
+      "id": 12,
+      "isBuilding": false,
+      "street": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "state": "São Paulo",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel accumsan turpis. Fusce at tristique tortor. Nulla nec dictum urna. Ut facilisis eget neque et ultricies. Suspendisse potenti. Vestibulum pharetra, lectus et rhoncus tempor, turpis magna eleifend tortor, at sollicitudin lacus nibh sed neque. Vestibulum mattis libero quis metus consequat, non laoreet urna euismod. Aenean et ipsum est. Etiam nec lacinia lacus, a pellentesque elit. Praesent bibendum tellus ac faucibus dignissim. Pellentesque at diam eleifend, bibendum quam at, pharetra velit. Morbi eget enim semper, pretium leo eu, convallis felis. Praesent rutrum elit purus, sit amet semper magna ullamcorper sed. Vestibulum eu dapibus arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+      "price": 3000000,
+      "area": 200,
+      "images": [
+        "https://classic.exame.com/wp-content/uploads/2020/09/Apartamento-compacto-incorporadora-You-Inc-mercado-imobiliario.jpg?quality=70&strip=info&w=1024",
+        "https://classic.exame.com/wp-content/uploads/2020/07/Mitre-empreendimento-Freguesia.jpg?quality=70&strip=info&w=1024",
+        "https://classic.exame.com/wp-content/uploads/2017/09/apto-decorado-even1.jpg?quality=70&strip=info&w=1000"
+      ],
+      "startDate": "01-01-2023",
+      "endDate": "01-06-2023"
+    }
+  ]
+}

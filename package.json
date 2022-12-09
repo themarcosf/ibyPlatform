@@ -2,15 +2,15 @@
   "name": "iby",
   "version": "1.0.0",
   "description": "Real Estate management based on Celo Blockchain",
-  "main": "index.js",
+  "main": "server.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/themarcosf/ibyPlataform.git"
   },
   "scripts": {
-    "start:dev": "nodemon index.js",
-    "start:prod": "NODE_ENV=production nodemon index.js",
-    "debug": "ndb index.js"
+    "start:dev": "nodemon server.js",
+    "start:prod": "NODE_ENV=production nodemon server.js",
+    "debug": "ndb server.js"
   },
   "keywords": [
     "blockchain",
@@ -24,8 +24,6 @@
   "homepage": "https://github.com/themarcosf/ibyPlataform#readme",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.2.1",
-    "@nomiclabs/hardhat-waffle": "^2.0.3",
-    "ethereum-waffle": "^3.4.4",
     "hardhat": "^2.12.3",
     "ndb": "^1.1.5",
     "nodemon": "^2.0.20"
@@ -33,7 +31,10 @@
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.0",
     "dotenv": "^16.0.3",
-    "ethers": "^5.7.2"
+    "ethers": "^5.7.2",
+    "express": "^4.18.2",
+    "mongoose": "^6.7.2",
+    "morgan": "^1.10.0"
   },
   "engines": {
     "node": ">=18.12.0"

@@ -1,4 +1,3 @@
-require("dotenv").config({ path: `${__dirname}/../config.env` });
 const { ethers } = require("ethers");
 const { getWallet, realtyPoolDestruct } = require("./../utils/utils");
 const IbyFactory = require("./../artifacts/contracts/ibyFactory.sol/IbyFactory.json");
@@ -9,7 +8,7 @@ const IbyFactory = require("./../artifacts/contracts/ibyFactory.sol/IbyFactory.j
  * @param {number} idx : zero-based index of realty properties
  * @param {array} params : contract function params
  */
-const factoryContract = async function (arg, idx, params) {
+exports.factoryContract = async function (arg, idx, params) {
   // wallet address
   const wallet = getWallet();
 

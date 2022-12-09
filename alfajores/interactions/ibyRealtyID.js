@@ -1,4 +1,3 @@
-require("dotenv").config({ path: `${__dirname}/../config.env` });
 const { ethers } = require("ethers");
 const { getWallet } = require("../utils/utils");
 const IbyRealtyID = require("../artifacts/contracts/ibyRealtyID.sol/IbyRealtyID.json");
@@ -8,7 +7,7 @@ const IbyRealtyID = require("../artifacts/contracts/ibyRealtyID.sol/IbyRealtyID.
  * @param {string} arg : name of function to be called from contract
  * @param {array} params : token contract function params
  */
-const realtyIdContract = async function (arg, params) {
+exports.realtyIdContract = async function (arg, params) {
   // wallet address
   const wallet = getWallet();
 
@@ -39,6 +38,23 @@ const realtyIdContract = async function (arg, params) {
     return await submittedTx.wait();
   }
 
+  // invoke write method: transferFrom
+  if (arg === "transferFrom") {
+    const estimateGasLimit = await realtyID.estimateGas.transferFrom(...params);
+
+    const safeTransferFromTxUnsigned =
+      await realtyID.populateTransaction.transferFrom(...params);
+
+    safeTransferFromTxUnsigned.gasLimit = estimateGasLimit;
+    safeTransferFromTxUnsigned.gasPrice = await provider.getGasPrice();
+
+    const submittedTx = await wallet.sendTransaction(
+      safeTransferFromTxUnsigned
+    );
+
+    return await submittedTx.wait();
+  }
+
   // invoke read method: ownerOf
   if (arg === "ownerOf") {
     const [owner] = await realtyID.functions.ownerOf(params);
@@ -60,11 +76,11 @@ const realtyIdContract = async function (arg, params) {
    * realtyIdContract EXAMPLES : detailed comments in the contract
    *
    * .. write methods :
-   * 1. console.log(await realtyIdContract("createToken", [1234, "https://"]));
-   * 2.
+   * 1. await realtyIdContract("createToken", [1234, "https://ipfs.io/ipfs/QmTJZkVtzhKJw4FrHxm9pbpYm7NnnZxy9iNWnisEdtr9nA"])
+   * 2. await realtyIdContract("transferFrom", ["0x...","0x...",1234,]));
    *
    * .. read methods :
-   * 1. console.log(await realtyIdContract("ownerOf", 1234));
-   * 2. console.log(await realtyIdContract("balanceOf","0x8d616a0997cc5cca5de654364d87427a932828de"));
+   * 1. await realtyIdContract("ownerOf", 1234)
+   * 2. await realtyIdContract("balanceOf","0x...")
    */
 })();
