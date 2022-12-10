@@ -5,12 +5,6 @@ const { terminate } = require("./utils/lib");
 //////////////////////////////////////////////////////////////////
 
 /**
- * TODO :
- *   . delete config.env from alfajores
- */
-//////////////////////////////////////////////////////////////////
-
-/**
  * unhandled (sync) exceptions handler
  */
 process.on("uncaughtException", (err) => terminate(err));
@@ -21,26 +15,18 @@ process.on("uncaughtException", (err) => terminate(err));
  */
 
 // remote database
-// const DB = process.env.DATABASE_REMOTE.replace(
-//   "<PASSWORD>",
-//   process.env.DATABASE_PASSWORD
-// );
+const DB = process.env.DATABASE_REMOTE.replace(
+  "<PASSWORD>",
+  process.env.DATABASE_PASSWORD
+);
 
 // local database
-const DB = process.env.DATABASE_LOCAL;
+// const DB = process.env.DATABASE_LOCAL;
 
 mongoose
   .connect(DB)
   .then((conn) => console.log(`DB connected to: ${conn.connections[0].name}`));
 
-/**
- * REMINDER: deprecation warnings
- * {
- *   useNewUrlParser: true,
- *   useCreateIndex: true,
- *   useFindAndModify: false,
- * }
- */
 //////////////////////////////////////////////////////////////////
 
 /**

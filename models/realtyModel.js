@@ -17,7 +17,7 @@ const realtySchema = new mongoose.Schema(
       type: String,
       required: [true, "celoId is required"],
       trim: true,
-      // unique: true,
+      unique: true,
     },
     streetAddress: {
       type: String,

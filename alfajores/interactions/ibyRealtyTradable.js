@@ -17,9 +17,9 @@ exports.realtyTradableContract = async function (arg, params) {
   );
 
   // connect to realtyTradable contract
-  // TODO : not sure why process.env.IBY_REALTY_TRADABLE did not work here
+  // @dev not sure why process.env.IBY_REALTY_TRADABLE may not work here
   const realtyTradable = new ethers.Contract(
-    "0xfEEc33a5E9A93f43F9267A02dAaad0C4fBa1992e",
+    process.env.IBY_REALTY_TRADABLE,
     IbyRealtyTradable.abi,
     wallet
   );

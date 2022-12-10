@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const { CustomError } = require("./utils/lib");
 const errController = require("./controllers/errController");
 const realtyRouter = require("./routers/realtyRouter");
+const auctionsRouter = require("./routers/auctionsRouter");
 ////////////////////////////////////////////////////////////////////////
 
 const app = express();
@@ -18,6 +19,7 @@ if (process.env.NODE_ENV === "development") app.use(morgan("dev")); // dev helpe
  * routers middleware
  */
 app.use("/api/v1/realty", realtyRouter);
+app.use("/api/v1/auctions", auctionsRouter);
 app.all("/*", (req, res, next) =>
   next(new CustomError(`Invalid path: ${req.originalUrl}`, 404))
 );

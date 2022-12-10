@@ -7,6 +7,7 @@ const {
   paramsObjToArray,
 } = require("../utils/lib");
 const Realty = require("./../models/realtyModel");
+const Auction = require("./../models/auctionsModel");
 ////////////////////////////////////////////////////////
 
 /**
@@ -18,7 +19,21 @@ exports.getAllRealty = asyncHandler(async function (req, res, next) {
     .sort()
     .fields()
     .paginate();
-  const _realty = await query.mongooseQuery;
+  const realty_ = await query.mongooseQuery;
+
+  const _auctions = await Auction.find();
+  const _realty = realty_.map((el) => {
+    let temp = {};
+
+    for (let i = 0; i < _auctions.length; i++) {
+      if (_auctions[i].realtyId === el.id) {
+        temp = { ...el }._doc;
+        temp.lastBidValue = _auctions[i].lastBidValue;
+        temp.auctionEndDate = _auctions[i].auctionEndDate;
+        return temp;
+      }
+    }
+  });
 
   res
     .status(200)
@@ -31,9 +46,22 @@ exports.getAllRealty = asyncHandler(async function (req, res, next) {
 });
 
 exports.getRealty = asyncHandler(async function (req, res, next) {
-  const _realty = await Realty.findById(req.params.id);
+  const realty_ = await Realty.findById(req.params.id);
 
-  if (!_realty) return next(new CustomError("ID not found", 404));
+  if (!realty_) return next(new CustomError("ID not found", 404));
+
+  let _realty = { ...realty_ }._doc;
+  console.log("Hi");
+
+  const _auctions = await Auction.find();
+  for (let i = 0; i < _auctions.length; i++) {
+    if (_auctions[i].realtyId === _realty.id) {
+      console.log("Oi");
+      _realty.lastBidValue = _auctions[i].lastBidValue;
+      _realty.auctionEndDate = _auctions[i].auctionEndDate;
+      break;
+    }
+  }
 
   res
     .status(200)
@@ -79,6 +107,23 @@ exports.createNewRealty = asyncHandler(async function (req, res, next) {
     .json({
       status: "Success",
       data: { realty: _realty },
+    })
+    .end();
+});
+
+exports.updateRealty = asyncHandler(async function (req, res, next) {
+  const _realty = await Realty.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!_realty) return next(new CustomError("ID not found", 404));
+
+  res
+    .status(200)
+    .json({
+      status: "sucess",
+      data: { _realty },
     })
     .end();
 });
