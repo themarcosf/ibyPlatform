@@ -51,12 +51,10 @@ exports.getRealty = asyncHandler(async function (req, res, next) {
   if (!realty_) return next(new CustomError("ID not found", 404));
 
   let _realty = { ...realty_ }._doc;
-  console.log("Hi");
 
   const _auctions = await Auction.find();
   for (let i = 0; i < _auctions.length; i++) {
-    if (_auctions[i].realtyId === _realty.id) {
-      console.log("Oi");
+    if (_auctions[i].realtyId === realty_.id) {
       _realty.lastBidValue = _auctions[i].lastBidValue;
       _realty.auctionEndDate = _auctions[i].auctionEndDate;
       break;
