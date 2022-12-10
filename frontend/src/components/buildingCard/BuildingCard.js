@@ -15,8 +15,8 @@ function BuildingCard(props) {
         <div className={styles.imgCard}>
           <Image
             src={`${props.image}`}
-            width={256}
-            height={256}
+            width={277}
+            height={262}
             priority
             alt="build-image"
           />
@@ -25,7 +25,7 @@ function BuildingCard(props) {
         <div className={styles.streetBx}>
           <h3>{props.street}</h3>
           <span href="#">
-            <img src="/favorite.png" />
+            <img style={{width:"22px"}} src="/heartIcon.png" />
           </span>
         </div>
         <p className={styles.address}>
@@ -34,7 +34,7 @@ function BuildingCard(props) {
         <div className={styles.buildingInfos}>
           <p>{brlPrice}</p>
           <div className={styles.meters}>
-            <img src={"/meter.png"} />
+            <img  style={{width:"25px", marginRight:"3px"}} src={"/regua.png"} />
             <p>
               {props.area}m<sup>2</sup>
             </p>
