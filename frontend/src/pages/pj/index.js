@@ -4,8 +4,11 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import NavBar from "../../components/NavBar/NavBar";
 import styles from "./pj.module.scss";
+import { useState } from "react";
+import FilterModal from "../../components/FilterModal/FilterModal";
 
 function pf({ data }) {
+  const [openModal, setOpenModal] = useState(false);
   return (
     <>
       <Header>
@@ -19,8 +22,24 @@ function pf({ data }) {
         <NavBar />
       </Header>
       <div className={styles.content}>
-        <h1>Pessoa Jurídica</h1>
-        <div className={styles.filters}>Filtros</div>
+        <div className={styles.title}>
+          <h1>Pessoa Jurídica</h1>
+          <div className={styles.filters}>
+            <button
+              onClick={() => {
+                setOpenModal(true);
+              }}
+            >
+              <div>
+                <img src="/filter.png" />
+              </div>{" "}
+              <div>
+                <p>Filtros</p>
+              </div>
+            </button>
+            {openModal && <FilterModal closeModal={setOpenModal} />}
+          </div>
+        </div>
         <div className={styles.cardsContainer}>
           {data.map((build) => (
             <BuildingCard
@@ -36,7 +55,7 @@ function pf({ data }) {
           ))}
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }
@@ -51,6 +70,6 @@ export const getStaticProps = async () => {
     props: {
       data,
     },
-    revalidate: 60 * 5
+    revalidate: 60 * 5,
   };
 };

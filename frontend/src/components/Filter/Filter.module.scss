@@ -1,22 +1,3 @@
-.content{
-    padding: 1rem;
-    max-width: 1300px;
-
-
-    h1{
-        color: #2E65BC;
-        font-weight: 600;
-    }
-
-}
-
-.title{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .filters{
     margin: 1rem;
     right: 3rem;
@@ -42,10 +23,4 @@
         font-weight: 600;
         color: #2E65BC;
     }
-}
-
-.cardsContainer{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly
 }

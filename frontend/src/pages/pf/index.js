@@ -1,5 +1,6 @@
 import Image from "next/image";
 import BuildingCard from "../../components/BuildingCard/BuildingCard";
+import Filter from "../../components/Filter/Filter";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import NavBar from "../../components/NavBar/NavBar";
@@ -19,8 +20,10 @@ function pf({ data }) {
         <NavBar />
       </Header>
       <div className={styles.content}>
+        <div className={styles.title}>
         <h1>Pessoa Física</h1>
-        <div className={styles.filters}>Filtros</div>
+        <Filter/>
+        </div>
         <div className={styles.cardsContainer}>
           {data.map((build) => {
             if (!build.isFinished) {
