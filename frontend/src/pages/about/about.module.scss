@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+.body{
+    overflow-x: hidden; 
+    width: 100%;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.title{
+    h1{
+        color: #2E65BC;
+        font-weight: 700;
+        font-size: 48px;
+        position: absolute;
+        width: 390px;
+        height: 93px;
+        left: 66px;
+        top: 219px;
+
+
+    }
+    h2{
+        color: #2E65BC;
+        font-weight: 500;
+        font-weight: 32px;
+        position: absolute;
+        width: 376px;
+        height: 93px;
+        left: 66px;
+        top: 342px;
+    }
+}
+
+.gradiente{
+    position: relative;
+    width: 346px;
+    height: 553px;
+    left: 31.9rem;
+    z-index:1;
+}
+
+.imgContainer{
+    position: relative;
+    width: 785px;
+    height: 553px;
+    left: 100px;    
+}
+
+.texts{
+    margin-top: 30px;
+    margin-left: 40px;
+    h3{
+        position:inherit;
+        margin-top: 40px;
+        font-size: 27px;
+        color:  #2E65BC;
+        justify-self: unset;
+        right: 15rem;
+    }
+    p{
+        position: inherit;
+        margin-top: 20px;
+        color: #3E3E3E;
+        font-weight: 500;
+        right: 15rem;
+        
+    }
+}
+
+.esg{
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+
+    .esgTexts{
+        position: relative;
+        left: 20rem;
+        margin-top: 20px;
+        h3{
+            color: #66A570;
+            text-align: right;
+            font-size: 36px;
+            font-weight: 600;
+        } 
+        p{
+            margin-top: 50px;
+            text-align: right;
+            line-height: 20px;
+            color: #3E3E3E;
+        font-weight: 500;
+
+        }     
+    }
+
+}
+
+.esgMessage{
+    margin-top: 50px;
+    text-align: center;
+    line-height: 20px;
+    color: #3E3E3E;
+        font-weight: 500;
+
+}
+
+.nftContainer{
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    margin-left: 40px;
+    margin-bottom: 30px;
+    h3{
+        color: #66A570;
+        font-weight: 500;
+        font-size: 40px;
+    }
+    p{
+        margin-top: 15px;
+        color: #3E3E3E;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+    }
+}
