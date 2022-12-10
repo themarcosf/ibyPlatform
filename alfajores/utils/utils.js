@@ -1,3 +1,4 @@
+require("dotenv").config({ path: "./../../config.env" });
 const ethers = require("ethers");
 
 exports.getWallet = function () {

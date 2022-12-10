@@ -1,50 +1,41 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.15;
 
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
  * @title IbyRealtyID
  * @author ibyPlatform DevTeam (Bianca Lima, Luiz Kama, Marcos Florencio)
  *
- * @notice implement ERC721 standard to create unique token for each realty property
+ * @notice implement ERC1155 standard to create collection of tradable tokens
  */
-contract IbyRealtyTradable is ERC721URIStorage, Ownable {
-    using Strings for string;
 
+contract IbyRealtyTradable is ERC1155, ERC1155Burnable, Ownable {
     /**
-     * @notice stardard constructor ERC721
-     *         tokenName : Iby Realty ID
-     *         tokenSymbol : IBY
+     * @notice stardard constructor ERC1155
      */
-    constructor() ERC721("Iby Realty Tradable", "IBY-T") {}
+    constructor()
+        ERC1155(
+            "https://ipfs.io/ipfs/QmTJZkVtzhKJw4FrHxm9pbpYm7NnnZxy9iNWnisEdtr9nA"
+        )
+    {}
 
     /**
-     * @notice mints a new token and store metadata
-     *         1. safely mint new token and set gov't address as initial owner
-     *         2. set token URI provided by IPFS [optional]
-     *         3. include new token in token collection
-     *         4. set gov't address as initial owner
-     *         5. increase count of gov't owned tokens by 1
-     *         6. increase token counter by 1
-     *         7. automatically emits a event Transfer(address from, address to, uint256 tokenId)
+     * @notice mints new token and store metadata
      *
-     * @param _tokenId : same as realtyId deployed using IbyFactory
-     * @param _tokenUri : graphic resource URI on IPFS
+     * @param data : required by standard implementation; can be void
      *
      * @dev visibility public : can be called by ANY contract
-     * @dev onlyOwer : only gov't manager [SPU] is enabled to create a new token
+     * @dev onlyOwer : only gov't manager [SPU] is enabled to create new token
      */
     function createToken(
-        uint _tokenId,
-        string memory _tokenUri
+        address to,
+        uint256 id,
+        uint256 amount,
+        bytes memory data
     ) public onlyOwner {
-        uint _id = _tokenId + 1;
-        for (uint i = 0; i < 20; i++) {
-            _safeMint(owner(), _id);
-            _setTokenURI(_id, _tokenUri);
-            _id++;
-        }
+        _mint(to, id, amount, data);
     }
 }
