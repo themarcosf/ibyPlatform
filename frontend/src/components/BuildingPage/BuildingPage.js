@@ -7,6 +7,16 @@ import Card from "../Card/Card";
 import styles from "./BuildingPage.module.scss";
 
 function BuildingPage(props) {
+  const formatedStartDate = format(parseISO(props.startDate), 'MMMM', { 
+    locale: ptBR
+  })
+  const formatedMonthEndDate = format(parseISO(props.endDate), 'MMMM', { 
+    locale: ptBR
+  })
+  const formatedYearEndDate = format(parseISO(props.endDate), 'yyyy', { 
+    locale: ptBR
+  })
+
   const price = props.price;
   const brlPrice = price.toLocaleString("pt-br", {
     style: "currency",
@@ -18,7 +28,7 @@ function BuildingPage(props) {
       <h1>{`${props.street} - ${props.district}, ${props.state}`}</h1>
       <div className={styles.statusAndFavorite}>
         <p>
-          Status: {props.isBuilding ? "Em construção." : "Pronto para morar."}
+          Status: {props.isFinished ? "Em construção." : "Pronto para morar."}
         </p>
         <span>
           Salvar <img src="/favorite.png" />
@@ -62,11 +72,11 @@ function BuildingPage(props) {
               Valor Atual: <i>Ultimo lance</i>
             </p>
             <p className={styles.period}>
-              Período: {props.startDate}, {props.endDate}
+              Período: <span>{formatedStartDate}</span> - <span>{formatedMonthEndDate}</span> de {formatedYearEndDate}
             </p>
           </div>
           <div className={styles.moneyContainer}>
-            <input placeholder="Digite o valor" r type="number" />
+            <input placeholder="Digite o valor" type="number" />
             <button type="button">Fazer meu lance</button>
           </div>
         </Card>

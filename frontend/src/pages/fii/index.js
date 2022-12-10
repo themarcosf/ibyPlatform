@@ -19,15 +19,15 @@ function pf({ data }) {
         <NavBar />
       </Header>
       <div className={styles.content}>
-        <h1>Fundos</h1>
+        <h1>Fundos Imobiliários</h1>
         <div className={styles.filters}>Filtros</div>
         <div className={styles.cardsContainer}>
         {data.map((build) => {
-            if (build.isBuilding) {
+            if (build.isFinished) {
               return (
                 <BuildingCard
                   image={build.images[0]}
-                  isBuilding={build.isBuilding}
+                  isFinished={build.isFinished}
                   street={build.street}
                   district={build.district}
                   state={build.state}

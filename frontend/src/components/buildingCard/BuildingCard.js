@@ -16,7 +16,7 @@ function BuildingCard(props) {
           <Image
             src={`${props.image}`}
             width={256}
-            height={264}
+            height={256}
             priority
             alt="build-image"
           />

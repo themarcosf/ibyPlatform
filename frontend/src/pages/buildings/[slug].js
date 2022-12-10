@@ -23,7 +23,7 @@ function build({ data }) {
       </Header>
       <BuildingPage
         image={data.images}
-        isBuilding={data.isBuilding}
+        isFinished={data.isFinished}
         description={data.description}
         street={data.street}
         district={data.district}

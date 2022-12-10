@@ -1,0 +1,27 @@
+.content {
+  padding: 1rem;
+  max-width: 1300px; 
+
+  h1 {
+    color: #2e65bc;
+    font-weight: 600;
+  }
+}
+
+.filters {
+  margin: 1rem;
+  background-color: antiquewhite;
+}
+
+.cardsWrapper{
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.cardsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}

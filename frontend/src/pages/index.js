@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import Card from "../components/Card/Card";
 import Header from "../components/Header/Header";
 
-import styles from "./login.module.scss";
+import styles from "../styles/login.module.scss";
 
 export default function Home() {
   const {

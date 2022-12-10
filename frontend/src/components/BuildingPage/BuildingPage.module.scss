@@ -83,6 +83,10 @@
 .period {
   color: #525151;
   font-size: 0.8rem;
+
+  span{
+    text-transform: capitalize;
+  }
 }
 
 .moneyContainer {

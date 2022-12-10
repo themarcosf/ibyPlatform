@@ -25,7 +25,7 @@ function pf({ data }) {
           {data.map((build) => (
             <BuildingCard
               image={build.images[0]}
-              isBuilding={build.isBuilding}
+              isFinished={build.isFinished}
               street={build.street}
               district={build.district}
               state={build.state}
