@@ -31,6 +31,8 @@ exports.getAllRealty = asyncHandler(async function (req, res, next) {
         temp.lastBidValue = _auctions[i].lastBidValue;
         temp.auctionEndDate = _auctions[i].auctionEndDate;
         return temp;
+      } else {
+        return el;
       }
     }
   });
