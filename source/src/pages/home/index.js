@@ -1,16 +1,16 @@
 import Header from "../../components/HeaderEspecial/Header";
 import NavBar from "../../components/NavBar/NavBar";
-import styles from "./about.module.scss";
+import styles from "./home.module.scss";
 import Image from "next/image";
 import Footer from "../../components/Footer/Footer";
-import Planet from "../about/planet.json";
-import House from "../about/isometric_house.json";
+import Planet from "./planet.json";
+import House from "./isometric_house.json";
 import Lottie from "lottie-react";
 import EsgPractice from "../../components/EsgPractice/EsgPractice";
 
-export default about;
+export default home;
 
-function about({ data }) {
+function home() {
   return (
     <div className={styles.body}>
       <Header>

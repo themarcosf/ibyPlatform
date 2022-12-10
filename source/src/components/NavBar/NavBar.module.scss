@@ -57,6 +57,7 @@
   overflow: hidden;
   width: max-content;
   max-height: 0;
+  z-index: 100;
 
   li {
     &::after {
@@ -74,6 +75,7 @@
 }
 
 .dropdownSub {
+  z-index: 100;
   padding: 1rem;
   background: #fff;
   border-top: none !important;
