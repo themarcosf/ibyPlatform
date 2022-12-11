@@ -67,6 +67,31 @@ Nossa solução busca facilitar a destinação de imóveis da União através da
  - express
  - mongodb
 
+## Orientações
+ . instalar bibliotecas node.js usando npm i nas pastas root, alfajores e source
+ . gerar os arquivos binários e de interface através do comando npx hardhat compile
+ . deployar os contratos na rede de testes ALFAJORES
+ . iniciar o servidor de back end por meio do comando npm run start:dev
+ . iniciar o servidor de front end por meio do comando npm run dev
+ . configurar arquivo de variaveis de ambiente na pasta root (config.env)
+      NODE_ENV=development
+
+      MNEMONIC=...
+      ACCOUNT_ADDRESS=0x...
+      PRIVATE_KEY=...
+      PUBLIC_KEY=...
+
+      IBY_FACTORY_ADDRESS=0x
+      IBY_REALTY_ID=0x
+      IBY_REALTY_TRADABLE=0x
+
+      PORT=8000
+      HOST=127.0.0.1
+
+      DATABASE_LOCAL=mongodb://127.0.0.1:27017/ibyPlatform-api
+      DATABASE_REMOTE=mongodb+srv://<USER>:<PASSWORD>@...
+      DATABASE_PASSWORD=...
+
 ## Licença
 
 Distributed under the MIT License. See  `LICENSE`  for more information.
