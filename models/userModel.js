@@ -37,11 +37,6 @@ const userSchema = new mongoose.Schema(
       required: [true, "realtyId is required"],
       trim: true,
     },
-    type: {
-      type: String,
-      required: [true, "realtyId is required"],
-      trim: true,
-    },
     createdAt: {
       type: Date,
       default: Date.now(),
