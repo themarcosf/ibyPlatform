@@ -1,5 +1,6 @@
 const morgan = require("morgan");
 const express = require("express");
+const cors = require("cors");
 const { CustomError } = require("./utils/lib");
 const errController = require("./controllers/errController");
 const realtyRouter = require("./routers/realtyRouter");
@@ -12,7 +13,9 @@ const app = express();
 /**
  * general purpose middleware
  */
+
 app.use(express.json()); // parses request body
+app.use(cors());
 app.use(express.static(`${__dirname}/public`)); //serves static files
 if (process.env.NODE_ENV === "development") app.use(morgan("dev")); // dev helper - http requests logger
 
