@@ -27,19 +27,15 @@ exports.userLogin = asyncHandler(async function (req, res, next) {
       return next(new CustomError("Invalid password", 400));
     }
   } else {
-    if (_currentUser.email) {
-      const _user = await User.create(req.body);
+    const _user = await User.create(req.body);
 
-      res
-        .status(201)
-        .json({
-          status: "Success",
-          data: { user: _user },
-        })
-        .end();
-    } else {
-      return next(new CustomError("Email not provided", 400));
-    }
+    res
+      .status(201)
+      .json({
+        status: "Success",
+        data: { user: _user },
+      })
+      .end();
   }
 });
 
