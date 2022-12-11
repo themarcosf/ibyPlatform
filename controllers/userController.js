@@ -11,9 +11,13 @@ const User = require("../models/userModel");
 exports.userLogin = asyncHandler(async function (req, res, next) {
   const _allUsers = await User.find();
 
-  const [_currentUser] = _allUsers.filter(
-    (el) => el.officialId === req.body.id
-  );
+  let _currentUser;
+  for (let i = 0; i < _allUsers.length; i++) {
+    if (_allUsers[i].officialId === req.body.officialId) {
+      _currentUser = _allUsers[i];
+    }
+  }
+
   if (_currentUser) {
     if (_currentUser.password === req.body.password) {
       res
