@@ -17,9 +17,8 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "realtyId is required"],
       trim: true,
-      unique: true,
     },
-    id: {
+    officialId: {
       type: Number,
       required: [true, "minValue is required."],
     },
@@ -27,25 +26,21 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "realtyId is required"],
       trim: true,
-      unique: true,
     },
     wallet: {
       type: String,
       required: [true, "realtyId is required"],
       trim: true,
-      unique: true,
     },
     email: {
       type: String,
       required: [true, "realtyId is required"],
       trim: true,
-      unique: true,
     },
     type: {
       type: String,
       required: [true, "realtyId is required"],
       trim: true,
-      unique: true,
     },
     createdAt: {
       type: Date,

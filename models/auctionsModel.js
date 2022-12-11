@@ -23,8 +23,8 @@ const auctionsSchema = new mongoose.Schema(
       type: Number,
       required: [true, "minValue is required."],
     },
-    lastBidValue: Number,
-    lastBidUser: String,
+    lastBidValue: { type: Number, default: 0 },
+    lastBidUser: { type: String, default: "none" },
     auctionEndDate: {
       type: Number,
       require: [true, "AuctionEndDate is required"],

@@ -6,8 +6,6 @@ const router = express.Router();
 /**
  * routes middleware
  */
-router.route("/").post(userController.createNewUser);
-
-router.route("/:id").get(userController.getUser);
+router.route("/").post(userController.userLogin);
 
 module.exports = router;
