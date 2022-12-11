@@ -1,4 +1,6 @@
-const { asyncHandler } = require("../utils/lib");
+const { CustomError, asyncHandler } = require("../utils/lib");
+const Auction = require("./../models/auctionsModel");
+const Realty = require("./../models/realtyModel");
 const User = require("../models/userModel");
 ////////////////////////////////////////////////////////
 
@@ -16,7 +18,7 @@ exports.userLogin = asyncHandler(async function (req, res, next) {
         .status(200)
         .json({
           status: "Success",
-          authorized: true,
+          data: { currentUser: _currentUser },
         })
         .end();
     } else {
@@ -33,6 +35,37 @@ exports.userLogin = asyncHandler(async function (req, res, next) {
       })
       .end();
   }
+});
+
+exports.userContracts = asyncHandler(async function (req, res, next) {
+  const userId = req.params.id;
+
+  const _auctions = await Auction.find();
+  const _realty = await Realty.find();
+
+  const _myAuctions = _auctions.map((el) => {
+    if (el.lastBidUser === userId) {
+      let _realtyData;
+      for (let i = 0; i < _realty.length; i++) {
+        if (_realty[i].id === el.realtyId) _realtyData = _realty[i];
+      }
+
+      return {
+        _realtyData: _realtyData,
+        _lastBidValue: el.lastBidValue,
+        _auctionId: el.id,
+      };
+    }
+  });
+  console.log(_myAuctions);
+
+  res
+    .status(201)
+    .json({
+      status: "Success",
+      data: { auctions: _myAuctions },
+    })
+    .end();
 });
 
 ////////////////////////////////////////////////////////

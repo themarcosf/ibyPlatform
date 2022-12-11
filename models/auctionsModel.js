@@ -25,6 +25,7 @@ const auctionsSchema = new mongoose.Schema(
     },
     lastBidValue: { type: Number, default: 0 },
     lastBidUser: { type: String, default: "none" },
+    lastBidderWallet: { type: String, default: "none" },
     auctionEndDate: {
       type: Number,
       require: [true, "AuctionEndDate is required"],
