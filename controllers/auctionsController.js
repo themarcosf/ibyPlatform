@@ -1,5 +1,10 @@
 const { QueryHelpers, CustomError, asyncHandler } = require("../utils/lib");
-const Auction = require("../models/auctionsModel");
+const Auction = require("./../models/auctionsModel");
+const Realty = require("./../models/realtyModel");
+const schedule = require("node-schedule");
+const {
+  realtyTradableContract,
+} = require("./../alfajores/interactions/ibyRealtyTradable");
 ////////////////////////////////////////////////////////
 
 /**
@@ -39,6 +44,33 @@ exports.getAuction = asyncHandler(async function (req, res, next) {
 
 exports.createNewAuction = asyncHandler(async function (req, res, next) {
   const _auction = await Auction.create(req.body);
+  const realtyId = _auction.realtyId;
+  console.log("realtyId: ", realtyId);
+  const endDate = _auction.auctionEndDate;
+  console.log("endDate: ", endDate);
+
+  const celoId = (await Realty.findById(realtyId)).celoId;
+  console.log("celoId", celoId);
+
+  const expirationDate = String(new Date(endDate));
+  console.log("expirationDate", expirationDate);
+  schedule.scheduleJob(expirationDate, async () => {
+    const _auctionFinal = await Auction.findById(_auction.id);
+
+    await realtyTradableContract("createToken", [
+      _auctionFinal.lastBidUser,
+      celoId,
+      20,
+      "0xff",
+    ]);
+    const _balance = await realtyTradableContract("balanceOf", [
+      _auctionFinal.lastBidUser,
+      celoId,
+    ]);
+    console.log(
+      `Balance of ${_balance} NFTs with ID ${celoId} transferred to ${_auctionFinal.lastBidUser}`
+    );
+  });
 
   res
     .status(201)

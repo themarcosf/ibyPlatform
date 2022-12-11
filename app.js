@@ -4,6 +4,7 @@ const { CustomError } = require("./utils/lib");
 const errController = require("./controllers/errController");
 const realtyRouter = require("./routers/realtyRouter");
 const auctionsRouter = require("./routers/auctionsRouter");
+const usersRouter = require("./routers/usersRouter");
 ////////////////////////////////////////////////////////////////////////
 
 const app = express();
@@ -20,6 +21,7 @@ if (process.env.NODE_ENV === "development") app.use(morgan("dev")); // dev helpe
  */
 app.use("/api/v1/realty", realtyRouter);
 app.use("/api/v1/auctions", auctionsRouter);
+app.use("/api/v1/users", usersRouter);
 app.all("/*", (req, res, next) =>
   next(new CustomError(`Invalid path: ${req.originalUrl}`, 404))
 );
