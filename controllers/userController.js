@@ -11,7 +11,9 @@ const User = require("../models/userModel");
 exports.userLogin = asyncHandler(async function (req, res, next) {
   const _allUsers = await User.find();
 
-  const [_currentUser] = _allUsers.filter((el) => el.email === req.body.email);
+  const [_currentUser] = _allUsers.filter(
+    (el) => el.officialId === req.body.id
+  );
   if (_currentUser) {
     if (_currentUser.password === req.body.password) {
       res
@@ -25,15 +27,19 @@ exports.userLogin = asyncHandler(async function (req, res, next) {
       return next(new CustomError("Invalid password", 400));
     }
   } else {
-    const _user = await User.create(req.body);
+    if (_currentUser.email) {
+      const _user = await User.create(req.body);
 
-    res
-      .status(201)
-      .json({
-        status: "Success",
-        data: { user: _user },
-      })
-      .end();
+      res
+        .status(201)
+        .json({
+          status: "Success",
+          data: { user: _user },
+        })
+        .end();
+    } else {
+      return next(new CustomError("Email not provided", 400));
+    }
   }
 });
 
@@ -47,7 +53,10 @@ exports.userContracts = asyncHandler(async function (req, res, next) {
     if (el.lastBidUser === userId) {
       let _realtyData;
       for (let i = 0; i < _realty.length; i++) {
-        if (_realty[i].id === el.realtyId) _realtyData = _realty[i];
+        if (_realty[i].id === el.realtyId) {
+          _realtyData = _realty[i];
+          break;
+        }
       }
 
       return {
