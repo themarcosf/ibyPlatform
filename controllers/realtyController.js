@@ -8,6 +8,7 @@ const {
 } = require("../utils/lib");
 const Realty = require("./../models/realtyModel");
 const Auction = require("./../models/auctionsModel");
+const { json } = require("express");
 ////////////////////////////////////////////////////////
 
 /**
@@ -22,19 +23,18 @@ exports.getAllRealty = asyncHandler(async function (req, res, next) {
   const realty_ = await query.mongooseQuery;
 
   const _auctions = await Auction.find();
-  const _realty = realty_.map((el) => {
-    let temp = {};
 
+  const _realty = realty_.map((el) => {
+    let temp = { ...el }._doc;
     for (let i = 0; i < _auctions.length; i++) {
       if (_auctions[i].realtyId === el.id) {
-        temp = { ...el }._doc;
         temp.lastBidValue = _auctions[i].lastBidValue;
         temp.auctionEndDate = _auctions[i].auctionEndDate;
+        temp.minValue = _auctions[i].minValue;
         return temp;
-      } else {
-        return el;
       }
     }
+    return temp;
   });
 
   res
