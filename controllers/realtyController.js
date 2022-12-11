@@ -8,7 +8,6 @@ const {
 } = require("../utils/lib");
 const Realty = require("./../models/realtyModel");
 const Auction = require("./../models/auctionsModel");
-const { json } = require("express");
 ////////////////////////////////////////////////////////
 
 /**
