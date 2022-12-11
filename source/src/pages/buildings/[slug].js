@@ -36,7 +36,8 @@ function build({ data, auctionsData }) {
         sqMeters={data.sqMeters}
         lastBidValue={auction?.lastBidValue}
         minValue={auction.minValue}
-        id={build._id}
+        id={data._id}
+        auctionId={auction.id}
         expired={true}
         leaseBeginDate={auction.leaseBeginDate}
         auctionEndDate={auction.auctionEndDate}

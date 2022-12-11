@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Router from 'next/router'
 import { useForm } from "react-hook-form";
 
@@ -16,11 +17,29 @@ export default function home() {
 
 
   const login = (data) => {
-    if(data.CPF == 17097167700 && data.password == 123456){
-      Router.push('/pf')
+    const loginData = {
+      officialId: parseInt(data.officialId),
+      password: data.password
     }
-  }
 
+    fetch(`http://127.0.0.1:8000/api/v1/users`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(loginData),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        // console.log(json);
+        localStorage.setItem("userData", JSON.stringify(json.data.currentUser))
+        // console.log(localStorage)
+      })
+      .then(() => {
+        Router.push("/home");
+      });
+  }
   return (
     <>
       <Header>
@@ -45,13 +64,12 @@ export default function home() {
         <Card>
           <div className={styles.wrapper}>
             <h1>Identifique-se no gov.com:</h1>
-            <p>Número do CPF</p>
-            <p>Digite seu CPF para criar ou acessar sua conta gov.br</p>
+            <p>Digite seu CPF ou CNPJ para criar ou acessar<br/> sua conta gov.br</p>
 
             <form onSubmit={handleSubmit(login)}>
               <div className={styles.fields}>
-                <label>CPF</label>
-                <input placeholder="Digite seu CPF" type="text" name="CPF" {...register("CPF")} />
+                <label>CPF/CNPJ</label>
+                <input placeholder="Digite seu CPF ou CNPJ" type="number" name="officialId" {...register("officialId")} />
               </div>
 
               <div className={styles.fields}>
@@ -63,6 +81,7 @@ export default function home() {
                 <button type="submit">Continuar</button>
               </div>
             </form>
+            <p className={styles.register}>Não tem uma conta ainda? <Link href={'/register'}>Registre-se</Link></p>
           </div>
         </Card>
       </div>

@@ -1,7 +1,7 @@
-import { format, parseISO } from "date-fns";
-import ptBR from "date-fns/locale/pt-BR";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
 
 import Card from "../Card/Card";
 
@@ -9,12 +9,50 @@ import styles from "./BuildingPage.module.scss";
 
 function BuildingPage(props) {
   const [buildingStatus, setbuildingStatus] = useState("Pronto para morar!");
+  const [realtyValue, setRealtyValue] = useState(
+    props?.lastBidValue > props.minValue ? props.lastBidValue : props.minValue
+  );
+
+  const userData = JSON.parse(localStorage.getItem("userData"))
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const makeBid = (data) => {
+    const updatedData = {
+      lastBidValue: data.bid,
+      lastBidUser: userData.id
+    };
+
+    if (data.bid > realtyValue) {
+      toast.success("Seu lance foi enviado!", {
+        position: "bottom-right",
+      });
+      fetch(`http://127.0.0.1:8000/api/v1/auctions/${props.auctionId}`, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(updatedData),
+      })
+        .then((response) => response.json())
+        .then(console.log("feito"));
+    } else {
+      toast.error("Insira um valor maior do que o valor atual", {
+        position: "bottom-right",
+      });
+    }
+  };
 
   const auctionEndDate = new Date(props.auctionEndDate).toLocaleDateString(
     "pt-BR",
     { year: "numeric", month: "long", day: "numeric" }
   );
-  
+
   const leaseBeginDate = new Date(props.leaseBeginDate).toLocaleDateString(
     "pt-BR",
     { year: "numeric", month: "long", day: "numeric" }
@@ -27,16 +65,6 @@ function BuildingPage(props) {
       setbuildingStatus("Para reforma");
     }
   }, []);
-
-  const brlMinValue = props.minValue.toLocaleString("pt-br", {
-    style: "currency",
-    currency: "BRL",
-  });
-
-  const brlLastBidValue = props?.lastBidValue?.toLocaleString("pt-br", {
-    style: "currency",
-    currency: "BRL",
-  });
 
   return (
     <div className={styles.buildingPageContent}>
@@ -80,22 +108,47 @@ function BuildingPage(props) {
         </div>
         <Card>
           <div className={styles.infoContainer}>
-            <p className={styles.minimumValue}>Valor mínimo: {brlMinValue}</p>
             <p className={styles.currentValue}>
-              Valor Atual: {brlLastBidValue ? brlLastBidValue : brlMinValue}
+              {props.auctionEndDate < Date.now()
+                ? "Valor Atual:"
+                : "Valor Final:"}{" "}
+              {realtyValue?.toLocaleString("pt-br", {
+                style: "currency",
+                currency: "BRL",
+              })}
             </p>
-            <p className={styles.period}>Início em {leaseBeginDate}</p>
-            <p className={styles.period}>Período de 10 anos</p>
-            <p className={props.auctionEndDate > Date.now() ? styles.period : styles.red}>
-              {props.auctionEndDate > Date.now()
-                ? `Esse leilão se encerra dia ${auctionEndDate}`
-                : `Esse leilão se encerrou no dia ${auctionEndDate}`}
+            <p className={styles.period}>
+              Início do contrato no dia {leaseBeginDate}
+            </p>
+            <p className={styles.period}>Período do contrato de 10 anos</p>
+            <p className={styles.period}>
+              {props.auctionEndDate < Date.now() ? (
+                `Esse leilão se encerra dia ${auctionEndDate}`
+              ) : (
+                <>
+                  <p>Esse leilão se encerrou.</p>
+                  <p>Verifique seus contratos</p>
+                </>
+              )}
             </p>
           </div>
-          <div className={styles.moneyContainer}>
-            <input placeholder="Digite o valor" type="number" />
-            <button type="button">Fazer meu lance</button>
-          </div>
+
+          {props.auctionEndDate < Date.now() ? (
+            <form
+              className={styles.moneyContainer}
+              onSubmit={handleSubmit(makeBid)}
+            >
+              <input
+                placeholder="Digite o valor"
+                type="number"
+                name="bid"
+                {...register("bid")}
+              />
+
+              <button type="submit">Fazer meu lance</button>
+              <Toaster />
+            </form>
+          ) : null}
         </Card>
       </div>
     </div>

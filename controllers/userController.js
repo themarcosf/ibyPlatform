@@ -13,11 +13,15 @@ exports.userLogin = asyncHandler(async function (req, res, next) {
 
   let _currentUser;
   for (let i = 0; i < _allUsers.length; i++) {
+    // console.log(req.body.officialId)
+    // console.log(_allUsers[i].officialId)
+    // console.log(_allUsers[i])
     if (_allUsers[i].officialId === req.body.officialId) {
       _currentUser = _allUsers[i];
+      break
     }
   }
-
+  // console.log(_currentUser)
   if (_currentUser) {
     if (_currentUser.password === req.body.password) {
       res

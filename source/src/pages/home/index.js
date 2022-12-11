@@ -11,9 +11,15 @@ import EsgPractice from "../../components/EsgPractice/EsgPractice";
 export default home;
 
 function home() {
+  const checkLocalStorage= () => {
+    const userId = JSON.parse(localStorage.getItem("userData"))
+    console.log(userId)
+  }
+
   return (
     <div className={styles.body}>
       <Header>
+        <a onClick={() => checkLocalStorage()}>Teste</a>
         <Image
           src="/iby_logo.svg"
           width={220}

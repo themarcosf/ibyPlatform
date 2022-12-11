@@ -83,6 +83,7 @@
 .period {
   color: #525151;
   font-size: 0.8rem;
+  margin: 0.5rem 0;
 
   span{
     text-transform: capitalize;
@@ -115,7 +116,7 @@
     padding: 1rem;
     color: white;
     border: none;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
 
     transition: 300ms;
@@ -124,9 +125,4 @@
       opacity: 0.9;
     }
   }
-}
-
-.red{
-  color:red;
-  font-weight: 600;
 }
