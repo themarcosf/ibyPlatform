@@ -5,25 +5,21 @@ function FilterModal({ closeModal }) {
     <>
       <div className={styles.modalBackground}>
         <div className={styles.modalContainer}>
-          <div className={styles.titleAlign}>
-            <div className={styles.title}>
-              <button
-                onClick={() => {
-                  closeModal(false);
-                }}
-              >
-                X
-              </button>
-            </div>
-          <div className={styles.title}>
+          <div className={styles.header}>
             <h1>Localização</h1>
+            <button
+              onClick={() => {
+                closeModal(false);
+              }}
+            >
+              X
+            </button>
           </div>
-          </div>
-          
+
           <div className={styles.body}>
             <div className={styles.sec}>
-                <h3>Estado</h3>
-            <p>Selecione o Estado que deseja:</p>
+              <h3>Estado</h3>
+              <p>Selecione o Estado que deseja:</p>
             </div>
             <h3>Cidade</h3>
             <p>Selecione a cidade que deseja:</p>
@@ -31,7 +27,7 @@ function FilterModal({ closeModal }) {
             <p>Selecione o bairro que deseja:</p>
           </div>
           <div className={styles.footer}>
-            <button>Aplicar Filtros</button>
+            <button type="button">Aplicar Filtros</button>
           </div>
         </div>
       </div>

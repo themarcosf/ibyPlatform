@@ -3,8 +3,14 @@ import styles from "./BuildingCard.module.scss";
 import Link from "next/link";
 
 function BuildingCard(props) {
-  const price = props.price;
-  const brlPrice = price.toLocaleString("pt-br", {
+
+  // Rua travessa 123 não possui min value(apos reinicar o db pode retirar os "?" pois todos os imoveis precisam ter minValue
+  const brlMinValue = props?.minValue?.toLocaleString("pt-br", {
+    style: "currency",
+    currency: "BRL",
+  });
+
+  const brlLastBidValue = props?.lastBidValue?.toLocaleString("pt-br", {
     style: "currency",
     currency: "BRL",
   });
@@ -23,23 +29,32 @@ function BuildingCard(props) {
         </div>
 
         <div className={styles.streetBx}>
-          <h3>{props.street}</h3>
+          <h3>{props.streetAddress}</h3>
           <span href="#">
-            <img style={{width:"22px"}} src="/heartIcon.png" />
+            <img style={{ width: "22px" }} src="/heartIcon.png" />
           </span>
         </div>
         <p className={styles.address}>
-          {props.district}, {props.state}
+          {props.neighborhood}, {props.state}
         </p>
-        <div className={styles.buildingInfos}>
-          <p>{brlPrice}</p>
-          <div className={styles.meters}>
-            <img  style={{width:"25px", marginRight:"3px"}} src={"/regua.png"} />
-            <p>
-              {props.area}m<sup>2</sup>
-            </p>
+        {props.expired ? (
+          <div className={styles.expiradedBx}>
+            <p>Leilão expirado</p>
           </div>
-        </div>
+        ) : (
+          <div className={styles.buildingInfos}>
+            <p>{props.lastBidValue ? brlLastBidValue : brlMinValue}</p>
+            <div className={styles.meters}>
+              <img
+                style={{ width: "25px", marginRight: "3px" }}
+                src={"/regua.png"}
+              />
+              <p>
+                {props.sqMeters}m<sup>2</sup>
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </Link>
   );

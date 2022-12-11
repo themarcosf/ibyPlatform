@@ -7,7 +7,7 @@ import Header from "../components/Header/Header";
 
 import styles from "../styles/login.module.scss";
 
-export default function Home() {
+export default function home() {
   const {
     register,
     handleSubmit,

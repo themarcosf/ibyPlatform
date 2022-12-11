@@ -1,0 +1,20 @@
+.registerContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1{
+        margin: 1rem;
+    }
+}
+
+.btnsContainer {
+  a {
+    cursor: pointer;
+
+  }
+}
+
+.active{
+    background: red;
+}

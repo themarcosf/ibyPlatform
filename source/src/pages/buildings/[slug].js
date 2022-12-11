@@ -6,8 +6,12 @@ import Header from "../../components/Header/Header";
 import NavBar from "../../components/NavBar/NavBar";
 import styles from "./build.module.scss";
 
-function build({ data }) {
-  const router = useRouter();
+function build({ data, auctionsData }) {
+
+  console.log(data)
+  
+  const auction = auctionsData.find((auction) => auction.realtyId == data._id);
+
 
   return (
     <>
@@ -22,17 +26,20 @@ function build({ data }) {
         <NavBar />
       </Header>
       <BuildingPage
+        inConstruction={data.inConstruction}
+        toRetrofit={data.toRetrofit}
         image={data.images}
-        isFinished={data.isFinished}
         description={data.description}
-        street={data.street}
-        district={data.district}
+        streetAddress={data.streetAddress}
+        neighborhood={data.neighborhood}
         state={data.state}
-        price={data.price}
-        area={data.area}
-        id={data.id}
-        startDate={data.startDate}
-        endDate={data.endDate}
+        sqMeters={data.sqMeters}
+        lastBidValue={auction?.lastBidValue}
+        minValue={auction.minValue}
+        id={build._id}
+        expired={true}
+        leaseBeginDate={auction.leaseBeginDate}
+        auctionEndDate={auction.auctionEndDate}
       />
       <Footer />
     </>
@@ -51,12 +58,18 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (ctx) => {
   const { slug } = ctx.params;
 
-  const res = await fetch(`http://localhost:3333/properties/${slug}`);
-  const data = await res.json();
+  const res = await fetch(`http://127.0.0.1:8000/api/v1/realty/${slug}`);
+  const initialData = await res.json();
+  const data = initialData.data._realty;
+
+  const auctionsRes = await fetch("http://127.0.0.1:8000/api/v1/auctions/");
+  const initialAuctionsData = await auctionsRes.json();
+  const auctionsData = initialAuctionsData.data._auctions;
 
   return {
     props: {
       data,
+      auctionsData,
     },
     revalidate: 60 * 5,
   };

@@ -6,7 +6,6 @@ import Header from "../components/Header/Header";
 import NavBar from "../components/NavBar/NavBar";
 import SaleModal from "../components/SaleModal/SaleModal";
 import styles from "../styles/myContracts.module.scss";
-import { redirect } from "next/dist/server/api-utils";
 
 function myContracts({ data }) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -31,13 +30,18 @@ function myContracts({ data }) {
           <div className={styles.cardsContainer}>
             {data.map((build) => (
               <BoughtBuildingCard
-                image={build.images[0]}
-                street={build.street}
-                district={build.district}
+                iimage={build.images[0]}
+                inConstruction={build.inConstruction}
+                toRetrofit={build.toRetrofit}
+                streetAddress={build.streetAddress}
+                neighborhood={build.neighborhood}
                 state={build.state}
-                id={build.id}
-                startDate={build.startDate}
-                endDate={build.endDate}
+                price={build.price}
+                sqMeters={build.sqMeters}
+                lastBidValue={build?.lastBidValue}
+                minValue={build?.minValue}
+                id={build._id}
+                expired={false}
                 setModalOpen={setModalOpen}
                 setModalId={setModalId}
                 

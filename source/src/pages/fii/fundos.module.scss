@@ -1,6 +1,8 @@
 .content{
     padding: 1rem;
     max-width: 1300px;
+    min-width: 1000px;
+
 
 
     h1{
@@ -10,9 +12,11 @@
 
 }
 
-.filters{
-    margin: 1rem;
-    background-color: antiquewhite;
+.title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .cardsContainer{
