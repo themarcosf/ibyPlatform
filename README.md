@@ -1,23 +1,25 @@
-#  <img width="28px" height="28px" src="https://user-images.githubusercontent.com/99221221/206879319-23fa7ee3-75ca-4534-98d7-6b1d754c2f12.png" alt="ibyplatform-logo"/> Plataforma Iby
+#  <img width="28px" height="28px" src="https://user-images.githubusercontent.com/99203402/206941522-7b780bfb-2be8-4012-a748-48f1e5ca7a95.png" alt="ibyplatform-logo"/> Plataforma Iby
 ## Plataforma Iby - HACKATHON WEB3 - Tokenização do Patrimônio da União - 2022
 
-## [Trailer]()
+## Trailer
 
-<img src="https://user-images.githubusercontent.com/99221221/206878622-54420850-86b1-4eaa-9c62-fe99bb5edb40.png" alt="app-screens-mockup"/>
+
+<img src="https://user-images.githubusercontent.com/99203402/206941612-a2241827-ba5a-4627-9844-50d0a3ca7afe.png" alt="app-screens-mockup"/>
 
 ## Nosso Time
 - Bianca Cassemiro Lima
 - Luiz Felipe Kama Alencar
 - Marcos Aurélio Florêncio da Silva
 
+
 ## Quem Somos
 Somos alunos do primeiro ano de Engenharia de Software e de Computação no INTELI - Instituto de Tecnologia e Liderança. Acreditamos no potencial do blockchain para gerar impactos positivos sociais e econômicos.
 
 ## Nossa Solução
 
-Nossa solução busca facilitar a destinação de imóveis da União através da venda de NFTs para empresas e fundos de investimento imobiliário por um período fixo de 10 anos. Cada NFT dá direito ao uso semestral do imóvel a que faz referência e podem ser revendidas para pessoas físicas ou empresas que queiram alugar residências ou imóveis comerciais. Acreditamos que a proposta de valor esteja direcionada para empresas do setor imobiliário e fundos que adotem um modelo de negócios de reforma e valorização de imóveis. Como possui valor de revenda, as pessoas físicas ou empresas que comprarem tais NFT poderão observar ganhos em seus investimentos no momento da revenda. Propõe-se que os FIIs possam adquirir tokens ESG mediante a destinação de 1% a 3% do valor dos tokens para um fundo indicado pela SPU, com igual contrapartida do Governo Federal - essa iniciativa ESG é viabilizada pela plataforma e pode se beneficiar o segmento de green finance, que investe preferencialmente em iniciativas que gerem efeitos positivos ao ambiente.
+- Nossa solução busca facilitar a destinação de imóveis da União através da venda de NFTs para empresas e fundos de investimento imobiliário por um período fixo de 10 anos. Cada NFT dá direito ao uso semestral do imóvel a que faz referência e podem ser revendidas para pessoas físicas ou empresas que queiram alugar residências ou imóveis comerciais.<br/>
+- Acreditamos que a proposta de valor esteja direcionada para empresas do setor imobiliário e fundos que adotem um modelo de negócios de reforma e valorização de imóveis. Como possui valor de revenda, as pessoas físicas ou empresas que comprarem tais NFT poderão observar ganhos em seus investimentos no momento da revenda. Propõe-se que os FIIs possam adquirir tokens ESG mediante a destinação de 1% a 3% do valor dos tokens para um fundo indicado pela SPU, com igual contrapartida do Governo Federal - essa iniciativa ESG é viabilizada pela plataforma e pode se beneficiar o segmento de green finance, que investe preferencialmente em iniciativas que gerem efeitos positivos ao ambiente.
 
-<img src="https://user-images.githubusercontent.com/99221221/206878693-562f919a-ec3c-4a55-bfa8-1860273b0ff9.png" alt="app-screens-mockup"/>
 
 ## Proposta de Valor
 
@@ -51,16 +53,16 @@ Nossa solução busca facilitar a destinação de imóveis da União através da
  Esse projeto foi desenvolvido em Javascript e Solidity e utilizou as seguintes tecnologias:
  
  Blockchain:
- . alfajores
- . ethers
- . hardhat
- . openZeppelin
- . IPFS
+ - alfajores
+ - ethers
+ - hardhat
+ - openZeppelin
+ - IPFS
  
  Frontend:
- . React
- . Next
- . SaaS
+ - React
+ - Next
+ - SaaS
  
  Backend:
  - node.js
@@ -68,12 +70,13 @@ Nossa solução busca facilitar a destinação de imóveis da União através da
  - mongodb
 
 ## Orientações
- . instalar bibliotecas node.js usando npm i nas pastas root, alfajores e source
- . gerar os arquivos binários e de interface através do comando npx hardhat compile
- . deployar os contratos na rede de testes ALFAJORES
- . iniciar o servidor de back end por meio do comando npm run start:dev
- . iniciar o servidor de front end por meio do comando npm run dev
- . configurar arquivo de variaveis de ambiente na pasta root (config.env)
+ - instalar bibliotecas node.js usando npm i nas pastas root, alfajores e source
+ - assegurar que o engine utilizado é node versão 18 ou superior
+ - gerar os arquivos binários e de interface através do comando npx hardhat compile
+ - deployar os contratos na rede de testes ALFAJORES
+ - iniciar o servidor de back end por meio do comando npm run start:dev
+ - iniciar o servidor de front end por meio do comando npm run dev
+ - configurar arquivo de variaveis de ambiente na pasta root (config.env)
       NODE_ENV=development
 
       MNEMONIC=...
