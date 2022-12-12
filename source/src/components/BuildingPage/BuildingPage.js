@@ -13,7 +13,13 @@ function BuildingPage(props) {
     props?.lastBidValue > props.minValue ? props.lastBidValue : props.minValue
   );
 
-  const userData = JSON.parse(localStorage.getItem("userData"))
+  let wallet
+  let userId
+
+  if (typeof window !== "undefined") {
+    wallet = JSON.parse(localStorage.userData).wallet
+    userId = JSON.parse(localStorage.userData).id
+  }
 
   const {
     register,
@@ -24,7 +30,8 @@ function BuildingPage(props) {
   const makeBid = (data) => {
     const updatedData = {
       lastBidValue: data.bid,
-      lastBidUser: userData.id
+      lastBidUser: userId,
+      lastBidderWallet: wallet,
     };
 
     if (data.bid > realtyValue) {

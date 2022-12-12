@@ -5,15 +5,15 @@ import Image from "next/image";
 import styles from "./SaleModal.module.scss";
 
 function SaleModal(props) {
-  const formatedStartDate = format(parseISO(props.startDate), "MMMM", {
-    locale: ptBR,
-  });
-  const formatedMonthEndDate = format(parseISO(props.endDate), "MMMM", {
-    locale: ptBR,
-  });
-  const formatedYearEndDate = format(parseISO(props.endDate), "yyyy", {
-    locale: ptBR,
-  });
+  // const formatedStartDate = format(parseISO(props.startDate), "MMMM", {
+  //   locale: ptBR,
+  // });
+  // const formatedMonthEndDate = format(parseISO(props.endDate), "MMMM", {
+  //   locale: ptBR,
+  // });
+  // const formatedYearEndDate = format(parseISO(props.endDate), "yyyy", {
+  //   locale: ptBR,
+  // });
 
   return (
     <div className={styles.cardContainer}>
@@ -38,14 +38,14 @@ function SaleModal(props) {
             alt="build-image"
           />
           <div className={styles.infosBx}>
-            <h3>{props.street}</h3>
+            <h3>{props.streetAddress}</h3>
             <p>
-              {props.district}, {props.state}
+              {props.neighborhood}, {props.state}
             </p>
-            <p>
+            {/* <p>
               <span>{formatedStartDate}</span> a{" "}
               <span>{formatedMonthEndDate}</span> de {formatedYearEndDate}
-            </p>
+            </p> */}
           </div>
         </div>
         <div className={styles.secondColumn}>

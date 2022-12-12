@@ -5,7 +5,6 @@ import Header from "../../components/Header/Header";
 import NavBar from "../../components/NavBar/NavBar";
 import styles from "./pj.module.scss";
 import { useState } from "react";
-import FilterModal from "../../components/FilterModal/FilterModal";
 import Filter from "../../components/Filter/Filter";
 
 function pj({ realtyData }) {

@@ -1,83 +1,138 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import BoughtBuildingCard from "../components/boughtBuildingCard/boughtBuildingCard";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import NavBar from "../components/NavBar/NavBar";
 import SaleModal from "../components/SaleModal/SaleModal";
+import Filter from "../components/Filter/Filter";
 import styles from "../styles/myContracts.module.scss";
 
-function myContracts({ data }) {
+function myContracts() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalId, setModalId] = useState();
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    const userId = JSON.parse(localStorage.userData).id;
+
+    fetch(`http://127.0.0.1:8000/api/v1/users/${userId}`)
+      .then((response) => response.json())
+      .then((json) => {
+        setData(json.data.auctions);
+      });
+  }, []);
+
+  console.log(data);
 
   return (
     <>
-      <Header>
-        <Image
-          src="/iby_logo.svg"
-          width={220}
-          height={130}
-          alt="iby_logo"
-          priority
-        />
-        <NavBar />
-      </Header>
-      <div className={styles.content}>
-        <h1>Meus Contratos</h1>
-        <div className={styles.filters}>Filtros</div>
-        <div className={styles.cardsWrapper}>
-          <div className={styles.cardsContainer}>
-            {data.map((build) => (
-              <BoughtBuildingCard
-                iimage={build.images[0]}
-                inConstruction={build.inConstruction}
-                toRetrofit={build.toRetrofit}
-                streetAddress={build.streetAddress}
-                neighborhood={build.neighborhood}
-                state={build.state}
-                price={build.price}
-                sqMeters={build.sqMeters}
-                lastBidValue={build?.lastBidValue}
-                minValue={build?.minValue}
-                id={build._id}
-                expired={false}
-                setModalOpen={setModalOpen}
-                setModalId={setModalId}
-                
-              />
-            ))}
-          </div>
-          {modalOpen ? (
-            <SaleModal
-              street={data[modalId].street}
-              image={data[modalId].images[0]}
-              district={data[modalId].district}
-              state={data[modalId].state}
-              id={data[modalId].id}
-              startDate={data[modalId].startDate}
-              endDate={data[modalId].endDate}
-              setModalOpen={setModalOpen}
+      {data ? (
+        <>
+          <Header>
+            <Image
+              src="/iby_logo.svg"
+              width={220}
+              height={130}
+              alt="iby_logo"
+              priority
             />
-          ) : null}
-        </div>
-      </div>
+            <NavBar />
+          </Header>
+          <div className={styles.content}>
+            <div className={styles.title}>
+              <h1>Meus Contratos</h1>
+              <Filter />
+            </div>
+            <div className={styles.cardsWrapper}>
+              <div className={styles.cardsContainer}>
+                {data.map((card) => {
+                  if (card != null) {
+                    
+                    const cardIndex = data.indexOf(card);
+                    return (
+                      <BoughtBuildingCard
+                        image={card._realtyData.images[0]}
+                        streetAddress={card._realtyData.streetAddress}
+                        neighborhood={card._realtyData.neighborhood}
+                        state={card._realtyData.state}
+                        setModalOpen={setModalOpen}
+                        setModalId={setModalId}
+                        id={cardIndex}
+                        // startDate={"2023-01-01"}
+                        // endDate={"2024-12-31"}
+                      />
+                    );
+                  }
+                })}
 
-      <Footer />
+                {/* <BoughtBuildingCard
+                  image={
+                    "https://classic.exame.com/wp-content/uploads/2017/09/apto-decorado-even1.jpg?quality=70&strip=info&w=1000"
+                  }
+                  streetAddresss={"Alameda São Joao, 10101"}
+                  neighborhoods={"Moema"}
+                  state={"São Paulo"}
+                  // setModalOpen={setModalOpen}
+                  // setModalId={setModalId}
+                  startDate={"2023-01-01"}
+                  endDate={"2024-12-31"}
+                />
+                <BoughtBuildingCard
+                  image={
+                    "https://classic.exame.com/wp-content/uploads/2020/09/Apartamento-compacto-incorporadora-You-Inc-mercado-imobiliario.jpg?quality=70&strip=info&w=1024"
+                  }
+                  streetAddresss={"Rua correa de santos, 198"}
+                  neighborhoods={"Butantã"}
+                  state={"São Paulo"}
+                  // setModalOpen={setModalOpen}
+                  // setModalId={setModalId}
+                  startDate={"2023-01-01"}
+                  endDate={"2025-12-31"}
+                /> */}
+              </div>
+              {modalOpen ? (
+                <SaleModal
+                  streetAddress={data[modalId]._realtyData.streetAddress}
+                  image={data[modalId]._realtyData.images[0]}
+                  neighborhood={data[modalId]._realtyData.neighborhood}
+                  state={data[modalId]._realtyData.state}
+                  id={data[modalId]._realtyData.id}
+                  // startDate={data[modalId]._realtyData.startDate}
+                  // endDate={data[modalId]._realtyData.endDate}
+                  setModalOpen={setModalOpen}
+                />
+              ) : null}
+            </div>
+          </div>
+
+          <Footer />
+        </>
+      ) : (
+        "carregando"
+      )}
     </>
   );
 }
 
 export default myContracts;
 
-export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:3333/properties");
-  const data = await res.json();
+// export const getStaticProps = async () => {
+//   let data ={}
 
-  return {
-    props: {
-      data,
-    },
-    revalidate: 60 * 5,
-  };
-};
+//   if (typeof window !== "undefined") {
+//     const userId = JSON.parse(localStorage.userData).id;
+
+//     data = fetch(`http://127.0.0.1:8000/api/v1/users/${userId}`)
+//       .then((response) => response.json())
+//       .then((json) => {
+//         console.log(json);
+//       });
+//   }
+//   return {
+//     props: {
+//       data,
+//     },
+//     revalidate: 60 * 5,
+//   };
+// };

@@ -19,7 +19,6 @@ function home() {
   return (
     <div className={styles.body}>
       <Header>
-        <a onClick={() => checkLocalStorage()}>Teste</a>
         <Image
           src="/iby_logo.svg"
           width={220}

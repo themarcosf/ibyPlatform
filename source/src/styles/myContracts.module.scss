@@ -1,6 +1,8 @@
 .content {
   padding: 1rem;
   max-width: 1300px; 
+  width: 1300px;
+  min-height: 500px;
 
   h1 {
     color: #2e65bc;
@@ -8,9 +10,11 @@
   }
 }
 
-.filters {
-  margin: 1rem;
-  background-color: antiquewhite;
+.title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .cardsWrapper{
