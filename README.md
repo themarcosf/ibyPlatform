@@ -69,6 +69,7 @@ Nossa solução busca facilitar a destinação de imóveis da União através da
 
 ## Orientações
  . instalar bibliotecas node.js usando npm i nas pastas root, alfajores e source
+ . assegurar que o engine utilizado é node versão 18 ou superior
  . gerar os arquivos binários e de interface através do comando npx hardhat compile
  . deployar os contratos na rede de testes ALFAJORES
  . iniciar o servidor de back end por meio do comando npm run start:dev
