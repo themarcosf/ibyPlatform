@@ -35,7 +35,7 @@ function build({ data, auctionsData }) {
         state={data.state}
         sqMeters={data.sqMeters}
         lastBidValue={auction?.lastBidValue}
-        minValue={auction.minValue}
+        minValue={auction?.minValue}
         id={data._id}
         auctionId={auction.id}
         expired={true}

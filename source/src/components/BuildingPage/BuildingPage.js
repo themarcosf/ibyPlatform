@@ -10,7 +10,7 @@ import styles from "./BuildingPage.module.scss";
 function BuildingPage(props) {
   const [buildingStatus, setbuildingStatus] = useState("Pronto para morar!");
   const [realtyValue, setRealtyValue] = useState(
-    props?.lastBidValue > props.minValue ? props.lastBidValue : props.minValue
+    props?.lastBidValue > props?.minValue ? props.lastBidValue : props?.minValue
   );
 
   let wallet

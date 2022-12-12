@@ -45,7 +45,7 @@ function pj({ realtyData }) {
                   price={build.price}
                   sqMeters={build.sqMeters}
                   lastBidValue={build?.lastBidValue}
-                  minValue={build.minValue}
+                  minValue={build?.minValue}
                   id={build._id}
                   expired={false}
                 />
@@ -64,7 +64,7 @@ function pj({ realtyData }) {
                   state={build.state}
                   sqMeters={build.sqMeters}
                   lastBidValue={build?.lastBidValue}
-                  minValue={build.minValue}
+                  minValue={build?.minValue}
                   id={build._id}
                   expired={true}
                 />
