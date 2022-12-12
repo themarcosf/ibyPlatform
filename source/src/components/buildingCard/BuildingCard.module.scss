@@ -11,9 +11,14 @@
   display: flex;
   padding-left: 0.4rem;
   margin-bottom: 1rem;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
 
   img {
     border-radius: 1.2rem;
+    width: 200px;
+    height: 200px;
   }
 }
 

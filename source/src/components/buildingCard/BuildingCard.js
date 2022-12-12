@@ -19,10 +19,9 @@ function BuildingCard(props) {
     <Link href={`/buildings/${props.id}`}>
       <div className={styles.buildingCard}>
         <div className={styles.imgCard}>
-          <Image
-            src={`${props.image}`}
-            width={277}
-            height={262}
+          <img
+            src={`/${props.image}`}
+            
             priority
             alt="build-image"
           />
@@ -30,9 +29,6 @@ function BuildingCard(props) {
 
         <div className={styles.streetBx}>
           <h3>{props.streetAddress}</h3>
-          <span href="#">
-            <img style={{ width: "22px" }} src="/heartIcon.png" />
-          </span>
         </div>
         <p className={styles.address}>
           {props.neighborhood}, {props.state}

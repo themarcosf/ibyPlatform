@@ -86,7 +86,7 @@ function BuildingPage(props) {
         <div>
           <Image
             className={styles.firstImg}
-            src={`${props.image[0]}`}
+            src={`/${props.image[0]}`}
             width={500}
             height={330}
           />
@@ -94,7 +94,7 @@ function BuildingPage(props) {
         <div>
           <Image
             className={styles.secondImg}
-            src={`${props.image[1]}`}
+            src={`/${props.image[1]}`}
             width={500}
             height={330}
           />
@@ -102,7 +102,7 @@ function BuildingPage(props) {
         <div>
           <Image
             className={styles.thirdImg}
-            src={`${props.image[2]}`}
+            src={`/${props.image[2]}`}
             width={500}
             height={330}
           />

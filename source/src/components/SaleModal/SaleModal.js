@@ -31,7 +31,7 @@ function SaleModal(props) {
       <div className={styles.content}>
         <div className={styles.firstColumn}>
           <Image
-            src={`${props.image}`}
+            src={`/${props.image}`}
             width={256}
             height={256}
             priority
