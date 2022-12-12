@@ -29,7 +29,7 @@ exports.getAllRealty = asyncHandler(async function (req, res, next) {
       if (_auctions[i].realtyId === el.id) {
         temp.lastBidValue = _auctions[i].lastBidValue;
         temp.auctionEndDate = _auctions[i].auctionEndDate;
-        temp?.minValue = _auctions[i]?.minValue;
+        temp.minValue = _auctions[i]?.minValue;
         return temp;
       }
     }
