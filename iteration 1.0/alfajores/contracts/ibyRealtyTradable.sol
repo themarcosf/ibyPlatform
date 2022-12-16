@@ -18,7 +18,7 @@ contract IbyRealtyTradable is ERC1155, ERC1155Burnable, Ownable {
      */
     constructor()
         ERC1155(
-            "https://ipfs.io/ipfs/QmTJZkVtzhKJw4FrHxm9pbpYm7NnnZxy9iNWnisEdtr9nA"
+            "https://ipfs.io/ipfs/QmSvxXUTUKABgfyfJLbhzkSmGUpDPkifWrARhTWCPvEq2b?filename=nftEsg.png"
         )
     {}
 

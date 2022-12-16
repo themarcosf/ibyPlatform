@@ -1,16 +1,17 @@
+require("dotenv").config({ path: "./../config.env" });
 const { ContractFactory } = require("ethers");
-const IbyRealtyTradable = require("../artifacts/contracts/IbyRealtyTradable.sol/IbyRealtyTradable.json");
+const IbyRealtyID = require("./../artifacts/contracts/IbyRealtyID.sol/IbyRealtyID.json");
 const { getWallet } = require("../utils/utils");
 
 const main = async function () {
   const wallet = getWallet();
   console.info("Deploying to Alfajores with account", wallet.address);
-  const ibyRealtyTradable = new ContractFactory(
-    IbyRealtyTradable.abi,
-    IbyRealtyTradable.bytecode,
+  const ibyRealtyID = new ContractFactory(
+    IbyRealtyID.abi,
+    IbyRealtyID.bytecode,
     wallet
   );
-  const contract = await ibyRealtyTradable.deploy();
+  const contract = await ibyRealtyID.deploy();
   await contract.deployTransaction.wait();
   console.info("Contract deployed, address:", contract.address);
 };

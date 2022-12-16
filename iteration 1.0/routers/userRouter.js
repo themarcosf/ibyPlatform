@@ -8,6 +8,8 @@ const router = express.Router();
  */
 router.route("/").post(userController.userLogin);
 
+router.route("/balanceOf").get(userController.balanceOf);
+
 router.route("/:id").get(userController.userContracts);
 
 module.exports = router;

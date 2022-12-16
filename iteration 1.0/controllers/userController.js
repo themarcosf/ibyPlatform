@@ -1,4 +1,7 @@
-const { CustomError, asyncHandler } = require("../utils/lib");
+const { CustomError, asyncHandler } = require("./../utils/lib");
+const {
+  realtyTradableContract,
+} = require("./../alfajores/interactions/ibyRealtyTradable");
 const Auction = require("./../models/auctionsModel");
 const Realty = require("./../models/realtyModel");
 const User = require("../models/userModel");
@@ -13,15 +16,11 @@ exports.userLogin = asyncHandler(async function (req, res, next) {
 
   let _currentUser;
   for (let i = 0; i < _allUsers.length; i++) {
-    // console.log(req.body.officialId)
-    // console.log(_allUsers[i].officialId)
-    // console.log(_allUsers[i])
     if (_allUsers[i].officialId === req.body.officialId) {
       _currentUser = _allUsers[i];
-      break
+      break;
     }
   }
-  // console.log(_currentUser)
   if (_currentUser) {
     if (_currentUser.password === req.body.password) {
       res
@@ -70,13 +69,26 @@ exports.userContracts = asyncHandler(async function (req, res, next) {
       };
     }
   });
-  console.log(_myAuctions);
 
   res
     .status(201)
     .json({
       status: "Success",
       data: { auctions: _myAuctions },
+    })
+    .end();
+});
+
+exports.balanceOf = asyncHandler(async function (req, res, next) {
+  const _balance = await realtyTradableContract("balanceOf", [
+    req.body.userId,
+    req.body.celoId,
+  ]);
+  res
+    .status(200)
+    .json({
+      status: "Success",
+      data: { balance: _balance },
     })
     .end();
 });
