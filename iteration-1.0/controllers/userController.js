@@ -1,9 +1,9 @@
-const { CustomError, asyncHandler } = require("./../utils/lib");
+const { CustomError, asyncHandler } = require("../utils/lib");
 const {
   realtyTradableContract,
-} = require("./../alfajores/interactions/ibyRealtyTradable");
-const Auction = require("./../models/auctionsModel");
-const Realty = require("./../models/realtyModel");
+} = require("../alfajores/interactions/ibyRealtyTradable");
+const Auction = require("../models/auctionsModel");
+const Realty = require("../models/realtyModel");
 const User = require("../models/userModel");
 ////////////////////////////////////////////////////////
 

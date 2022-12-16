@@ -1,0 +1,28 @@
+{
+  "name": "iby_platform_blockchain_api",
+  "version": "1.0.0",
+  "description": "Blockchain API for Iby Platform project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/themarcosf/ibyPlataform.git"
+  },
+  "keywords": [
+    "iby",
+    "real",
+    "estate",
+    "rental",
+    "tokens"
+  ],
+  "author": "Iby Team (Bianca Lima, Luiz Kama, Marcos Florencio)",
+  "bugs": {
+    "url": "https://github.com/themarcosf/ibyPlataform/issues"
+  },
+  "homepage": "https://github.com/themarcosf/ibyPlataform#readme",
+  "devDependencies": {
+    "hardhat": "^2.12.4"
+  }
+}

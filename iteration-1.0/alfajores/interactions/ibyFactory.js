@@ -1,6 +1,6 @@
 const { ethers } = require("ethers");
-const { getWallet, realtyPoolDestruct } = require("./../utils/utils");
-const IbyFactory = require("./../artifacts/contracts/ibyFactory.sol/IbyFactory.json");
+const { getWallet, realtyPoolDestruct } = require("../utils/utils");
+const IbyFactory = require("../artifacts/contracts/ibyFactory.sol/IbyFactory.json");
 
 /**
  * smart contract public functions

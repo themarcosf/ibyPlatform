@@ -1,10 +1,10 @@
 const { QueryHelpers, CustomError, asyncHandler } = require("../utils/lib");
-const Auction = require("./../models/auctionsModel");
-const Realty = require("./../models/realtyModel");
+const Auction = require("../models/auctionsModel");
+const Realty = require("../models/realtyModel");
 const schedule = require("node-schedule");
 const {
   realtyTradableContract,
-} = require("./../alfajores/interactions/ibyRealtyTradable");
+} = require("../alfajores/interactions/ibyRealtyTradable");
 ////////////////////////////////////////////////////////
 
 /**

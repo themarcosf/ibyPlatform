@@ -1,13 +1,13 @@
-const { factoryContract } = require("./../alfajores/interactions/ibyFactory");
-const { realtyIdContract } = require("./../alfajores/interactions/ibyRealtyID");
+const { factoryContract } = require("../alfajores/interactions/ibyFactory");
+const { realtyIdContract } = require("../alfajores/interactions/ibyRealtyID");
 const {
   QueryHelpers,
   CustomError,
   asyncHandler,
   paramsObjToArray,
 } = require("../utils/lib");
-const Realty = require("./../models/realtyModel");
-const Auction = require("./../models/auctionsModel");
+const Realty = require("../models/realtyModel");
+const Auction = require("../models/auctionsModel");
 ////////////////////////////////////////////////////////
 
 /**

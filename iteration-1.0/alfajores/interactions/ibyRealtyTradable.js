@@ -1,5 +1,5 @@
 const { ethers } = require("ethers");
-const { getWallet } = require("./../utils/utils");
+const { getWallet } = require("../utils/utils");
 const IbyRealtyTradable = require("../artifacts/contracts/ibyRealtyTradable.sol/IbyRealtyTradable.json");
 
 /**
