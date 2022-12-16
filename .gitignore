@@ -1,6 +1,6 @@
 # hardhat artifacts
-/alfajores/artifacts
-/alfajores/cache
+/iteration-2.0/Blockchain/artifacts
+/iteration-2.0/Blockchain/cache
 
 # dependencies
 /iteration-2.0/Blockchain/node_modules
