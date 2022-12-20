@@ -1,3 +1,8 @@
+/**
+ * DOCUMENTATION
+ * chai-matchers: https://hardhat.org/hardhat-chai-matchers/docs/reference
+ */
+
 const {
   time,
   loadFixture,
@@ -94,6 +99,9 @@ describe("Lock", function () {
       });
     });
 
+    /**
+     * @dev ethers.js polls network to check if some event was emitted every 4 seconds
+     */
     describe("Events", function () {
       it("Should emit an event on withdrawals", async function () {
         const { lock, unlockTime, lockedAmount } = await loadFixture(
@@ -104,7 +112,7 @@ describe("Lock", function () {
 
         await expect(lock.withdraw())
           .to.emit(lock, "Withdrawal")
-          .withArgs(lockedAmount, anyValue); // We accept any value as `when` arg
+          .withArgs(lockedAmount, anyValue);
       });
     });
 

@@ -18,3 +18,16 @@ Use these commands to compile contracts:
 npx hardhat compile
 npx hardhat help compile
 ```
+
+Set up and deploy to a local blockchain:
+
+```shell
+npx hardhat node
+npx hardhat run --network localhost scripts/deployContract.js
+```
+
+Interacting from the console
+
+```shell
+npx hardhat console --network localhost
+```
