@@ -1,0 +1,31 @@
+.content {
+  padding: 1rem;
+  max-width: 1300px; 
+  width: 1300px;
+  min-height: 500px;
+
+  h1 {
+    color: #2e65bc;
+    font-weight: 600;
+  }
+}
+
+.title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardsWrapper{
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.cardsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}

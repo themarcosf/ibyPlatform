@@ -1,0 +1,110 @@
+.registerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    margin: 1rem;
+  }
+}
+
+.registerCard {
+  background: var(--gray-100);
+  border-radius: 1.8rem;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 1rem;
+  // width: 400px;
+  padding: 1rem 3rem;
+}
+
+.btnsContainer {
+  margin: 2rem 0;
+
+  a {
+    cursor: pointer;
+  }
+}
+
+.active {
+  background: #2e65bc;
+  border-radius: 1rem;
+  padding: 1rem;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 3rem 1rem;
+
+  transition: 300ms;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.disable {
+  background: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  color: #2e65bc;
+  border: 1px solid #2e65bc;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 3rem 1rem;
+
+  transition: 300ms;
+
+  &:hover {
+    opacity: 0.9;
+    color: white;
+    background-color: #2e65bc;
+    opacity: 0.9;
+  }
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  input {
+    background: #fbfbfb;
+    border: 0.4px solid #9e9b9b;
+    border-radius: 5px;
+    padding: 0.8rem 1.1rem;
+    width: 300px;
+    margin: 0.4rem 0 0.8rem;
+  }
+}
+
+.sendBtn {
+  display: flex;
+  justify-content: flex-end;
+  button {
+    background: #2e65bc;
+    border-radius: 1rem;
+    padding: 1rem;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 1rem 0rem;
+
+    transition: 300ms;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
