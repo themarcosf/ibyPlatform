@@ -1,9 +1,12 @@
-// We require the Hardhat Runtime Environment explicitly here. This is optional
-// but useful for running the script in a standalone fashion through `node <script>`.
-//
-// You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
-// will compile your contracts, add the Hardhat Runtime Environment's members to the
-// global scope, and execute the script.
+/**
+ * HRE = Hardhat Runtime Environment
+ *   programmatic access to task runner and config system
+ *   export EIP-1193-compatible Ethereum provider
+ *   can be extended using plug-ins eg hardhat-ethers
+ *
+ *   node <script> : run standalone script
+ *   npx hardhat run <script> : compile contracts, add HRE to global scope, execute script, then remove HRE from global scope
+ */
 const hre = require("hardhat");
 
 async function main() {
@@ -23,8 +26,6 @@ async function main() {
   );
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
