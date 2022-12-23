@@ -1,15 +1,14 @@
 # hardhat artifacts
-/iteration-2.0/Blockchain/artifacts
-/iteration-2.0/Blockchain/cache
+artifacts/
+cache/
 
 # dependencies
-/iteration-2.0/Blockchain/node_modules
-/iteration-2.0/Frontend/node_modules
-/iteration-2.0/Frontend/.next
+node_modules/
+.next/
 
 # misc
 
 # debug
 
 # local env files
-config.env
+*.env
