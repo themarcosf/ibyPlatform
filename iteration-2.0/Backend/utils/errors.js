@@ -1,14 +1,24 @@
 /**
- * handles uncaught (sync) exceptions and (async) rejections
+ * @notice distinguish operational error from other unknown errors
+ */
+class CustomError extends Error {
+  constructor(msg, statusCode) {
+    super(msg);
+    this.statusCode = statusCode;
+    this.status = String(this.statusCode).startsWith(4) ? "fail" : "error";
+    this.isOperational = true;
+  }
+}
+//////////////////////////////////////////////////////////////////
+
+/**
+ * @notice handle uncaught (sync) exceptions and (async) rejections
  */
 const uncaughtErrorHandler = function (err, server) {
-  if (process.env.NODE_ENV === "development")
-    console.log("Origin: Backend/utils/utils.js:uncaughtErrorHandler()");
-
   console.log(err.name, err.message);
   if (server) server.close();
   process.exit(-1);
 };
 //////////////////////////////////////////////////////////////////
 
-module.exports = { uncaughtErrorHandler };
+module.exports = { CustomError, uncaughtErrorHandler };
