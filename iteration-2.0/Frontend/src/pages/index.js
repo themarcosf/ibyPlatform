@@ -1,90 +1,162 @@
-import Image from "next/image";
-import Link from "next/link";
-import Router from 'next/router'
-import { useForm } from "react-hook-form";
+import Lottie from "lottie-react";
+import { getSession } from "next-auth/react";
 
-import Card from "../components/Card/Card";
-import Header from "../components/Header/Header";
+import Header from "../components/HeaderEspecial/Header";
+import Footer from "../components/Footer/Footer";
+import EsgPractice from "../components/EsgPractice/EsgPractice";
 
-import styles from "../styles/login.module.scss";
+import Planet from "../../public/planet.json";
+import House from "../../public/isometric_house.json";
 
-export default function home() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+import styles from "../styles/index.module.scss";
 
+function Home() {
+  const checkLocalStorage = () => {
+    const userId = JSON.parse(localStorage.getItem("userData"));
+    console.log(userId);
+  };
 
-  const login = (data) => {
-    const loginData = {
-      officialId: parseInt(data.officialId),
-      password: data.password
-    }
-
-    fetch(`http://127.0.0.1:8000/api/v1/users`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify(loginData),
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        // console.log(json);
-        localStorage.setItem("userData", JSON.stringify(json.data.currentUser))
-        // console.log(localStorage)
-      })
-      .then(() => {
-        Router.push("/home");
-      });
-  }
   return (
-    <>
-      <Header>
-        <Image src="/gov_logo.svg" width={89} height={32} alt="gov_logo" />
-        <a
-          target={"_blank"}
-          href={"https://www.gov.br/governodigital/pt-br/vlibras"}
-        >
-          <strong>VLibras</strong>
-        </a>
-      </Header>
-      <div className={styles.loginContent}>
-        <div className={styles.imgContainer}>
+    <div className={styles.body}>
+      <Header />
+      <div className={styles.container}>
+        <div className={styles.title}>
           <h1>
-            Cuide do que realmente <br />
-            importa para você
+            Conheça a <br />
+            Plataforma Iby
           </h1>
-          <div className={styles.imgBx}>
-            <img src="/family.png" alt="family" />
-          </div>
+          <h2>
+            e encontre um lugar <br />
+            para chamar de lar
+          </h2>
         </div>
-        <Card>
-          <div className={styles.wrapper}>
-            <h1>Identifique-se no gov.com:</h1>
-            <p>Digite seu CPF ou CNPJ para criar ou acessar<br/> sua conta gov.br</p>
-
-            <form onSubmit={handleSubmit(login)}>
-              <div className={styles.fields}>
-                <label>CPF/CNPJ</label>
-                <input placeholder="Digite seu CPF ou CNPJ" type="number" name="officialId" {...register("officialId")} />
-              </div>
-
-              <div className={styles.fields}>
-                <label>Senha</label>
-                <input placeholder="Digite sua senha" type="text" name="password" {...register("password")} />
-              </div>
-
-              <div className={styles.btnContainer}>
-                <button type="submit">Continuar</button>
-              </div>
-            </form>
-            <p className={styles.register}>Não tem uma conta ainda? <Link href={'/register'}>Registre-se</Link></p>
-          </div>
-        </Card>
+        <div className={styles.gradiente}>
+          <img id="gradiente" src="/gradiente.png" />
+        </div>
+        <div className={styles.imgContainer}>
+          <img id="family" src="/houseFamily.png" />
+        </div>
       </div>
-    </>
+      <div className={styles.texts}>
+        <h3>Como surgiu a Plataforma Iby?</h3>
+        <p>
+          A ideia surgiu quando vimos a possibilidade de criar algo inovador no
+          mercado
+          <br /> imobiliário, unindo a experiência de participar de leilões
+          junto ao universo
+          <br /> Web3. Foi assim que nasceu a IbyPlatform, que trás a
+          possibilidade de comprar <br />
+          imóveis e ganhar dinheiro, tudo isso em um só lugar.
+        </p>
+        <h3>Qual o nosso objetivo?</h3>
+        <p>
+          Nosso objetivo é fazer com que você compre ou alugue imóveis sem
+          seguro
+          <br /> fiança, sem taxas de entrada e com possibilidade de ganho na
+          valorização do <br />
+          seu token.
+        </p>
+      </div>
+      <div className={styles.esg}>
+        <div
+          style={{
+            width: "28%",
+            marginTop: "2%",
+            position: "relative",
+            left: "3%",
+          }}
+        >
+          <Lottie animationData={Planet} />
+        </div>
+        <div className={styles.esgTexts}>
+          <h3>Iniciativas ESG</h3>
+          <p>
+            O ESG resume as melhores práticas de caráter ambiental,
+            <br /> social e de governança (Environmental, Social,
+            <br /> Governance) que as empresas devem seguir.
+            <br />
+            Trata-se de um tripé que sustenta as ações de um novo
+            <br /> mercado, em que organizações, investidores e,
+            <br /> sobretudo, consumidores estão mais preocupados com a<br />{" "}
+            sustentabilidade e a responsabilidade social das marcas
+            <br /> com as quais se relacionam.
+          </p>
+        </div>
+      </div>
+      <div className={styles.esgMessage}>
+        <p>
+          A IbyPlatform promove a prática do{" "}
+          <span style={{ color: "#66A570", fontWeight: "bold" }}>ESG</span> no
+          momento em que a pessoa realiza a compra de <br />
+          algum imóvel. Ou seja, antes da realização da compra há a opção de
+          pagar de 1 a 3% a mais <br />
+          do valor do imóvel para promover as práticas ESG, deste modo o governo
+          paga o mesmo <br />
+          valor referente a doação.{" "}
+        </p>
+      </div>
+      <p
+        style={{
+          color: "#66A570",
+          fontWeight: "500",
+          fontSize: "28px",
+          marginTop: "40px",
+          textAlign: "center",
+        }}
+      >
+        Na prática
+      </p>
+      <EsgPractice />
+      <div className={styles.nftContainer}>
+        <div>
+          <h3>
+            Ganhe um NFT <br />
+            especial
+          </h3>
+          <p>
+            Quando você realiza uma ação no fundo de ESG <br />
+            promovido pelo Governo Federal, você recebe um <br />
+            NFT referente a esta doação. Essa NFT é exclusiva e <br />
+            tem um design diferente dos demais.
+          </p>
+          <h4 style={{ color: "#66A570", marginTop: "40px", fontSize: "24px" }}>
+            Faça a diferença, faça um Iby
+          </h4>
+        </div>
+        <div
+          style={{
+            width: "28%",
+            marginTop: "1%",
+            marginLeft: "20%",
+            position: "relative",
+            left: "3%",
+          }}
+        >
+          <Lottie animationData={House} />
+        </div>
+      </div>
+      <Footer />
+    </div>
   );
 }
+
+export async function getServerSideProps(context) {
+  const session = await getSession({ req: context.req });
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/myAccount",
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: {}
+    }
+  }
+
+
+}
+
+export default Home;

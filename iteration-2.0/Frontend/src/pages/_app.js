@@ -1,7 +1,11 @@
-import styles from "../styles/globals.scss";
+import ProvidersWrapper from "../components/ProvidersWrapper/ProvidersWrapper";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import '../styles/globals.scss'
+
+export default function App({ Component, pageProps }) {
+  return (
+    <ProvidersWrapper>
+      <Component {...pageProps} />
+    </ProvidersWrapper>
+  );
 }
-
-export default MyApp
