@@ -1,3 +1,4 @@
+const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const express = require("express");
@@ -23,6 +24,9 @@ if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 
 // set security HTTP headers
 app.use(helmet());
+
+// cross origin resource sharing (cors)
+app.use(cors());
 
 // parse and control maximum request body
 app.use(express.json({ limit: "100kb" }));
