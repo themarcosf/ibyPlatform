@@ -1,9 +1,20 @@
+import Image from 'next/image';
+
+import NavBar from '../NavBar/NavBar';
+
 import styles from './Header.module.scss'
 
-function Header({children}){
+function Header(){
      return (
        <header className={styles.headerContainer}>
-           {children}
+           <Image
+          src="/iby_logo.svg"
+          width={220}
+          height={130}
+          alt="iby_logo"
+          priority
+        />
+        <NavBar />
        </header>
    )
 }

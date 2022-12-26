@@ -1,11 +1,22 @@
-import styles from './Header.module.scss'
+import Image from "next/image";
 
-function HeaderEspecial({children}){
-     return (
-       <header className={styles.headerContainer}>
-           {children}
-       </header>
-   )
+import NavBar from "../NavBar/NavBar";
+
+import styles from "./Header.module.scss";
+
+function HeaderEspecial() {
+  return (
+    <header className={styles.headerContainer}>
+      <Image
+        src="/iby_logo.svg"
+        width={220}
+        height={130}
+        alt="iby_logo"
+        priority
+      />
+      <NavBar />
+    </header>
+  );
 }
 
 export default HeaderEspecial;
