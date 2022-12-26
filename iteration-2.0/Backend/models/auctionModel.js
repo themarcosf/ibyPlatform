@@ -4,15 +4,14 @@ const auctionSchema = new mongoose.Schema(
   {
     realtyId: String,
     index: Number,
-    minimum: Number,
-    current: Number,
-    periodBegin: Date,
-    periodEnd: Date,
-    auctionEnd: Date,
+    minValue: Number,
+    currentValue: Number,
+    leaseBeginDate: Date,
+    leaseEndDate: Date,
+    auctionEndDate: Date,
     active: {
       type: Boolean,
       default: true,
-      select: false,
     },
     createdAt: {
       type: Date,

@@ -1,3 +1,4 @@
+const Auction = require("./../models/auctionModel");
 const Realty = require("./../models/realtyModel");
 const { CustomError } = require("./../utils/errors");
 const { asyncHandler } = require("./../utils/handlers");
@@ -22,6 +23,10 @@ exports.getAllRealty = asyncHandler(async function (req, res, next) {
 
 exports.getRealty = asyncHandler(async function (req, res, next) {
   const _realty = await Realty.findById(req.params.id);
+  const _auction = await Auction.find();
+  const _currentAuction = _auction.find(
+    (el) => el.realtyId === req.params.id && el.active === true
+  );
 
   if (!_realty) return next(new CustomError("ID not found", 404));
 
@@ -31,6 +36,7 @@ exports.getRealty = asyncHandler(async function (req, res, next) {
       status: "success",
       data: {
         realty: _realty,
+        auction: _currentAuction,
       },
     })
     .end();
