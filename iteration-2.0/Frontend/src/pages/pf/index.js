@@ -1,24 +1,14 @@
-import Image from "next/image";
 import BuildingCard from "../../components/BuildingCard/BuildingCard";
 import Filter from "../../components/Filter/Filter";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
-import NavBar from "../../components/NavBar/NavBar";
+
 import styles from "./pf.module.scss";
 
 function pf({ realtyData }) {
   return (
     <>
-      <Header>
-        <Image
-          src="/iby_logo.svg"
-          width={220}
-          height={130}
-          alt="iby_logo"
-          priority
-        />
-        <NavBar />
-      </Header>
+      <Header />
       <div className={styles.content}>
         <div className={styles.title}>
           <h1>Pessoa Física</h1>

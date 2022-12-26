@@ -1,11 +1,12 @@
-import { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
+import { useState, useEffect } from "react";
+import { getSession } from "next-auth/react";
+
 import BoughtBuildingCard from "../components/boughtBuildingCard/boughtBuildingCard";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
-import NavBar from "../components/NavBar/NavBar";
 import SaleModal from "../components/SaleModal/SaleModal";
 import Filter from "../components/Filter/Filter";
+
 import styles from "../styles/myContracts.module.scss";
 
 function myContracts() {
@@ -29,16 +30,7 @@ function myContracts() {
     <>
       {data ? (
         <>
-          <Header>
-            <Image
-              src="/iby_logo.svg"
-              width={220}
-              height={130}
-              alt="iby_logo"
-              priority
-            />
-            <NavBar />
-          </Header>
+          <Header />
           <div className={styles.content}>
             <div className={styles.title}>
               <h1>Meus Contratos</h1>
@@ -114,6 +106,25 @@ function myContracts() {
     </>
   );
 }
+
+
+export async function getServerSideProps(context) {
+  const session = await getSession({ req: context.req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: session,
+  };
+}
+
 
 export default myContracts;
 

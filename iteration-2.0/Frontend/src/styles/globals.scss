@@ -30,13 +30,6 @@
   }
 }
 
-#__next{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow-x: hidden;
-}
-
 body {
   background: var(--white);
 }
@@ -47,8 +40,17 @@ button {
 
 a{
   text-decoration: none;
+  cursor: pointer;
 
   &:visited{
-    color: var(--gray-900);
+    color: unset
   }
+}
+
+ul{
+  list-style-type: none;
+}
+
+*:focus{
+  outline: none;
 }
