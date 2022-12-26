@@ -1,0 +1,20 @@
+{
+  "properties": [
+    {
+      "address": "Avenida Rangel Pestana",
+      "district": "Brás",
+      "city": "São Paulo",
+      "state": "São Paulo",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel accumsan turpis. Fusce at tristique tortor. Nulla nec dictum urna. Ut facilisis eget neque et ultricies. Suspendisse potenti. Vestibulum pharetra, lectus et rhoncus tempor, turpis magna eleifend tortor, at sollicitudin lacus nibh sed neque. Vestibulum mattis libero quis metus consequat, non laoreet urna euismod.",
+      "images": [
+        "https://classic.exame.com/wp-content/uploads/2020/07/Mitre-empreendimento-Freguesia.jpg?quality=70&strip=info&w=1024",
+        "https://classic.exame.com/wp-content/uploads/2020/09/Apartamento-compacto-incorporadora-You-Inc-mercado-imobiliario.jpg?quality=70&strip=info&w=1024",
+        "https://classic.exame.com/wp-content/uploads/2017/09/apto-decorado-even1.jpg?quality=70&strip=info&w=1000"
+      ],
+      "sqMeters": 200,
+      "inConstruction": false,
+      "toRetrofit": false,
+      "active": true
+    }
+  ]
+}
