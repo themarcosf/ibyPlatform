@@ -2,32 +2,39 @@ import BuildingPage from "../../components/BuildingPage/BuildingPage";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 
-function build({ data, auctionsData }) {
+function build({ realtyData, auctionData }) {
+  let expired
 
-  console.log(data)
-  
-  const auction = auctionsData.find((auction) => auction.realtyId == data._id);
+  let realtyAuctionEndDate = new Date(
+    auctionData.auctionEndDate
+  ).getTime();
 
+  if (realtyAuctionEndDate > Date.now()){
+    expired = false
+  } else {
+    expired = true
+  }
 
   return (
     <>
       <Header />
       <BuildingPage
-        inConstruction={data.inConstruction}
-        toRetrofit={data.toRetrofit}
-        image={data.images}
-        description={data.description}
-        streetAddress={data.streetAddress}
-        neighborhood={data.neighborhood}
-        state={data.state}
-        sqMeters={data.sqMeters}
-        lastBidValue={auction?.lastBidValue}
-        minValue={auction?.minValue}
-        id={data._id}
-        auctionId={auction.id}
-        expired={true}
-        leaseBeginDate={auction.leaseBeginDate}
-        auctionEndDate={auction.auctionEndDate}
+        inConstruction={realtyData.inConstruction}
+        toRetrofit={realtyData.toRetrofit}
+        image={realtyData.images}
+        description={realtyData.description}
+        address={realtyData.address}
+        district={realtyData.district}
+        state={realtyData.state}
+        sqMeters={realtyData.sqMeters}
+        currentValue={auctionData.currentValue}
+        minValue={auctionData.minValue}
+        id={realtyData.id}
+        auctionId={auctionData.id}
+        expired={expired}
+        auctionEndDate={realtyAuctionEndDate}
+        leaseBeginDate={auctionData.leaseBeginDate}
+        leaseEndDate={auctionData.leaseEndDate}
       />
       <Footer />
     </>
@@ -48,16 +55,15 @@ export const getStaticProps = async (ctx) => {
 
   const res = await fetch(`http://127.0.0.1:8000/api/v1/realty/${slug}`);
   const initialData = await res.json();
-  const data = initialData.data._realty;
+  const data = initialData.data;
 
-  const auctionsRes = await fetch("http://127.0.0.1:8000/api/v1/auctions/");
-  const initialAuctionsData = await auctionsRes.json();
-  const auctionsData = initialAuctionsData.data._auctions;
+  const realtyData = data.realty;
+  const auctionData = data.auction;
 
   return {
     props: {
-      data,
-      auctionsData,
+      realtyData,
+      auctionData,
     },
     revalidate: 60 * 5,
   };
