@@ -8,6 +8,6 @@ const router = express.Router();
  */
 router.route("/").get(realtyController.getAllRealty);
 
-// router.route("/:id").get(realtyController.getRealty);
+router.route("/:id").get(realtyController.getRealty);
 
 module.exports = router;
