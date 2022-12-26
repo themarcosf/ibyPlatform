@@ -1,9 +1,10 @@
-const express = require("express");
 const helmet = require("helmet");
 const morgan = require("morgan");
+const express = require("express");
 const rateLimit = require("express-rate-limit");
-const errController = require("./controllers/errController");
 const { CustomError } = require("./utils/errors");
+const realtyRouter = require("./routers/realtyRouter");
+const errController = require("./controllers/errController");
 ////////////////////////////////////////////////////////////////////////
 
 const app = express();
@@ -36,6 +37,7 @@ app.use(
 /**
  * routers middleware
  */
+app.use("/api/v1/realty", realtyRouter);
 app.all("/*", (req, res, next) =>
   next(new CustomError(`Invalid path: ${req.originalUrl}`, 404))
 );
