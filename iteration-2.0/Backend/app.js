@@ -3,8 +3,9 @@ const morgan = require("morgan");
 const express = require("express");
 const rateLimit = require("express-rate-limit");
 const { CustomError } = require("./utils/errors");
-const auctionRouter = require("./routers/auctionRouter");
+const userRouter = require("./routers/userRouter");
 const realtyRouter = require("./routers/realtyRouter");
+const auctionRouter = require("./routers/auctionRouter");
 const errController = require("./controllers/errController");
 ////////////////////////////////////////////////////////////////////////
 
@@ -39,6 +40,7 @@ app.use(
  * routers middleware
  */
 app.use("/api/v1/realty", realtyRouter);
+app.use("/api/v1/user", userRouter);
 app.use("/api/v1/auction", auctionRouter);
 app.all("/*", (req, res, next) =>
   next(new CustomError(`Invalid path: ${req.originalUrl}`, 404))
