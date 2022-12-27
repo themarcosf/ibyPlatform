@@ -32,15 +32,10 @@ exports.createUser = asyncHandler(async function (req, res, next) {
   const _users = await User.find();
 
   // check if username or email in use
-  const _checkUser = _users.find(
-    (el) => el.username === _body.username || el.email === _body.email
-  );
+  let _user = _users.find((el) => el.email === _body.email);
 
-  if (_checkUser)
-    return next(new CustomError("Username or email unavailable", 401));
-
-  // create user
-  const _user = await User.create(_body);
+  // TODO: send user back
+  if (!_user) _user = await User.create(_body);
 
   res
     .status(200)
@@ -52,3 +47,5 @@ exports.createUser = asyncHandler(async function (req, res, next) {
     })
     .end();
 });
+
+// TODO: DELETE ACCOUNT == active: false
