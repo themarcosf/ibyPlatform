@@ -3,7 +3,10 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 
 function build({ realtyData, auctionData }) {
+  let currentValue
   let expired
+
+  auctionData.currentValue >= auctionData.minValue ? currentValue = auctionData.currentValue : currentValue = auctionData.minValue
 
   let realtyAuctionEndDate = new Date(
     auctionData.auctionEndDate
@@ -27,8 +30,7 @@ function build({ realtyData, auctionData }) {
         district={realtyData.district}
         state={realtyData.state}
         sqMeters={realtyData.sqMeters}
-        currentValue={auctionData.currentValue}
-        minValue={auctionData.minValue}
+        currentValue={currentValue}
         id={realtyData.id}
         auctionId={auctionData.id}
         expired={expired}

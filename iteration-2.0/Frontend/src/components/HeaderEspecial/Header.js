@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import NavBar from "../NavBar/NavBar";
 
 import styles from "./Header.module.scss";
@@ -7,12 +5,11 @@ import styles from "./Header.module.scss";
 function HeaderEspecial() {
   return (
     <header className={styles.headerContainer}>
-      <Image
+      <img
         src="/iby_logo.svg"
         width={220}
         height={130}
         alt="iby_logo"
-        priority
       />
       <NavBar />
     </header>
