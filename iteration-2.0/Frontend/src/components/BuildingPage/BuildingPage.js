@@ -1,22 +1,18 @@
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
-import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
+import { useSession } from "next-auth/react";
 
 import Card from "../Card/Card";
 
 import styles from "./BuildingPage.module.scss";
 
 function BuildingPage(props) {
+  const { data: session } = useSession();
   const [buildingStatus, setbuildingStatus] = useState("Pronto para morar!");
   const bidInputRef = useRef();
-
-  const brlMinValue = props.minValue.toLocaleString("pt-br", {
-    style: "currency",
-    currency: "BRL",
-  });
-
-  const brlCurrentValue = props.currentValue.toLocaleString("pt-br", {
+  const [currentValue, setCurrentValue] = useState(props.currentValue);
+  const brlCurrentValue = currentValue.toLocaleString("pt-br", {
     style: "currency",
     currency: "BRL",
   });
@@ -31,19 +27,24 @@ function BuildingPage(props) {
 
   async function handleSubmit(event) {
     event.preventDefault();
+
     const enteredBid = bidInputRef.current.value;
 
     const updatedData = {
       currentValue: enteredBid,
-      // lastBidUser: userId,
-      // lastBidderWallet: wallet,
+      // lastBidUser: session.user.email,
+      // lastBidderWallet: ,
     };
 
-    console.log(enteredBid)
-    console.log(props.currentValue)
+    if (enteredBid > currentValue) {
+      setCurrentValue(
+        enteredBid.toLocaleString("pt-br", {
+          style: "currency",
+          currency: "BRL",
+        })
+      );
 
-    if (enteredBid > props.currentValue) {
-      fetch(`http://127.0.0.1:8000/api/v1/auctions/${props.auctionId}`, {
+      fetch(`http://127.0.0.1:8000/api/v1/auction/${props.auctionId}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
@@ -117,27 +118,24 @@ function BuildingPage(props) {
           <h3>Descrição</h3>
           <p>{props.description}</p>
         </div>
-        <Card>
-          <div className={styles.infoContainer}>
-            <p className={styles.currentValue}>
-              {props.expired ? "Valor Final:" : "Valor Atual:"}{" "}
-              {props.currentValue > props.minValue ? brlCurrentValue : brlMinValue }
-            </p>
-            <p className={styles.period}>
-              Início do contrato no dia {leaseBeginDate}
-            </p>
-            <p className={styles.period}>Período do contrato de 10 anos</p>
-            <p className={styles.period}>
-              {props.expired ? (
-                <>
-                  <p>Esse leilão se encerrou.</p>
-                  <p>Verifique seus contratos</p>
-                </>
-              ) : (
-                `Esse leilão se encerra dia ${auctionEndDate}`
-              )}
-            </p>
-          </div>
+        <div className={styles.infoContainer}>
+          <p className={styles.currentValue}>
+            {props.expired ? "Valor Final:" : "Valor Atual:"} {brlCurrentValue}
+          </p>
+          <p className={styles.period}>
+            Início do contrato no dia {leaseBeginDate}
+          </p>
+          <p className={styles.period}>Período do contrato de 10 anos</p>
+          <p className={styles.period}>
+            {props.expired ? (
+              <>
+                <p>Esse leilão se encerrou.</p>
+                <p>Verifique seus contratos</p>
+              </>
+            ) : (
+              `Esse leilão se encerra dia ${auctionEndDate}`
+            )}
+          </p>
 
           {!props.expired && (
             <form className={styles.moneyContainer} onSubmit={handleSubmit}>
@@ -152,7 +150,7 @@ function BuildingPage(props) {
               <Toaster />
             </form>
           )}
-        </Card>
+        </div>
       </div>
     </div>
   );

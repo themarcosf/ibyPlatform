@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { BsGoogle } from "react-icons/bs";
+import { FcGoogle } from "react-icons/fc";
 
 import styles from "./NavBar.module.scss";
 
@@ -12,60 +12,61 @@ function NavBar() {
   }
 
   return (
-    <ul className={styles.navbar}>
-      { !session && <li>
-        <Link className={styles.linkItem} href={"/home"}>
-          Início
-        </Link>
-      </li>}
-      <li>
-        <Link className={styles.linkItem} href={"/pj"}>
-          Pessoa Jurídica
-        </Link>
-      </li>
-      <li>
-        <Link className={styles.linkItem} href={"/pf"}>
-          Pessoa Física
-        </Link>
-      </li>
-      <li>
-        <Link className={styles.linkItem} href={"/fii"}>
-          Fundos Imobiliários
-        </Link>
-      </li>
-      {!session && (
-        <li>
-          <a onClick={() => signIn("google")}>  
-            Acesse com <BsGoogle />
-          </a>
-        </li>
-      )}
-      {session && (
-        <li>
-          <a className={styles.userIcon} href="#">
-            <img src='/user_icon.png' alt="user_icon" />
-          </a>
-          <div className={styles.dropdownContent}>
-            <div className={styles.dropdownSub}>
-              <ul>
-                <li>
-                  <Link href={"#"}>Meus Lances</Link>
-                </li>
-                <li>
-                  <Link href={"/myContracts"}>Meus Contratos</Link>
-                </li>
-                <li>
-                  <Link href={"/myAccount"}>Minha conta</Link>
-                </li>
-                <li>
-                  <a onClick={logoutHandler}>Sair</a>
-                </li>
-              </ul>
-            </div>
+    <>
+      <nav className={`${styles.nav} ${styles.stroke}`}>
+        <ul>
+          <div>
+            {!session && (
+              <li>
+                <Link href={"/"}>Início</Link>
+              </li>
+            )}
+            <li>
+              <Link href={"/pf"}>Imóveis para alugar</Link>
+            </li>
+            <li>
+              <Link href={"/pj"}>Para proprietários</Link>
+            </li>
           </div>
-        </li>
-      )}
-    </ul>
+
+          {!session && (
+            <li>
+              <button
+                className={styles.googleBtn}
+                onClick={() => signIn("google")}
+              >
+                Acesse com <FcGoogle />
+              </button>
+            </li>
+          )}
+          {session && (
+            <li className={styles.userIconContainer}>
+              <button className={styles.userIcon} href="#">
+                <img src="/user_icon.png" alt="user_icon" />
+              </button>
+              <div className={styles.dropdownContent}>
+                <div className={styles.dropdownSub}>
+                  <ul>
+                    <li>
+                      <Link href={"#"}>Meus Lances</Link>
+                    </li>
+                    <li>
+                      <Link href={"/myContracts"}>Meus Contratos</Link>
+                    </li>
+                    <li>
+                      <Link href={"/myAccount"}>Minha conta</Link>
+                    </li>
+                    <li>
+                      <a onClick={logoutHandler}>Sair</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+          )}
+        </ul>
+      </nav>
+    </>
   );
 }
 
