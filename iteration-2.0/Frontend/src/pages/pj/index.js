@@ -2,14 +2,13 @@ import { useState } from "react";
 
 import BuildingCard from "../../components/BuildingCard/BuildingCard";
 import Footer from "../../components/Footer/Footer";
+import NoRealty from "../../components/NoRealty/NoRealty";
 import Header from "../../components/Header/Header";
 import Filter from "../../components/Filter/Filter";
 
 import styles from "./pj.module.scss";
 
-function pj({ realtyData }) {
-  const [openModal, setOpenModal] = useState(false);
-
+function pj({ realtyData, auctionData }) {
   return (
     <>
       <Header />
@@ -20,8 +19,16 @@ function pj({ realtyData }) {
         </div>
         <div className={styles.cardsContainer}>
           {realtyData.map((build) => {
+            let realtyAuction = auctionData.find(
+              (auction) => auction.realtyId === build.id
+            );
+
+            let realtyAuctionEndDate = new Date(
+              realtyAuction.auctionEndDate
+            ).getTime();
+
             if (
-              build.auctionEndDate > Date.now() &&
+              realtyAuctionEndDate < Date.now() &&
               build.toRetrofit == true &&
               build.inConstruction == false
             ) {
@@ -30,38 +37,38 @@ function pj({ realtyData }) {
                   image={build.images[0]}
                   inConstruction={build.inConstruction}
                   toRetrofit={build.toRetrofit}
-                  streetAddress={build.streetAddress}
-                  neighborhood={build.neighborhood}
+                  address={build.address}
+                  district={build.district}
                   state={build.state}
-                  price={build.price}
+                  minValue={realtyAuction.minValue}
+                  currentValue={realtyAuction.currentValue}
                   sqMeters={build.sqMeters}
-                  lastBidValue={build?.lastBidValue}
-                  minValue={build?.minValue}
-                  id={build._id}
-                  expired={false}
-                />
-              );
-            } else if (
-              build.toRetrofit == true &&
-              build.inConstruction == false
-            ) {
-              return (
-                <BuildingCard
-                  image={build.images[0]}
-                  inConstruction={build.inConstruction}
-                  toRetrofit={build.toRetrofit}
-                  streetAddress={build.streetAddress}
-                  neighborhood={build.neighborhood}
-                  state={build.state}
-                  sqMeters={build.sqMeters}
-                  lastBidValue={build?.lastBidValue}
-                  minValue={build?.minValue}
-                  id={build._id}
+                  key={build.id}
                   expired={true}
                 />
               );
+            } else if (
+              realtyAuctionEndDate > Date.now() &&
+              build.toRetrofit == true &&
+              build.inConstruction == false
+            ) {
+              return (
+                <BuildingCard
+                  image={build.images[0]}
+                  inConstruction={build.inConstruction}
+                  toRetrofit={build.toRetrofit}
+                  address={build.address}
+                  district={build.district}
+                  state={build.state}
+                  minValue={realtyAuction.minValue}
+                  currentValue={realtyAuction.currentValue}
+                  sqMeters={build.sqMeters}
+                  key={build.id}
+                  expired={false}
+                />
+              );
             } else {
-              return null;
+              return <NoRealty key={0}/>;
             }
           })}
         </div>
@@ -76,12 +83,14 @@ export default pj;
 export const getStaticProps = async () => {
   const realtyRes = await fetch("http://127.0.0.1:8000/api/v1/realty/");
   const initialRealtyData = await realtyRes.json();
-  const realtyData = initialRealtyData.data._realty;
+  const realtyData = initialRealtyData.data.realty;
+
+  const auctionRes = await fetch("http://127.0.0.1:8000/api/v1/auction/");
+  const initialAuctionData = await auctionRes.json();
+  const auctionData = initialAuctionData.data.auction;
 
   return {
-    props: {
-      realtyData,
-    },
+    props: { realtyData, auctionData },
     revalidate: 60 * 5,
   };
 };

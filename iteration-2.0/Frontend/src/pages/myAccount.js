@@ -1,5 +1,5 @@
 import { getSession, useSession, signOut } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 import Footer from "../components/Footer/Footer";
@@ -7,25 +7,48 @@ import Header from "../components/Header/Header";
 
 import styles from "../styles/myAccount.module.scss";
 
-function myAccount() {
-  const { data: session, status } = useSession();
+async function createUser(email, name) {
+  const response = await fetch("http://localhost:3333/users", {
+    method: "POST",
+    body: JSON.stringify({
+      username: name,
+      email: email,
+      wallet: "",
+      paymentMethod: "",
+      CPF: null,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Something went wrong!");
+  } else console.log("user created!");
+
+  return data;
+}
+
+function myAccount({ session }) {
+  const { status } = useSession();
   const [isEditing, setIsEditing] = useState(false);
 
-  function deleteHandler(){
-    console.log('delete')
+  function deleteHandler() {
+    console.log("delete");
 
     // Sign out and redirect to '/'
   }
 
   function submitHandler(event) {
     event.preventDefault();
-    
-    setIsEditing(false)
 
-    console.log('patch')
+    setIsEditing(false);
+
+    console.log("patch");
 
     // PATCH com as novas informações
-
   }
 
   function editingHandler() {
@@ -43,7 +66,9 @@ function myAccount() {
       <Header />
       <main className={styles.main}>
         <div className={styles.menu}>
-          <h1>Minha conta</h1>
+          <h1 onClick={() => createUser(session.user.email, session.user.name)}>
+            Minha conta
+          </h1>
           <ul>
             <li>
               <button
@@ -120,6 +145,19 @@ function myAccount() {
 
 export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
+  const users = await fetch("http://localhost:3333/users").then((json) =>
+    json.json()
+  );
+
+  let user;
+
+  if (session) {
+    user = users.find((user) => user.email == session.user.email);
+  }
+
+  if (!user && session) {
+    createUser(session.user.email, session.user.name);
+  }
 
   if (!session) {
     return {
@@ -131,7 +169,7 @@ export async function getServerSideProps(context) {
   }
 
   return {
-    props: session,
+    props: { session: session, users: users },
   };
 }
 

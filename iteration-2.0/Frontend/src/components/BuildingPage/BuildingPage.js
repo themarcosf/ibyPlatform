@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -9,35 +9,40 @@ import styles from "./BuildingPage.module.scss";
 
 function BuildingPage(props) {
   const [buildingStatus, setbuildingStatus] = useState("Pronto para morar!");
-  const [realtyValue, setRealtyValue] = useState(
-    props?.lastBidValue > props?.minValue ? props.lastBidValue : props?.minValue
-  );
+  const bidInputRef = useRef();
 
-  let wallet
-  let userId
+  const brlMinValue = props.minValue.toLocaleString("pt-br", {
+    style: "currency",
+    currency: "BRL",
+  });
 
-  if (typeof window !== "undefined") {
-    wallet = JSON.parse(localStorage.userData).wallet
-    userId = JSON.parse(localStorage.userData).id
-  }
+  const brlCurrentValue = props.currentValue.toLocaleString("pt-br", {
+    style: "currency",
+    currency: "BRL",
+  });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  useEffect(() => {
+    if (props.inConstruction == true) {
+      setbuildingStatus("Em construção");
+    } else if (props.toRetrofit == true) {
+      setbuildingStatus("Para reforma");
+    }
+  }, []);
 
-  const makeBid = (data) => {
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const enteredBid = bidInputRef.current.value;
+
     const updatedData = {
-      lastBidValue: data.bid,
-      lastBidUser: userId,
-      lastBidderWallet: wallet,
+      currentValue: enteredBid,
+      // lastBidUser: userId,
+      // lastBidderWallet: wallet,
     };
 
-    if (data.bid > realtyValue) {
-      toast.success("Seu lance foi enviado!", {
-        position: "bottom-right",
-      });
+    console.log(enteredBid)
+    console.log(props.currentValue)
+
+    if (enteredBid > props.currentValue) {
       fetch(`http://127.0.0.1:8000/api/v1/auctions/${props.auctionId}`, {
         method: "PATCH",
         headers: {
@@ -47,13 +52,17 @@ function BuildingPage(props) {
         body: JSON.stringify(updatedData),
       })
         .then((response) => response.json())
-        .then(console.log("feito"));
+        .then(
+          toast.success("Seu lance foi enviado!", {
+            position: "bottom-right",
+          })
+        );
     } else {
       toast.error("Insira um valor maior do que o valor atual", {
         position: "bottom-right",
       });
     }
-  };
+  }
 
   const auctionEndDate = new Date(props.auctionEndDate).toLocaleDateString(
     "pt-BR",
@@ -65,17 +74,9 @@ function BuildingPage(props) {
     { year: "numeric", month: "long", day: "numeric" }
   );
 
-  useEffect(() => {
-    if (props.inConstruction == true) {
-      setbuildingStatus("Em construção");
-    } else if (props.toRetrofit == true) {
-      setbuildingStatus("Para reforma");
-    }
-  }, []);
-
   return (
     <div className={styles.buildingPageContent}>
-      <h1>{`${props.streetAddress} - ${props.neighborhood}, ${props.state}`}</h1>
+      <h1>{`${props.address} - ${props.district}, ${props.state}`}</h1>
       <div className={styles.statusAndFavorite}>
         <p>Status: {buildingStatus} </p>
         <span>
@@ -84,27 +85,30 @@ function BuildingPage(props) {
       </div>
       <div className={styles.imgsContainer}>
         <div>
-          <Image
+          <img
             className={styles.firstImg}
-            src={`/${props.image[0]}`}
+            src={`${props.image[0]}`}
             width={500}
             height={330}
+            alt="realt_img"
           />
         </div>
         <div>
-          <Image
+          <img
             className={styles.secondImg}
-            src={`/${props.image[1]}`}
+            src={`${props.image[1]}`}
             width={500}
             height={330}
+            alt="realt_img"
           />
         </div>
         <div>
-          <Image
+          <img
             className={styles.thirdImg}
-            src={`/${props.image[2]}`}
+            src={`${props.image[2]}`}
             width={500}
             height={330}
+            alt="realt_img"
           />
         </div>
       </div>
@@ -116,46 +120,38 @@ function BuildingPage(props) {
         <Card>
           <div className={styles.infoContainer}>
             <p className={styles.currentValue}>
-              {props.auctionEndDate < Date.now()
-                ? "Valor Atual:"
-                : "Valor Final:"}{" "}
-              {realtyValue?.toLocaleString("pt-br", {
-                style: "currency",
-                currency: "BRL",
-              })}
+              {props.expired ? "Valor Final:" : "Valor Atual:"}{" "}
+              {props.currentValue > props.minValue ? brlCurrentValue : brlMinValue }
             </p>
             <p className={styles.period}>
               Início do contrato no dia {leaseBeginDate}
             </p>
             <p className={styles.period}>Período do contrato de 10 anos</p>
             <p className={styles.period}>
-              {props.auctionEndDate < Date.now() ? (
-                `Esse leilão se encerra dia ${auctionEndDate}`
-              ) : (
+              {props.expired ? (
                 <>
                   <p>Esse leilão se encerrou.</p>
                   <p>Verifique seus contratos</p>
                 </>
+              ) : (
+                `Esse leilão se encerra dia ${auctionEndDate}`
               )}
             </p>
           </div>
 
-          {props.auctionEndDate < Date.now() ? (
-            <form
-              className={styles.moneyContainer}
-              onSubmit={handleSubmit(makeBid)}
-            >
+          {!props.expired && (
+            <form className={styles.moneyContainer} onSubmit={handleSubmit}>
               <input
                 placeholder="Digite o valor"
                 type="number"
                 name="bid"
-                {...register("bid")}
+                ref={bidInputRef}
               />
 
               <button type="submit">Fazer meu lance</button>
               <Toaster />
             </form>
-          ) : null}
+          )}
         </Card>
       </div>
     </div>
