@@ -8,14 +8,11 @@ import Header from "../components/Header/Header";
 import styles from "../styles/myAccount.module.scss";
 
 async function createUser(email, name) {
-  const response = await fetch("http://localhost:3333/users", {
+  const response = await fetch("http://127.0.0.1:8000/api/v1/user", {
     method: "POST",
     body: JSON.stringify({
       username: name,
       email: email,
-      wallet: "",
-      paymentMethod: "",
-      CPF: null,
     }),
     headers: {
       "Content-Type": "application/json",
@@ -23,6 +20,8 @@ async function createUser(email, name) {
   });
 
   const data = await response.json();
+
+  console.log(data)
 
   if (!response.ok) {
     throw new Error(data.message || "Something went wrong!");
@@ -145,17 +144,8 @@ function myAccount({ session }) {
 
 export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
-  const users = await fetch("http://localhost:3333/users").then((json) =>
-    json.json()
-  );
-
-  let user;
 
   if (session) {
-    user = users.find((user) => user.email == session.user.email);
-  }
-
-  if (!user && session) {
     createUser(session.user.email, session.user.name);
   }
 
@@ -169,7 +159,7 @@ export async function getServerSideProps(context) {
   }
 
   return {
-    props: { session: session, users: users },
+    props: { session: session },
   };
 }
 
