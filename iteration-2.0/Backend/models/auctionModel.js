@@ -9,6 +9,7 @@ const auctionSchema = new mongoose.Schema(
     leaseBeginDate: Date,
     leaseEndDate: Date,
     auctionEndDate: Date,
+    auctionLog: [Object],
     active: {
       type: Boolean,
       default: true,

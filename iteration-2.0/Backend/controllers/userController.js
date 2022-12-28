@@ -31,12 +31,12 @@ exports.createUser = asyncHandler(async function (req, res, next) {
   // get entire users collection
   const _users = await User.find();
 
-  // check if username or email in use
+  // if not in use create new user
   let _user = _users.find((el) => el.email === _body.email);
 
-  // TODO: send user back
   if (!_user) _user = await User.create(_body);
 
+  // return user object
   res
     .status(200)
     .json({
@@ -48,4 +48,39 @@ exports.createUser = asyncHandler(async function (req, res, next) {
     .end();
 });
 
-// TODO: DELETE ACCOUNT == active: false
+exports.updateUser = asyncHandler(async function (req, res, next) {
+  // get and update user from collection
+  const _user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  // if user not found return new error
+  if (!_user) return next(new CustomError("Id not found", 404));
+
+  // end request
+  res
+    .status(200)
+    .json({
+      status: "success",
+      data: {
+        user: _user,
+      },
+    })
+    .end();
+});
+
+exports.deleteUser = asyncHandler(async function (req, res, next) {
+  // get user from collection
+  const _user = await User.findById(req.params.id);
+
+  // if user not found return error
+  if (!_user) return next(new CustomError("Id not found", 404));
+
+  // if user found set active to false
+  _user.active = false;
+  _user.save();
+
+  // end request
+  res.status(200).json({ status: "success", data: null }).end();
+});

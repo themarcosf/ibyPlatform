@@ -8,6 +8,9 @@ const router = express.Router();
  */
 router.route("/").get(auctionController.getAllAuction);
 
-router.route("/:id").get(auctionController.getAuction);
+router
+  .route("/:id")
+  .get(auctionController.getAuction)
+  .patch(auctionController.updateAuction);
 
 module.exports = router;

@@ -4,10 +4,12 @@ const userSchema = new mongoose.Schema(
   {
     username: { type: String, required: true },
     email: { type: String, unique: true, required: true },
-    favorite: [String],
-    wallet: String,
-    paymentMethod: String,
+    name: String,
     nationalId: Number,
+    mobile: Number,
+    wallet: String,
+    favorite: [String],
+    paymentMethod: String,
     active: {
       type: Boolean,
       default: true,
