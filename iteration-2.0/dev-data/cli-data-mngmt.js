@@ -5,7 +5,7 @@
 require("dotenv").config({ path: `${__dirname}/../config.env` });
 const fs = require("fs");
 const mongoose = require("mongoose");
-const Realty = require("./../iteration-2.0/Backend/models/realtyModel");
+const Realty = require("../backend/models/realtyModel");
 ////////////////////////////////////////////////////////////////////////////////
 
 // remote database
