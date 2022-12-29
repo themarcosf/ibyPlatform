@@ -7,7 +7,7 @@ const { asyncHandler } = require("../utils/handlers");
  */
 exports.getAllAuction = asyncHandler(async function (req, res, next) {
   // get all auctions from collection
-  const _auction = await Auction.find();
+  const _auction = await Auction.find().select("-__v");
 
   // end request
   res
@@ -24,7 +24,7 @@ exports.getAllAuction = asyncHandler(async function (req, res, next) {
 
 exports.getAuction = asyncHandler(async function (req, res, next) {
   // get auction from collection
-  const _auction = await Auction.findById(req.params.id);
+  const _auction = await Auction.findById(req.params.id).select("-__v");
 
   // if auction not found return new error
   if (!_auction) return next(new CustomError("ID not found", 404));
@@ -42,24 +42,11 @@ exports.getAuction = asyncHandler(async function (req, res, next) {
 });
 
 exports.updateAuction = asyncHandler(async function (req, res, next) {
-  // find auction from collection by ID and update
-  const _auction = await Auction.findById(req.params.id);
-
-  // if auction not found return error
-  if (!_auction) return next(new CustomError("ID not found", 404));
-
-  // add new bid data to log array
-  _auction.auctionLog.push(req.body.auctionLog);
-  await _auction.save();
-
-  // end request
   res
-    .status(200)
+    .status(500)
     .json({
-      status: "success",
-      data: {
-        auction: _auction,
-      },
+      status: "error",
+      message: "TODO",
     })
     .end();
 });

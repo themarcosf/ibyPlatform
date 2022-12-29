@@ -22,11 +22,12 @@ const auctionSchema = new mongoose.Schema(
       required: [true, "realtyId is required"],
       ref: "Realty",
     },
-    index: Number,
-    minAskValue: Number,
-    auctionEndDate: Date,
+    index: { type: Number, required: true },
+    minAskValue: { type: Number, required: true },
+    auctionEndDate: { type: Date, required: true },
     leaseBeginDate: {
       type: Date,
+      required: true,
       validate: {
         validator: function (val) {
           let _isValid;
@@ -38,6 +39,7 @@ const auctionSchema = new mongoose.Schema(
     },
     leaseEndDate: {
       type: Date,
+      required: true,
       validate: {
         validator: function (val) {
           let _isValid;
