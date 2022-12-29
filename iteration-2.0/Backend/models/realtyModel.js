@@ -20,6 +20,11 @@ const realtySchema = new mongoose.Schema(
       maxLengh: [40, "invalid lengh"],
       trim: true,
     },
+    complement: {
+      type: String,
+      maxLengh: [40, "invalid lengh"],
+      trim: true,
+    },
     district: {
       type: String,
       required: [true, "district is required"],
@@ -80,9 +85,9 @@ const realtySchema = new mongoose.Schema(
         message: "invalid path: {VALUE}",
       },
     },
-    sqMeters: Number,
-    inConstruction: Boolean,
-    toRetrofit: Boolean,
+    sqMeters: { type: Number, required: true },
+    inConstruction: { type: Boolean, required: true },
+    toRetrofit: { type: Boolean, required: true },
     active: {
       type: Boolean,
       default: true,
