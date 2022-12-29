@@ -6,6 +6,7 @@ require("dotenv").config({ path: "./../../../../config.env" });
 const fs = require("fs");
 const mongoose = require("mongoose");
 const Realty = require("./../../models/realtyModel");
+const Auction = require("./../../models/auctionModel");
 ////////////////////////////////////////////////////////////////////////////////
 
 // remote database
@@ -23,12 +24,19 @@ mongoose
   .then((conn) => console.log(`DB Connected: ${conn.connections[0].name}`));
 ////////////////////////////////////////////////////////////////////////////////
 
-// data management
-const data = JSON.parse(fs.readFileSync(`${__dirname}/realty.json`, "utf-8"));
+/**
+ * data management : select appropriate data category
+ */
+// const _category = ["realty", Realty];
+const _category = ["auction", Auction];
+
+const _data = JSON.parse(
+  fs.readFileSync(`${__dirname}/${_category[0]}.json`, "utf-8")
+);
 
 const _import = async () => {
   try {
-    await Realty.create(data);
+    await _category[1].create(_data);
     console.log("Data successfully loaded");
   } catch (err) {
     console.log(err);
@@ -38,7 +46,7 @@ const _import = async () => {
 
 const _delete = async () => {
   try {
-    await Realty.deleteMany();
+    await _category[1].deleteMany();
     console.log("Data successfully deleted");
   } catch (err) {
     console.log(err);

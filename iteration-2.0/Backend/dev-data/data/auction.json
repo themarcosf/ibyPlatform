@@ -1,0 +1,26 @@
+[
+  {
+    "realtyId": "63ad6432a4fbaf79a6c900e1",
+    "index": 1,
+    "minAskValue": 120000,
+    "auctionEndDate": "January 31, 2023 00:00:00",
+    "leaseBeginDate": "March 01, 2023 00:00:00",
+    "leaseEndDate": "February 28, 2033 00:00:00"
+  },
+  {
+    "realtyId": "63ad6432a4fbaf79a6c900e2",
+    "index": 1,
+    "minAskValue": 140000,
+    "auctionEndDate": "February 10, 2023 00:00:00",
+    "leaseBeginDate": "April 01, 2023 00:00:00",
+    "leaseEndDate": "March 31, 2033 00:00:00"
+  },
+  {
+    "realtyId": "63ad6432a4fbaf79a6c900e0",
+    "index": 1,
+    "minAskValue": 300000,
+    "auctionEndDate": "February 10, 2023 00:00:00",
+    "leaseBeginDate": "April 01, 2023 00:00:00",
+    "leaseEndDate": "March 31, 2033 00:00:00"
+  }
+]
