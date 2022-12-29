@@ -11,11 +11,6 @@ import House from "../../public/isometric_house.json";
 import styles from "../styles/index.module.scss";
 
 function Home() {
-  const checkLocalStorage = () => {
-    const userId = JSON.parse(localStorage.getItem("userData"));
-    console.log(userId);
-  };
-
   return (
     <div className={styles.body}>
       <Header />
