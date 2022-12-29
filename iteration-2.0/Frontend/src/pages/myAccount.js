@@ -1,34 +1,12 @@
 import { getSession, useSession, signOut } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
+import { createUser, verifyUser } from "./_app";
 
 import styles from "../styles/myAccount.module.scss";
-
-async function createUser(email, name) {
-  const response = await fetch("http://127.0.0.1:8000/api/v1/user", {
-    method: "POST",
-    body: JSON.stringify({
-      username: name,
-      email: email,
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  const data = await response.json();
-
-  console.log(data)
-
-  if (!response.ok) {
-    throw new Error(data.message || "Something went wrong!");
-  } else console.log("user created!");
-
-  return data;
-}
 
 function myAccount({ session }) {
   const { status } = useSession();
@@ -146,7 +124,7 @@ export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
 
   if (session) {
-    createUser(session.user.email, session.user.name);
+    verifyUser(session.user.email, session.user.name);
   }
 
   if (!session) {

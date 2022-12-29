@@ -7,6 +7,10 @@ import styles from "./NavBar.module.scss";
 function NavBar() {
   const { data: session } = useSession();
 
+  function signInHandler(){
+    signIn("google")
+  }
+
   function logoutHandler() {
     signOut();
   }
@@ -33,7 +37,7 @@ function NavBar() {
             <li>
               <button
                 className={styles.googleBtn}
-                onClick={() => signIn("google")}
+                onClick={signInHandler}
               >
                 Acesse com <FcGoogle />
               </button>
