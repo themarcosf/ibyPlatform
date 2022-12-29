@@ -15,8 +15,9 @@ const app = express();
 /**
  * general purpose global middleware
  *
- * TODO : data sanitization against noSQL query injection
- * TODO : data sanitization against XSS
+ * TODO : data sanitization against noSQL query injection eg mongoSanitize
+ * TODO : data sanitization against XSS eg xss or xss-clean
+ * TODO : prevent http parameter pollution eg hpp
  */
 
 // HTTP requests logger

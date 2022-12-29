@@ -1,8 +1,8 @@
-const Auction = require("./../models/auctionModel");
-const Realty = require("./../models/realtyModel");
-const { monthDiff } = require("./../utils/utils");
-const { CustomError } = require("./../utils/errors");
-const { asyncHandler } = require("./../utils/handlers");
+const Auction = require("../models/auctionModel");
+const Realty = require("../models/realtyModel");
+const { monthDiff } = require("../utils/utils");
+const { CustomError } = require("../utils/errors");
+const { asyncHandler } = require("../utils/handlers");
 
 /**
  * ROUTE HANDLERS
