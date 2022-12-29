@@ -1,0 +1,19 @@
+[
+  {
+    "address": "Av. Delfim Moreira, 710",
+    "complement": "Apto. 1204",
+    "district": "Leblon",
+    "city": "Rio de Janeiro",
+    "state": "RJ",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel accumsan turpis. Fusce at tristique tortor. Nulla nec dictum urna. Ut facilisis eget neque et ultricies. Suspendisse potenti. Vestibulum pharetra, lectus et rhoncus tempor, turpis magna eleifend tortor, at sollicitudin lacus nibh sed neque. Vestibulum mattis libero quis metus consequat, non laoreet urna euismod.",
+    "geoLocation": {
+      "type": "Point",
+      "coordinates": [-43.22296, -22.98702]
+    },
+    "imageCover": "image-cover.jpg",
+    "images": ["image-1.jpg", "image-2.jpg", "image-3.jpg"],
+    "sqMeters": 200,
+    "inConstruction": false,
+    "toRetrofit": false
+  }
+]
