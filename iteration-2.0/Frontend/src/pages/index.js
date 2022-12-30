@@ -6,7 +6,7 @@ import Footer from "../components/Footer/Footer";
 import EsgPractice from "../components/EsgPractice/EsgPractice";
 
 import Planet from "../../public/planet.json";
-import House from "../../public/isometric_house.json";
+import House from "../../public/home-lootie.json";
 
 import styles from "../styles/index.module.scss";
 
@@ -120,11 +120,11 @@ function Home() {
         </div>
         <div
           style={{
-            width: "28%",
-            marginTop: "1%",
+            width: "35%",
+            marginTop: "2%",
             marginLeft: "20%",
             position: "relative",
-            left: "3%",
+            left: "2%",
           }}
         >
           <Lottie animationData={House} />
