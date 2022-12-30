@@ -1,17 +1,7 @@
-/**
- * IMPORTANT CAVEAT ABOUT MONGOOSE CUSTOM DATA VALIDATORS:
- *
- * inside a validator function (eg images) the THIS keyword
- * is only gonna point to the current document when a NEW document
- * is being created ie POST request
- *
- * that is not true when UPDATING a document ie PATCH request
- */
 const mongoose = require("mongoose");
-////////////////////////////////////////////////////////////////////////
 
 /**
- * @param index {Number}: autoincrement function is in controller
+ * @param index {Number}: autoincrement function in controller
  * @param leaseBeginDate {Date}: must ref first day of month
  * @param leaseEndDate {Date} : must ref last day of month
  */
@@ -19,10 +9,10 @@ const auctionSchema = new mongoose.Schema(
   {
     realtyId: {
       type: mongoose.Schema.ObjectId,
-      required: [true, "realtyId is required"],
       ref: "Realty",
+      required: [true, "realtyId is required"],
     },
-    index: { type: Number, required: true },
+    index: Number,
     minAskValue: { type: Number, required: true },
     auctionEndDate: { type: Date, required: true },
     leaseBeginDate: {
@@ -55,9 +45,14 @@ const auctionSchema = new mongoose.Schema(
         ref: "Bid",
       },
     ],
-    active: {
-      type: Boolean,
-      default: true,
+    status: {
+      type: String,
+      default: "active",
+      enum: {
+        values: ["active", "inactive"],
+        message: "Invalid status",
+      },
+      select: false,
     },
     createdAt: {
       type: Date,
@@ -72,12 +67,6 @@ const auctionSchema = new mongoose.Schema(
 );
 ////////////////////////////////////////////////////////////////////////
 
-/**
- * Virtual Properties:
- * enables separation between business logic and application logic
- * derivative fields not to be persisted in the database
- * cannot be manipulated in queries eg Auction.find( $where: { LeaseDurationMonths: 1 })
- */
 auctionSchema.virtual("LeaseDurationMonths").get(function () {
   let months;
   months =
@@ -88,20 +77,6 @@ auctionSchema.virtual("LeaseDurationMonths").get(function () {
 });
 ////////////////////////////////////////////////////////////////////////
 
-/**
- * @dev populate and select fields of realtyId reference in Auction document
- */
-auctionSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: "realtyId",
-    select: "-__v",
-  });
-  next();
-});
-
-/**
- * @dev populate and select fields of bidLog reference in Auction document
- */
 auctionSchema.pre(/^find/, function (next) {
   this.populate({
     path: "bidLog",

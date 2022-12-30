@@ -1,20 +1,17 @@
 const mongoose = require("mongoose");
+////////////////////////////////////////////////////////////////////////
 
-const bidSchema = new mongoose.Schema(
+const favoriteSchema = new mongoose.Schema(
   {
-    auctionId: {
+    realtyId: {
       type: mongoose.Schema.ObjectId,
-      ref: "Auction",
       required: [true, "auctionId is required"],
+      ref: "Realty",
     },
     userId: {
       type: mongoose.Schema.ObjectId,
-      ref: "User",
       required: [true, "userId is required"],
-    },
-    bidValue: {
-      type: Number,
-      required: [true, "bid value is required"],
+      ref: "User",
     },
     createdAt: {
       type: Date,
@@ -29,6 +26,6 @@ const bidSchema = new mongoose.Schema(
 );
 ////////////////////////////////////////////////////////////////////////
 
-const Bid = new mongoose.model("Bid", bidSchema);
+const Favorite = new mongoose.model("Favorite", favoriteSchema);
 
-module.exports = Bid;
+module.exports = Favorite;

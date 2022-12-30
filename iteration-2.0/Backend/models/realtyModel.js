@@ -1,11 +1,6 @@
 /**
- * IMPORTANT CAVEAT ABOUT MONGOOSE CUSTOM DATA VALIDATORS:
- *
- * inside a validator function (eg images) the THIS keyword
- * is only gonna point to the current document when a NEW document
- * is being created ie POST request
- *
- * that is not true when UPDATING a document ie PATCH request
+ * @dev mongoDB supports geospatial data coords
+ * @dev standard: GeoJSON [long, lat]
  */
 const mongoose = require("mongoose");
 ////////////////////////////////////////////////////////////////////////
@@ -14,48 +9,43 @@ const realtySchema = new mongoose.Schema(
   {
     address: {
       type: String,
-      unique: [true, "address already exists"],
       required: [true, "address is required"],
-      minLength: [5, "invalid length"],
-      maxLengh: [40, "invalid lengh"],
+      maxlength: [50, "maximum length is 50 digits"],
       trim: true,
     },
     complement: {
       type: String,
-      maxLengh: [40, "invalid lengh"],
+      maxlength: [50, "maximum length is 50 digits"],
       trim: true,
     },
     district: {
       type: String,
       required: [true, "district is required"],
-      minLength: [2, "invalid length"],
-      maxLengh: [40, "invalid lengh"],
+      maxlength: [50, "maximum length is 50 digits"],
       trim: true,
     },
     city: {
       type: String,
       required: [true, "city is required"],
-      minLength: [2, "invalid length"],
-      maxLengh: [40, "invalid lengh"],
+      maxlength: [50, "maximum length is 50 digits"],
       trim: true,
     },
     state: {
       type: String,
-      enum: ["ES", "MG", "RJ", "SP"],
       required: [true, "state is required"],
+      enum: {
+        values: ["ES", "MG", "RJ", "SP"],
+        message: "invalid state",
+      },
       trim: true,
     },
     description: {
       type: String,
       required: [true, "description is required"],
-      minLength: [50, "invalid length"],
-      maxLengh: [500, "invalid lengh"],
+      minlength: [50, "minimum length is 50 digits"],
+      maxlength: [500, "maximum length is 500 digits"],
       trim: true,
     },
-    /**
-     * mongoDB supports geospatial data coords
-     * standard: GeoJSON [long, lat]
-     */
     geoLocation: {
       type: {
         type: String,
@@ -67,8 +57,7 @@ const realtySchema = new mongoose.Schema(
     imageCover: {
       type: String,
       required: [true, "imageCover is required"],
-      minlength: [4, "lengthmin is 4 digits"],
-      maxlength: [20, "lengthmax is 20 digits"],
+      maxlength: [50, "maximum length is 50 digits"],
       trim: true,
     },
     images: {
@@ -77,8 +66,7 @@ const realtySchema = new mongoose.Schema(
         validator: function (val) {
           let _isValid;
           val.forEach((el) => {
-            if (el !== el.trim() || el.length < 4 || el.length > 20)
-              _isValid = false;
+            if (el !== el.trim() || el.length > 50) _isValid = false;
           });
           return _isValid;
         },
@@ -88,14 +76,25 @@ const realtySchema = new mongoose.Schema(
     sqMeters: { type: Number, required: true },
     inConstruction: { type: Boolean, required: true },
     toRetrofit: { type: Boolean, required: true },
-    active: {
-      type: Boolean,
-      default: true,
+    status: {
+      type: String,
+      default: "active",
+      enum: {
+        values: ["active", "inactive"],
+        message: "Invalid status",
+      },
+      select: false,
+    },
+    owner: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: true,
       select: false,
     },
     vip: {
       type: Boolean,
       default: false,
+      select: false,
     },
     createdAt: {
       type: Date,
@@ -108,6 +107,13 @@ const realtySchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+////////////////////////////////////////////////////////////////////////
+
+realtySchema.virtual("auction", {
+  ref: "Auction",
+  foreignField: "RealtyId",
+  localField: "_id",
+});
 ////////////////////////////////////////////////////////////////////////
 
 const Realty = new mongoose.model("Realty", realtySchema);
