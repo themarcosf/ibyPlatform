@@ -7,6 +7,7 @@ const { CustomError } = require("./utils/errors");
 const bidRouter = require("./routers/bidRouter");
 const userRouter = require("./routers/userRouter");
 const realtyRouter = require("./routers/realtyRouter");
+const favoriteRouter = require("./routers/favoriteRouter");
 const auctionRouter = require("./routers/auctionRouter");
 const errController = require("./controllers/errController");
 ////////////////////////////////////////////////////////////////////////
@@ -49,6 +50,7 @@ app.use("/api/v1/bid", bidRouter);
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/realty", realtyRouter);
 app.use("/api/v1/auction", auctionRouter);
+app.use("/api/v1/favorite", favoriteRouter);
 app.all("/*", (req, res, next) =>
   next(new CustomError(`Invalid path: ${req.originalUrl}`, 404))
 );
