@@ -1,26 +1,15 @@
-import Image from "next/image";
 import styles from "./BuildingCard.module.scss";
 import Link from "next/link";
+import { formatToCurrency } from "../../functions/formatToCurrency";
 
 function BuildingCard(props) {
-  const brlMinValue = props.minValue.toLocaleString("pt-br", {
-    style: "currency",
-    currency: "BRL",
-  });
-
-  const brlCurrentValue = props.currentValue.toLocaleString("pt-br", {
-    style: "currency",
-    currency: "BRL",
-  });
+  const brlCurrentValue = formatToCurrency.format(props.currentValue);
 
   return (
     <Link href={`/buildings/${props.id}`}>
       <div className={styles.buildingCard}>
         <div className={styles.imgCard}>
-          <img
-            src={`${props.image}`}
-            alt="build-image"
-          />
+          <img src={`/${props.image}`} alt="build-image" />
         </div>
 
         <div className={styles.streetBx}>
@@ -35,7 +24,7 @@ function BuildingCard(props) {
           </div>
         ) : (
           <div className={styles.buildingInfos}>
-            <p>{props.currentValue ? brlCurrentValue : brlMinValue}</p>
+            <p>{brlCurrentValue}</p>
             <div className={styles.meters}>
               <img
                 style={{ width: "25px", marginRight: "3px" }}

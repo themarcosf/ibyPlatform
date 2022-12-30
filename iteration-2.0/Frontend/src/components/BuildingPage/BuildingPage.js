@@ -5,18 +5,16 @@ import { useRouter } from "next/router";
 import { FaHeart } from "react-icons/fa";
 
 import styles from "./BuildingPage.module.scss";
-import { verifyUser } from "../../pages/_app";
+import { verifyUser } from "../../functions/verifyUser";
+import { formatToCurrency } from "../../functions/formatToCurrency";
 
 function BuildingPage(props) {
-  const router = useRouter()
+  const router = useRouter();
   const { data: session } = useSession();
   const [buildingStatus, setbuildingStatus] = useState("Pronto para morar!");
   const bidInputRef = useRef();
-  const [currentValue, setCurrentValue] = useState(props.currentValue);
-  const brlCurrentValue = currentValue.toLocaleString("pt-br", {
-    style: "currency",
-    currency: "BRL",
-  });
+
+  const brlCurrentValue = formatToCurrency.format(props.currentValue);
 
   useEffect(() => {
     if (props.inConstruction == true) {
@@ -29,57 +27,47 @@ function BuildingPage(props) {
   async function handleSubmit(event) {
     event.preventDefault();
     const enteredBid = bidInputRef.current.value;
+    console.log(enteredBid);
 
     if (session) {
-      const userData = await verifyUser(session.user.email, session.user.name)
-      
-      console.log(userData);
-      localStorage.setItem("userData", JSON.stringify(userData))
+      if (enteredBid > props.currentValue) {
+        const userData = await verifyUser(
+          session.user.email,
+          session.user.name
+        );
+        localStorage.setItem("userData", JSON.stringify(userData));
 
+        const bidData = {
+          lastBidValue: enteredBid,
+          lastBidUser: userData.id,
+          lastBidderWallet: userData.wallet,
+        };
 
-      if (userData.wallet && userData.documents && userData.phone) {
-        // redirect to payment page
+        localStorage.setItem("bidData", JSON.stringify(bidData));
+
+        const auctionData = {
+          minAskValue: props.minAskValue,
+          currentValue: props.currentValue,
+          lastBidderWallet: userData.wallet,
+          auctionId: props.auctionId
+        };
+
+        localStorage.setItem("auctionData", JSON.stringify(auctionData));
+
+        if (userData.wallet && userData.nationalId && userData.mobile) {
+          router.push("/paymentForm/2");
+        } else {
+          router.push("/paymentForm/1");
+        }
       } else {
-        router.push('/paymentForm')
-      }
-
-      // const updatedData = {
-      //   currentValue: enteredBid,
-      //   lastBidUser: userData.id,
-      //   lastBidderWallet: ,
-      // };
-
-      //   if (enteredBid > currentValue) {
-      //     setCurrentValue(
-      //       enteredBid.toLocaleString("pt-br", {
-      //         style: "currency",
-      //         currency: "BRL",
-      //       })
-      //     );
-
-      //     fetch(`http://127.0.0.1:8000/api/v1/auction/${props.auctionId}`, {
-      //       method: "PATCH",
-      //       headers: {
-      //         "content-type": "application/json",
-      //         "Access-Control-Allow-Origin": "*",
-      //       },
-      //       body: JSON.stringify(updatedData),
-      //     })
-      //       .then((response) => response.json())
-      //       .then(
-      //         toast.success("Seu lance foi enviado!", {
-      //           position: "bottom-right",
-      //         })
-      //       );
-      //   } else {
-      //     toast.error("Insira um valor maior do que o valor atual", {
-      //       position: "bottom-right",
-      //     });
-      //   }
-      } else {
-        toast.error("Você precisa estar logado para realizar um lance", {
+        toast.error("Insira um valor maior do que o valor atual", {
           position: "bottom-right",
         });
+      }
+    } else {
+      toast.error("Você precisa estar logado para realizar um lance", {
+        position: "bottom-right",
+      });
     }
   }
 
@@ -100,7 +88,9 @@ function BuildingPage(props) {
 
   return (
     <div className={styles.buildingPageContent}>
-      <h1 onClick={() => createUser(session.user.email, session.user.name)}>{`${props.address} - ${props.district}, ${props.state}`}</h1>
+      <h1
+        onClick={() => createUser(session.user.email, session.user.name)}
+      >{`${props.address} - ${props.district}, ${props.state}`}</h1>
       <div className={styles.statusAndFavorite}>
         <p onClick={checkLocalStorage}>Status: {buildingStatus} </p>
         <span>
@@ -111,7 +101,7 @@ function BuildingPage(props) {
         <div>
           <img
             className={styles.firstImg}
-            src={`${props.image[0]}`}
+            src={`/${props.image[0]}`}
             width={500}
             height={330}
             alt="realt_img"
@@ -120,7 +110,7 @@ function BuildingPage(props) {
         <div>
           <img
             className={styles.secondImg}
-            src={`${props.image[1]}`}
+            src={`/${props.image[1]}`}
             width={500}
             height={330}
             alt="realt_img"
@@ -129,7 +119,7 @@ function BuildingPage(props) {
         <div>
           <img
             className={styles.thirdImg}
-            src={`${props.image[2]}`}
+            src={`/${props.image[2]}`}
             width={500}
             height={330}
             alt="realt_img"
@@ -143,7 +133,7 @@ function BuildingPage(props) {
         </div>
         <div className={styles.infoContainer}>
           <p className={styles.currentValue}>
-            {props.expired ? "Valor Final:" : "Valor Atual:"} {brlCurrentValue}
+            {props.active ? "Valor Atual:" : "Valor Final:"} {brlCurrentValue}
           </p>
           <p className={styles.period}>
             Início do contrato no dia {leaseBeginDate}

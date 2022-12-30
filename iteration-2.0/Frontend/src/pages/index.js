@@ -141,7 +141,7 @@ export async function getServerSideProps(context) {
   if (session) {
     return {
       redirect: {
-        destination: "/myAccount",
+        destination: "/pf",
         permanent: false,
       },
     };

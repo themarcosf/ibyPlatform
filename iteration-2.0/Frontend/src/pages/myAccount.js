@@ -4,16 +4,16 @@ import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
-import { createUser, verifyUser } from "./_app";
+import { verifyUser } from "../functions/verifyUser";
 
 import styles from "../styles/myAccount.module.scss";
 
-function myAccount({ session }) {
+function myAccount({ session, userData }) {
   const { status } = useSession();
   const [isEditing, setIsEditing] = useState(false);
 
   function deleteHandler() {
-    console.log("delete");
+    console.log(userData);
 
     // Sign out and redirect to '/'
   }
@@ -43,7 +43,7 @@ function myAccount({ session }) {
       <Header />
       <main className={styles.main}>
         <div className={styles.menu}>
-          <h1 onClick={() => createUser(session.user.email, session.user.name)}>
+          <h1>
             Minha conta
           </h1>
           <ul>
@@ -75,13 +75,13 @@ function myAccount({ session }) {
                   <div className={styles.field}>
                     <label>Nome</label>
                     <input
-                      placeholder={session.user.name}
+                      placeholder={userData.username}
                       disabled={!isEditing}
                     />
                   </div>
                   <div className={styles.field}>
                     <label>CPF/CNPJ</label>
-                    <input disabled={!isEditing} />
+                    <input disabled={!isEditing} placeholder={userData.nationalId}/>
                   </div>
                 </div>
                 <div className={styles.column}>
@@ -90,7 +90,7 @@ function myAccount({ session }) {
                       <label>Carteira</label>
                       <AiOutlineQuestionCircle fill="#1351b4" />
                     </div>
-                    <input disabled={!isEditing} />
+                    <input disabled={!isEditing} placeholder={userData.wallet}/>
                   </div>
                   <div className={styles.field}>
                     <div className={styles.walletBx}>
@@ -122,9 +122,10 @@ function myAccount({ session }) {
 
 export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
+  let userData
 
   if (session) {
-    verifyUser(session.user.email, session.user.name);
+    userData = await verifyUser(session.user.email, session.user.name);
   }
 
   if (!session) {
@@ -137,7 +138,7 @@ export async function getServerSideProps(context) {
   }
 
   return {
-    props: { session: session },
+    props: { session: session, userData: userData },
   };
 }
 
