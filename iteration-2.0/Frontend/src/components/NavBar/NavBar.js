@@ -4,12 +4,19 @@ import { FcGoogle } from "react-icons/fc";
 import { useRouter } from "next/router";
 
 import styles from "./NavBar.module.scss";
+import { verifyUser } from "../../functions/verifyUser";
 
 function NavBar() {
   const { data: session } = useSession();
 
-  function signInHandler(){
-    signIn("google")
+  async function saveDataHandler() {
+    const userData = await verifyUser(session.user.email, session.user.name);
+
+    localStorage.setItem("userData", JSON.stringify(userData));
+  }
+
+  function signInHandler() {
+    signIn("google");
   }
 
   function logoutHandler() {
@@ -36,24 +43,25 @@ function NavBar() {
 
           {!session && (
             <li>
-              <button
-                className={styles.googleBtn}
-                onClick={signInHandler}
-              >
+              <button className={styles.googleBtn} onClick={signInHandler}>
                 Acesse com <FcGoogle />
               </button>
             </li>
           )}
           {session && (
             <li className={styles.userIconContainer}>
-              <button className={styles.userIcon} href="#">
+              <button
+                onClick={saveDataHandler}
+                className={styles.userIcon}
+                href="#"
+              >
                 <img src="/user_icon.png" alt="user_icon" />
               </button>
               <div className={styles.dropdownContent}>
                 <div className={styles.dropdownSub}>
                   <ul>
                     <li>
-                      <Link href={"#"}>Meus Lances</Link>
+                      <Link href={"/myBids"}>Meus Lances</Link>
                     </li>
                     <li>
                       <Link href={"/myContracts"}>Meus Contratos</Link>

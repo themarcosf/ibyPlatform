@@ -3,6 +3,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { FaHeart } from "react-icons/fa";
+import IntlCurrencyInput from "react-intl-currency-input";
 
 import styles from "./BuildingPage.module.scss";
 import { verifyUser } from "../../functions/verifyUser";
@@ -12,7 +13,22 @@ function BuildingPage(props) {
   const router = useRouter();
   const { data: session } = useSession();
   const [buildingStatus, setbuildingStatus] = useState("Pronto para morar!");
-  const bidInputRef = useRef();
+  const [bidValue, setBidVaule] = useState();
+  const currencInputRef = useRef();
+
+  const currencyConfig = {
+    locale: "pt-BR",
+    formats: {
+      number: {
+        BRL: {
+          style: "currency",
+          currency: "BRL",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        },
+      },
+    },
+  };
 
   const brlCurrentValue = formatToCurrency.format(props.currentValue);
 
@@ -24,13 +40,16 @@ function BuildingPage(props) {
     }
   }, []);
 
-  async function handleSubmit(event) {
+  function handleBlur(event, value) {
     event.preventDefault();
-    const enteredBid = bidInputRef.current.value;
-    console.log(enteredBid);
+
+    setBidVaule(value);
+  }
+  async function handleSubmit(event, value) {
+    event.preventDefault();
 
     if (session) {
-      if (enteredBid > props.currentValue) {
+      if (bidValue > props.currentValue) {
         const userData = await verifyUser(
           session.user.email,
           session.user.name
@@ -38,7 +57,7 @@ function BuildingPage(props) {
         localStorage.setItem("userData", JSON.stringify(userData));
 
         const bidData = {
-          lastBidValue: enteredBid,
+          lastBidValue: bidValue,
           lastBidUser: userData.id,
           lastBidderWallet: userData.wallet,
         };
@@ -49,7 +68,7 @@ function BuildingPage(props) {
           minAskValue: props.minAskValue,
           currentValue: props.currentValue,
           lastBidderWallet: userData.wallet,
-          auctionId: props.auctionId
+          auctionId: props.auctionId,
         };
 
         localStorage.setItem("auctionData", JSON.stringify(auctionData));
@@ -152,14 +171,12 @@ function BuildingPage(props) {
 
           {!props.expired && (
             <form className={styles.moneyContainer} onSubmit={handleSubmit}>
-              <input
-                placeholder="Digite o valor"
-                type="number"
-                name="bid"
-                data-type="currency"
-                ref={bidInputRef}
+              <IntlCurrencyInput
+                className={styles.currencyInput}
+                currency="BRL"
+                config={currencyConfig}
+                onBlur={handleBlur}
               />
-
               <button type="submit">Fazer meu lance</button>
               <Toaster />
             </form>

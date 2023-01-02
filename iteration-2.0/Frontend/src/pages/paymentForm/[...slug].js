@@ -53,27 +53,6 @@ function paymentForm(slug) {
     return (
       <>
         <Header />
-        <p
-          onClick={() => {
-            console.log(index);
-          }}
-        >
-          oi
-        </p>
-        <p
-          onClick={() => {
-            console.log(disable);
-          }}
-        >
-          disable
-        </p>
-        <p
-          onClick={() => {
-            console.log(userData);
-          }}
-        >
-          user id
-        </p>
         <main className={styles.main}>
           <MultiStepProgressBar step={index} />
           <div className={styles.formContainer}>

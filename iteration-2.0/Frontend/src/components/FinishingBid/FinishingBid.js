@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -5,7 +6,7 @@ import { formatToCurrency } from "../../functions/formatToCurrency";
 
 import styles from "./FinishingBid.module.scss";
 
-async function makeBid(fetchData, auctionId) {
+async function makeBid(fetchData, auctionId, router) {
   fetch(`http://127.0.0.1:8000/api/v1/auction/${auctionId}`, {
     method: "PATCH",
     headers: {
@@ -16,13 +17,12 @@ async function makeBid(fetchData, auctionId) {
   })
     .then((response) => response.json())
     .then(
-      toast.success("Seu lance foi enviado!", {
-        position: "bottom-right",
-      })
+      router.push('/myBids')
     );
 }
 
 function FinishingBid(props) {
+  const router = useRouter()
   const [auctionData, setAuctionData] = useState();
 
   useEffect(() => {
@@ -39,7 +39,7 @@ function FinishingBid(props) {
         },
       };
 
-      makeBid(fetchData, auctionData.auctionId);
+      makeBid(fetchData, auctionData.auctionId, router);
     }
     const brlLastBidValue = formatToCurrency.format(props.bidData.lastBidValue);
     const brlMinAskValue = formatToCurrency.format(auctionData.minAskValue);
