@@ -38,10 +38,6 @@ function myBids({ realtyData, auctionData }) {
                 if (userLastBid.lastBidValue >= auctionLog[0].lastBidValue) {
                   winningBid = true;
                 } else winningBid = false;
-                // console.log(auctionLog);
-                // console.log(userLastBid.lastBidValue);
-                // console.log(auctionLog[0].lastBidValue);
-                // console.log(winningBid);
 
                 let currentValue;
                 let lastBidChecking =

@@ -14,7 +14,6 @@ function BuildingPage(props) {
   const { data: session } = useSession();
   const [buildingStatus, setbuildingStatus] = useState("Pronto para morar!");
   const [bidValue, setBidVaule] = useState();
-  const currencInputRef = useRef();
 
   const currencyConfig = {
     locale: "pt-BR",
