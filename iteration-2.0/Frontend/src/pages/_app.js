@@ -1,3 +1,4 @@
+import { useSession } from "next-auth/react";
 import ProvidersWrapper from "../components/ProvidersWrapper/ProvidersWrapper";
 
 import "../styles/globals.scss";
