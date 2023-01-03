@@ -68,7 +68,7 @@ function pj({ realtyData, auctionData }) {
                 />
               );
             } else {
-              return <NoRealty key={0}/>;
+              return <NoRealty key={0} />;
             }
           })}
         </div>
@@ -83,7 +83,9 @@ export default pj;
 export const getStaticProps = async () => {
   const realtyRes = await fetch("http://127.0.0.1:8000/api/v1/realty/");
   const initialRealtyData = await realtyRes.json();
-  const realtyData = initialRealtyData.data.realty;
+  const realtyData = initialRealtyData.data.realty.filter((elements) => {
+    return elements !== null;
+  });
 
   const auctionRes = await fetch("http://127.0.0.1:8000/api/v1/auction/");
   const initialAuctionData = await auctionRes.json();

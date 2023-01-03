@@ -1,12 +1,13 @@
 .nav {
   width: 80%;
-  margin: 0 auto;
+  margin: 0 !important; 
   background: #fff;
   display: flex;
   justify-content: flex-end;
-
+  
   ul {
     width: 80%;
+    margin: 0 !important; 
     list-style: none;
     text-align: center;
     justify-content: space-between;

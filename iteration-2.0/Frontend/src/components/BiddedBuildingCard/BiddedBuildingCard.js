@@ -1,8 +1,8 @@
-import styles from "./BuildingCard.module.scss";
+import styles from "./BiddedBuildingCard.module.scss";
 import Link from "next/link";
 import { formatToCurrency } from "../../functions/formatToCurrency";
 
-function BuildingCard(props) {
+function BiddedBuildingCard(props) {
   const brlCurrentValue = formatToCurrency.format(props.currentValue);
 
   return (
@@ -25,15 +25,19 @@ function BuildingCard(props) {
         ) : (
           <div className={styles.buildingInfos}>
             <p>{brlCurrentValue}</p>
-            <div className={styles.meters}>
-              <img
-                style={{ width: "25px", marginRight: "3px" }}
-                src={"/regua.png"}
-              />
-              <p>
-                {props.sqMeters}m<sup>2</sup>
-              </p>
-            </div>
+            {props.winningBid ? (
+              <div className={styles.winningBidTrue}>
+                <p>
+                  Seu lance está <br /> na frente
+                </p>
+              </div>
+            ) : (
+              <div className={styles.winningBidFalse}>
+                <p>
+                  Seu lance não <br /> está na frente
+                </p>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -41,4 +45,4 @@ function BuildingCard(props) {
   );
 }
 
-export default BuildingCard;
+export default BiddedBuildingCard;
