@@ -1,21 +1,35 @@
-import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useSession } from "next-auth/react";
-
-import Card from "../Card/Card";
+import { useRouter } from "next/router";
+import { FaHeart } from "react-icons/fa";
+import IntlCurrencyInput from "react-intl-currency-input";
 
 import styles from "./BuildingPage.module.scss";
+import { verifyUser } from "../../functions/verifyUser";
+import { formatToCurrency } from "../../functions/formatToCurrency";
 
 function BuildingPage(props) {
+  const router = useRouter();
   const { data: session } = useSession();
   const [buildingStatus, setbuildingStatus] = useState("Pronto para morar!");
-  const bidInputRef = useRef();
-  const [currentValue, setCurrentValue] = useState(props.currentValue);
-  const brlCurrentValue = currentValue.toLocaleString("pt-br", {
-    style: "currency",
-    currency: "BRL",
-  });
+  const [bidValue, setBidVaule] = useState();
+
+  const currencyConfig = {
+    locale: "pt-BR",
+    formats: {
+      number: {
+        BRL: {
+          style: "currency",
+          currency: "BRL",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        },
+      },
+    },
+  };
+
+  const brlCurrentValue = formatToCurrency.format(props.currentValue);
 
   useEffect(() => {
     if (props.inConstruction == true) {
@@ -25,45 +39,60 @@ function BuildingPage(props) {
     }
   }, []);
 
-  async function handleSubmit(event) {
+  function handleBlur(event, value) {
     event.preventDefault();
 
-    const enteredBid = bidInputRef.current.value;
+    setBidVaule(value);
+  }
+  async function handleSubmit(event, value) {
+    event.preventDefault();
 
-    const updatedData = {
-      currentValue: enteredBid,
-      // lastBidUser: session.user.email,
-      // lastBidderWallet: ,
-    };
-
-    if (enteredBid > currentValue) {
-      setCurrentValue(
-        enteredBid.toLocaleString("pt-br", {
-          style: "currency",
-          currency: "BRL",
-        })
-      );
-
-      fetch(`http://127.0.0.1:8000/api/v1/auction/${props.auctionId}`, {
-        method: "PATCH",
-        headers: {
-          "content-type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify(updatedData),
-      })
-        .then((response) => response.json())
-        .then(
-          toast.success("Seu lance foi enviado!", {
-            position: "bottom-right",
-          })
+    if (session) {
+      if (bidValue > props.currentValue) {
+        const userData = await verifyUser(
+          session.user.email,
+          session.user.name
         );
+        localStorage.setItem("userData", JSON.stringify(userData));
+
+        const bidData = {
+          lastBidValue: bidValue,
+          lastBidUser: userData.id,
+          lastBidderWallet: userData.wallet,
+        };
+
+        localStorage.setItem("bidData", JSON.stringify(bidData));
+
+        const auctionData = {
+          minAskValue: props.minAskValue,
+          currentValue: props.currentValue,
+          lastBidderWallet: userData.wallet,
+          auctionId: props.auctionId,
+        };
+
+        localStorage.setItem("auctionData", JSON.stringify(auctionData));
+
+        if (userData.wallet && userData.nationalId && userData.mobile) {
+          router.push("/paymentForm/2");
+        } else {
+          router.push("/paymentForm/1");
+        }
+      } else {
+        toast.error("Insira um valor maior do que o valor atual", {
+          position: "bottom-right",
+        });
+      }
     } else {
-      toast.error("Insira um valor maior do que o valor atual", {
+      toast.error("Você precisa estar logado para realizar um lance", {
         position: "bottom-right",
       });
     }
   }
+
+  const checkLocalStorage = () => {
+    const userId = JSON.parse(localStorage.getItem("userData"));
+    console.log(userId);
+  };
 
   const auctionEndDate = new Date(props.auctionEndDate).toLocaleDateString(
     "pt-BR",
@@ -77,18 +106,20 @@ function BuildingPage(props) {
 
   return (
     <div className={styles.buildingPageContent}>
-      <h1>{`${props.address} - ${props.district}, ${props.state}`}</h1>
+      <h1
+        onClick={() => createUser(session.user.email, session.user.name)}
+      >{`${props.address} - ${props.district}, ${props.state}`}</h1>
       <div className={styles.statusAndFavorite}>
-        <p>Status: {buildingStatus} </p>
+        <p onClick={checkLocalStorage}>Status: {buildingStatus} </p>
         <span>
-          Salvar <img src="/favorite.png" />
+          Salvar <FaHeart fill="#2e65bc" />
         </span>
       </div>
       <div className={styles.imgsContainer}>
         <div>
           <img
             className={styles.firstImg}
-            src={`${props.image[0]}`}
+            src={`/${props.image[0]}`}
             width={500}
             height={330}
             alt="realt_img"
@@ -97,7 +128,7 @@ function BuildingPage(props) {
         <div>
           <img
             className={styles.secondImg}
-            src={`${props.image[1]}`}
+            src={`/${props.image[1]}`}
             width={500}
             height={330}
             alt="realt_img"
@@ -106,7 +137,7 @@ function BuildingPage(props) {
         <div>
           <img
             className={styles.thirdImg}
-            src={`${props.image[2]}`}
+            src={`/${props.image[2]}`}
             width={500}
             height={330}
             alt="realt_img"
@@ -120,7 +151,7 @@ function BuildingPage(props) {
         </div>
         <div className={styles.infoContainer}>
           <p className={styles.currentValue}>
-            {props.expired ? "Valor Final:" : "Valor Atual:"} {brlCurrentValue}
+            {props.active ? "Valor Atual:" : "Valor Final:"} {brlCurrentValue}
           </p>
           <p className={styles.period}>
             Início do contrato no dia {leaseBeginDate}
@@ -139,13 +170,12 @@ function BuildingPage(props) {
 
           {!props.expired && (
             <form className={styles.moneyContainer} onSubmit={handleSubmit}>
-              <input
-                placeholder="Digite o valor"
-                type="number"
-                name="bid"
-                ref={bidInputRef}
+              <IntlCurrencyInput
+                className={styles.currencyInput}
+                currency="BRL"
+                config={currencyConfig}
+                onBlur={handleBlur}
               />
-
               <button type="submit">Fazer meu lance</button>
               <Toaster />
             </form>

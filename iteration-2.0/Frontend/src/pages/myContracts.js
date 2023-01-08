@@ -9,107 +9,109 @@ import Filter from "../components/Filter/Filter";
 
 import styles from "../styles/myContracts.module.scss";
 
-function myContracts() {
-  const [modalOpen, setModalOpen] = useState(false);
+function myContracts({ realtyData, auctionData }) {
+  const [showModal, setShowModal] = useState(false);
   const [modalId, setModalId] = useState();
-  const [data, setData] = useState();
+  const [auctionModalId, setAuctionModalId] = useState();
+  const [userData, setUserData] = useState();
+  const [noBuilds, setNoBuilds] = useState(false);
 
   useEffect(() => {
-    const userId = JSON.parse(localStorage.userData).id;
-
-    fetch(`http://127.0.0.1:8000/api/v1/users/${userId}`)
-      .then((response) => response.json())
-      .then((json) => {
-        setData(json.data.auctions);
-      });
+    setUserData(JSON.parse(localStorage.getItem("userData")));
   }, []);
 
-  console.log(data);
+  if (userData) {
+    return (
+      <>
+        <Header />
+        <div className={styles.content}>
+          <div className={styles.title}>
+            <h1>Meus imóveis</h1>
+            <Filter />
+          </div>
+          <div className={styles.cardsWrapper}>
+            <div className={styles.cardsContainer}>
+              {realtyData.map((build) => {
+                let realtyAuction = auctionData.find(
+                  (auction) => auction.realtyId === build.id
+                );
 
-  return (
-    <>
-      {data ? (
-        <>
-          <Header />
-          <div className={styles.content}>
-            <div className={styles.title}>
-              <h1>Meus Contratos</h1>
-              <Filter />
-            </div>
-            <div className={styles.cardsWrapper}>
-              <div className={styles.cardsContainer}>
-                {data.map((card) => {
-                  if (card != null) {
-                    
-                    const cardIndex = data.indexOf(card);
+                const auctionLog = realtyAuction.auctionLog.filter(
+                  (elements) => {
+                    return elements !== null;
+                  }
+                );
+
+                const userLastBid = auctionLog
+                  .reverse()
+                  .find((auction) => auction.lastBidUser == userData.id);
+
+                if (userLastBid) {
+                  let winningBid;
+
+                  if (userLastBid.lastBidValue >= auctionLog[0].lastBidValue) {
+                    winningBid = true;
+                  } else winningBid = false;
+
+                  const buildIndex = realtyData.indexOf(build);
+                  const realtyAuctionIndex = auctionData.indexOf(realtyAuction);
+
+                  if (winningBid && !realtyAuction.active) {
                     return (
                       <BoughtBuildingCard
-                        image={card._realtyData.images[0]}
-                        streetAddress={card._realtyData.streetAddress}
-                        neighborhood={card._realtyData.neighborhood}
-                        state={card._realtyData.state}
-                        setModalOpen={setModalOpen}
+                        image={build.images[0]}
+                        address={build.address}
+                        district={build.district}
+                        state={build.state}
+                        setShowModal={setShowModal}
                         setModalId={setModalId}
-                        id={cardIndex}
-                        // startDate={"2023-01-01"}
-                        // endDate={"2024-12-31"}
+                        buildIndex={buildIndex}
+                        setAuctionModalId={setAuctionModalId}
+                        realtyAuctionIndex={realtyAuctionIndex}
+                        id={build.id}
+                        leaseBeginDate={realtyAuction.leaseBeginDate}
+                        leaseEndDate={realtyAuction.leaseEndDate}
                       />
                     );
                   }
-                })}
-
-                {/* <BoughtBuildingCard
-                  image={
-                    "https://classic.exame.com/wp-content/uploads/2017/09/apto-decorado-even1.jpg?quality=70&strip=info&w=1000"
-                  }
-                  streetAddresss={"Alameda São Joao, 10101"}
-                  neighborhoods={"Moema"}
-                  state={"São Paulo"}
-                  // setModalOpen={setModalOpen}
-                  // setModalId={setModalId}
-                  startDate={"2023-01-01"}
-                  endDate={"2024-12-31"}
-                />
-                <BoughtBuildingCard
-                  image={
-                    "https://classic.exame.com/wp-content/uploads/2020/09/Apartamento-compacto-incorporadora-You-Inc-mercado-imobiliario.jpg?quality=70&strip=info&w=1024"
-                  }
-                  streetAddresss={"Rua correa de santos, 198"}
-                  neighborhoods={"Butantã"}
-                  state={"São Paulo"}
-                  // setModalOpen={setModalOpen}
-                  // setModalId={setModalId}
-                  startDate={"2023-01-01"}
-                  endDate={"2025-12-31"}
-                /> */}
-              </div>
-              {modalOpen ? (
-                <SaleModal
-                  streetAddress={data[modalId]._realtyData.streetAddress}
-                  image={data[modalId]._realtyData.images[0]}
-                  neighborhood={data[modalId]._realtyData.neighborhood}
-                  state={data[modalId]._realtyData.state}
-                  id={data[modalId]._realtyData.id}
-                  // startDate={data[modalId]._realtyData.startDate}
-                  // endDate={data[modalId]._realtyData.endDate}
-                  setModalOpen={setModalOpen}
-                />
-              ) : null}
+                }
+              })}
             </div>
+            {/* {showModal ? (
+              <SaleModal
+                address={realtyData[modalId].address}
+                image={realtyData[modalId].images[0]}
+                district={realtyData[modalId].district}
+                state={realtyData[modalId].state}
+                id={realtyData[modalId].id}
+                setShowModal={setShowModal}
+                leaseBeginDate={auctionData[auctionModalId].leaseBeginDate}
+                leaseEndDate={auctionData[auctionModalId].leaseEndDate}
+              />
+            ) : null} */}
           </div>
+        </div>
 
-          <Footer />
-        </>
-      ) : (
-        "carregando"
-      )}
-    </>
-  );
+        <Footer />
+      </>
+    );
+  } else {
+    return <p>Carregando</p>;
+  }
 }
-
 
 export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
+
+  const realtyRes = await fetch("http://127.0.0.1:8000/api/v1/realty/");
+  const initialRealtyData = await realtyRes.json();
+  const realtyData = initialRealtyData.data.realty.filter((elements) => {
+    return elements !== null;
+  });
+
+  const auctionRes = await fetch("http://127.0.0.1:8000/api/v1/auction/");
+  const initialAuctionData = await auctionRes.json();
+  const auctionData = initialAuctionData.data.auction;
 
   if (!session) {
     return {
@@ -121,29 +123,8 @@ export async function getServerSideProps(context) {
   }
 
   return {
-    props: session,
+    props: { realtyData: realtyData, auctionData: auctionData },
   };
 }
 
-
 export default myContracts;
-
-// export const getStaticProps = async () => {
-//   let data ={}
-
-//   if (typeof window !== "undefined") {
-//     const userId = JSON.parse(localStorage.userData).id;
-
-//     data = fetch(`http://127.0.0.1:8000/api/v1/users/${userId}`)
-//       .then((response) => response.json())
-//       .then((json) => {
-//         console.log(json);
-//       });
-//   }
-//   return {
-//     props: {
-//       data,
-//     },
-//     revalidate: 60 * 5,
-//   };
-// };

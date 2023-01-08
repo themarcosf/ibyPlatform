@@ -3,20 +3,14 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 
 function build({ realtyData, auctionData }) {
-  let currentValue
-  let expired
+  let currentValue;
+  let lastBidChecking = auctionData.auctionLog.slice(-1)[0]?.lastBidValue;
 
-  auctionData.currentValue >= auctionData.minValue ? currentValue = auctionData.currentValue : currentValue = auctionData.minValue
+  lastBidChecking
+    ? (currentValue = lastBidChecking)
+    : (currentValue = auctionData.minAskValue);
 
-  let realtyAuctionEndDate = new Date(
-    auctionData.auctionEndDate
-  ).getTime();
-
-  if (realtyAuctionEndDate > Date.now()){
-    expired = false
-  } else {
-    expired = true
-  }
+    let realtyAuctionEndDate = new Date(auctionData.auctionEndDate).getTime();
 
   return (
     <>
@@ -33,7 +27,8 @@ function build({ realtyData, auctionData }) {
         currentValue={currentValue}
         id={realtyData.id}
         auctionId={auctionData.id}
-        expired={expired}
+        minAskValue={auctionData.minAskValue}
+        active={auctionData.active}
         auctionEndDate={realtyAuctionEndDate}
         leaseBeginDate={auctionData.leaseBeginDate}
         leaseEndDate={auctionData.leaseEndDate}

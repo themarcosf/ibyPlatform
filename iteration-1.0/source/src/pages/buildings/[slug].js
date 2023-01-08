@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useRouter } from "next/router";
 import BuildingPage from "../../components/BuildingPage/BuildingPage";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";

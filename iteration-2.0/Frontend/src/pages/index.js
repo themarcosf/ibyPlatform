@@ -4,39 +4,16 @@ import { getSession } from "next-auth/react";
 import Header from "../components/HeaderEspecial/Header";
 import Footer from "../components/Footer/Footer";
 import EsgPractice from "../components/EsgPractice/EsgPractice";
-
 import Planet from "../../public/planet.json";
-import House from "../../public/isometric_house.json";
-
+import House from "../../public/home-lootie.json";
+import CarouselIndex from "../components/Carousel/Carousel";
 import styles from "../styles/index.module.scss";
 
 function Home() {
-  const checkLocalStorage = () => {
-    const userId = JSON.parse(localStorage.getItem("userData"));
-    console.log(userId);
-  };
-
   return (
     <div className={styles.body}>
       <Header />
-      <div className={styles.container}>
-        <div className={styles.title}>
-          <h1>
-            Conheça a <br />
-            Plataforma Iby
-          </h1>
-          <h2>
-            e encontre um lugar <br />
-            para chamar de lar
-          </h2>
-        </div>
-        <div className={styles.gradiente}>
-          <img id="gradiente" src="/gradiente.png" />
-        </div>
-        <div className={styles.imgContainer}>
-          <img id="family" src="/houseFamily.png" />
-        </div>
-      </div>
+     <CarouselIndex/>
       <div className={styles.texts}>
         <h3>Como surgiu a Plataforma Iby?</h3>
         <p>
@@ -125,11 +102,11 @@ function Home() {
         </div>
         <div
           style={{
-            width: "28%",
-            marginTop: "1%",
+            width: "35%",
+            marginTop: "2%",
             marginLeft: "20%",
             position: "relative",
-            left: "3%",
+            left: "2%",
           }}
         >
           <Lottie animationData={House} />
@@ -146,7 +123,7 @@ export async function getServerSideProps(context) {
   if (session) {
     return {
       redirect: {
-        destination: "/myAccount",
+        destination: "/pf",
         permanent: false,
       },
     };

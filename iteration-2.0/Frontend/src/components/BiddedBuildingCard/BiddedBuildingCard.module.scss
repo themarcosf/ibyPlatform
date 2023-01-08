@@ -48,7 +48,7 @@
 
 .buildingInfos {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between ;
   width: 100%;
   align-items: center;
   margin-top: 1rem;
@@ -56,15 +56,6 @@
 
   p {
     font-weight: 600;
-  }
-}
-
-.meters {
-  display: flex;
-  align-items: center;
-  p,
-  sup {
-    color: #2e65bc;
   }
 }
 
@@ -77,5 +68,28 @@
     margin: 0.5rem;
     color: red;
     font-weight: 600;
+  }
+}
+
+.winningBidTrue {
+  background-color: #4b8f3f;
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.7rem;
+
+  p {
+    color: white;
+  }
+}
+.winningBidFalse {
+  background-color: #C74444;
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.7rem;
+
+  p {
+    color: white;
   }
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { verifyUser } from "../../functions/verifyUser";
 
 import BuildingCard from "../../components/BuildingCard/BuildingCard";
 import Footer from "../../components/Footer/Footer";
@@ -8,13 +8,13 @@ import Filter from "../../components/Filter/Filter";
 
 import styles from "./pf.module.scss";
 
-function pj({ realtyData, auctionData }) {
+function pf({ realtyData, auctionData }) {
   return (
     <>
       <Header />
       <div className={styles.content}>
         <div className={styles.title}>
-          <h1>Pessoa Jurídica</h1>
+          <h1>Imóveis para alugar</h1>
           <Filter />
         </div>
         <div className={styles.cardsContainer}>
@@ -22,6 +22,14 @@ function pj({ realtyData, auctionData }) {
             let realtyAuction = auctionData.find(
               (auction) => auction.realtyId === build.id
             );
+
+            let currentValue;
+            let lastBidChecking =
+              realtyAuction.auctionLog.slice(-1)[0]?.lastBidValue;
+
+            lastBidChecking
+              ? (currentValue = lastBidChecking)
+              : (currentValue = realtyAuction.minAskValue);
 
             let realtyAuctionEndDate = new Date(
               realtyAuction.auctionEndDate
@@ -40,8 +48,7 @@ function pj({ realtyData, auctionData }) {
                   address={build.address}
                   district={build.district}
                   state={build.state}
-                  minValue={realtyAuction.minValue}
-                  currentValue={realtyAuction.currentValue}
+                  currentValue={currentValue}
                   sqMeters={build.sqMeters}
                   key={build.id}
                   id={build.id}
@@ -61,8 +68,7 @@ function pj({ realtyData, auctionData }) {
                   address={build.address}
                   district={build.district}
                   state={build.state}
-                  minValue={realtyAuction.minValue}
-                  currentValue={realtyAuction.currentValue}
+                  currentValue={currentValue}
                   sqMeters={build.sqMeters}
                   key={build.id}
                   id={build.id}
@@ -80,12 +86,14 @@ function pj({ realtyData, auctionData }) {
   );
 }
 
-export default pj;
+export default pf;
 
 export const getStaticProps = async () => {
   const realtyRes = await fetch("http://127.0.0.1:8000/api/v1/realty/");
   const initialRealtyData = await realtyRes.json();
-  const realtyData = initialRealtyData.data.realty;
+  const realtyData = initialRealtyData.data.realty.filter((elements) => {
+    return elements !== null;
+  });
 
   const auctionRes = await fetch("http://127.0.0.1:8000/api/v1/auction/");
   const initialAuctionData = await auctionRes.json();

@@ -22,7 +22,7 @@ function SaleModal(props) {
         <button
           style={{ all: "unset", cursor: "pointer" }}
           onClick={() => {
-            props.setModalOpen(false);
+            props.setShowModal(false);
           }}
         >
           X
@@ -30,17 +30,16 @@ function SaleModal(props) {
       </div>
       <div className={styles.content}>
         <div className={styles.firstColumn}>
-          <Image
+          <img
             src={`/${props.image}`}
             width={256}
             height={256}
-            priority
             alt="build-image"
           />
           <div className={styles.infosBx}>
-            <h3>{props.streetAddress}</h3>
+            <h3>{props.address}</h3>
             <p>
-              {props.neighborhood}, {props.state}
+              {props.district}, {props.state}
             </p>
             {/* <p>
               <span>{formatedStartDate}</span> a{" "}
