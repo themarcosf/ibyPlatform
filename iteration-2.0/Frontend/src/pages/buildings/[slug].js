@@ -2,15 +2,21 @@ import BuildingPage from "../../components/BuildingPage/BuildingPage";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 
-function build({ realtyData, auctionData }) {
+function build({ realtyData }) {
+  console.log(realtyData)
+
+  let realtyAuction = realtyData?.auctions[0];
+
   let currentValue;
-  let lastBidChecking = auctionData.auctionLog.slice(-1)[0]?.lastBidValue;
+  let lastBidChecking = realtyAuction.bids.slice(-1)[0]?.lastBidValue;
 
   lastBidChecking
     ? (currentValue = lastBidChecking)
-    : (currentValue = auctionData.minAskValue);
+    : (currentValue = realtyAuction.minAskValue);
 
-    let realtyAuctionEndDate = new Date(auctionData.auctionEndDate).getTime();
+  let realtyAuctionEndDate = new Date(realtyAuction.auctionEndDate).getTime();
+
+  let contractPeriod = realtyAuction.LeaseDurationMonths / 12
 
   return (
     <>
@@ -25,13 +31,14 @@ function build({ realtyData, auctionData }) {
         state={realtyData.state}
         sqMeters={realtyData.sqMeters}
         currentValue={currentValue}
+        contractPeriod={contractPeriod}
         id={realtyData.id}
-        auctionId={auctionData.id}
-        minAskValue={auctionData.minAskValue}
-        active={auctionData.active}
+        auctionId={realtyAuction.id}
+        minAskValue={realtyAuction.minAskValue}
+        active={realtyAuction.active}
         auctionEndDate={realtyAuctionEndDate}
-        leaseBeginDate={auctionData.leaseBeginDate}
-        leaseEndDate={auctionData.leaseEndDate}
+        leaseBeginDate={realtyAuction.leaseBeginDate}
+        leaseEndDate={realtyAuction.leaseEndDate}
       />
       <Footer />
     </>
@@ -50,17 +57,13 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (ctx) => {
   const { slug } = ctx.params;
 
-  const res = await fetch(`http://127.0.0.1:8000/api/v1/realty/${slug}`);
-  const initialData = await res.json();
-  const data = initialData.data;
-
-  const realtyData = data.realty;
-  const auctionData = data.auction;
+  const realtyRes = await fetch(`http://127.0.0.1:8000/api/v1/realty/${slug}`);
+  const initialRealtyData = await realtyRes.json();
+  const realtyData = initialRealtyData.data._document
 
   return {
     props: {
       realtyData,
-      auctionData,
     },
     revalidate: 60 * 5,
   };

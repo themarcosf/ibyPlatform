@@ -3,7 +3,7 @@ import Link from "next/link";
 import { formatToCurrency } from "../../functions/formatToCurrency";
 
 function BuildingCard(props) {
-  const brlCurrentValue = formatToCurrency.format(props.currentValue);
+  const brlCurrentMonthValue = formatToCurrency.format(props.currentMonthValue);
 
   return (
     <Link href={`/buildings/${props.id}`}>
@@ -24,7 +24,7 @@ function BuildingCard(props) {
           </div>
         ) : (
           <div className={styles.buildingInfos}>
-            <p>{brlCurrentValue}</p>
+            <p>{brlCurrentMonthValue} <span>/mês</span></p>
             <div className={styles.meters}>
               <img
                 style={{ width: "25px", marginRight: "3px" }}

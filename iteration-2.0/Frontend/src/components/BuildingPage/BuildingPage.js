@@ -44,6 +44,7 @@ function BuildingPage(props) {
 
     setBidVaule(value);
   }
+
   async function handleSubmit(event, value) {
     event.preventDefault();
 
@@ -53,6 +54,7 @@ function BuildingPage(props) {
           session.user.email,
           session.user.name
         );
+        
         localStorage.setItem("userData", JSON.stringify(userData));
 
         const bidData = {
@@ -156,7 +158,7 @@ function BuildingPage(props) {
           <p className={styles.period}>
             Início do contrato no dia {leaseBeginDate}
           </p>
-          <p className={styles.period}>Período do contrato de 10 anos</p>
+          <p className={styles.period}>Período do contrato de {props.contractPeriod} anos</p>
           <p className={styles.period}>
             {props.expired ? (
               <>

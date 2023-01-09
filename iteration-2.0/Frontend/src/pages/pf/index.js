@@ -8,7 +8,8 @@ import Filter from "../../components/Filter/Filter";
 
 import styles from "./pf.module.scss";
 
-function pf({ realtyData, auctionData }) {
+function pf({ realtyData }) {
+  console.log(realtyData);
   return (
     <>
       <Header />
@@ -19,64 +20,64 @@ function pf({ realtyData, auctionData }) {
         </div>
         <div className={styles.cardsContainer}>
           {realtyData.map((build) => {
-            let realtyAuction = auctionData.find(
-              (auction) => auction.realtyId === build.id
-            );
+            let realtyAuction = build?.auctions[0];
 
-            let currentValue;
-            let lastBidChecking =
-              realtyAuction.auctionLog.slice(-1)[0]?.lastBidValue;
+            if (realtyAuction) {
+              let currentMonthValue;
+              let lastBidChecking =
+                realtyAuction.bids.slice(-1)[0]?.lastBidValue;
 
-            lastBidChecking
-              ? (currentValue = lastBidChecking)
-              : (currentValue = realtyAuction.minAskValue);
+              lastBidChecking
+                ? (currentMonthValue = lastBidChecking / realtyAuction.LeaseDurationMonths )
+                : (currentMonthValue = realtyAuction.minAskValue / realtyAuction.LeaseDurationMonths);
 
-            let realtyAuctionEndDate = new Date(
-              realtyAuction.auctionEndDate
-            ).getTime();
+              let realtyAuctionEndDate = new Date(
+                realtyAuction.auctionEndDate
+              ).getTime();
 
-            if (
-              realtyAuctionEndDate < Date.now() &&
-              build.toRetrofit == false &&
-              build.inConstruction == false
-            ) {
-              return (
-                <BuildingCard
-                  image={build.images[0]}
-                  inConstruction={build.inConstruction}
-                  toRetrofit={build.toRetrofit}
-                  address={build.address}
-                  district={build.district}
-                  state={build.state}
-                  currentValue={currentValue}
-                  sqMeters={build.sqMeters}
-                  key={build.id}
-                  id={build.id}
-                  expired={true}
-                />
-              );
-            } else if (
-              realtyAuctionEndDate > Date.now() &&
-              build.toRetrofit == false &&
-              build.inConstruction == false
-            ) {
-              return (
-                <BuildingCard
-                  image={build.images[0]}
-                  inConstruction={build.inConstruction}
-                  toRetrofit={build.toRetrofit}
-                  address={build.address}
-                  district={build.district}
-                  state={build.state}
-                  currentValue={currentValue}
-                  sqMeters={build.sqMeters}
-                  key={build.id}
-                  id={build.id}
-                  expired={false}
-                />
-              );
-            } else {
-              return <NoRealty />;
+              if (
+                realtyAuctionEndDate < Date.now() &&
+                build.toRetrofit == false &&
+                build.inConstruction == false
+              ) {
+                return (
+                  <BuildingCard
+                    image={build.images[0]}
+                    inConstruction={build.inConstruction}
+                    toRetrofit={build.toRetrofit}
+                    address={build.address}
+                    district={build.district}
+                    state={build.state}
+                    currentMonthValue={currentMonthValue}
+                    sqMeters={build.sqMeters}
+                    key={build.id}
+                    id={build.id}
+                    expired={true}
+                  />
+                );
+              } else if (
+                realtyAuctionEndDate > Date.now() &&
+                build.toRetrofit == false &&
+                build.inConstruction == false
+              ) {
+                return (
+                  <BuildingCard
+                    image={build.images[0]}
+                    inConstruction={build.inConstruction}
+                    toRetrofit={build.toRetrofit}
+                    address={build.address}
+                    district={build.district}
+                    state={build.state}
+                    currentMonthValue={currentMonthValue}
+                    sqMeters={build.sqMeters}
+                    key={build.id}
+                    id={build.id}
+                    expired={false}
+                  />
+                );
+              } else {
+                return <NoRealty />;
+              }
             }
           })}
         </div>
@@ -91,16 +92,12 @@ export default pf;
 export const getStaticProps = async () => {
   const realtyRes = await fetch("http://127.0.0.1:8000/api/v1/realty/");
   const initialRealtyData = await realtyRes.json();
-  const realtyData = initialRealtyData.data.realty.filter((elements) => {
+  const realtyData = initialRealtyData.data._documents.filter((elements) => {
     return elements !== null;
   });
 
-  const auctionRes = await fetch("http://127.0.0.1:8000/api/v1/auction/");
-  const initialAuctionData = await auctionRes.json();
-  const auctionData = initialAuctionData.data.auction;
-
   return {
-    props: { realtyData, auctionData },
+    props: { realtyData },
     revalidate: 60 * 5,
   };
 };

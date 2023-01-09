@@ -2,7 +2,7 @@ export async function verifyUser(email, name) {
     const response = await fetch("http://127.0.0.1:8000/api/v1/user", {
       method: "POST",
       body: JSON.stringify({
-        username: name,
+        name: name,
         email: email,
       }),
       headers: {
@@ -11,7 +11,7 @@ export async function verifyUser(email, name) {
     }).then((response) => response.json());
     console.log(response)
   
-    const userData = response.data.user;
+    const userData = response._document;
   
     return userData
   }
