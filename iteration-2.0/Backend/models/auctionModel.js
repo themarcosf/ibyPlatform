@@ -39,12 +39,6 @@ const auctionSchema = new mongoose.Schema(
         message: "lease must end after lease begin date",
       },
     },
-    bidLog: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: "Bid",
-      },
-    ],
     status: {
       type: String,
       default: "active",
@@ -75,14 +69,11 @@ auctionSchema.virtual("LeaseDurationMonths").get(function () {
   months += this.leaseEndDate.getMonth();
   return ++months;
 });
-////////////////////////////////////////////////////////////////////////
 
-auctionSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: "bidLog",
-    select: "-__v",
-  });
-  next();
+auctionSchema.virtual("bids", {
+  ref: "Bid",
+  foreignField: "auctionId",
+  localField: "_id",
 });
 ////////////////////////////////////////////////////////////////////////
 

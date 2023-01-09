@@ -7,10 +7,10 @@ const { CustomError } = require("./utils/errors");
 const bidRouter = require("./routers/bidRouter");
 const userRouter = require("./routers/userRouter");
 const realtyRouter = require("./routers/realtyRouter");
-const favoriteRouter = require("./routers/favoriteRouter");
 const auctionRouter = require("./routers/auctionRouter");
+const favoriteRouter = require("./routers/favoriteRouter");
 const errController = require("./controllers/errController");
-////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 
 const app = express();
 
@@ -59,6 +59,6 @@ app.all("/*", (req, res, next) =>
  * global error handling middleware
  */
 app.use(errController);
-////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 
 module.exports = app;

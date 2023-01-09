@@ -109,9 +109,9 @@ const realtySchema = new mongoose.Schema(
 );
 ////////////////////////////////////////////////////////////////////////
 
-realtySchema.virtual("auction", {
+realtySchema.virtual("auctions", {
   ref: "Auction",
-  foreignField: "RealtyId",
+  foreignField: "realtyId",
   localField: "_id",
 });
 ////////////////////////////////////////////////////////////////////////

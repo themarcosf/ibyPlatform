@@ -5,8 +5,10 @@ require("dotenv").config({ path: "./../../../../config.env" });
 
 const fs = require("fs");
 const mongoose = require("mongoose");
+const Bid = require("./../../models/bidModel");
 const Realty = require("./../../models/realtyModel");
 const Auction = require("./../../models/auctionModel");
+
 ////////////////////////////////////////////////////////////////////////////////
 
 // remote database
@@ -28,7 +30,8 @@ mongoose
  * data management : select appropriate data category
  */
 // const _category = ["realty", Realty];
-const _category = ["auction", Auction];
+// const _category = ["auction", Auction];
+// const _category = ["bid", Bid];
 
 const _data = JSON.parse(
   fs.readFileSync(`${__dirname}/${_category[0]}.json`, "utf-8")

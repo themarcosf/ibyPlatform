@@ -7,7 +7,7 @@ const { asyncHandler } = require("../utils/handlers");
  */
 exports.getAllAuction = asyncHandler(async function (req, res, next) {
   // get all auctions from collection
-  const _auction = await Auction.find().select("-__v");
+  const _auction = await Auction.find().populate("bids");
 
   // end request
   res

@@ -14,8 +14,8 @@ process.on("uncaughtException", (err) => uncaughtErrorHandler(err));
  * database config
  *
  * strict option (enabled by default) : ensures that values not specified in schema do not get saved to db
- * strictQuery option : avoid strict mode for query filters because empty query filters cause Mongoose
- *                      to return all documents in the model, which can cause issues
+ * strictQuery false : avoid strict mode for query filters because empty query filters cause Mongoose
+ *                      to return all documents in the model, which can cause data leaks
  */
 
 // local database
