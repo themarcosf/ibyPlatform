@@ -17,13 +17,15 @@ const userSchema = new mongoose.Schema(
       unique: true,
       validate: [validator.isEmail, "email is invalid"],
     },
+    avatar: {
+      type: String,
+      maxlength: [50, "maximum length is 50 digits"],
+      trim: true,
+    },
     wallet: {
       type: String,
-      minlength: [42, "wallet length is 42 digits"],
-      maxlength: [42, "wallet length is 42 digits"],
       trim: true,
       unique: true,
-      select: false,
     },
     // TODO : validate CPF CNPJ
     nationalId: {

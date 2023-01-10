@@ -10,7 +10,7 @@ const devError = (err, res) =>
   res
     .status(err.statusCode)
     .json({
-      status: err.status,
+      // status: err.status, :: may be enabled
       operational: err.isOperational,
       stack: err.stack,
     })

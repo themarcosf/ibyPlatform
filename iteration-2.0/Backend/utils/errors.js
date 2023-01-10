@@ -1,5 +1,5 @@
 /**
- * @notice distinguish operational error from other unknown errors
+ * distinguish operational error from other unknown errors
  */
 class CustomError extends Error {
   constructor(msg, statusCode) {
@@ -12,7 +12,7 @@ class CustomError extends Error {
 //////////////////////////////////////////////////////////////////
 
 /**
- * @notice handle uncaught (sync) exceptions and (async) rejections
+ * handle uncaught (sync) exceptions and (async) rejections
  */
 const uncaughtErrorHandler = function (err, server) {
   console.log(err.name, err.message);

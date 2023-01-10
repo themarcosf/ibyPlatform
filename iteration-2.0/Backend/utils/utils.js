@@ -1,5 +1,3 @@
-const jwt = require("jsonwebtoken");
-
 /**
  * @notice calculate difference in months between two dates
  *
@@ -16,31 +14,19 @@ exports.monthDiff = function (d1, d2) {
 };
 ////////////////////////////////////////////////////////////////////////
 
-exports.setupResponse = function (_user, _statusCode, _res) {
-  const _token = jwt.sign({ id: _user._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES,
-  });
+/**
+ * @notice template for generic API responses
+ *
+ * @param {Object} _res
+ * @param {Number} _statusCode
+ * @param {String} _status
+ * @param {Object} _data
+ */
+exports.setupResponse = function (_res, _statusCode, _status, _data, _message) {
+  let data = { status: _status };
+  if (_data) data.data = _data;
+  if (_message) data.message = _message;
 
-  const _options = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: true,
-  };
-
-  if (process.env.NODE_ENV === "production") _options.secure = true;
-
-  _res.cookie("jwt", _token, _options);
-
-  return _res
-    .status(_statusCode)
-    .json({
-      status: "success",
-      data: {
-        name: _user.name,
-        email: _user.email,
-      },
-    })
-    .end();
+  return _res.status(_statusCode).json(data).end();
 };
 ////////////////////////////////////////////////////////////////////////

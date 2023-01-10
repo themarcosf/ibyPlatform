@@ -3,14 +3,15 @@ const { promisify } = require("util");
 const User = require("./../models/userModel");
 const { CustomError } = require("./../utils/errors");
 const { asyncHandler } = require("./../utils/handlers");
+const { setupResponse } = require("./../utils/utils");
 
 /**
- * login middleware :
- * validation is done in the function
- * and a JWT token is returned to the client
+ * username & password validation is done by next-auth
+ *
+ * 1. validate jwt from request
+ * 2. check if user exists in database
+ * 3. if new user, save basic information
  */
-
-// TODO : some form of validation provided by Google
 exports.login = asyncHandler(async function (req, res, next) {
   const { email } = req.body;
 
@@ -21,7 +22,7 @@ exports.login = asyncHandler(async function (req, res, next) {
   let _user = await User.findOne({ email });
   if (!_user) _user = await User.create(req.body);
 
-  setupResponse(_user, 200, res);
+  // setupResponse();
 });
 ////////////////////////////////////////////////////////////////////////
 
@@ -32,26 +33,6 @@ exports.login = asyncHandler(async function (req, res, next) {
  * PROMISIFY (fn) : node built-in method to avoid callback pattern in async/await functions
  */
 exports.authentication = asyncHandler(async function (req, res, next) {
-  const _error = new CustomError("Authentication failed", 401);
-
-  // check headers for authorization token
-  const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith("Bearer")) return next(_error);
-
-  const token = authHeader.split(" ")[1];
-
-  // validate token integrity
-  const _payload = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-
-  // verify user status
-  const _user = await User.findById(_payload.id)
-    .select("+status")
-    .select("+role");
-
-  if (!_user || _user.status === "inactive") return next(_error);
-
-  // attach user data to request
-  req.user = _user;
   next();
 });
 
@@ -65,7 +46,6 @@ exports.authorization = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role))
       return next(new CustomError("Authorization failed", 403));
-
     next();
   };
 };

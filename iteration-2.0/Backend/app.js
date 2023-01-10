@@ -39,7 +39,7 @@ app.use(
   rateLimit({
     max: 100,
     windowMs: 60 * 60 * 1000,
-    message: "IP blocked",
+    message: "IP exceeded maximum requests limit",
   })
 );
 
