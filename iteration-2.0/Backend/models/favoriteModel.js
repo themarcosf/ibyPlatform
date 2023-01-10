@@ -13,6 +13,10 @@ const favoriteSchema = new mongoose.Schema(
       required: [true, "userId is required"],
       ref: "User",
     },
+    status: {
+      type: Boolean,
+      default: true,
+    },
     createdAt: {
       type: Date,
       default: Date.now(),

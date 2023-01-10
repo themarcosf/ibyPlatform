@@ -5,11 +5,11 @@ const realtyController = require("../controllers/realtyController");
 const router = express.Router();
 
 /**
- * Routes middleware
+ * specific-purpose routes middleware
  */
 
 // nested-routes middleware
-router.use("/:realtyId/favorites", favoriteRouter);
+router.use("/:realtyId/favorite", favoriteRouter);
 
 // general routes middleware
 router.route("/").get(realtyController.readAllRealty).post(
@@ -17,6 +17,10 @@ router.route("/").get(realtyController.readAllRealty).post(
   // authController.authorization("owner", "admin"),
   realtyController.createRealty
 );
+
+/**
+ * general purpose routes middleware
+ */
 
 router
   .route("/:id")
