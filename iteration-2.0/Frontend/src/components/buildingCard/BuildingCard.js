@@ -9,7 +9,7 @@ function BuildingCard(props) {
     <Link href={`/buildings/${props.id}`}>
       <div className={styles.buildingCard}>
         <div className={styles.imgCard}>
-          {!props.active && (
+          {props.active && (
             <div>
               <p>Expirado</p>
             </div>
@@ -17,7 +17,7 @@ function BuildingCard(props) {
           <img src={`/${props.image}`} alt="build-image" />
         </div>
 
-        {props.active ? (
+        {!props.active ? (
           <>
             <div className={styles.streetBx}>
               <h3>{props.address}</h3>
