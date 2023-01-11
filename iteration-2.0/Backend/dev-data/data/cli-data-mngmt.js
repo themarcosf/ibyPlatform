@@ -8,17 +8,18 @@ const mongoose = require("mongoose");
 const Bid = require("./../../models/bidModel");
 const Realty = require("./../../models/realtyModel");
 const Auction = require("./../../models/auctionModel");
+const User = require("./../../models/userModel");
 
 ////////////////////////////////////////////////////////////////////////////////
+
+// local database
+// const DB = process.env.DATABASE_LOCAL;
 
 // remote database
 const DB = process.env.DATABASE_REMOTE.replace(
   "<PASSWORD>",
   process.env.DATABASE_PASSWORD
 );
-
-// local database
-// const DB = process.env.DATABASE_LOCAL;
 
 mongoose
   .set("strictQuery", false)
@@ -27,11 +28,12 @@ mongoose
 ////////////////////////////////////////////////////////////////////////////////
 
 /**
- * data management : select appropriate data category
+ * data management : select ONE appropriate data category
  */
-// const _category = ["realty", Realty];
 // const _category = ["auction", Auction];
 // const _category = ["bid", Bid];
+// const _category = ["realty", Realty];
+const _category = ["user", User];
 
 const _data = JSON.parse(
   fs.readFileSync(`${__dirname}/${_category[0]}.json`, "utf-8")

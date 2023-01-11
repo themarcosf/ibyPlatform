@@ -10,7 +10,7 @@ const {
 } = require("../utils/handlers");
 
 /**
- * ROUTE HANDLERS
+ * specific-purpose route handlers
  */
 exports.readCurrentUser = (req, res, next) => {
   req.params.id = req.user.id;
@@ -49,7 +49,11 @@ exports.deleteCurrentUser = asyncHandler(async function (req, res, next) {
   // end request
   res.status(200).json({ status: "success", data: null }).end();
 });
+//////////////////////////////////////////////////////////////////
 
+/**
+ * general purpose route handlers
+ */
 exports.createUser = createOne(User);
 exports.readUser = readOne(User);
 exports.readAllUsers = readAll(User);

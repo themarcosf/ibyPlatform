@@ -1,11 +1,12 @@
 const express = require("express");
 const favoriteController = require("../controllers/favoriteController");
 
-const router = express.Router();
+// @dev mergeParms default: false
+const router = express.Router({ mergeParams: true });
 
 /**
- * Routes middleware
+ * specific-purpose routes middleware
  */
-router.route("/").post(favoriteController.createFavorite);
+router.route("/toggle").post(favoriteController.toggleFavorite);
 
 module.exports = router;

@@ -4,17 +4,11 @@ const userController = require("../controllers/userController");
 
 const router = express.Router();
 
-// @notice routes middleware
+/**
+ * username & password validation is done by next-auth
+ * user-specific routes middleware
+ */
 router.post("/login", authController.login);
-
-router
-  .route("/")
-  .get(
-    authController.authentication,
-    authController.authorization("admin"),
-    userController.readAllUsers
-  )
-  .post(userController.createUser);
 
 // @notice authentication required for all routes
 router.use(authController.authentication);
@@ -25,9 +19,19 @@ router
   .delete(userController.deleteCurrentUser);
 
 router.get("/me", userController.readCurrentUser, userController.readUser);
+//////////////////////////////////////////////////////////////////
+
+/**
+ * general purpose routes middleware
+ */
 
 // @notice authorization required for all routes
-router.use(authController.authorization("admin"));
+// router.use(authController.authorization("admin"));
+
+router
+  .route("/")
+  .get(userController.readAllUsers)
+  .post(userController.createUser);
 
 router
   .route("/:id")
