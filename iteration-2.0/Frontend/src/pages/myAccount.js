@@ -28,10 +28,10 @@ function myAccount({ session, userData }) {
     const deletedData = {
       username: userData.username,
       active: false,
-      mobile: null,
-      wallet: "",
-      nationalId: null,
-      favorite: [],
+      // mobile: null,
+      // wallet: "",
+      // nationalId: null,
+      // favorite: [],
     };
 
     fetch(`http://127.0.0.1:8000/api/v1/user/${userData.id}`, {
