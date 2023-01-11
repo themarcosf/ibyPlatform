@@ -19,7 +19,6 @@ const userSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
-      maxlength: [50, "maximum length is 50 digits"],
       trim: true,
     },
     wallet: {

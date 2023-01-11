@@ -1,28 +1,52 @@
-const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 const User = require("./../models/userModel");
 const { CustomError } = require("./../utils/errors");
 const { asyncHandler } = require("./../utils/handlers");
-const { setupResponse } = require("./../utils/utils");
+const { jwtTokenGenerator, setupResponse } = require("./../utils/utils");
 
 /**
  * username & password validation is done by next-auth
  *
  * 1. validate jwt from request
- * 2. check if user exists in database
- * 3. if new user, save basic information
+ * 2. if user not in database, create new user
+ * 3. generate and embed new token in response
  */
 exports.login = asyncHandler(async function (req, res, next) {
-  const { email } = req.body;
+  // validate access_token from request
+  const _accessToken = await fetch(
+    "https://www.googleapis.com/oauth2/v3/userinfo",
+    { headers: { authorization: req.headers.authorization } }
+  ).then((response) => response.json());
 
-  // validate email from request
-  if (!email) return next(new CustomError("Email provided", 400));
+  if (!_accessToken.email_verified)
+    return next(new CustomError("Invalid token", 400));
 
   // set user credentials
-  let _user = await User.findOne({ email });
-  if (!_user) _user = await User.create(req.body);
+  let _statusCode = 200;
+  let _user = await User.findOne({ email: _accessToken.email });
+  if (!_user) {
+    _statusCode = 201;
+    _user = await User.create({
+      name: _accessToken.name,
+      email: _accessToken.email,
+      avatar: _accessToken.picture,
+    });
+  }
 
-  // setupResponse();
+  // set new token
+  const _token = jwtTokenGenerator(_user._id);
+  const _options = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
+
+  if (process.env.NODE_ENV === "production") _options.secure = true;
+
+  res.cookie("jwt", _token, _options);
+
+  setupResponse(res, _statusCode);
 });
 ////////////////////////////////////////////////////////////////////////
 
