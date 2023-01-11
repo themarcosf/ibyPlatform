@@ -28,18 +28,13 @@ function pf({ realtyData }) {
                 realtyAuction.bids.slice(-1)[0]?.lastBidValue;
 
               lastBidChecking
-                ? (currentMonthValue = lastBidChecking / realtyAuction.LeaseDurationMonths )
-                : (currentMonthValue = realtyAuction.minAskValue / realtyAuction.LeaseDurationMonths);
+                ? (currentMonthValue =
+                    lastBidChecking / realtyAuction.LeaseDurationMonths)
+                : (currentMonthValue =
+                    realtyAuction.minAskValue /
+                    realtyAuction.LeaseDurationMonths);
 
-              let realtyAuctionEndDate = new Date(
-                realtyAuction.auctionEndDate
-              ).getTime();
-
-              if (
-                realtyAuctionEndDate < Date.now() &&
-                build.toRetrofit == false &&
-                build.inConstruction == false
-              ) {
+              if (build.toRetrofit == false && build.inConstruction == false) {
                 return (
                   <BuildingCard
                     image={build.images[0]}
@@ -52,27 +47,7 @@ function pf({ realtyData }) {
                     sqMeters={build.sqMeters}
                     key={build.id}
                     id={build.id}
-                    expired={true}
-                  />
-                );
-              } else if (
-                realtyAuctionEndDate > Date.now() &&
-                build.toRetrofit == false &&
-                build.inConstruction == false
-              ) {
-                return (
-                  <BuildingCard
-                    image={build.images[0]}
-                    inConstruction={build.inConstruction}
-                    toRetrofit={build.toRetrofit}
-                    address={build.address}
-                    district={build.district}
-                    state={build.state}
-                    currentMonthValue={currentMonthValue}
-                    sqMeters={build.sqMeters}
-                    key={build.id}
-                    id={build.id}
-                    expired={false}
+                    active={realtyAuction.active}
                   />
                 );
               } else {
