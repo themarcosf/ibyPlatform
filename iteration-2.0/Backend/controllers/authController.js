@@ -13,6 +13,7 @@ const { setupResponse } = require("./../utils/utils");
  * 3. if new user, save basic information
  */
 exports.login = asyncHandler(async function (req, res, next) {
+  /** 
   const { email } = req.body;
 
   // validate email from request
@@ -21,8 +22,9 @@ exports.login = asyncHandler(async function (req, res, next) {
   // set user credentials
   let _user = await User.findOne({ email });
   if (!_user) _user = await User.create(req.body);
+   */
 
-  // setupResponse();
+  setupResponse(res, 200, "success", req.body);
 });
 ////////////////////////////////////////////////////////////////////////
 
