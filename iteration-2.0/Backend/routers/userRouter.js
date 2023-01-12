@@ -26,7 +26,7 @@ router.get("/me", userController.readCurrentUser, userController.readUser);
  */
 
 // @notice authorization required for all routes
-// router.use(authController.authorization("admin"));
+router.use(authController.authorization("admin"));
 
 router
   .route("/")

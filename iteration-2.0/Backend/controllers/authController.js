@@ -8,9 +8,10 @@ const { jwtTokenGenerator, setupResponse } = require("./../utils/utils");
 /**
  * username & password validation is done by next-auth
  *
- * 1. validate jwt from request
+ * 1. validate access token from request
  * 2. if user not in database, create new user
- * 3. generate and embed new token in response
+ * 3. if user status inactive, toggle to active
+ * 4. generate and embed new token in response
  */
 exports.login = asyncHandler(async function (req, res, next) {
   // validate access_token from request
@@ -22,9 +23,11 @@ exports.login = asyncHandler(async function (req, res, next) {
   if (!_accessToken.email_verified)
     return next(new CustomError("Invalid token", 400));
 
-  // set user credentials
+  // check if user in database
   let _statusCode = 200;
   let _user = await User.findOne({ email: _accessToken.email });
+
+  // if not in database, create new user
   if (!_user) {
     _statusCode = 201;
     _user = await User.create({
@@ -33,6 +36,9 @@ exports.login = asyncHandler(async function (req, res, next) {
       avatar: _accessToken.picture,
     });
   }
+
+  // if user status inactive, toggle to active
+  if (_user.status === "inactive") _user.status === "active";
 
   // set new token
   const _token = jwtTokenGenerator(_user._id);
