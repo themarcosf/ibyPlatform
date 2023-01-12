@@ -9,7 +9,6 @@ import Filter from "../../components/Filter/Filter";
 import styles from "./pf.module.scss";
 
 function pf({ realtyData }) {
-  console.log(realtyData);
   return (
     <>
       <Header />

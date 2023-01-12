@@ -4,15 +4,17 @@ import { FcGoogle } from "react-icons/fc";
 import { useRouter } from "next/router";
 
 import styles from "./NavBar.module.scss";
-import { verifyUser } from "../../functions/verifyUser";
+import { getUserData } from "../../functions/getUserData";
 
 function NavBar() {
   const { data: session } = useSession();
 
   async function saveDataHandler() {
-    const userData = await verifyUser(session.user.email, session.user.name);
+    const userData = await getUserData()
 
-    localStorage.setItem("userData", JSON.stringify(userData));
+    // const userData = await verifyUser(session.user.email, session.user.name);
+
+    // localStorage.setItem("userData", JSON.stringify(userData));
   }
 
   function signInHandler() {

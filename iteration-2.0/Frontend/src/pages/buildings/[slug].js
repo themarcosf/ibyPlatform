@@ -3,8 +3,6 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 
 function build({ realtyData }) {
-  console.log(realtyData)
-
   let realtyAuction = realtyData?.auctions[0];
 
   let currentValue;
