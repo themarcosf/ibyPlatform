@@ -19,7 +19,6 @@
   "author": "iby Dev Team",
   "license": "UNLICENSED",
   "dependencies": {
-    "@openzeppelin/contracts": "^4.8.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "ethers": "^5.7.2",
@@ -32,6 +31,9 @@
     "validator": "^13.7.0"
   },
   "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.1",
+    "@openzeppelin/contracts": "^4.8.0",
+    "hardhat": "^2.12.6",
     "nodemon": "^2.0.20"
   }
 }

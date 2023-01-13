@@ -5,9 +5,9 @@ pragma solidity ^0.8.17;
  * @dev IERC721: interface to represent token being auctioned for each individual auction
  * @dev IERC721Receiver: implement method required by ERC721 protocol to receive tokens
  */
-import "./../../node_modules/@openzeppelin/contracts/access/Ownable.sol";
-import "./../../node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol";
-import "./../../node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
+import "./../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "./../node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol";
+import "./../node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 
 /**
  * @notice AuctionFactory structure
@@ -55,6 +55,7 @@ contract AuctionFactory is Ownable {
     }
 
     // @dev method required by ERC721 protocol to receive tokens
+    // solc-ignore-next-line unused-param
     function onERC721Received(
         address operator,
         address from,

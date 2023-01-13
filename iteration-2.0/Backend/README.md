@@ -1,6 +1,6 @@
 # IBY PLATFORM
 
-This document contains information about tasks required to operate the API.
+This document contains information about tasks required to operate the web3 API.
 
 Try running some of the following tasks:
 
