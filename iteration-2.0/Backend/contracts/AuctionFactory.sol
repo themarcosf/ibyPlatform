@@ -80,10 +80,10 @@ contract AuctionFactory is Ownable {
     ) external onlyOwner {
         address _tokenOwner = token.ownerOf(tokenId);
 
-        // @dev check pre-approval granted to iby by token owner
+        // @dev check if transfer privileges granted by token owner
         require(
             token.getApproved(tokenId) == address(this),
-            "pre-approval not granted to iby by token owner"
+            "transfer privileges not granted by token owner"
         );
 
         // @dev transfer token to iby for the duration of auction
