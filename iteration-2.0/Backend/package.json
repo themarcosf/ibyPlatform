@@ -19,8 +19,10 @@
   "author": "iby Dev Team",
   "license": "UNLICENSED",
   "dependencies": {
+    "@openzeppelin/contracts": "^4.8.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
+    "ethers": "^5.7.2",
     "express": "^4.18.2",
     "express-rate-limit": "^6.7.0",
     "helmet": "^6.0.1",
