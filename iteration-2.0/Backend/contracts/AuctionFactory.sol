@@ -61,7 +61,7 @@ contract AuctionFactory is Ownable {
         address from,
         uint tokenId,
         bytes calldata data
-    ) public view returns (bytes4) {
+    ) public returns (bytes4) {
         return IERC721Receiver.onERC721Received.selector;
     }
 

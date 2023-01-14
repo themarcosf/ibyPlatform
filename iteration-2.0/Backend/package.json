@@ -16,6 +16,9 @@
     "real estate",
     "nft"
   ],
+  "engines": {
+    "node": ">=18"
+  },
   "author": "iby Dev Team",
   "license": "UNLICENSED",
   "dependencies": {

@@ -51,7 +51,83 @@ describe("AuctionFactory", function () {
   });
 
   describe("Auction", function () {
-    // NFT Auction 33m
+    it("Should revert if transfer privileges not granted by token owner", async function () {
+      const { deployedAuctionFactory, deployedERC721_NFT, addr1 } =
+        await loadFixture(setFixture);
+
+      await deployedERC721_NFT.safeMint(addr1.address, "");
+
+      // prettier-ignore
+      await expect(
+        deployedAuctionFactory.auction(
+          deployedERC721_NFT.address, 0, 1, 1, 0
+          )
+          ).to.be.revertedWith("transfer privileges not granted by token owner");
+    });
+
+    it("Should allow listing a token", async function () {
+      const { deployedAuctionFactory, deployedERC721_NFT, addr1 } =
+        await loadFixture(setFixture);
+
+      await deployedERC721_NFT.safeMint(addr1.address, "");
+
+      await deployedERC721_NFT
+        .connect(addr1)
+        .approve(deployedAuctionFactory.address, 0);
+
+      // prettier-ignore
+      await expect(
+              deployedAuctionFactory.auction(
+                deployedERC721_NFT.address, 0, 1, 1, 0
+              )
+            ).to.not.be.reverted;
+    });
+
+    it("Should emit a new auction listing event", async function () {
+      const { deployedAuctionFactory, deployedERC721_NFT, addr1 } =
+        await loadFixture(setFixture);
+
+      await deployedERC721_NFT.safeMint(addr1.address, "");
+
+      await deployedERC721_NFT
+        .connect(addr1)
+        .approve(deployedAuctionFactory.address, 0);
+
+      // prettier-ignore
+      await expect(
+              deployedAuctionFactory.auction(
+                deployedERC721_NFT.address, 0, 1, 1, 0
+              )
+            ).to.emit(deployedAuctionFactory, "newAuction");
+    });
+
+    it("Should allow listing a second token", async function () {
+      const { deployedAuctionFactory, deployedERC721_NFT, addr1, addr2 } =
+        await loadFixture(setFixture);
+
+      // @dev list first token
+      await deployedERC721_NFT.safeMint(addr1.address, "");
+      await deployedERC721_NFT
+        .connect(addr1)
+        .approve(deployedAuctionFactory.address, 0);
+      // prettier-ignore
+      await deployedAuctionFactory.auction(
+        deployedERC721_NFT.address, 0, 1, 1, 0
+      );
+
+      // list second token
+      await deployedERC721_NFT.safeMint(addr2.address, "");
+      await deployedERC721_NFT
+        .connect(addr2)
+        .approve(deployedAuctionFactory.address, 1);
+
+      // prettier-ignore
+      await expect(
+        deployedAuctionFactory.auction(
+          deployedERC721_NFT.address, 1, 1, 1, 0
+        )
+      ).to.not.be.reverted;
+    });
   });
 
   // describe("Bid", function () {});
