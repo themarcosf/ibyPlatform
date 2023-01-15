@@ -2,9 +2,14 @@
 pragma solidity ^0.8.17;
 
 /**
- * @dev IERC721: interface to represent token being auctioned for each individual auction
- * @dev IERC721Receiver: implement method required by ERC721 protocol to receive tokens
+ * @title Auction Factory
+ * @author ibyPlatform dev team
+ *
+ * @dev TODO : implement third-party listing and bidding functionalities
  */
+
+// @dev IERC721: interface to represent token being auctioned for each individual auction
+// @dev IERC721Receiver: implement method required by ERC721 protocol to receive tokens
 import "./../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 import "./../node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "./../node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
@@ -49,6 +54,11 @@ contract AuctionFactory is Ownable {
         uint timestamp
     );
 
+    event transferToken(
+        uint indexed tokenId,
+        uint timestamp
+    );
+
     modifier auctionExists(uint auctionId) {
         require(auctions[auctionId].owner != address(0), "invalid auction");
         _;
@@ -75,11 +85,17 @@ contract AuctionFactory is Ownable {
         IERC721 token,
         uint tokenId,
         uint minPrice,
-        uint numHours,
+        uint endTime,
         uint flashPrice
     ) external onlyOwner {
         address _tokenOwner = token.ownerOf(tokenId);
 
+        // @dev check if endTime in the future
+        require(
+            block.timestamp < endTime,
+            "Auction end time should be in the future"
+        );
+        
         // @dev check if transfer privileges granted by token owner
         require(
             token.getApproved(tokenId) == address(this),
@@ -96,7 +112,7 @@ contract AuctionFactory is Ownable {
         _listing.minPrice = minPrice;
         _listing.flashPrice = flashPrice;
         _listing.highestBidder = _tokenOwner;
-        _listing.endTime = block.timestamp + (numHours * 1 hours);
+        _listing.endTime = endTime;
         _listing.owner = _tokenOwner;
 
         emit newAuction(
@@ -117,7 +133,7 @@ contract AuctionFactory is Ownable {
      * @notice requirements to bid:
      * 1. check if bidPrice greater than or equal to minimun price
      * 2. check if bidPrice greater than current highest bid price
-     * 3. check if auction is not finished
+     * 3. check if auction is not expired
      */
     function bid(
         uint auctionId,
@@ -131,7 +147,7 @@ contract AuctionFactory is Ownable {
             "invalid bid price"
         );
 
-        require(block.timestamp < _auction.endTime, "auction is finished");
+        require(block.timestamp < _auction.endTime, "auction is expired");
 
         _auction.highestBid = amount;
         _auction.highestBidder = bidder;
@@ -158,6 +174,8 @@ contract AuctionFactory is Ownable {
             _auction.highestBidder,
             _auction.tokenId
         );
+        emit transferToken(_auction.tokenId, block.timestamp);
+
         _auction.owner = address(0);
     }
 
@@ -168,7 +186,7 @@ contract AuctionFactory is Ownable {
         external
         view
         auctionExists(auctionId)
-        returns (address, uint, uint, uint, uint, uint)
+        returns (address, uint, uint, uint, uint, uint, address)
     {
         Auction storage _auction = auctions[auctionId];
 
@@ -178,7 +196,8 @@ contract AuctionFactory is Ownable {
             _auction.highestBid,
             _auction.minPrice,
             _auction.flashPrice,
-            _auction.endTime
+            _auction.endTime,
+            _auction.highestBidder
         );
     }
 }

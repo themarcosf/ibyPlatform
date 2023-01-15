@@ -10,9 +10,7 @@ import "./../node_modules/@openzeppelin/contracts/utils/Counters.sol";
 
 /**
  * @title ERC721_NFT
- * @author ibyPlatform dev team
- *
- * @notice 
+ * @author openZeppelin standard implementation
  */
 
 contract ERC721_NFT is ERC721, ERC721Enumerable, ERC721URIStorage, ERC721Burnable, Ownable {
