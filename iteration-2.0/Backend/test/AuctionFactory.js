@@ -4,6 +4,7 @@
  * @dev using @nomicfoundation/hardhat-chai-matchers (https://hardhat.org/tutorial/testing-contracts)
  *
  * @dev FIXTURES : setup functions ran only once by hardHat and reset to initial state after every call
+ * @dev chai-matchers: https://hardhat.org/hardhat-chai-matchers/docs/reference
  */
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
@@ -83,6 +84,7 @@ describe("AuctionFactory", function () {
       _approveFixture.endTime,
       20000
     );
+
     await _approveFixture.deployedAuctionFactory.auction(
       _approveFixture.deployedERC721_NFT.address,
       1,
@@ -260,18 +262,65 @@ describe("AuctionFactory", function () {
       ).to.be.revertedWith("invalid bid price");
     });
 
-    it("Should call end auction method if bid price equal to flash price");
-    it("Should call end auction method if bid price greater than flash price");
+    it("Should end auction if bid price equal to flash price", async function () {
+      const { deployedAuctionFactory, deployedERC721_NFT, addr2 } =
+        await loadFixture(auctionFixture);
+
+      await deployedAuctionFactory.bid(0, 20000, addr2.address);
+
+      expect(await deployedERC721_NFT.ownerOf(0)).to.equal(addr2.address);
+    });
+
+    it("Should end auction if bid price greater than flash price", async function () {
+      const { deployedAuctionFactory, deployedERC721_NFT, addr2 } =
+        await loadFixture(auctionFixture);
+
+      await deployedAuctionFactory.bid(0, 30000, addr2.address);
+
+      expect(await deployedERC721_NFT.ownerOf(0)).to.equal(addr2.address);
+    });
   });
 
   describe("End", function () {
-    it("Should revert if auction does not exist");
-    it("Should revert if auction not expired and flash price not reached");
-    it("Should transfer token to highest bidder");
-    it("Should transfer token to owner if no bid placed");
-    it("Should set auction owner to null");
+    it("Should revert if auction does not exist", async function () {
+      const { deployedAuctionFactory } = await loadFixture(setupFixture);
+
+      await expect(deployedAuctionFactory.end(0)).to.be.revertedWith(
+        "invalid auction"
+      );
+    });
+
+    it("Should revert if auction not expired", async function () {
+      const { deployedAuctionFactory } = await loadFixture(auctionFixture);
+
+      await expect(deployedAuctionFactory.end(0)).to.be.revertedWith(
+        "request denied"
+      );
+    });
+
+    it("Should transfer token to highest bidder when end time reached", async function () {
+      const { deployedAuctionFactory, deployedERC721_NFT, addr2, endTime } =
+        await loadFixture(auctionFixture);
+
+      await deployedAuctionFactory.bid(0, 15000, addr2.address);
+      await time.increaseTo(endTime);
+      await deployedAuctionFactory.end(0);
+
+      expect(await deployedERC721_NFT.ownerOf(0)).to.equal(addr2.address);
+    });
+
+    it("Should transfer token to owner if no bid placed", async function () {
+      const { deployedAuctionFactory, deployedERC721_NFT, endTime, addr1 } =
+        await loadFixture(auctionFixture);
+
+      await time.increaseTo(endTime);
+      await deployedAuctionFactory.end(0);
+
+      expect(await deployedERC721_NFT.ownerOf(0)).to.equal(addr1.address);
+    });
   });
 
+  // @dev ethers.js polls network to check if some event was emitted every 4 seconds
   describe("Events", function () {
     it("Should emit a new auction listing event", async function () {
       const { endTime, deployedAuctionFactory, deployedERC721_NFT } =
@@ -296,6 +345,14 @@ describe("AuctionFactory", function () {
       );
     });
 
-    it("Should emit a transfer token event");
+    it("Should emit a transfer token event", async function () {
+      const { deployedAuctionFactory, endTime } = await loadFixture(bidFixture);
+
+      await time.increaseTo(endTime);
+
+      expect(await deployedAuctionFactory.end(0))
+        .to.emit(deployedAuctionFactory, "transferToken")
+        .withArgs(anyValue);
+    });
   });
 });

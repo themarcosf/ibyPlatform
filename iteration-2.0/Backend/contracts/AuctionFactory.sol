@@ -153,15 +153,19 @@ contract AuctionFactory is Ownable {
         _auction.highestBidder = bidder;
 
         if (_auction.flashPrice != 0 && amount >= _auction.flashPrice) {
-            return end(auctionId);
+            return this.end(auctionId);
         }
 
         emit newBid(bidder, auctionId, amount, block.timestamp);
     }
 
     // @dev i/o _auction.owner = address(0) : delete _auction
-    function end(uint auctionId) public auctionExists(auctionId) onlyOwner {
+    function end(uint auctionId) public auctionExists(auctionId) {
         Auction storage _auction = auctions[auctionId];
+
+        require(
+            msg.sender == owner() || msg.sender == address(this), "invalid caller"
+        );
 
         require(
             block.timestamp > _auction.endTime ||
