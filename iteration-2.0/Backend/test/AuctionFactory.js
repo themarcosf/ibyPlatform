@@ -230,20 +230,13 @@ describe("AuctionFactory", function () {
       ).to.be.revertedWith("auction is expired");
     });
 
-    it("Should update auction with new bid price", async function () {
-      const { deployedAuctionFactory, addr1 } = await loadFixture(bidFixture);
-
-      expect(
-        (await deployedAuctionFactory.getAuction(0))[2].toNumber()
-      ).to.equal(15000);
-    });
-
-    it("Should update auction with new bidder address", async function () {
-      const { deployedAuctionFactory, addr1 } = await loadFixture(bidFixture);
-
-      expect((await deployedAuctionFactory.getAuction(0))[6]).to.equal(
-        addr1.address
+    it("Should allow bidding in valid auction", async function () {
+      const { deployedAuctionFactory, addr1 } = await loadFixture(
+        auctionFixture
       );
+
+      expect(await deployedAuctionFactory.bid(0, 15000, addr1.address)).to.not
+        .be.reverted;
     });
 
     it("Should revert if bid price less than highest bid price", async function () {
@@ -260,6 +253,13 @@ describe("AuctionFactory", function () {
       await expect(
         deployedAuctionFactory.bid(0, 15000, addr2.address)
       ).to.be.revertedWith("invalid bid price");
+    });
+
+    it("Should allow new bid if price is higher than highest price", async function () {
+      const { deployedAuctionFactory, addr2 } = await loadFixture(bidFixture);
+
+      expect(await deployedAuctionFactory.bid(0, 17500, addr2.address)).to.not
+        .be.reverted;
     });
 
     it("Should end auction if bid price equal to flash price", async function () {
@@ -309,7 +309,7 @@ describe("AuctionFactory", function () {
       expect(await deployedERC721_NFT.ownerOf(0)).to.equal(addr2.address);
     });
 
-    it("Should transfer token to owner if no bid placed", async function () {
+    it("Should transfer token back to owner if no bid placed", async function () {
       const { deployedAuctionFactory, deployedERC721_NFT, endTime, addr1 } =
         await loadFixture(auctionFixture);
 
@@ -318,20 +318,47 @@ describe("AuctionFactory", function () {
 
       expect(await deployedERC721_NFT.ownerOf(0)).to.equal(addr1.address);
     });
+
+    it("Should revert if auction has already ended", async function () {
+      const { deployedAuctionFactory, endTime } = await loadFixture(
+        auctionFixture
+      );
+
+      await time.increaseTo(endTime);
+      await deployedAuctionFactory.end(0);
+
+      await expect(deployedAuctionFactory.end(0)).to.be.revertedWith(
+        "invalid auction"
+      );
+    });
   });
 
   // @dev ethers.js polls network to check if some event was emitted every 4 seconds
   describe("Events", function () {
     it("Should emit a new auction listing event", async function () {
-      const { endTime, deployedAuctionFactory, deployedERC721_NFT } =
+      const { endTime, deployedAuctionFactory, deployedERC721_NFT, addr1 } =
         await loadFixture(approveFixture);
 
-      // prettier-ignore
       await expect(
         deployedAuctionFactory.auction(
-          deployedERC721_NFT.address, 0, 10000, endTime, 20000
+          deployedERC721_NFT.address,
+          0,
+          10000,
+          endTime,
+          20000
         )
-      ).to.emit(deployedAuctionFactory, "newAuction");
+      )
+        .to.emit(deployedAuctionFactory, "newAuction")
+        .withArgs(
+          addr1.address,
+          deployedERC721_NFT.address,
+          0,
+          0,
+          10000,
+          20000,
+          endTime,
+          anyValue
+        );
     });
 
     it("Should emit a new bid event", async function () {
@@ -339,10 +366,9 @@ describe("AuctionFactory", function () {
         auctionFixture
       );
 
-      await expect(deployedAuctionFactory.bid(0, 15000, addr1.address)).to.emit(
-        deployedAuctionFactory,
-        "newBid"
-      );
+      await expect(deployedAuctionFactory.bid(0, 15000, addr1.address))
+        .to.emit(deployedAuctionFactory, "newBid")
+        .withArgs(addr1.address, 0, 15000, anyValue);
     });
 
     it("Should emit a transfer token event", async function () {
@@ -352,7 +378,7 @@ describe("AuctionFactory", function () {
 
       expect(await deployedAuctionFactory.end(0))
         .to.emit(deployedAuctionFactory, "transferToken")
-        .withArgs(anyValue);
+        .withArgs(0, anyValue);
     });
   });
 });
