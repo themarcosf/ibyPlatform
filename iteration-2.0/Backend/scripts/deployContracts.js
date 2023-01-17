@@ -8,11 +8,17 @@
  *   npx hardhat run <script> : compile contracts, add HRE to global scope, execute script, then remove HRE from global scope
  */
 const hre = require("hardhat");
+const ethers = require("ethers");
 const fs = require("fs/promises");
 
+const provider = new ethers.providers.InfuraProvider(
+  "goerli",
+  process.env.INFURA_API_KEY
+);
+
 async function main(_contractName) {
-  const Contract = await hre.ethers.getContractFactory(_contractName);
-  const contract = await Contract.deploy();
+  const contractFactory = await hre.ethers.getContractFactory(_contractName);
+  const contract = await contractFactory.deploy();
   await contract.deployed();
 
   await writeDeploymentInfo(contract, _contractName);

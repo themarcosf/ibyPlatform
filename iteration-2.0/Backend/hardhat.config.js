@@ -1,10 +1,7 @@
+require("dotenv").config({ path: "./../../config.env" });
 require("@nomicfoundation/hardhat-toolbox");
 
-/** @type import('hardhat/config').HardhatUserConfig */
-
-/**
- * CUSTOM TASK @cliCommand npx hardhat blockNumber
- */
+/** @dev custom task cli command : npx hardhat <taskName> */
 task(
   "blockNumber",
   "Prints the current block number",
@@ -17,4 +14,10 @@ task(
 
 module.exports = {
   solidity: "0.8.17",
+  networks: {
+    goerli: {
+      url: `https://goerli.infura.io/v3/${process.env.INFURA_API_KEY}`,
+      accounts: [process.env.GOERLI_PRIVATE_KEY],
+    },
+  },
 };
