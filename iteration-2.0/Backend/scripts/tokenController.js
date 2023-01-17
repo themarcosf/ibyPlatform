@@ -1,6 +1,14 @@
 const ethers = require("ethers");
 
-const provider = new ethers.providers.Web3Provider(window.ethereum);
+// const currentTimestampInSeconds = Math.round(Date.now() / 1000);
+//   const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
+//   const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+
+// @notice provider : any company that provides nodes that can be used to interact with the blockchain
+const provider = new ethers.providers.InfuraProvider(
+  "goerli",
+  process.env.INFURA_API_KEY
+);
 
 let signer;
 let tokenContract = null;
