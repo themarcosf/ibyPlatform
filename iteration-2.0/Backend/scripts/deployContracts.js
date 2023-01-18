@@ -4,17 +4,10 @@
  *   export EIP-1193-compatible Ethereum provider
  *   can be extended using plug-ins eg hardhat-ethers
  *
- *   node <script> : run standalone script
- *   npx hardhat run <script> : compile contracts, add HRE to global scope, execute script, then remove HRE from global scope
+ *   npx hardhat run <script> --network <network> : localhost, goerli, ...
  */
 const hre = require("hardhat");
-const ethers = require("ethers");
 const fs = require("fs/promises");
-
-const provider = new ethers.providers.InfuraProvider(
-  "goerli",
-  process.env.INFURA_API_KEY
-);
 
 async function main(_contractName) {
   const contractFactory = await hre.ethers.getContractFactory(_contractName);
@@ -34,7 +27,7 @@ async function writeDeploymentInfo(contract, _contractName) {
     },
   };
 
-  const filename = `${__dirname}/../artifacts/contracts/${_contractName}.sol/deployed${_contractName}.json`;
+  const filename = `${__dirname}/../contracts/deployed${_contractName}.json`;
   const content = JSON.stringify(data, null, 2);
   await fs.writeFile(filename, content, { encoding: "utf-8" });
 }

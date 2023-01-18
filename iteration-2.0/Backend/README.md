@@ -9,7 +9,7 @@ npx hardhat help
 npx hardhat test
 REPORT_GAS=true npx hardhat test
 npx hardhat node
-npx hardhat run scripts/deploy.js
+npx hardhat run scripts/deployContracts.js
 ```
 
 Use these commands to compile contracts:
@@ -23,7 +23,7 @@ Set up and deploy to a local blockchain:
 
 ```shell
 npx hardhat node
-npx hardhat run --network localhost scripts/deployContract.js
+npx hardhat run --network localhost scripts/deployContracts.js
 ```
 
 Interacting from the console

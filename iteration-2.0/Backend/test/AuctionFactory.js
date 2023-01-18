@@ -118,7 +118,7 @@ describe("AuctionFactory", function () {
     });
   });
 
-  describe("Auctions", function () {
+  describe("New auction method", function () {
     it("Should revert if transfer privileges not granted by token owner", async function () {
       const { endTime, deployedAuctionFactory, deployedERC721_NFT } =
         await loadFixture(mintFixture);
@@ -197,7 +197,7 @@ describe("AuctionFactory", function () {
     });
   });
 
-  describe("Bid", function () {
+  describe("New bid method", function () {
     it("Should revert if auction does not exist", async function () {
       const { deployedAuctionFactory, addr1 } = await loadFixture(
         approveFixture
@@ -281,7 +281,7 @@ describe("AuctionFactory", function () {
     });
   });
 
-  describe("End", function () {
+  describe("End auction method", function () {
     it("Should revert if auction does not exist", async function () {
       const { deployedAuctionFactory } = await loadFixture(setupFixture);
 
