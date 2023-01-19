@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import Input from "react-phone-number-input/input";
 import toast, { Toaster } from "react-hot-toast";
+import cookieCutter from 'cookie-cutter'
 
 import styles from "./ContactForm.module.scss";
 
@@ -10,6 +11,8 @@ function ContactForm(props) {
   const nationalIdInputRef = useRef();
   const mobileInputRef = useRef();
   const walletInputRef = useRef();
+  const jwtCookie = cookieCutter.get('jwt')
+
 
   function contactSubmitHandler(event) {
     event.preventDefault();
@@ -17,7 +20,7 @@ function ContactForm(props) {
     console.log("Contact submited");
 
     const contactData = {
-      username: nameInputRef.current.value,
+      name: nameInputRef.current.value,
       nationalId: Number(nationalIdInputRef.current.value),
       mobile: Number(
         mobileInputRef.current.value.replace(/[^0-9.-]+/g, "").replace(/-/g, "")
@@ -26,7 +29,7 @@ function ContactForm(props) {
     };
 
     if (
-      contactData.username &&
+      contactData.name &&
       contactData.nationalId &&
       contactData.mobile &&
       contactData.wallet
@@ -36,6 +39,7 @@ function ContactForm(props) {
         headers: {
           "content-type": "application/json",
           "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${jwtCookie}`,
         },
         body: JSON.stringify(contactData),
       })

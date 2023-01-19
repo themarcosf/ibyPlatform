@@ -3,12 +3,11 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 
 function build({ realtyData }) {
-  console.log(realtyData)
-
   let realtyAuction = realtyData?.auctions[0];
 
+  
   let currentValue;
-  let lastBidChecking = realtyAuction.bids.slice(-1)[0]?.lastBidValue;
+  let lastBidChecking = realtyAuction.bids[0]?.bidValue;
 
   lastBidChecking
     ? (currentValue = lastBidChecking)
@@ -16,7 +15,7 @@ function build({ realtyData }) {
 
   let realtyAuctionEndDate = new Date(realtyAuction.auctionEndDate).getTime();
 
-  let contractPeriod = realtyAuction.LeaseDurationMonths / 12
+  let contractPeriod = realtyAuction.LeaseDurationMonths / 12;
 
   return (
     <>
@@ -59,7 +58,7 @@ export const getStaticProps = async (ctx) => {
 
   const realtyRes = await fetch(`http://127.0.0.1:8000/api/v1/realty/${slug}`);
   const initialRealtyData = await realtyRes.json();
-  const realtyData = initialRealtyData.data._document
+  const realtyData = initialRealtyData.data._document;
 
   return {
     props: {

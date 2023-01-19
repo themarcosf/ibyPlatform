@@ -33,8 +33,8 @@ function FinishingBid(props) {
     function makeBidHandler() {
       const fetchData = {
         auctionLog: {
-          lastBidValue: Number(props.bidData.lastBidValue),
-          lastBidUser: props.bidData.lastBidUser,
+          bidValue: Number(props.bidData.lastBidValue),
+          userId: props.bidData.lastBidUser,
           lastBidderWallet: props.bidData.lastBidderWallet,
         },
       };

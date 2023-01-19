@@ -6,8 +6,8 @@ import { FaHeart } from "react-icons/fa";
 import IntlCurrencyInput from "react-intl-currency-input";
 
 import styles from "./BuildingPage.module.scss";
-import { verifyUser } from "../../functions/verifyUser";
 import { formatToCurrency } from "../../functions/formatToCurrency";
+import { getUserData } from "../../functions/getUserData";
 
 function BuildingPage(props) {
   const router = useRouter();
@@ -50,10 +50,7 @@ function BuildingPage(props) {
 
     if (session) {
       if (bidValue > props.currentValue) {
-        const userData = await verifyUser(
-          session.user.email,
-          session.user.name
-        );
+        const userData = await getUserData();
         
         localStorage.setItem("userData", JSON.stringify(userData));
 
