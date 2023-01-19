@@ -3,11 +3,12 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 
 function build({ realtyData }) {
+  
   let realtyAuction = realtyData?.auctions[0];
-
+  
   
   let currentValue;
-  let lastBidChecking = realtyAuction.bids[0]?.bidValue;
+  let lastBidChecking = realtyAuction.bids.slice(-1)[0].bidValue;
 
   lastBidChecking
     ? (currentValue = lastBidChecking)

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import cookieCutter from 'cookie-cutter'
+import cookieCutter from "cookie-cutter";
 
 import { formatToCurrency } from "../../functions/formatToCurrency";
 
@@ -18,16 +18,16 @@ async function makeBid(fetchData, jwtCookie, router) {
     body: JSON.stringify(fetchData),
   })
     .then((response) => response.json())
-    // .then(
-    //   router.push('/myBids')
-    // );
+    .then(
+      (json) => console.log(json)
+      // router.push('/myBids')
+    );
 }
 
 function FinishingBid(props) {
-  const router = useRouter()
+  const router = useRouter();
   const [auctionData, setAuctionData] = useState();
-  const jwtCookie = cookieCutter.get('jwt')
-
+  const jwtCookie = cookieCutter.get("jwt");
 
   useEffect(() => {
     setAuctionData(JSON.parse(localStorage.getItem("auctionData")));
@@ -36,11 +36,9 @@ function FinishingBid(props) {
   if (auctionData) {
     function makeBidHandler() {
       const fetchData = {
-        auctionLog: {
-          auctionId: "63c9315bddf31ba1719a184b",
-          bidValue: Number(props.bidData.lastBidValue),
-          userId: props.bidData.lastBidUser,
-        },
+        auctionId: auctionData.auctionId,
+        userId: props.bidData.lastBidUser,
+        bidValue: Number(props.bidData.lastBidValue),
       };
 
       makeBid(fetchData, jwtCookie, router);

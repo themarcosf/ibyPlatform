@@ -17,11 +17,7 @@ const nextAuthOptions = (req, res) => {
       }),
     ],
     callbacks: {
-      async jwt({ token, user, account }) {
-        // if (token) console.log("1");
-        // if (user) console.log("2");
-        // if (account) console.log("3");
-
+      async jwt({ token, user, account, profile }) {
         if (account) {
           const cookies = await fetch(
             "http://127.0.0.1:8000/api/v1/user/login",
@@ -34,13 +30,13 @@ const nextAuthOptions = (req, res) => {
             }
           ).then((res) => res.headers.get("set-cookie"));
 
-          console.log(account.access_token);
+          console.log(account.access_token)
 
-          // const cookies = response.headers.get('set-cookie')
 
           res.setHeader("Set-Cookie", cookies, {
             httpOnly: false,
           });
+
         }
       },
     },

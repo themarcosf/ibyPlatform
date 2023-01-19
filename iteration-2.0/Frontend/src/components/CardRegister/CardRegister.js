@@ -6,7 +6,6 @@ function CardRegister(props) {
   function cardSubmitHandler(event) {
     event.preventDefault();
 
-    console.log("Card submited");
     props.nextButton();
   }
 

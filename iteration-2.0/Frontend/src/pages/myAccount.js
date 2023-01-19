@@ -49,7 +49,6 @@ function myAccount(session) {
       body: JSON.stringify(deletedData),
     })
       .then((response) => response.json())
-      .then((json) => console.log(json))
       .then(() => {
         signOut();
       });
@@ -73,8 +72,6 @@ function myAccount(session) {
       nationalId: enteredNationalId,
     };
 
-    console.log(dataEdited);
-
     fetch(`http://127.0.0.1:8000/api/v1/user/${userData.id}`, {
       method: "PATCH",
       headers: {
@@ -84,7 +81,6 @@ function myAccount(session) {
       body: JSON.stringify(dataEdited),
     })
       .then((response) => response.json())
-      .then((json) => console.log(json))
       .then(() => {
         toast.success("Seus dados foram editados!", {
           position: "bottom-right",

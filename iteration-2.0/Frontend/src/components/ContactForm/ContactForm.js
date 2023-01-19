@@ -42,7 +42,6 @@ function ContactForm(props) {
         body: JSON.stringify(contactData),
       })
         .then((response) => response.json())
-        // .then((json) => console.log(json))
         .then(() => {
           props.showBtnHandler(false);
           props.nextButton();

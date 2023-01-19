@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
-import cookieCutter from 'cookie-cutter'
 
 import styles from "./NavBar.module.scss";
 import { getUserData } from "../../functions/getUserData";
@@ -34,7 +33,6 @@ function NavBar() {
 
   function logoutHandler() {
     signOut();
-
   }
 
   return (
