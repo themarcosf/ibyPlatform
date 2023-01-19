@@ -19,7 +19,6 @@ const userSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
-      maxlength: [50, "maximum length is 50 digits"],
       trim: true,
     },
     wallet: {
@@ -31,13 +30,9 @@ const userSchema = new mongoose.Schema(
     nationalId: {
       type: Number,
       unique: true,
-      select: false,
     },
     // TODO : validate
-    mobile: {
-      type: Number,
-      select: false,
-    },
+    mobile: Number,
     status: {
       type: String,
       default: "active",
@@ -67,15 +62,6 @@ const userSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
-//////////////////////////////////////////////////////////////////
-
-/**
- * @notice regex /^param/ : any expression starting with param
- */
-userSchema.pre(/^find/, function (next) {
-  this.find({ status: { $ne: "inactive" } });
-  next();
-});
 //////////////////////////////////////////////////////////////////
 
 const User = new mongoose.model("User", userSchema);

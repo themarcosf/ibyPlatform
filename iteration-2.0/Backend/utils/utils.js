@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+
 /**
  * @notice calculate difference in months between two dates
  *
@@ -15,6 +17,17 @@ exports.monthDiff = function (d1, d2) {
 ////////////////////////////////////////////////////////////////////////
 
 /**
+ * @param {mongoDB _id} userId
+ * @returns token
+ */
+exports.jwtTokenGenerator = function (userId) {
+  return jwt.sign({ id: userId }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES,
+  });
+};
+////////////////////////////////////////////////////////////////////////
+
+/**
  * @notice template for generic API responses
  *
  * @param {Object} _res
@@ -22,8 +35,8 @@ exports.monthDiff = function (d1, d2) {
  * @param {String} _status
  * @param {Object} _data
  */
-exports.setupResponse = function (_res, _statusCode, _status, _data, _message) {
-  let data = { status: _status };
+exports.setupResponse = function (_res, _statusCode, _data, _message) {
+  let data = { status: "success" };
   if (_data) data.data = _data;
   if (_message) data.message = _message;
 

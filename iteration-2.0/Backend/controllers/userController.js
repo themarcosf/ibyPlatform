@@ -1,5 +1,5 @@
 const User = require("../models/userModel");
-const { CustomError } = require("../utils/errors");
+const { setupResponse } = require("./../utils/utils");
 const {
   asyncHandler,
   createOne,
@@ -24,30 +24,14 @@ exports.updateCurrentUser = asyncHandler(async function (req, res, next) {
     runValidators: true,
   });
 
-  res
-    .status(200)
-    .json({
-      status: "success",
-      data: {
-        document: _updatedUser,
-      },
-    })
-    .end();
+  setupResponse(res, 200, _updatedUser);
 });
 
 exports.deleteCurrentUser = asyncHandler(async function (req, res, next) {
-  // get user from collection
-  const _user = await User.findById(req.params.id);
+  // get user from collection and set active to false
+  await User.findByIdAndUpdate(req.user.id, { status: "inactive" });
 
-  // if user not found return error
-  if (!_user) return next(new CustomError("Id not found", 404));
-
-  // if user found set active to false
-  _user.active = false;
-  _user.save();
-
-  // end request
-  res.status(200).json({ status: "success", data: null }).end();
+  setupResponse(res, 200);
 });
 //////////////////////////////////////////////////////////////////
 

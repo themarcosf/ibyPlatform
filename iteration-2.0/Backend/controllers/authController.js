@@ -3,44 +3,92 @@ const { promisify } = require("util");
 const User = require("./../models/userModel");
 const { CustomError } = require("./../utils/errors");
 const { asyncHandler } = require("./../utils/handlers");
-const { setupResponse } = require("./../utils/utils");
+const { jwtTokenGenerator, setupResponse } = require("./../utils/utils");
 
 /**
  * username & password validation is done by next-auth
  *
- * 1. validate jwt from request
- * 2. check if user exists in database
- * 3. if new user, save basic information
+ * 1. validate access token from request
+ * 2. if user not in database, create new user
+ * 3. if user status inactive, toggle to active
+ * 4. generate and embed new token in response
  */
 exports.login = asyncHandler(async function (req, res, next) {
-  /** 
-  const { email } = req.body;
+  // validate access_token from request
+  const _accessToken = await fetch(
+    "https://www.googleapis.com/oauth2/v3/userinfo",
+    { headers: { authorization: req.headers.authorization } }
+  ).then((response) => response.json());
 
-  // validate email from request
-  if (!email) return next(new CustomError("Email provided", 400));
+  if (!_accessToken.email_verified)
+    return next(new CustomError("Invalid token", 400));
 
-  // set user credentials
-  let _user = await User.findOne({ email });
-  if (!_user) _user = await User.create(req.body);
-   */
+  // check if user in database
+  let _statusCode = 200;
+  let _user = await User.findOne({ email: _accessToken.email });
 
-  setupResponse(res, 200, "success", req.body);
+  // if not in database, create new user
+  if (!_user) {
+    _statusCode = 201;
+    _user = await User.create({
+      name: _accessToken.name,
+      email: _accessToken.email,
+      avatar: _accessToken.picture,
+    });
+  }
+
+  // if user status inactive, toggle to active
+  if (_user.status === "inactive") _user.status === "active";
+
+  // set new token
+  const _token = jwtTokenGenerator(_user._id);
+  const _options = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: false, // TODO : enable httpOnly
+  };
+
+  if (process.env.NODE_ENV === "production") _options.secure = true;
+
+  res.cookie("jwt", _token, _options);
+
+  setupResponse(res, _statusCode);
 });
 ////////////////////////////////////////////////////////////////////////
 
 /**
  * authentication middleware : handles authentication before routes access
- * authorization middleware : handles authorization to specific routes by certain users eg admin
+ *
+ * TODO : validate Google OAuth token
  *
  * PROMISIFY (fn) : node built-in method to avoid callback pattern in async/await functions
  */
 exports.authentication = asyncHandler(async function (req, res, next) {
+  const _error = new CustomError("Authentication failed", 401);
+  // check headers for authorization token
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer")) return next(_error);
+
+  const token = authHeader.split(" ")[1];
+
+  // validate token integrity
+  const _payload = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+
+  // verify user status
+  const _user = await User.findById(_payload.id);
+
+  if (!_user || _user.status === "inactive") return next(_error);
+
+  // attach user data to request
+  req.user = _user;
   next();
 });
 
 /**
- * PASSING ARGUMENTS INTO MIDDLEWARE FUNCTIONS
+ * authorization middleware : handles authorization to specific routes by certain users eg admin
  *
+ * PASSING ARGUMENTS INTO MIDDLEWARE FUNCTIONS
  * 1. create wrapper function that returns middleware function
  * 2. middleware gets access to wrapper function parameters due to closure
  */

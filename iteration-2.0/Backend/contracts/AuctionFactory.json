@@ -1,0 +1,21 @@
+{
+  "network": "goerli",
+  "contract": {
+    "address": "0xbbdac338f3a94A2F4D4C4C518249C147dD873315",
+    "signer": "0x077842934266EDd974d51129CDad3db0Ee40394e",
+    "abi": [
+      "event OwnershipTransferred(address indexed previousOwner, address indexed newOwner)",
+      "event newAuction(address indexed owner, address indexed token, uint256 indexed tokenId, uint256 auctionId, uint256 minPrice, uint256 flashPrice, uint256 endTime, uint256 timestamp)",
+      "event newBid(address indexed bidder, uint256 indexed auctionId, uint256 amount, uint256 timestamp)",
+      "event transferToken(uint256 indexed tokenId, uint256 timestamp)",
+      "function auction(address token, uint256 tokenId, uint256 minPrice, uint256 endTime, uint256 flashPrice)",
+      "function bid(uint256 auctionId, uint256 amount, address bidder)",
+      "function end(uint256 auctionId)",
+      "function getAuction(uint256 auctionId) view returns (address, uint256, uint256, uint256, uint256, uint256, address)",
+      "function onERC721Received(address operator, address from, uint256 tokenId, bytes data) returns (bytes4)",
+      "function owner() view returns (address)",
+      "function renounceOwnership()",
+      "function transferOwnership(address newOwner)"
+    ]
+  }
+}
