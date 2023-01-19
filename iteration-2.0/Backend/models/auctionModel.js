@@ -13,8 +13,9 @@ const auctionSchema = new mongoose.Schema(
       required: [true, "realtyId is required"],
     },
     index: Number,
-    minAskValue: { type: Number, required: true },
-    auctionEndDate: { type: Date, required: true },
+    minPrice: { type: Number, required: true },
+    flashPrice: Number,
+    auctionEndDate: { type: Number, required: true },
     leaseBeginDate: {
       type: Date,
       required: true,

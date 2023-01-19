@@ -1,8 +1,8 @@
 {
   "network": "goerli",
   "contract": {
-    "address": "0x5b2351D55fBca5cCD50d55F5F886dE7c75f59C7A",
-    "signer": "0x6CAc2a4dAF81b603589C024141D3eADFdf064377",
+    "address": "0xbbdac338f3a94A2F4D4C4C518249C147dD873315",
+    "signer": "0x077842934266EDd974d51129CDad3db0Ee40394e",
     "abi": [
       "event OwnershipTransferred(address indexed previousOwner, address indexed newOwner)",
       "event newAuction(address indexed owner, address indexed token, uint256 indexed tokenId, uint256 auctionId, uint256 minPrice, uint256 flashPrice, uint256 endTime, uint256 timestamp)",

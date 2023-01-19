@@ -76,6 +76,7 @@ const realtySchema = new mongoose.Schema(
     sqMeters: { type: Number, required: true },
     inConstruction: { type: Boolean, required: true },
     toRetrofit: { type: Boolean, required: true },
+    tokenId: Number,
     status: {
       type: String,
       default: "active",

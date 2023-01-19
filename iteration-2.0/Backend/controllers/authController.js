@@ -76,11 +76,7 @@ exports.authentication = asyncHandler(async function (req, res, next) {
   const _payload = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
   // verify user status
-  const _user = await User.findById(_payload.id)
-    .select("+nationalId")
-    .select("+mobile")
-    .select("+status")
-    .select("+role");
+  const _user = await User.findById(_payload.id);
 
   if (!_user || _user.status === "inactive") return next(_error);
 

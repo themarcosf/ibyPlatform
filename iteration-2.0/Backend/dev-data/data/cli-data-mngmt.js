@@ -1,7 +1,5 @@
-/**
- * command line script for importing and deleting collections of data
- */
-require("dotenv").config({ path: "./../../../../config.env" });
+/** command line script for importing and deleting collections of data */
+require("dotenv").config({ path: `${__dirname}/../../../../config.env` });
 
 const fs = require("fs");
 const mongoose = require("mongoose");
@@ -27,13 +25,12 @@ mongoose
   .then((conn) => console.log(`DB Connected: ${conn.connections[0].name}`));
 ////////////////////////////////////////////////////////////////////////////////
 
-/**
- * data management : select ONE appropriate data category
- */
-// const _category = ["auction", Auction];
+/** data management : select ONE appropriate data category */
+
+const _category = ["auction", Auction];
 // const _category = ["bid", Bid];
 // const _category = ["realty", Realty];
-const _category = ["user", User];
+// const _category = ["user", User];
 
 const _data = JSON.parse(
   fs.readFileSync(`${__dirname}/${_category[0]}.json`, "utf-8")

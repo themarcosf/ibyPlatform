@@ -27,7 +27,7 @@ async function writeDeploymentInfo(contract, _contractName) {
     },
   };
 
-  const filename = `${__dirname}/../contracts/deployed${_contractName}.json`;
+  const filename = `${__dirname}/../contracts/${_contractName}.json`;
   const content = JSON.stringify(data, null, 2);
   await fs.writeFile(filename, content, { encoding: "utf-8" });
 }

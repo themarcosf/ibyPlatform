@@ -1,8 +1,8 @@
 {
   "network": "goerli",
   "contract": {
-    "address": "0x781dE17d87F6a997509f41430422e4Fec3A08727",
-    "signer": "0x6CAc2a4dAF81b603589C024141D3eADFdf064377",
+    "address": "0x815B5cEA41e62BEE311baeDB22E52DD8ecB9861c",
+    "signer": "0x077842934266EDd974d51129CDad3db0Ee40394e",
     "abi": [
       "constructor()",
       "event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId)",
