@@ -5,7 +5,7 @@ import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import styles from "../styles/myBids.module.scss";
 
-function myBids({ realtyData, auctionData }) {
+function myBids({ realtyData }) {
   const [userData, setUserData] = useState();
 
   useEffect(() => {
@@ -20,28 +20,25 @@ function myBids({ realtyData, auctionData }) {
           <h1>Leilões que estou participando</h1>
           <div className={styles.content}>
             {realtyData.map((build) => {
-              let realtyAuction = auctionData.find(
-                (auction) => auction.realtyId === build.id
-              );
+              let realtyAuction = build?.auctions[0];
 
-              const auctionLog = realtyAuction.auctionLog.filter((elements) => {
+              const bids = realtyAuction?.bids.filter((elements) => {
                 return elements !== null;
               });
 
-              const userLastBid = auctionLog
-                .reverse()
-                .find((auction) => auction.lastBidUser == userData.id);
+              const userLastBid = bids
+                ?.reverse()
+                .find((bid) => bid.userId == userData.id);
 
               if (userLastBid) {
                 let winningBid;
+                let currentValue;
 
-                if (userLastBid.lastBidValue >= auctionLog[0].lastBidValue) {
+                if (userLastBid.bidValue >= bids[0].bidValue) {
                   winningBid = true;
                 } else winningBid = false;
 
-                let currentValue;
-                let lastBidChecking =
-                  realtyAuction.auctionLog.slice(-1)[0]?.lastBidValue;
+                let lastBidChecking = realtyAuction.bids[0]?.bidValue;
 
                 lastBidChecking
                   ? (currentValue = lastBidChecking)
@@ -74,16 +71,11 @@ function myBids({ realtyData, auctionData }) {
 
 export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
-
   const realtyRes = await fetch("http://127.0.0.1:8000/api/v1/realty/");
   const initialRealtyData = await realtyRes.json();
-  const realtyData = initialRealtyData.data.realty.filter((elements) => {
+  const realtyData = initialRealtyData.data._documents.filter((elements) => {
     return elements !== null;
   });
-
-  const auctionRes = await fetch("http://127.0.0.1:8000/api/v1/auction/");
-  const initialAuctionData = await auctionRes.json();
-  const auctionData = initialAuctionData.data.auction;
 
   if (!session) {
     return {
@@ -95,7 +87,7 @@ export async function getServerSideProps(context) {
   }
 
   return {
-    props: { realtyData: realtyData, auctionData: auctionData },
+    props: { realtyData },
   };
 }
 

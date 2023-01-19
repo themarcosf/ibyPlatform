@@ -1,20 +1,30 @@
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
-import { useRouter } from "next/router";
 
 import styles from "./NavBar.module.scss";
 import { getUserData } from "../../functions/getUserData";
+import { useEffect, useState } from "react";
+
+async function onLoadHandler(setUserImage, setUserData) {
+  const data = await getUserData();
+  setUserData(data);
+  setUserImage(data.avatar);
+}
 
 function NavBar() {
   const { data: session } = useSession();
+  const [userImage, setUserImage] = useState();
+  const [userData, setUserData] = useState();
 
-  async function saveDataHandler() {
-    const userData = await getUserData()
+  useEffect(() => {
+    if (session) {
+      onLoadHandler(setUserImage, setUserData);
+    }
+  }, []);
 
-    // const userData = await verifyUser(session.user.email, session.user.name);
-
-    // localStorage.setItem("userData", JSON.stringify(userData));
+  function saveDataHandler() {
+    localStorage.setItem("userData", JSON.stringify(userData));
   }
 
   function signInHandler() {
@@ -57,7 +67,7 @@ function NavBar() {
                 className={styles.userIcon}
                 href="#"
               >
-                <img src="/user_icon.png" alt="user_icon" />
+                <img src={`${userImage}`} alt="user_icon" />
               </button>
               <div className={styles.dropdownContent}>
                 <div className={styles.dropdownSub}>

@@ -1,5 +1,3 @@
-import { verifyUser } from "../../functions/verifyUser";
-
 import BuildingCard from "../../components/BuildingCard/BuildingCard";
 import Footer from "../../components/Footer/Footer";
 import NoRealty from "../../components/NoRealty/NoRealty";
