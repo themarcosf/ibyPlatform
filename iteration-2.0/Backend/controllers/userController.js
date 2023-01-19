@@ -9,9 +9,7 @@ const {
   deleteOne,
 } = require("../utils/handlers");
 
-/**
- * specific-purpose route handlers
- */
+/** specific-purpose route handlers */
 exports.readCurrentUser = (req, res, next) => {
   req.params.id = req.user.id;
   next();
@@ -35,9 +33,7 @@ exports.deleteCurrentUser = asyncHandler(async function (req, res, next) {
 });
 //////////////////////////////////////////////////////////////////
 
-/**
- * general purpose route handlers
- */
+/** general purpose route handlers */
 exports.createUser = createOne(User);
 exports.readUser = readOne(User);
 exports.readAllUsers = readAll(User);

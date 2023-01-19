@@ -2,9 +2,10 @@ const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const express = require("express");
+const compression = require("compression");
 const rateLimit = require("express-rate-limit");
-const { CustomError } = require("./utils/errors");
 const bidRouter = require("./routers/bidRouter");
+const { CustomError } = require("./utils/errors");
 const userRouter = require("./routers/userRouter");
 const realtyRouter = require("./routers/realtyRouter");
 const auctionRouter = require("./routers/auctionRouter");
@@ -43,9 +44,10 @@ app.use(
   })
 );
 
-/**
- * routers middleware
- */
+// compress response body
+app.use(compression());
+
+/** routers middleware */
 app.use("/api/v1/bid", bidRouter);
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/realty", realtyRouter);
@@ -55,9 +57,7 @@ app.all("/*", (req, res, next) =>
   next(new CustomError(`Invalid path: ${req.originalUrl}`, 404))
 );
 
-/**
- * global error handling middleware
- */
+/** global error handling middleware */
 app.use(errController);
 //////////////////////////////////////////////////////////////////
 

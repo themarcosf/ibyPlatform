@@ -6,7 +6,7 @@ let erc721Contract = null;
 let auctionFactoryContract = null;
 
 async function tokenContract(_wallet) {
-  if (erc721Contract) return;
+  if (erc721Contract) return erc721Contract;
 
   const _data = JSON.parse(
     fs.readFileSync(`${__dirname}/../contracts/ERC721_NFT.json`, "utf-8")
@@ -24,7 +24,7 @@ async function tokenContract(_wallet) {
 }
 
 async function auctionContract(_wallet) {
-  if (auctionFactoryContract) return;
+  if (auctionFactoryContract) return auctionFactoryContract;
 
   const _data = JSON.parse(
     fs.readFileSync(`${__dirname}/../contracts/AuctionFactory.json`, "utf-8")
