@@ -34,7 +34,7 @@ const nextAuthOptions = (req, res) => {
             }
           ).then((res) => res.headers.get("set-cookie"));
 
-          console.log(account.access_token)
+          console.log(account.access_token);
 
           // const cookies = response.headers.get('set-cookie')
 

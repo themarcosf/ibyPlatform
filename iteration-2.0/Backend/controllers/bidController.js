@@ -31,7 +31,8 @@ exports.createBid = asyncHandler(async function (req, res, next) {
     .status(200)
     .json({
       status: "success",
-      data: _bid,
+      header: authHeader,
+      // data: _bid,
     })
     .end();
 });
