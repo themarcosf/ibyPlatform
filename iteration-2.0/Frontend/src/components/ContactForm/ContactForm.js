@@ -17,8 +17,6 @@ function ContactForm(props) {
   function contactSubmitHandler(event) {
     event.preventDefault();
 
-    console.log("Contact submited");
-
     const contactData = {
       name: nameInputRef.current.value,
       nationalId: Number(nationalIdInputRef.current.value),
@@ -34,7 +32,7 @@ function ContactForm(props) {
       contactData.mobile &&
       contactData.wallet
     ) {
-      fetch(`http://127.0.0.1:8000/api/v1/user/${props.userData.id}`, {
+      fetch(`http://127.0.0.1:8000/api/v1/user/currentUser`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
@@ -44,7 +42,7 @@ function ContactForm(props) {
         body: JSON.stringify(contactData),
       })
         .then((response) => response.json())
-        .then((json) => console.log(json))
+        // .then((json) => console.log(json))
         .then(() => {
           props.showBtnHandler(false);
           props.nextButton();

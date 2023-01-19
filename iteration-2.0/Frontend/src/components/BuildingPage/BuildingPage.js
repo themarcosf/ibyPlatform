@@ -93,7 +93,7 @@ function BuildingPage(props) {
     console.log(userId);
   };
 
-  const auctionEndDate = new Date(props.auctionEndDate).toLocaleDateString(
+  const auctionEndDate = new Date(props.auctionEndDate * 1000).toLocaleDateString(
     "pt-BR",
     { year: "numeric", month: "long", day: "numeric" }
   );

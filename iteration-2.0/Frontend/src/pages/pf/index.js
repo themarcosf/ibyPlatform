@@ -21,14 +21,13 @@ function pf({ realtyData }) {
 
             if (realtyAuction) {
               let currentMonthValue;
-              let lastBidChecking =
-                realtyAuction.bids.slice(-1)[0]?.lastBidValue;
+              let lastBidChecking = realtyAuction.bids.slice(-1)[0].bidValue;
 
               lastBidChecking
                 ? (currentMonthValue =
                     lastBidChecking / realtyAuction.LeaseDurationMonths)
                 : (currentMonthValue =
-                    realtyAuction.minAskValue /
+                    realtyAuction.minPrice /
                     realtyAuction.LeaseDurationMonths);
 
               if (build.toRetrofit == false && build.inConstruction == false) {

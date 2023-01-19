@@ -1,29 +1,33 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import cookieCutter from 'cookie-cutter'
 
 import { formatToCurrency } from "../../functions/formatToCurrency";
 
 import styles from "./FinishingBid.module.scss";
 
-async function makeBid(fetchData, auctionId, router) {
-  fetch(`http://127.0.0.1:8000/api/v1/auction/${auctionId}`, {
-    method: "PATCH",
+async function makeBid(fetchData, jwtCookie, router) {
+  fetch(`http://127.0.0.1:8000/api/v1/bid`, {
+    method: "POST",
     headers: {
       "content-type": "application/json",
       "Access-Control-Allow-Origin": "*",
+      Authorization: `Bearer ${jwtCookie}`,
     },
     body: JSON.stringify(fetchData),
   })
     .then((response) => response.json())
-    .then(
-      router.push('/myBids')
-    );
+    // .then(
+    //   router.push('/myBids')
+    // );
 }
 
 function FinishingBid(props) {
   const router = useRouter()
   const [auctionData, setAuctionData] = useState();
+  const jwtCookie = cookieCutter.get('jwt')
+
 
   useEffect(() => {
     setAuctionData(JSON.parse(localStorage.getItem("auctionData")));
@@ -33,23 +37,23 @@ function FinishingBid(props) {
     function makeBidHandler() {
       const fetchData = {
         auctionLog: {
+          auctionId: "63c9315bddf31ba1719a184b",
           bidValue: Number(props.bidData.lastBidValue),
           userId: props.bidData.lastBidUser,
-          lastBidderWallet: props.bidData.lastBidderWallet,
         },
       };
 
-      makeBid(fetchData, auctionData.auctionId, router);
+      makeBid(fetchData, jwtCookie, router);
     }
     const brlLastBidValue = formatToCurrency.format(props.bidData.lastBidValue);
-    const brlMinAskValue = formatToCurrency.format(auctionData.minAskValue);
+    const brlMinPrice = formatToCurrency.format(auctionData.minPrice);
     const brlCurrentValue = formatToCurrency.format(auctionData.currentValue);
     return (
       <>
         <div className={styles.content}>
           <h1>Finalizar lance</h1>
           <div className={styles.infoContainer}>
-            <p>Valor mínimo:{brlMinAskValue}</p>
+            <p>Valor mínimo:{brlMinPrice}</p>
             <p>Período: 10 anos</p>
             <h3>Valor atual: {brlCurrentValue}</h3>
             <h2>Seu Lance é: {brlLastBidValue}</h2>
