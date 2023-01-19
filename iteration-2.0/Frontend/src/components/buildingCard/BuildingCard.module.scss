@@ -17,6 +17,21 @@
   align-items: center;
   justify-content: center;
   width: 200px;
+  position: relative;
+
+  div{
+    position: absolute;
+    top: 0;
+    right: -5px;
+    background-color: #fff;
+    padding: 0.6rem;
+    border-radius: 1rem;
+
+    p{
+      color: #CC0000;
+      font-weight: 600;
+    }
+  }
 
   img {
     border-radius: 1.2rem;
@@ -28,7 +43,6 @@
 .streetBx {
   display: flex;
   justify-content: space-between;
-  margin-left: 0.5rem;
 
   h3 {
     font-size: 16px;
@@ -40,7 +54,6 @@
   color: #747474;
   font-size: 0.8rem;
   font-weight: 600;
-  margin-left: 0.5rem;
   width: 100%;
   display: flex;
   justify-content: flex-start;
@@ -74,14 +87,12 @@
   }
 }
 
-.expiradedBx {
+.expiradedText {
   display: flex;
   align-items: center;
   justify-content: center;
 
   p {
-    margin: 0.5rem;
-    color: red;
     font-weight: 600;
   }
 }
