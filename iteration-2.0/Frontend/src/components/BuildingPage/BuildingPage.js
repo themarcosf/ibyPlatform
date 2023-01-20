@@ -88,11 +88,6 @@ function BuildingPage(props) {
     }
   }
 
-  const checkLocalStorage = () => {
-    const userId = JSON.parse(localStorage.getItem("userData"));
-    console.log(userId);
-  };
-
   const auctionEndDate = new Date(props.auctionEndDate * 1000).toLocaleDateString(
     "pt-BR",
     { year: "numeric", month: "long", day: "numeric" }
@@ -109,7 +104,7 @@ function BuildingPage(props) {
         onClick={() => createUser(session.user.email, session.user.name)}
       >{`${props.address} - ${props.district}, ${props.state}`}</h1>
       <div className={styles.statusAndFavorite}>
-        <p onClick={checkLocalStorage}>Status: {buildingStatus} </p>
+        <p>Status: {buildingStatus} </p>
         <span>
           Salvar <FaHeart fill="#2e65bc" />
         </span>

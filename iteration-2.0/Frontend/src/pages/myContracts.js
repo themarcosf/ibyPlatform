@@ -20,8 +20,6 @@ function myContracts({realtyData}) {
     setUserData(JSON.parse(localStorage.getItem("userData")));
   }, []);
 
-  console.log(realtyData)
-
   if (userData) {
     return (
       <>
