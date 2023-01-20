@@ -22,14 +22,16 @@ function myBids({ realtyData }) {
             {realtyData.map((build) => {
               let realtyAuction = build?.auctions[0];
 
+              
               const bids = realtyAuction?.bids.filter((elements) => {
                 return elements !== null;
               });
-
+              
               const userLastBid = bids
-                ?.reverse()
-                .find((bid) => bid.userId == userData.id);
-
+              ?.reverse()
+              .find((bid) => bid.userId == userData.id);
+              
+              console.log(userLastBid)
               if (userLastBid) {
                 let winningBid;
                 let currentValue;
@@ -42,7 +44,7 @@ function myBids({ realtyData }) {
 
                 lastBidChecking
                   ? (currentValue = lastBidChecking)
-                  : (currentValue = realtyAuction.minAskValue);
+                  : (currentValue = realtyAuction.minPrice);
 
                 return (
                   <BiddedBuildingCard

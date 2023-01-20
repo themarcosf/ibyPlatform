@@ -18,13 +18,14 @@ function NavBar() {
 
   useEffect(() => {
     if (session) {
-      // onLoadHandler(setUserData);
+      onLoadHandler(setUserData);
     }
   }, []);
 
   function saveDataHandler() {
+    console.log(session)
+    console.log(userData);
     localStorage.setItem("userData", JSON.stringify(userData));
-    console.log(userData)
   }
 
   function signInHandler() {
@@ -40,11 +41,9 @@ function NavBar() {
       <nav className={`${styles.nav} ${styles.stroke}`}>
         <ul>
           <div>
-            {!session && (
-              <li>
-                <Link href={"/"}>Início</Link>
-              </li>
-            )}
+            <li>
+              <Link href={"/"}>Início</Link>
+            </li>
             <li>
               <Link href={"/pf"}>Imóveis para alugar</Link>
             </li>
@@ -52,7 +51,6 @@ function NavBar() {
               <Link href={"/pj"}>Para proprietários</Link>
             </li>
           </div>
-
           {!session && (
             <li>
               <button className={styles.googleBtn} onClick={signInHandler}>

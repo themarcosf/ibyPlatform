@@ -11,7 +11,7 @@ const router = express.Router();
 router.post("/login", authController.login);
 
 // @notice authentication required for all routes
-router.use(authController.authentication);
+// router.use(authController.authentication);
 
 router
   .route("/currentUser")
@@ -24,7 +24,7 @@ router.get("/me", userController.readCurrentUser, userController.readUser);
 /** general purpose routes middleware */
 
 // @notice authorization required for all routes
-router.use(authController.authorization("admin"));
+// router.use(authController.authorization("admin"));
 
 router
   .route("/")

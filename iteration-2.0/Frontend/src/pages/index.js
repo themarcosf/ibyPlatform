@@ -117,23 +117,4 @@ function Home() {
   );
 }
 
-export async function getServerSideProps(context) {
-  const session = await getSession({ req: context.req });
-
-  if (session) {
-    return {
-      redirect: {
-        destination: "/pf",
-        permanent: false,
-      },
-    };
-  } else {
-    return {
-      props: {}
-    }
-  }
-
-
-}
-
 export default Home;

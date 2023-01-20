@@ -6,7 +6,6 @@ function build({ realtyData }) {
   
   let realtyAuction = realtyData?.auctions[0];
   
-  
   let currentValue;
   let lastBidChecking = realtyAuction.bids.slice(-1)[0].bidValue;
 
@@ -34,7 +33,7 @@ function build({ realtyData }) {
         contractPeriod={contractPeriod}
         id={realtyData.id}
         auctionId={realtyAuction.id}
-        minAskValue={realtyAuction.minAskValue}
+        minPrice={realtyAuction.minPrice}
         active={realtyAuction.active}
         auctionEndDate={realtyAuctionEndDate}
         leaseBeginDate={realtyAuction.leaseBeginDate}

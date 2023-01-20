@@ -63,9 +63,8 @@ function BuildingPage(props) {
         localStorage.setItem("bidData", JSON.stringify(bidData));
 
         const auctionData = {
-          minAskValue: props.minAskValue,
+          minPrice: props.minPrice,
           currentValue: props.currentValue,
-          lastBidderWallet: userData.wallet,
           auctionId: props.auctionId,
         };
 

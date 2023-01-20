@@ -19,8 +19,7 @@ async function makeBid(fetchData, jwtCookie, router) {
   })
     .then((response) => response.json())
     .then(
-      (json) => console.log(json)
-      // router.push('/myBids')
+      router.push('/myBids')
     );
 }
 
@@ -51,7 +50,7 @@ function FinishingBid(props) {
         <div className={styles.content}>
           <h1>Finalizar lance</h1>
           <div className={styles.infoContainer}>
-            <p>Valor mínimo:{brlMinPrice}</p>
+            <p>Valor mínimo: {brlMinPrice}</p>
             <p>Período: 10 anos</p>
             <h3>Valor atual: {brlCurrentValue}</h3>
             <h2>Seu Lance é: {brlLastBidValue}</h2>
