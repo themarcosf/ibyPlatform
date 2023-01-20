@@ -1,10 +1,10 @@
 /**
- * @dev using Hardhat Network local Ethereum network designed for development
- * @dev signer <OBJECT>: ethereum account used to send transactions to contracts and EOA
- * @dev using @nomicfoundation/hardhat-chai-matchers (https://hardhat.org/tutorial/testing-contracts)
+ * using Hardhat Network local Ethereum network designed for development
+ * signer <OBJECT>: ethereum account used to send transactions to contracts and EOA
+ * using @nomicfoundation/hardhat-chai-matchers (https://hardhat.org/tutorial/testing-contracts)
  *
- * @dev FIXTURES : setup functions ran only once by hardHat and reset to initial state after every call
- * @dev chai-matchers: https://hardhat.org/hardhat-chai-matchers/docs/reference
+ * FIXTURES : setup functions ran only once by hardHat and reset to initial state after every call
+ * chai-matchers: https://hardhat.org/hardhat-chai-matchers/docs/reference
  */
 const { expect } = require("chai");
 const { ethers } = require("hardhat");

@@ -4,9 +4,7 @@ const mongoose = require("mongoose");
 const { uncaughtErrorHandler } = require("./utils/errors");
 //////////////////////////////////////////////////////////////////
 
-/**
- * unhandled (sync) exceptions handler
- */
+/** unhandled (sync) exceptions handler */
 process.on("uncaughtException", (err) => uncaughtErrorHandler(err));
 //////////////////////////////////////////////////////////////////
 
@@ -33,9 +31,7 @@ mongoose
   .then((conn) => console.log(`DB connected to: ${conn.connections[0].name}`));
 //////////////////////////////////////////////////////////////////
 
-/**
- * server config
- */
+/** server config */
 const server = app.listen(
   process.env.PORT || 8000,
   process.env.HOST || "127.0.0.1",
@@ -43,7 +39,5 @@ const server = app.listen(
 );
 //////////////////////////////////////////////////////////////////
 
-/**
- * unhandled (async) rejections handler
- */
+/** unhandled (async) rejections handler */
 process.on("unhandledRejection", (err) => uncaughtErrorHandler(err, server));

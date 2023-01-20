@@ -60,8 +60,6 @@ exports.login = asyncHandler(async function (req, res, next) {
 /**
  * authentication middleware : handles authentication before routes access
  *
- * TODO : validate Google OAuth token
- *
  * PROMISIFY (fn) : node built-in method to avoid callback pattern in async/await functions
  */
 exports.authentication = asyncHandler(async function (req, res, next) {

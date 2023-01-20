@@ -21,9 +21,7 @@ router
 router.get("/me", userController.readCurrentUser, userController.readUser);
 //////////////////////////////////////////////////////////////////
 
-/**
- * general purpose routes middleware
- */
+/** general purpose routes middleware */
 
 // @notice authorization required for all routes
 router.use(authController.authorization("admin"));

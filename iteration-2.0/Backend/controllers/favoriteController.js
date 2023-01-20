@@ -1,9 +1,7 @@
 const Favorite = require("../models/favoriteModel");
 const { asyncHandler } = require("../utils/handlers");
 
-/**
- * specific-purpose route handlers
- */
+/** specific-purpose route handlers */
 exports.toggleFavorite = asyncHandler(async function (req, res, next) {
   let _userId;
   if (req.user) _userId = req.user.id;

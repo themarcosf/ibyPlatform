@@ -1,6 +1,5 @@
 const Bid = require("../models/bidModel");
 const Auction = require("./../models/auctionModel");
-const { CustomError } = require("../utils/errors");
 const { asyncHandler } = require("../utils/handlers");
 const { auctionContract } = require("./../scripts/accessContracts");
 
@@ -25,14 +24,17 @@ exports.createBid = asyncHandler(async function (req, res, next) {
     req.user.wallet
   );
 
-  const _bid = await Bid.create(req.body);
+  const _bid = await Bid.create({
+    auctionId: req.body.auctionId,
+    bidValue: req.body.bidValue,
+    userId: req.user.id,
+  });
 
   res
     .status(200)
     .json({
       status: "success",
-      header: authHeader,
-      // data: _bid,
+      data: _bid,
     })
     .end();
 });

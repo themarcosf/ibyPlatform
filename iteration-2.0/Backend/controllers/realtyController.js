@@ -18,10 +18,7 @@ const populateOptions = {
 };
 //////////////////////////////////////////////////////////////////
 
-/**
- * ROUTE HANDLERS
- */
-
+/** ROUTE HANDLERS */
 exports.createRealty = createOne(Realty);
 exports.readRealty = readOne(Realty, populateOptions);
 exports.readAllRealty = readAll(Realty, populateOptions);

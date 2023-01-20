@@ -3,9 +3,7 @@ const auctionController = require("../controllers/auctionController");
 
 const router = express.Router();
 
-/**
- * Routes middleware
- */
+/** Routes middleware */
 router.route("/").get(auctionController.getAllAuction);
 
 router

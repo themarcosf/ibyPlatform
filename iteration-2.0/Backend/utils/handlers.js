@@ -1,9 +1,7 @@
 const QueryFeatures = require("./queryFeatures");
 const { CustomError } = require("./errors");
 
-/**
- * wrapper function to catch errors in async functions
- */
+/** wrapper function to catch errors in async functions */
 const asyncHandler = function (fn) {
   return (req, res, next) => fn(req, res, next).catch(next);
 };

@@ -1,23 +1,11 @@
 const Auction = require("../models/auctionModel");
 const { CustomError } = require("../utils/errors");
 const { asyncHandler } = require("../utils/handlers");
-const jwt = require("jsonwebtoken");
 
-/**
- * ROUTE HANDLERS
- */
+/** ROUTE HANDLERS */
 exports.getAllAuction = asyncHandler(async function (req, res, next) {
   // get all auctions from collection
   const _auction = await Auction.find().populate("bids");
-
-  /** 
-  console.log(
-    jwt.verify(
-      "ya29.a0AX9GBdXPGvuIGk4BzFOwDihLiOYAvC67IQAuoVs71pgsm87Hl2bgpIWJ8H-DrOCNzQCnJ-H1yr3XUFNqFb2sHCMu38QUmRvoMlUa1a_7hlRdhQyohrZD4sK4w13ZOowtO9DEvHS_uAQPrfwKAqUOiJYcaHoAaCgYKAR8SARASFQHUCsbCaciv6gKpqh19m2IALDzoew0163",
-      "secret"
-    )
-  );
-  */
 
   // end request
   res
