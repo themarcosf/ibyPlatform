@@ -7,8 +7,10 @@ import { formatToCurrency } from "../../functions/formatToCurrency";
 
 import styles from "./FinishingBid.module.scss";
 
-async function makeBid(fetchData, jwtCookie, router) {
-  fetch(`http://127.0.0.1:8000/api/v1/bid`, {
+async function makeBid(fetchData, jwtCookie, router, setFetchLoading) {
+  setFetchLoading(true);
+
+  await fetch(`http://127.0.0.1:8000/api/v1/bid`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -18,9 +20,8 @@ async function makeBid(fetchData, jwtCookie, router) {
     body: JSON.stringify(fetchData),
   })
     .then((response) => response.json())
-    .then(
-      router.push('/myBids')
-    );
+
+  router.push("/myBids");
 }
 
 function FinishingBid(props) {
@@ -40,7 +41,7 @@ function FinishingBid(props) {
         bidValue: Number(props.bidData.lastBidValue),
       };
 
-      makeBid(fetchData, jwtCookie, router);
+      makeBid(fetchData, jwtCookie, router, props.setFetchLoading);
     }
     const brlLastBidValue = formatToCurrency.format(props.bidData.lastBidValue);
     const brlMinPrice = formatToCurrency.format(auctionData.minPrice);

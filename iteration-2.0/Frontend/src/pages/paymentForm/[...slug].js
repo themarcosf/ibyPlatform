@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getSession } from "next-auth/react";
+import { TailSpin } from 'react-loader-spinner'
 
 import MultiStepProgressBar from "../../components/MultiStepProgressBar/MultiStepProgressBar";
 import Header from "../../components/Header/Header";
@@ -18,6 +19,7 @@ function paymentForm(slug) {
   const [disable, setDisable] = useState(false);
   const [userData, setUserData] = useState();
   const [bidData, setBidData] = useState();
+  const [fetchLoading, setFetchLoading] = useState(false);
 
   useEffect(() => {
     index == 2 && setShowBtn(false);
@@ -53,44 +55,64 @@ function paymentForm(slug) {
     return (
       <>
         <Header />
-        <main className={styles.main}>
-          <MultiStepProgressBar step={index} />
-          <div className={styles.formContainer}>
-            {index == 1 && (
-              <ContactForm
-                showBtnHandler={setShowBtn}
-                userData={userData}
-                nextButton={nextButton}
-              />
-            )}
-            {index == 2 && (
-              <PaymentMethodForm
-                showBtnHandler={setShowBtn}
-                nextButton={nextButton}
-                showCard={showCard}
-                setShowCard={setShowCard}
-              />
-            )}
-            {index == 3 && (
-              <FinishingBid bidData={bidData} showBidBtn={showBidBtn} />
-            )}
-          </div>
-          {showBtn && (
-            <div className={styles.btnContainer}>
-              <button
-                onClick={prevButton}
-                disabled={index == 1}
-                className={`${styles.btn}`}
-                style={disable ? { background: "gray" } : null}
-              >
-                Previous
-              </button>
-              <button type="submit" form="form" className={styles.btn}>
-                Next
-              </button>
+        {!fetchLoading ? (
+          <main className={styles.main}>
+            <MultiStepProgressBar step={index} />
+            <div className={styles.formContainer}>
+              {index == 1 && (
+                <ContactForm
+                  showBtnHandler={setShowBtn}
+                  userData={userData}
+                  nextButton={nextButton}
+                />
+              )}
+              {index == 2 && (
+                <PaymentMethodForm
+                  showBtnHandler={setShowBtn}
+                  nextButton={nextButton}
+                  showCard={showCard}
+                  setShowCard={setShowCard}
+                />
+              )}
+              {index == 3 && (
+                <FinishingBid
+                  bidData={bidData}
+                  showBidBtn={showBidBtn}
+                  fetchLoading={fetchLoading}
+                  setFetchLoading={setFetchLoading}
+                />
+              )}
             </div>
-          )}
-        </main>
+            {showBtn && (
+              <div className={styles.btnContainer}>
+                <button
+                  onClick={prevButton}
+                  disabled={index == 1}
+                  className={`${styles.btn}`}
+                  style={disable ? { background: "gray" } : null}
+                >
+                  Previous
+                </button>
+                <button type="submit" form="form" className={styles.btn}>
+                  Next
+                </button>
+              </div>
+            )}
+          </main>
+        ) : (
+          <div className={styles.loadingMain}>
+            <TailSpin
+              height="80"
+              width="80"
+              color="#2e65bc"
+              ariaLabel="tail-spin-loading"
+              radius="1"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+            />
+          </div>
+        )}
         <Footer />
       </>
     );

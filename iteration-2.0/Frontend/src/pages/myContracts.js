@@ -51,7 +51,7 @@ function myContracts({realtyData}) {
 
                   const buildIndex = realtyData.indexOf(build);
 
-                  if (winningBid && !realtyAuction.active) {
+                  if (winningBid && realtyAuction.active) {
                     return (
                       <BoughtBuildingCard
                         image={build.images[0]}
