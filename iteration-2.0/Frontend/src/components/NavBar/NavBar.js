@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { useSession, signIn, signOut, getSession } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 import { FcGoogle } from "react-icons/fc";
 
 import styles from "./NavBar.module.scss";
@@ -14,7 +15,7 @@ async function onLoadHandler(setUserData) {
 function NavBar() {
   const { data: session } = useSession();
   const [userData, setUserData] = useState();
-
+  const router = useRouter();
 
   useEffect(() => {
     if (session) {
@@ -23,8 +24,6 @@ function NavBar() {
   }, [session]);
 
   function saveDataHandler() {
-    console.log(session);
-    console.log(userData);
     localStorage.setItem("userData", JSON.stringify(userData));
   }
 
@@ -41,14 +40,14 @@ function NavBar() {
         <nav className={`${styles.nav} ${styles.stroke}`}>
           <ul>
             <div>
-              <li>
+              <li className={router.pathname == "/" ? styles.active : ""}>
                 <Link href={"/"}>Início</Link>
               </li>
-              <li>
-                <Link href={"/pf"}>Imóveis para alugar</Link>
+              <li className={router.pathname == "/toRent" ? styles.active : ""}>
+                <Link href={"/toRent"}>Imóveis para alugar</Link>
               </li>
-              <li>
-                <Link href={"/pj"}>Para proprietários</Link>
+              <li className={router.pathname == "/toOwners" ? styles.active : ""}>
+                <Link href={"/toOwners"}>Para proprietários</Link>
               </li>
             </div>
             {!session && (
@@ -65,7 +64,11 @@ function NavBar() {
                   className={styles.userIcon}
                   href="#"
                 >
-                  <img src={`${session.user.image}`} alt="user_icon" referrerPolicy="no-referrer"/>
+                  <img
+                    src={`${session.user.image}`}
+                    alt="user_icon"
+                    referrerPolicy="no-referrer"
+                  />
                 </button>
                 <div className={styles.dropdownContent}>
                   <div className={styles.dropdownSub}>

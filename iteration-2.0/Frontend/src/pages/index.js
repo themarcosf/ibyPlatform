@@ -1,7 +1,6 @@
 import Lottie from "lottie-react";
-import { getSession } from "next-auth/react";
 
-import Header from "../components/HeaderEspecial/Header";
+import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import EsgPractice from "../components/EsgPractice/EsgPractice";
 import Planet from "../../public/planet.json";

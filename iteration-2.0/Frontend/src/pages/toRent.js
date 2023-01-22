@@ -1,10 +1,10 @@
-import BuildingCard from "../../components/BuildingCard/BuildingCard";
-import Footer from "../../components/Footer/Footer";
-import NoRealty from "../../components/NoRealty/NoRealty";
-import Header from "../../components/Header/Header";
-import Filter from "../../components/Filter/Filter";
+import BuildingCard from "../components/BuildingCard/BuildingCard";
+import Footer from "../components/Footer/Footer";
+import NoRealty from "../components/NoRealty/NoRealty";
+import Header from "../components/Header/Header";
+import Filter from "../components/Filter/Filter";
 
-import styles from "./pf.module.scss";
+import styles from "../styles/toRent.module.scss";
 
 function pf({ realtyData }) {
   return (
