@@ -143,11 +143,18 @@
   right: 0;
   overflow: hidden;
   width: max-content;
+  height: min-content !important;
   max-height: 0;
   z-index: 100;
 
+  ul, li{
+    height: min-content !important;
+  }
+
   a {
     color: #2e65bc;
+    height: min-content !important;
+    margin: 1rem 0;
 
     &:after {
       position: absolute;

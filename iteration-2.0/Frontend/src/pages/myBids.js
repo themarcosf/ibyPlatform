@@ -56,6 +56,7 @@ function myBids({ realtyData }) {
                     id={build.id}
                     winningBid={winningBid}
                     expired={build.active}
+                    userBid={userLastBid.bidValue}
                   />
                 );
               }

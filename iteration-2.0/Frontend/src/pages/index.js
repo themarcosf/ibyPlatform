@@ -12,8 +12,8 @@ function Home() {
   return (
     <div className={styles.body}>
       <Header />
-     <CarouselIndex/>
-      <div className={styles.texts}>
+      <CarouselIndex />
+      <div id="howStarted" className={styles.texts}>
         <h3>Como surgiu a Plataforma Iby?</h3>
         <p>
           A ideia surgiu quando vimos a possibilidade de criar algo inovador no
