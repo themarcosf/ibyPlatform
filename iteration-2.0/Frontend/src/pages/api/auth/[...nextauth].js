@@ -30,8 +30,10 @@ const nextAuthOptions = (req, res) => {
             }
           ).then((res) => res.headers.get("set-cookie"));
 
-          // console.log("token");
-          // console.log(account.access_token);
+          console.log("token");
+          console.log(account.access_token);
+          console.log("cookie");
+          console.log(cookies);
 
 
           res.setHeader("Set-Cookie", cookies, {

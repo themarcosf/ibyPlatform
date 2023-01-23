@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { FaHeart } from "react-icons/fa";
+import { AiOutlineHeart } from "react-icons/ai";
 import IntlCurrencyInput from "react-intl-currency-input";
 
 import styles from "./BuildingPage.module.scss";
@@ -43,6 +43,13 @@ function BuildingPage(props) {
     event.preventDefault();
 
     setBidVaule(value);
+  }
+
+  function favoriteHandler(){
+    toast.loading("Feature em desenvolvimento", {
+      duration: 3000,
+      position: "bottom-right",
+    });
   }
 
   async function handleSubmit(event, value) {
@@ -105,7 +112,7 @@ function BuildingPage(props) {
       <div className={styles.statusAndFavorite}>
         <p>Status: {buildingStatus} </p>
         <span>
-          Salvar <FaHeart fill="#2e65bc" />
+          Gostei <AiOutlineHeart onClick={favoriteHandler} fill="#2e65bc" />
         </span>
       </div>
       <div className={styles.imgsContainer}>

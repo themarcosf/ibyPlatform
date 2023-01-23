@@ -33,6 +33,7 @@ function NavBar() {
 
   function logoutHandler() {
     signOut();
+    router.push("/");
   }
   if (!session || userData) {
     return (
