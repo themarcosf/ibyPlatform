@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   height: 42rem;
 
   button {
@@ -43,6 +42,7 @@
   display: flex;
   justify-content: space-between;
   width: 60%;
+  margin-top: 3rem;
 }
 
 .loadingMain {

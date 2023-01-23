@@ -86,7 +86,7 @@ function ContactForm(props) {
             placeholder={
               props.userData.mobile
                 ? props.userData.mobile
-                : "Insíra seu telefone"
+                : "Insira seu telefone"
             }
             value={value}
             onChange={setValue}
@@ -100,7 +100,7 @@ function ContactForm(props) {
             placeholder={
               props.userData.wallet
                 ? props.userData.wallet
-                : "Insíra sua carteira"
+                : "Insira sua carteira"
             }
             ref={walletInputRef}
           />
