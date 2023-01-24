@@ -22,27 +22,28 @@ function myBids({ realtyData }) {
             {realtyData.map((build) => {
               let realtyAuction = build?.auctions[0];
 
+              
               const bids = realtyAuction?.bids.filter((elements) => {
                 return elements !== null;
               });
-
+              
               const userLastBid = bids
-                ?.reverse()
-                .find((bid) => bid.userId == userData.id);
-
+              ?.reverse()
+              .find((bid) => bid.userId == userData.id);
+              
               if (userLastBid) {
                 let winningBid;
                 let currentValue;
-
+                
                 if (userLastBid.bidValue >= bids[0].bidValue) {
                   winningBid = true;
                 } else winningBid = false;
-
-                let lastBidChecking = realtyAuction.bids[0]?.bidValue;
-
+                
+                let lastBidChecking = bids[0]?.bidValue;
+                
                 lastBidChecking
                   ? (currentValue = lastBidChecking)
-                  : (currentValue = realtyAuction.minAskValue);
+                  : (currentValue = realtyAuction.minPrice);
 
                 return (
                   <BiddedBuildingCard
@@ -55,6 +56,7 @@ function myBids({ realtyData }) {
                     id={build.id}
                     winningBid={winningBid}
                     expired={build.active}
+                    userBid={userLastBid.bidValue}
                   />
                 );
               }

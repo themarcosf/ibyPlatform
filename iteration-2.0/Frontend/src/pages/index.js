@@ -1,7 +1,6 @@
 import Lottie from "lottie-react";
-import { getSession } from "next-auth/react";
 
-import Header from "../components/HeaderEspecial/Header";
+import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import EsgPractice from "../components/EsgPractice/EsgPractice";
 import Planet from "../../public/planet.json";
@@ -13,8 +12,8 @@ function Home() {
   return (
     <div className={styles.body}>
       <Header />
-     <CarouselIndex/>
-      <div className={styles.texts}>
+      <CarouselIndex />
+      <div id="howStarted" className={styles.texts}>
         <h3>Como surgiu a Plataforma Iby?</h3>
         <p>
           A ideia surgiu quando vimos a possibilidade de criar algo inovador no
@@ -115,25 +114,6 @@ function Home() {
       <Footer />
     </div>
   );
-}
-
-export async function getServerSideProps(context) {
-  const session = await getSession({ req: context.req });
-
-  if (session) {
-    return {
-      redirect: {
-        destination: "/pf",
-        permanent: false,
-      },
-    };
-  } else {
-    return {
-      props: {}
-    }
-  }
-
-
 }
 
 export default Home;

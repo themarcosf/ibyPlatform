@@ -26,7 +26,7 @@ function myContracts({realtyData}) {
         <Header />
         <div className={styles.content}>
           <div className={styles.title}>
-            <h1>Meus imóveis</h1>
+            <h1>Meus Contratos</h1>
             <Filter />
           </div>
           <div className={styles.cardsWrapper}>
@@ -51,7 +51,7 @@ function myContracts({realtyData}) {
 
                   const buildIndex = realtyData.indexOf(build);
 
-                  if (winningBid && !realtyAuction.active) {
+                  if (winningBid && realtyAuction.active) {
                     return (
                       <BoughtBuildingCard
                         image={build.images[0]}

@@ -199,7 +199,7 @@ function myAccount(session) {
                         placeholder={
                           userData.mobile
                             ? userData.mobile
-                            : "Insíra seu telefone"
+                            : "Insira seu telefone"
                         }
                         value={value}
                         onChange={setValue}

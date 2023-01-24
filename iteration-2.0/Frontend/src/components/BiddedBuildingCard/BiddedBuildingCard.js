@@ -4,6 +4,7 @@ import { formatToCurrency } from "../../functions/formatToCurrency";
 
 function BiddedBuildingCard(props) {
   const brlCurrentValue = formatToCurrency.format(props.currentValue);
+  const brluserBid = formatToCurrency.format(props.userBid);
 
   return (
     <Link href={`/buildings/${props.id}`}>
@@ -24,7 +25,12 @@ function BiddedBuildingCard(props) {
           </div>
         ) : (
           <div className={styles.buildingInfos}>
-            <p>{brlCurrentValue}</p>
+            <div className={styles.valuesContainer}>
+              <span>Seu lance:</span>
+              <p>{brluserBid}</p>
+              <span>Valor Atual:</span>
+              <p>{brlCurrentValue}</p>
+            </div>
             {props.winningBid ? (
               <div className={styles.winningBidTrue}>
                 <p>

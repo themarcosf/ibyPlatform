@@ -24,7 +24,6 @@ const userSchema = new mongoose.Schema(
     wallet: {
       type: String,
       trim: true,
-      unique: true,
     },
     // TODO : validate CPF CNPJ
     nationalId: {
