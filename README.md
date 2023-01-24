@@ -50,9 +50,8 @@ PRIVATE_KEY=<PRIVATE_KEY>
 ADDRESS=<ADDRESS>
 METAMASK_PASSWORD=<PASSWORD>
 
-# server host and port
+# server port
 PORT=8000
-HOST=127.0.0.1
 
 # database config, remote and local
 DATABASE_LOCAL=mongodb://127.0.0.1:27017/<PROJECT_NAME>
