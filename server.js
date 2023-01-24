@@ -39,3 +39,12 @@ const server = app.listen(process.env.PORT || 8000, () =>
 
 /** unhandled (async) rejections handler */
 process.on("unhandledRejection", (err) => uncaughtErrorHandler(err, server));
+//////////////////////////////////////////////////////////////////
+
+/** SIGTERM signal : dyno will shut down in 30 seconds */
+process.on("SIGTERM", () => {
+  console.log("SIGTERM received. Server shutting down.");
+  server.close(() => {
+    console.log("Server terminated.");
+  });
+});
