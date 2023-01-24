@@ -1,6 +1,8 @@
-import styles from "./BuildingCard.module.scss";
 import Link from "next/link";
+
 import { formatToCurrency } from "../../functions/formatToCurrency";
+
+import styles from "./BuildingCard.module.scss";
 
 function BuildingCard(props) {
   const brlCurrentMonthValue = formatToCurrency.format(props.currentMonthValue);

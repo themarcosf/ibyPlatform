@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
 import cookieCutter from "cookie-cutter";
 
 import { formatToCurrency } from "../../functions/formatToCurrency";
@@ -10,7 +9,7 @@ import styles from "./FinishingBid.module.scss";
 async function makeBid(fetchData, jwtCookie, router, setFetchLoading) {
   setFetchLoading(true);
 
-  await fetch(`http://127.0.0.1:8000/api/v1/bid`, {
+  await fetch(`${process.env.BASEURL}/bid`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -62,7 +61,6 @@ function FinishingBid(props) {
             <div className={styles.bidBtnBx}>
               <button onClick={makeBidHandler}>Fazer meu lance</button>
             </div>
-            <Toaster />
           </>
         )}
       </>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
+
 import CardRegister from "../CardRegister/CardRegister";
 
 import styles from "./PaymentMethodForm.module.scss";

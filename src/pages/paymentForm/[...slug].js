@@ -1,3 +1,5 @@
+import Head from "next/head";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { getSession } from "next-auth/react";
 import { TailSpin } from "react-loader-spinner";
@@ -5,12 +7,11 @@ import { TailSpin } from "react-loader-spinner";
 import MultiStepProgressBar from "../../components/MultiStepProgressBar/MultiStepProgressBar";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-
-import styles from "./paymentForm.module.scss";
 import ContactForm from "../../components/ContactForm/ContactForm";
 import PaymentMethodForm from "../../components/PaymentMethodForm/PaymentMethodForm";
 import FinishingBid from "../../components/FinishingBid/FinishingBid";
-import { useRouter } from "next/router";
+
+import styles from "./paymentForm.module.scss";
 
 function paymentForm(slug) {
   const [index, setIndex] = useState(Number(slug.slug));
@@ -60,6 +61,9 @@ function paymentForm(slug) {
   if (userData && bidData) {
     return (
       <>
+        <Head>
+          <title>Iby Platform | Meio de pagamento</title>
+        </Head>
         <Header />
         {!fetchLoading ? (
           <main className={styles.main}>
@@ -95,7 +99,7 @@ function paymentForm(slug) {
                   Voltar
                 </button>
                 <button type="submit" form="form" className={styles.btn}>
-                  Avançar
+                  {index == 3 ? "Fazer lance" : "Avançar"}
                 </button>
               </div>
             )}

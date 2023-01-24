@@ -1,7 +1,9 @@
-import styles from "./Filter.module.scss";
-import FilterModal from "../FilterModal/FilterModal";
-import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+
+import FilterModal from "../FilterModal/FilterModal";
+
+import styles from "./Filter.module.scss";
 
 function Filter() {
   const [openModal, setOpenModal] = useState(false);

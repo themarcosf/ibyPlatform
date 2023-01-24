@@ -1,11 +1,12 @@
+import Head from "next/head";
+
 import BuildingPage from "../../components/BuildingPage/BuildingPage";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 
 function build({ realtyData }) {
-  
   let realtyAuction = realtyData?.auctions[0];
-  
+
   let currentValue;
   let lastBidChecking = realtyAuction.bids.slice(-1)[0].bidValue;
 
@@ -19,6 +20,9 @@ function build({ realtyData }) {
 
   return (
     <>
+      <Head>
+        <title>Iby Platform | Imóveis para alugar</title>
+      </Head>
       <Header />
       <BuildingPage
         inConstruction={realtyData.inConstruction}
@@ -56,7 +60,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (ctx) => {
   const { slug } = ctx.params;
 
-  const realtyRes = await fetch(`http://127.0.0.1:8000/api/v1/realty/${slug}`);
+  const realtyRes = await fetch(`${process.env.BASEURL}/realty/${slug}`);
   const initialRealtyData = await realtyRes.json();
   const realtyData = initialRealtyData.data._document;
 

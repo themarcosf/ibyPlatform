@@ -32,7 +32,7 @@ function ContactForm(props) {
       contactData.mobile &&
       contactData.wallet
     ) {
-      fetch(`http://127.0.0.1:8000/api/v1/user/currentUser`, {
+      fetch(`${process.env.BASEURL}/user/currentUser`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",

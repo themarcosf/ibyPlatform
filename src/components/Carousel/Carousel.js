@@ -1,9 +1,9 @@
 import Carousel from "react-bootstrap/Carousel";
-import "bootstrap/dist/css/bootstrap.css";
 import { IoIosArrowDown } from "react-icons/io";
-
 import { Link, animateScroll as scroll } from "react-scroll";
+
 import styles from "./CarouselIndex.module.scss";
+import "bootstrap/dist/css/bootstrap.css";
 
 export default function CarouselIndex() {
   return (

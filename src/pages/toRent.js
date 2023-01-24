@@ -1,3 +1,5 @@
+import Head from "next/head";
+
 import BuildingCard from "../components/BuildingCard/BuildingCard";
 import Footer from "../components/Footer/Footer";
 import NoRealty from "../components/NoRealty/NoRealty";
@@ -9,6 +11,9 @@ import styles from "../styles/toRent.module.scss";
 function pf({ realtyData }) {
   return (
     <>
+      <Head>
+        <title>Iby Platform | Imóveis para alugar</title>
+      </Head>
       <Header />
       <div className={styles.content}>
         <div className={styles.title}>
@@ -27,8 +32,7 @@ function pf({ realtyData }) {
                 ? (currentMonthValue =
                     lastBidChecking / realtyAuction.LeaseDurationMonths)
                 : (currentMonthValue =
-                    realtyAuction.minPrice /
-                    realtyAuction.LeaseDurationMonths);
+                    realtyAuction.minPrice / realtyAuction.LeaseDurationMonths);
 
               if (build.toRetrofit == false && build.inConstruction == false) {
                 return (
@@ -61,7 +65,7 @@ function pf({ realtyData }) {
 export default pf;
 
 export const getStaticProps = async () => {
-  const realtyRes = await fetch("http://127.0.0.1:8000/api/v1/realty/");
+  const realtyRes = await fetch(`${process.env.BASEURL}/realty/`);
   const initialRealtyData = await realtyRes.json();
   const realtyData = initialRealtyData.data._documents.filter((elements) => {
     return elements !== null;

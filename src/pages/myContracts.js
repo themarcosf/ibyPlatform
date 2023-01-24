@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useState, useEffect } from "react";
 import { getSession } from "next-auth/react";
 
@@ -9,7 +10,7 @@ import Filter from "../components/Filter/Filter";
 
 import styles from "../styles/myContracts.module.scss";
 
-function myContracts({realtyData}) {
+function myContracts({ realtyData }) {
   const [showModal, setShowModal] = useState(false);
   const [modalId, setModalId] = useState();
   const [auctionModalId, setAuctionModalId] = useState();
@@ -23,6 +24,9 @@ function myContracts({realtyData}) {
   if (userData) {
     return (
       <>
+        <Head>
+          <title>Iby Platform | Meus imóveis</title>
+        </Head>
         <Header />
         <div className={styles.content}>
           <div className={styles.title}>
@@ -96,7 +100,7 @@ function myContracts({realtyData}) {
 
 export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
-  const realtyRes = await fetch("http://127.0.0.1:8000/api/v1/realty/");
+  const realtyRes = await fetch(`${process.env.BASEURL}/realty/`);
   const initialRealtyData = await realtyRes.json();
   const realtyData = initialRealtyData.data._documents.filter((elements) => {
     return elements !== null;

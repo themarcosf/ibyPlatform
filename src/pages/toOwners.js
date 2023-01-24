@@ -1,14 +1,17 @@
-// import BuildingCard from "../components/BuildingCard/BuildingCard";
+import Head from "next/head";
+
+import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import NoRealty from "../components/NoRealty/NoRealty";
-import Header from "../components/Header/Header";
-// import Filter from "../components/Filter/Filter";
 
 // import styles from "../styles/toOwners.module.scss";
 
 function pj() {
   return (
     <>
+      <Head>
+        <title>Iby Platform | Para proprietários</title>
+      </Head>
       <Header />
       <NoRealty />
       <Footer />

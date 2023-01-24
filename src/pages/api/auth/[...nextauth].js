@@ -20,7 +20,7 @@ const nextAuthOptions = (req, res) => {
       async jwt({ token, user, account, profile, isNewUser }) {
         if (account) {
           const cookies = await fetch(
-            "http://127.0.0.1:8000/api/v1/user/login",
+            `${process.env.BASEURL}/user/login`,
             {
               method: "POST",
               headers: {
@@ -29,12 +29,6 @@ const nextAuthOptions = (req, res) => {
               },
             }
           ).then((res) => res.headers.get("set-cookie"));
-
-          console.log("token");
-          console.log(account.access_token);
-          console.log("cookie");
-          console.log(cookies);
-
 
           res.setHeader("Set-Cookie", cookies, {
             httpOnly: false,

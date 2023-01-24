@@ -1,6 +1,8 @@
-import styles from "./BiddedBuildingCard.module.scss";
 import Link from "next/link";
+
 import { formatToCurrency } from "../../functions/formatToCurrency";
+
+import styles from "./BiddedBuildingCard.module.scss";
 
 function BiddedBuildingCard(props) {
   const brlCurrentValue = formatToCurrency.format(props.currentValue);

@@ -1,9 +1,9 @@
-import cookieCutter from 'cookie-cutter'
+import cookieCutter from "cookie-cutter";
 
 export async function getUserData() {
-  const jwtCookie = cookieCutter.get('jwt')
-  
-  const response = await fetch(`http://127.0.0.1:8000/api/v1/user/me`, {
+  const jwtCookie = cookieCutter.get("jwt");
+
+  const response = await fetch(`${process.env.BASEURL}/user/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -11,7 +11,7 @@ export async function getUserData() {
     },
   }).then((response) => response.json());
 
-  const userData = response.data._document
+  const userData = response.data._document;
 
   return userData;
 }

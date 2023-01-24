@@ -1,11 +1,12 @@
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import { FcGoogle } from "react-icons/fc";
+import Link from "next/link";
+
+import { getUserData } from "../../functions/getUserData";
 
 import styles from "./NavBar.module.scss";
-import { getUserData } from "../../functions/getUserData";
-import { useEffect, useState } from "react";
 
 async function onLoadHandler(setUserData) {
   const data = await getUserData();
@@ -35,6 +36,7 @@ function NavBar() {
     signOut();
     router.push("/");
   }
+
   if (!session || userData) {
     return (
       <>
@@ -47,7 +49,9 @@ function NavBar() {
               <li className={router.pathname == "/toRent" ? styles.active : ""}>
                 <Link href={"/toRent"}>Imóveis para alugar</Link>
               </li>
-              <li className={router.pathname == "/toOwners" ? styles.active : ""}>
+              <li
+                className={router.pathname == "/toOwners" ? styles.active : ""}
+              >
                 <Link href={"/toOwners"}>Para proprietários</Link>
               </li>
             </div>

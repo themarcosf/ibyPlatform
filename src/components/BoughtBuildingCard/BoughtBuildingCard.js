@@ -1,6 +1,7 @@
 import { format, parseISO } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import Image from "next/image";
+
 import styles from "./BoughtBuildingCard.module.scss";
 
 function BoughtBuildingCard(props) {

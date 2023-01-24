@@ -1,13 +1,14 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { AiOutlineHeart } from "react-icons/ai";
 import IntlCurrencyInput from "react-intl-currency-input";
 
-import styles from "./BuildingPage.module.scss";
 import { formatToCurrency } from "../../functions/formatToCurrency";
 import { getUserData } from "../../functions/getUserData";
+
+import styles from "./BuildingPage.module.scss";
 
 function BuildingPage(props) {
   const router = useRouter();

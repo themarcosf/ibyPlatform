@@ -1,14 +1,17 @@
+import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { getSession, useSession, signOut } from "next-auth/react";
 import Input from "react-phone-number-input/input";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/router";
 
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 
 import styles from "../styles/myAccount.module.scss";
-// import { getUserData } from "../functions/getUserData";
+import { editUserData } from "../functions/editUserData";
+import { deleteUserData } from "../functions/deleteUserData";
 
 function myAccount(session) {
   const [userData, setUserData] = useState();
@@ -20,43 +23,22 @@ function myAccount(session) {
   const mobileInputRef = useRef();
   const walletInputRef = useRef();
   const nationalIdInputRef = useRef();
+  const router = useRouter();
 
   useEffect(() => {
     setUserData(JSON.parse(localStorage.getItem("userData")));
   }, []);
 
-
   function deleteHandler() {
     setShowModal(true);
   }
 
-  function deleteConfirmedHandler() {
-    const deletedData = {
-      username: userData.username,
-      active: false,
-      // mobile: null,
-      // wallet: "",
-      // nationalId: null,
-      // favorite: [],
-    };
-
-    fetch(`http://127.0.0.1:8000/api/v1/user/${userData.id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify(deletedData),
-    })
-      .then((response) => response.json())
-      .then(() => {
-        signOut();
-      });
-
-    // Sign out and redirect to '/'
+  async function deleteConfirmedHandler() {
+    await deleteUserData();
+    signOut();
   }
 
-  function submitHandler(event) {
+  async function submitHandler(event) {
     event.preventDefault();
     setIsEditing(false);
 
@@ -66,26 +48,20 @@ function myAccount(session) {
     const enteredNationalId = nationalIdInputRef.current.value;
 
     const dataEdited = {
-      username: enteredName,
+      name: enteredName,
       mobile: Number(enteredMobile.replace(/[^0-9.-]+/g, "").replace(/-/g, "")),
       wallet: enteredWallet,
       nationalId: enteredNationalId,
     };
 
-    fetch(`http://127.0.0.1:8000/api/v1/user/${userData.id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify(dataEdited),
-    })
-      .then((response) => response.json())
-      .then(() => {
-        toast.success("Seus dados foram editados!", {
-          position: "bottom-right",
-        });
+    if (enteredName && enteredMobile && enteredWallet && enteredNationalId) {
+      await editUserData(dataEdited);
+      router.reload();
+    } else {
+      toast.error("Preencha todos os campos!", {
+        position: "bottom-right",
       });
+    }
   }
 
   function editingHandler() {
@@ -118,6 +94,9 @@ function myAccount(session) {
             </div>
           </div>
         )}
+        <Head>
+          <title>Iby Platform | Minha conta</title>
+        </Head>
         <Header />
         <main className={styles.main}>
           <div className={styles.menu}>
@@ -143,7 +122,7 @@ function myAccount(session) {
           {status == "authenticated" && (
             <div className={styles.profile}>
               <div className={styles.imageBx}>
-                <img src={`${userData.avatar}`} />
+                <img src={`${userData.avatar}`} referrerPolicy="no-referrer" />
               </div>
               <form onSubmit={submitHandler} className={styles.form}>
                 <div className={styles.columns}>
