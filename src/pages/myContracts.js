@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import { getSession } from "next-auth/react";
 
-import BoughtBuildingCard from "../components/boughtBuildingCard/boughtBuildingCard";
+import BoughtBuildingCard from "../components/BoughtBuildingCard/BoughtBuildingCard";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import SaleModal from "../components/SaleModal/SaleModal";
