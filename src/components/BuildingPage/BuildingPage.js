@@ -46,7 +46,7 @@ function BuildingPage(props) {
     setBidVaule(value);
   }
 
-  function favoriteHandler(){
+  function favoriteHandler() {
     toast.loading("Feature em desenvolvimento", {
       duration: 3000,
       position: "bottom-right",
@@ -59,7 +59,7 @@ function BuildingPage(props) {
     if (session) {
       if (bidValue > props.currentValue) {
         const userData = await getUserData();
-        
+
         localStorage.setItem("userData", JSON.stringify(userData));
 
         const bidData = {
@@ -95,10 +95,13 @@ function BuildingPage(props) {
     }
   }
 
-  const auctionEndDate = new Date(props.auctionEndDate * 1000).toLocaleDateString(
-    "pt-BR",
-    { year: "numeric", month: "long", day: "numeric" }
-  );
+  const auctionEndDate = new Date(
+    props.auctionEndDate * 1000
+  ).toLocaleDateString("pt-BR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
   const leaseBeginDate = new Date(props.leaseBeginDate).toLocaleDateString(
     "pt-BR",
@@ -107,9 +110,7 @@ function BuildingPage(props) {
 
   return (
     <div className={styles.buildingPageContent}>
-      <h1
-        onClick={() => createUser(session.user.email, session.user.name)}
-      >{`${props.address} - ${props.district}, ${props.state}`}</h1>
+      <h1>{`${props.address} - ${props.district}, ${props.state}`}</h1>
       <div className={styles.statusAndFavorite}>
         <p>Status: {buildingStatus} </p>
         <span>
@@ -157,7 +158,9 @@ function BuildingPage(props) {
           <p className={styles.period}>
             Início do contrato no dia {leaseBeginDate}
           </p>
-          <p className={styles.period}>Período do contrato de {props.contractPeriod} anos</p>
+          <p className={styles.period}>
+            Período do contrato de {props.contractPeriod} anos
+          </p>
           <p className={styles.period}>
             {props.expired ? (
               <>
