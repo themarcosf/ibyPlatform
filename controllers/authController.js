@@ -49,7 +49,7 @@ exports.login = asyncHandler(async function (req, res, next) {
     httpOnly: false, // TODO : enable httpOnly
   };
 
-  if (process.env.NODE_ENV === "production") _options.secure = true;
+  // if (process.env.NODE_ENV === "production") _options.secure = true;
 
   res.cookie("jwt", _token, _options);
 
