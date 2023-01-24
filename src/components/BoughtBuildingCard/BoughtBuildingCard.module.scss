@@ -1,0 +1,75 @@
+.buildingCard {
+  margin: 1rem;
+  transition: 300ms;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    scale: 1.03;
+  }
+}
+
+.imgCard {
+  border-radius: 2rem;
+  display: flex;
+  margin-bottom: 1rem;
+
+  img {
+    border-radius: 2rem;
+  }
+}
+
+.infosBx {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.auctionInfos {
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    font-size: 0.8rem;
+  }
+
+  p {
+    color: #747474;
+    font-size: 0.8rem;
+    font-weight: 600;
+
+    span {
+      color: #747474;
+      text-transform: capitalize;
+    }
+  }
+}
+
+.tokenContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1rem;
+
+  p {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-right: 0.3rem;
+  }
+
+  div {
+    width: 2rem;
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 100%;
+      transform: rotate(90deg);
+    }
+  }
+}

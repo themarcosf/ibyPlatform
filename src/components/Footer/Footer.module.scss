@@ -1,0 +1,75 @@
+.footerContainer {
+  width: 100%;
+  background-color: #153a74;
+  padding: 1.5rem 3rem;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.imgBx {
+  margin-bottom: 3rem;
+  width: 100%;
+  max-width: 1300px;
+
+  img {
+    width: 10%;
+    min-width: 10rem;
+  }
+  p{
+    color: white;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  button{
+    color: white;
+    background-color:  #2e65bc;
+    margin-left: 5px;
+    border: none;
+    padding: 3px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+
+  input{
+    padding: 3px;
+    border-radius: 3px;
+    border: none;
+  }
+}
+
+.links{
+  list-style: none;
+  text-align: center;
+
+  p{
+    color: white;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  li{
+    color: white;
+    margin-bottom: 5px;
+    padding: 5px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+}
+
+.copyRight{
+  text-align: center;
+  hr{
+    background-color: aliceblue;
+    margin-bottom: 10px;
+  }
+  p{
+   
+    color: rgb(216, 216, 216);
+    font-size: 11px;
+  }
+}
+

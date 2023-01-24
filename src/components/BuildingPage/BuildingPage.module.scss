@@ -1,0 +1,143 @@
+.buildingPageContent {
+  padding: 3rem 2rem;
+  max-width: 1300px;
+
+  h1:first-of-type {
+    font-weight: 600;
+    font-size: 1.8rem;
+  }
+}
+
+.statusAndFavorite {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  p,
+  span {
+    color: #2e65bc;
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+
+    svg {
+      margin-left: 0.3rem;
+      scale: 1.1;
+      transition: 200ms;
+      cursor: pointer;
+
+      &:hover{
+        scale: 1.2
+      }
+    }
+  }
+}
+
+.imgsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  div {
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  img {
+    width: 98%;
+  }
+}
+
+.firstImg {
+  border-radius: 1.8rem 0 0 1.8rem;
+}
+
+.thirdImg {
+  border-radius: 0 1.8rem 1.8rem 0;
+}
+
+.descriptionAndCard {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.descriptionContainer {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+
+  h3,
+  p {
+    margin: 0.5rem;
+    text-align: justify;
+  }
+}
+
+.minimumValue {
+  color: #6f6f6f;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.infoContainer {
+  background: var(--gray-100);
+  padding: 1.5rem 2rem;
+  border-radius: 1.8rem;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 1rem;
+}
+
+.currentValue {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0.3rem 0;
+}
+
+.period {
+  color: #525151;
+  font-size: 0.8rem;
+  margin: 0.5rem 0;
+
+  span {
+    text-transform: capitalize;
+  }
+}
+
+.moneyContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+
+  input {
+    background: rgba(247, 247, 247, 0.96);
+    border: 1px solid rgba(105, 105, 105, 0.18);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-right: 0.5rem;
+
+    &::placeholder {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #6f6f6f;
+    }
+  }
+
+  button {
+    background: #2e65bc;
+    border-radius: 1rem;
+    padding: 1rem;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+
+    transition: 300ms;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
