@@ -18,7 +18,7 @@
     "nft"
   ],
   "engines": {
-    "node": ">=18"
+    "node": "^18"
   },
   "author": "iby Dev Team",
   "license": "UNLICENSED",

@@ -29,8 +29,20 @@ if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 // set security HTTP headers
 app.use(helmet());
 
-// cross origin resource sharing (cors)
+/**
+ * cross origin resource sharing
+ * simple requests : GET, POST
+ * non-simple requests : PUT, PATCH, DELETE, embedded cookies, non-standard headers, ...
+ * pre-flight phase : browser issues special OPTIONS request before submitting actual request
+ */
 app.use(cors());
+/**
+ * app.use(cors(), {
+ *   origin: "https: www.domain.com.br"
+ * });
+ */
+
+app.options("*", cors());
 
 // parse and control maximum request body
 app.use(express.json({ limit: "100kb" }));
