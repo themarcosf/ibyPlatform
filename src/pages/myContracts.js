@@ -16,7 +16,7 @@ function myContracts({ realtyData }) {
   const [modalId, setModalId] = useState();
   const [auctionModalId, setAuctionModalId] = useState();
   const [userData, setUserData] = useState();
-  const [realty, setRealty] = useState(0);
+  const [content, setContent] = useState(false);
 
   useEffect(() => {
     setUserData(JSON.parse(localStorage.getItem("userData")));
@@ -57,9 +57,9 @@ function myContracts({ realtyData }) {
                   const buildIndex = realtyData.indexOf(build);
 
                   if (winningBid && realtyAuction.active) {
-                    setRealty((prevState) => {
-                      return prevState++;
-                    });
+                    if (!content) {
+                      setContent(true);
+                    }
                     return (
                       <BoughtBuildingCard
                         image={build.images[0]}
@@ -78,7 +78,7 @@ function myContracts({ realtyData }) {
                   }
                 }
               })}
-              {realty == 0 && <NoContent page={"myContracts"} />}
+              {!content && <NoContent page={"myContracts"} />}
             </div>
             {/* {showModal ? (
               <SaleModal

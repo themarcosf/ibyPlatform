@@ -11,7 +11,7 @@ import NoContent from "../components/NoContent/NoContent";
 
 function myBids({ realtyData }) {
   const [userData, setUserData] = useState();
-  const [bidAmount, setBidAmount] = useState(0);
+  const [content, setContent] = useState(false);
 
   useEffect(() => {
     setUserData(JSON.parse(localStorage.getItem("userData")));
@@ -52,10 +52,9 @@ function myBids({ realtyData }) {
                   ? (currentValue = lastBidChecking)
                   : (currentValue = realtyAuction.minPrice);
 
-                setBidAmount((prevState) => {
-                  return prevState++;
-                });
-
+                if (!content) {
+                  setContent(true);
+                }
                 return (
                   <BiddedBuildingCard
                     image={build.images[0]}
@@ -72,7 +71,7 @@ function myBids({ realtyData }) {
                 );
               }
             })}
-            {bidAmount == 0 && <NoContent page={"myBids"}/>}
+            {!content && <NoContent page={"myContracts"} />}
           </div>
         </main>
         <Footer />
