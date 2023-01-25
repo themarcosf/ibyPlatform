@@ -37,6 +37,7 @@ const nextAuthOptions = (req, res) => {
         return token;
       },
     },
+    secret: process.env.NEXTAUTH_SECRET
   };
 };
 
