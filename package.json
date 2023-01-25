@@ -22,14 +22,12 @@
     "react-device-detect": "^2.2.2",
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.7.1",
+    "react-intl-currency-input": "^0.2.6",
     "react-loader-spinner": "^5.3.4",
     "react-phone-number-input": "^3.2.13",
     "react-scroll": "^1.8.9",
     "react-step-progress-bar": "^1.0.3",
     "sass": "^1.56.1"
-  },
-  "devDependencies": {
-    "react-intl-currency-input": "^0.2.6"
   },
   "engines": {
     "node": "^18"
