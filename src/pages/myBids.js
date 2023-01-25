@@ -7,9 +7,11 @@ import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 
 import styles from "../styles/myBids.module.scss";
+import NoContent from "../components/NoContent/NoContent";
 
 function myBids({ realtyData }) {
   const [userData, setUserData] = useState();
+  const [bidAmount, setBidAmount] = useState(0);
 
   useEffect(() => {
     setUserData(JSON.parse(localStorage.getItem("userData")));
@@ -50,6 +52,10 @@ function myBids({ realtyData }) {
                   ? (currentValue = lastBidChecking)
                   : (currentValue = realtyAuction.minPrice);
 
+                setBidAmount((prevState) => {
+                  return prevState++;
+                });
+
                 return (
                   <BiddedBuildingCard
                     image={build.images[0]}
@@ -66,6 +72,7 @@ function myBids({ realtyData }) {
                 );
               }
             })}
+            {bidAmount == 0 && <NoContent page={"myBids"}/>}
           </div>
         </main>
         <Footer />

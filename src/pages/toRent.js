@@ -2,11 +2,11 @@ import Head from "next/head";
 
 import BuildingCard from "../components/BuildingCard/BuildingCard";
 import Footer from "../components/Footer/Footer";
-import NoRealty from "../components/NoRealty/NoRealty";
 import Header from "../components/Header/Header";
 import Filter from "../components/Filter/Filter";
 
 import styles from "../styles/toRent.module.scss";
+import NoContent from "../components/NoContent/NoContent";
 
 function pf({ realtyData }) {
   return (
@@ -51,7 +51,7 @@ function pf({ realtyData }) {
                   />
                 );
               } else {
-                return <NoRealty />;
+                return <NoContent page="dev" />;
               }
             }
           })}

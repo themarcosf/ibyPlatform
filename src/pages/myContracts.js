@@ -9,13 +9,14 @@ import SaleModal from "../components/SaleModal/SaleModal";
 import Filter from "../components/Filter/Filter";
 
 import styles from "../styles/myContracts.module.scss";
+import NoContent from "../components/NoContent/NoContent";
 
 function myContracts({ realtyData }) {
   const [showModal, setShowModal] = useState(false);
   const [modalId, setModalId] = useState();
   const [auctionModalId, setAuctionModalId] = useState();
   const [userData, setUserData] = useState();
-  const [noBuilds, setNoBuilds] = useState(false);
+  const [realty, setRealty] = useState(0);
 
   useEffect(() => {
     setUserData(JSON.parse(localStorage.getItem("userData")));
@@ -56,6 +57,9 @@ function myContracts({ realtyData }) {
                   const buildIndex = realtyData.indexOf(build);
 
                   if (winningBid && realtyAuction.active) {
+                    setRealty((prevState) => {
+                      return prevState++;
+                    });
                     return (
                       <BoughtBuildingCard
                         image={build.images[0]}
@@ -74,6 +78,7 @@ function myContracts({ realtyData }) {
                   }
                 }
               })}
+              {realty == 0 && <NoContent page={"myContracts"} />}
             </div>
             {/* {showModal ? (
               <SaleModal
