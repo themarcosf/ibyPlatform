@@ -23,6 +23,7 @@ function Footer() {
         <hr />
         <p>
           Copyright 2023 &copy; Por 3A1,5M Ltda. Todos os direitos reservados.
+          HEROKU
         </p>
       </div>
     </div>
