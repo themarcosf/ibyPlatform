@@ -66,7 +66,9 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (ctx) => {
   const { slug } = ctx.params;
 
-  const realtyRes = await fetch(`${process.env.BASEURL}/realty/${slug}`);
+  const realtyRes = await fetch(
+    `https://enigmatic-cove-57254.herokuapp.com/api/v1/realty/${slug}`
+  );
   const initialRealtyData = await realtyRes.json();
   const realtyData = initialRealtyData.data._document;
 
