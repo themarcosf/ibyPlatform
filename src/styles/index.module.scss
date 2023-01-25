@@ -59,13 +59,15 @@
 .texts {
   margin-top: 30px;
   margin-left: 40px;
-  h3 {
+  h2{
     position: inherit;
     padding-top: 40px;
     font-size: 27px;
     color: #2e65bc;
     justify-self: unset;
     right: 15rem;
+    font-weight: 700;
+    margin-bottom: 15px;
   }
   p {
     position: inherit;
@@ -74,6 +76,22 @@
     font-weight: 500;
     right: 15rem;
   }
+}
+
+.video{
+  padding-top: 40px;
+  h2{
+    text-align: center;
+    color: #2e65bc;
+    font-weight: 700;
+    margin-bottom: 40px;
+  }
+}
+
+.firstInfo{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .esg {
@@ -126,5 +144,40 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
+  }
+}
+
+.howItWorks{
+  h2{
+    color: #2e65bc;
+    text-align: center;
+    font-weight: 700;
+    margin-top: 60px;
+  }
+}
+
+.steps{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+  h3{
+    color: #2e65bc;
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 90px;
+  }
+}
+
+.steps2{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+  h3{
+    color: #2e65bc;
+    font-size: 25px;
+    font-weight: 600;
+   
   }
 }
