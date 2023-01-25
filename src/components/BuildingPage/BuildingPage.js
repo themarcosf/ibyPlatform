@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { AiOutlineHeart, AiOutlineQuestionCircle, AiOutlineClose } from "react-icons/ai";
+import {
+  AiOutlineHeart,
+  AiOutlineQuestionCircle,
+  AiOutlineClose,
+} from "react-icons/ai";
 import IntlCurrencyInput from "react-intl-currency-input";
 
 import { formatToCurrency } from "../../functions/formatToCurrency";
@@ -103,12 +107,11 @@ function BuildingPage(props) {
   ).toLocaleDateString("pt-BR", {
     year: "numeric",
     month: "long",
-    day: "numeric",
   });
 
   const leaseBeginDate = new Date(props.leaseBeginDate).toLocaleDateString(
     "pt-BR",
-    { year: "numeric", month: "long", day: "numeric" }
+    { year: "numeric", month: "long" }
   );
 
   return (
@@ -156,24 +159,7 @@ function BuildingPage(props) {
         </div>
         <div className={styles.infoContainer}>
           <p className={styles.currentValue}>
-            {props.active ? "Valor Atual:" : "Valor Final:"} {brlCurrentValue}
-          </p>
-          {showModal && (
-            <InfoModal>
-              <p>
-              Preço de arremate é o valor dado para
-              <br /> ganhar o leilão antesda data de término.
-              </p>
-              <AiOutlineClose onClick={() => setShowModal(!showModal)}/>
-            </InfoModal>
-          )}
-          <p className={styles.p}>
-            Preço de arremate: {brlFlashPrice}
-            <AiOutlineQuestionCircle onClick={() => setShowModal(!showModal)} />
-          </p>
-          <p className={styles.p}>Início do contrato no dia {leaseBeginDate}</p>
-          <p className={styles.p}>
-            Período do contrato de {props.contractPeriod} anos
+            {!props.active ? "Valor Atual:" : "Valor Final:"} {brlCurrentValue}
           </p>
           <p className={styles.p}>
             {props.expired ? (
@@ -182,8 +168,27 @@ function BuildingPage(props) {
                 <p>Verifique seus contratos</p>
               </>
             ) : (
-              `Esse leilão se encerra dia ${auctionEndDate}`
+              `Encerramento do leilão: ${auctionEndDate}`
             )}
+          </p>
+          {showModal && (
+            <InfoModal>
+              <p>
+                Preço de arremate é o valor estipulado pelo proprietário para venda imediata. Faça seu lance nesse valor para garantir o seu imóvel.
+              </p>
+              <AiOutlineClose onClick={() => setShowModal(!showModal)} />
+            </InfoModal>
+          )}
+
+          <p className={styles.p}>Início do contrato: {leaseBeginDate}</p>
+
+          <p className={styles.p}>
+            Período do contrato: {props.contractPeriod} anos
+          </p>
+
+          <p className={styles.p}>
+            Preço de arremate: {brlFlashPrice}
+            <AiOutlineQuestionCircle onClick={() => setShowModal(!showModal)} />
           </p>
 
           {!props.expired && (

@@ -21,9 +21,8 @@ function Footer() {
 
       <div className={styles.copyRight}>
         <hr />
-        <p>IbyPlatfrom company</p>
         <p>
-          Copyright 2023 ©. All rights reserved. Powered by Inteli's students.
+          Copyright 2023 &copy; Por 3A1,5M Ltda. Todos os direitos reservados.
         </p>
       </div>
     </div>
