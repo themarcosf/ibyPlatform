@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineQuestionCircle } from "react-icons/ai";
 import IntlCurrencyInput from "react-intl-currency-input";
 
 import { formatToCurrency } from "../../functions/formatToCurrency";
@@ -15,6 +15,8 @@ function BuildingPage(props) {
   const { data: session } = useSession();
   const [buildingStatus, setbuildingStatus] = useState("Pronto para morar!");
   const [bidValue, setBidVaule] = useState();
+  const [showModal, setShowModal] = useState();
+  
 
   const currencyConfig = {
     locale: "pt-BR",
@@ -31,6 +33,7 @@ function BuildingPage(props) {
   };
 
   const brlCurrentValue = formatToCurrency.format(props.currentValue);
+  const brlFlashPrice = formatToCurrency.format(props.flashPrice);
 
   useEffect(() => {
     if (props.inConstruction == true) {
@@ -155,13 +158,20 @@ function BuildingPage(props) {
           <p className={styles.currentValue}>
             {props.active ? "Valor Atual:" : "Valor Final:"} {brlCurrentValue}
           </p>
-          <p className={styles.period}>
-            Início do contrato no dia {leaseBeginDate}
+          {showModal && (
+            <div className={styles.questionContainer}>
+              <p>Preço de arremate é o valor dado para<br/> ganhar o leilão antesda data de término.</p>
+            </div>
+          )}
+          <p className={styles.p}>
+            Preço de arremate: {brlFlashPrice}
+            <AiOutlineQuestionCircle onClick={() => setShowModal(!showModal)}/>
           </p>
-          <p className={styles.period}>
+          <p className={styles.p}>Início do contrato no dia {leaseBeginDate}</p>
+          <p className={styles.p}>
             Período do contrato de {props.contractPeriod} anos
           </p>
-          <p className={styles.period}>
+          <p className={styles.p}>
             {props.expired ? (
               <>
                 <p>Esse leilão se encerrou.</p>

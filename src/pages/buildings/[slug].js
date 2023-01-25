@@ -41,6 +41,7 @@ function build({ realtyData }) {
           id={realtyData.id}
           auctionId={realtyAuction.id}
           minPrice={realtyAuction.minPrice}
+          flashPrice={realtyAuction.flashPrice}
           active={realtyAuction.active}
           auctionEndDate={realtyAuctionEndDate}
           leaseBeginDate={realtyAuction.leaseBeginDate}
