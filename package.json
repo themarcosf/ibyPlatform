@@ -28,5 +28,8 @@
   },
   "devDependencies": {
     "react-intl-currency-input": "^0.2.6"
+  },
+  "engines": {
+    "node": "^18"
   }
 }
