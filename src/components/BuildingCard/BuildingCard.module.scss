@@ -1,0 +1,98 @@
+.buildingCard {
+  margin: 1rem;
+  transition: 300ms;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &:hover {
+    scale: 1.03;
+  }
+}
+
+.imgCard {
+  display: flex;
+  padding-left: 0.4rem;
+  margin-bottom: 1rem;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  position: relative;
+
+  div{
+    position: absolute;
+    top: 0;
+    right: -5px;
+    background-color: #fff;
+    padding: 0.6rem;
+    border-radius: 1rem;
+
+    p{
+      color: #CC0000;
+      font-weight: 600;
+    }
+  }
+
+  img {
+    border-radius: 1.2rem;
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.streetBx {
+  display: flex;
+  justify-content: space-between;
+
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+.address {
+  color: #747474;
+  font-size: 0.8rem;
+  font-weight: 600;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.buildingInfos {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+
+  span{
+    color: #2e65bc;
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+
+  p {
+    font-weight: 600;
+  }
+}
+
+.meters {
+  display: flex;
+  align-items: center;
+  p,
+  sup {
+    color: #2e65bc;
+  }
+}
+
+.expiradedText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    font-weight: 600;
+  }
+}
