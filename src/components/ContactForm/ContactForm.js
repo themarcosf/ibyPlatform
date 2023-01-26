@@ -1,18 +1,21 @@
 import { useRef, useState } from "react";
 import Input from "react-phone-number-input/input";
 import toast, { Toaster } from "react-hot-toast";
-import cookieCutter from 'cookie-cutter'
+import cookieCutter from "cookie-cutter";
+import { AiOutlineQuestionCircle, AiOutlineClose } from 'react-icons/ai'
+
+import InfoModal from '../InfoModal/InfoModal'
 
 import styles from "./ContactForm.module.scss";
 
 function ContactForm(props) {
   const [value, setValue] = useState();
+  const [showInfoModal, setShowInfoModal] = useState(false);
   const nameInputRef = useRef();
   const nationalIdInputRef = useRef();
   const mobileInputRef = useRef();
   const walletInputRef = useRef();
-  const jwtCookie = cookieCutter.get('jwt')
-
+  const jwtCookie = cookieCutter.get("jwt");
 
   function contactSubmitHandler(event) {
     event.preventDefault();
@@ -94,7 +97,28 @@ function ContactForm(props) {
           />
         </div>
         <div className={styles.field}>
-          <label>Carteira</label>
+          <div className={styles.walletBx}>
+            <label>Carteira</label>
+            <AiOutlineQuestionCircle
+              onClick={() => {
+                setShowInfoModal(!showInfoModal);
+              }}
+              fill="#1351b4"
+            />
+            {showInfoModal && (
+              <InfoModal>
+                <p>
+                  Caso possua sua própria wallet, basta registrá-la. Caso <br />
+                  não tenha, use uma dessas: <br /> <br />
+                  0x340d100601D934C0321Ef417167314b66007d4e4 <br /> <br />
+                  0x0a54a762A26c2739217Bebc160Fc532561DCcE61
+                </p>
+                <AiOutlineClose
+                  onClick={() => setShowInfoModal(!showInfoModal)}
+                />
+              </InfoModal>
+            )}
+          </div>
           <input
             type="text"
             placeholder={
