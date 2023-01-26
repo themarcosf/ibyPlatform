@@ -15,9 +15,11 @@ exports.getAllBid = asyncHandler(async function (req, res, next) {
 });
 
 exports.createBid = asyncHandler(async function (req, res, next) {
+  console.log("req.body.auctionId: ", req.body.auctionId);
   const _auction = await Auction.findById(req.body.auctionId);
 
   const _auctionContract = await auctionContract();
+  console.log("_auctionContract", _auctionContract);
   await _auctionContract.bid(
     _auction.index,
     req.body.bidValue,
