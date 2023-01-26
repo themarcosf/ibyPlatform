@@ -25,15 +25,15 @@ function PaymentMethodForm(props) {
           <p>Cartão de crédito</p>
           <IoIosArrowForward />
         </a>
-        <a onClick={() => clickHandler("débito")} className={styles.methodCard}>
+        <a className={styles.inactive}>
           <p>Cartão de débito</p>
           <IoIosArrowForward />
         </a>
-        <a onClick={clickHandler} className={styles.methodCard}>
+        <a className={styles.inactive}>
           <p>Débito em conta</p>
           <IoIosArrowForward />
         </a>
-        <a onClick={clickHandler} className={styles.methodCard}>
+        <a className={styles.inactive}>
           <p>Financiamento</p>
           <IoIosArrowForward />
         </a>

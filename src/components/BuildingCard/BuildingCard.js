@@ -16,7 +16,7 @@ function BuildingCard(props) {
               <p>Expirado</p>
             </div>
           )}
-          <img src={`/${props.image}`} alt="build-image" />
+          <img  src={`/${props.id}/image-1.jpg`} alt="build-image" />
         </div>
 
         {!props.active ? (
