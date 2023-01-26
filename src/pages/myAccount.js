@@ -2,12 +2,13 @@ import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { getSession, useSession, signOut } from "next-auth/react";
 import Input from "react-phone-number-input/input";
-import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { AiOutlineQuestionCircle, AiOutlineClose } from "react-icons/ai";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
+import InfoModal from "../components/InfoModal/InfoModal";
 
 import styles from "../styles/myAccount.module.scss";
 import { editUserData } from "../functions/editUserData";
@@ -19,6 +20,7 @@ function myAccount(session) {
   const { status } = useSession();
   const [isEditing, setIsEditing] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showInfoModal, setShowInfoModal] = useState(false);
   const nameInputRef = useRef();
   const mobileInputRef = useRef();
   const walletInputRef = useRef();
@@ -121,11 +123,8 @@ function myAccount(session) {
           </div>
           {status == "authenticated" && (
             <div className={styles.profile}>
-              <div className={styles.imageBx}>
-                <img src={`${userData.avatar}`} referrerPolicy="no-referrer" />
-              </div>
               <form onSubmit={submitHandler} className={styles.form}>
-                <div className={styles.columns}>
+                <div className={styles.container}>
                   <div className={styles.column}>
                     <div className={styles.field}>
                       <label>Nome</label>
@@ -137,36 +136,43 @@ function myAccount(session) {
                       />
                     </div>
                     <div className={styles.field}>
-                      <label>CPF/CNPJ</label>
-                      <input
-                        tabIndex={3}
-                        disabled={!isEditing}
-                        placeholder={userData?.nationalId}
-                        ref={nationalIdInputRef}
-                      />
-                    </div>
-                    <div className={styles.field}>
-                      <div className={styles.walletBx}>
-                        <label>Meio de Pagamento</label>
-                      </div>
-                      <select disabled={!isEditing} tabIndex={5}>
-                        <option>Cartão de Crédito</option>
-                        <option>Pix</option>
-                        <option>Boleto</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className={styles.column}>
-                    <div className={styles.field}>
                       <div className={styles.walletBx}>
                         <label>Carteira</label>
-                        <AiOutlineQuestionCircle fill="#1351b4" />
+                        <AiOutlineQuestionCircle
+                          onClick={() => {
+                            setShowInfoModal(!showInfoModal);
+                          }}
+                          fill="#1351b4"
+                        />
+                        {showInfoModal && (
+                          <InfoModal>
+                            <p>
+                              Caso possua sua própria wallet, basta registrá-la.
+                              Caso <br />
+                              não tenha, use uma dessas: <br />  <br />
+                              0x340d100601D934C0321Ef417167314b66007d4e4 <br />  <br />
+                              0x0a54a762A26c2739217Bebc160Fc532561DCcE61
+                            </p>
+                            <AiOutlineClose onClick={() => setShowInfoModal(!showInfoModal)} />
+                          </InfoModal>
+                        )}
                       </div>
                       <input
                         tabIndex={2}
                         disabled={!isEditing}
                         placeholder={userData?.wallet}
                         ref={walletInputRef}
+                      />
+                    </div>
+                  </div>
+                  <div className={styles.row}>
+                    <div className={styles.field}>
+                      <label>CPF/CNPJ</label>
+                      <input
+                        tabIndex={3}
+                        disabled={!isEditing}
+                        placeholder={userData?.nationalId}
+                        ref={nationalIdInputRef}
                       />
                     </div>
                     <div className={styles.field}>
