@@ -26,7 +26,7 @@ function pf({ realtyData }) {
 
             if (realtyAuction) {
               let currentMonthValue;
-              let lastBidChecking = realtyAuction.bids.slice(-1)[0].bidValue;
+              let lastBidChecking = realtyAuction.bids.at(-1)?.bidValue;
 
               lastBidChecking
                 ? (currentMonthValue =

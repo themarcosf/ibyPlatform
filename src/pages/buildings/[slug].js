@@ -10,7 +10,7 @@ function build({ realtyData }) {
   let realtyAuction = realtyData?.auctions[0];
 
   let currentValue;
-  let lastBidChecking = realtyAuction.bids.at(-1).bidValue;
+  let lastBidChecking = realtyAuction.bids.at(-1)?.bidValue;
 
   lastBidChecking
     ? (currentValue = lastBidChecking)
