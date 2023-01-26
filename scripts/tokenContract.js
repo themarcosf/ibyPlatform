@@ -46,5 +46,7 @@ const getApproved = async function (_tokenId) {
  *
  * totalSupply().then((x) => console.log(x));
  */
-
-ownerOf(1).then((x) => console.log(x));
+// safeMint("0x340d100601D934C0321Ef417167314b66007d4e4", "");
+ownerOf(0).then((x) => console.log("Owner of: ", x));
+// getApproved(1).then((x) => console.log("Get approved: ", x));
+// approve("nose bird flame start comic discover hammer palace click sniff casino above", 1);

@@ -1,6 +1,39 @@
+const fs = require("fs");
+const ethers = require("ethers");
+const { provider } = require("./../scripts/config");
 const Auction = require("../models/auctionModel");
 const { CustomError } = require("../utils/errors");
 const { asyncHandler } = require("../utils/handlers");
+
+/** BLOCKCHAIN EVENT LISTENER */
+exports.eventTransferToken = async function () {
+  console.log("entry point");
+
+  const _data = JSON.parse(
+    fs.readFileSync(`${__dirname}/../contracts/AuctionFactory.json`, "utf-8")
+  );
+
+  const contract = new ethers.Contract(
+    _data.contract.address,
+    _data.contract.abi,
+    provider
+  );
+
+  console.log("contract set up");
+
+  contract.on(
+    "transferToken",
+    asyncHandler(async (tokenId) => {
+      console.log("tokenId: ", tokenId);
+      const _auction = await Auction.find({ index: tokenId });
+      console.log("_auction: ", _auction);
+
+      await _auction.update({ $set: { status: "inactive" } });
+
+      console.log("token transferred");
+    })
+  );
+};
 
 /** ROUTE HANDLERS */
 exports.getAllAuction = asyncHandler(async function (req, res, next) {
