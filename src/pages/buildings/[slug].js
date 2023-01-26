@@ -66,9 +66,6 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (ctx) => {
   const { slug } = ctx.params;
 
-  console.log(slug);
-  console.log(process.env.BASEURL);
-
   const realtyRes = await fetch(`${process.env.BASEURL}/realty/${slug}`);
   const initialRealtyData = await realtyRes.json();
   const realtyData = initialRealtyData.data._document;
