@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./Footer.module.scss";
 
 function Footer() {
@@ -6,16 +7,13 @@ function Footer() {
       <div className={styles.row}>
         <div className={styles.imgBx}>
           <img src="/platform_white.png"></img>
-          <p>Contact Us</p>
-          <input placeholder="How we can help you?"></input>
-          <button>Send</button>
         </div>
         <div className={styles.links}>
-          <p>About IbyPlatform</p>
-          <li>Partner with Us</li>
-          <li>Terms & Conditions</li>
-          <li>Cookie Statement</li>
-          <li>Privacy Statement</li>
+          <p>Mapa do site</p>
+          <li><Link href={'/'}>Início</Link></li>
+          <li><Link href={'/toRent'}>Imóveis para alugar</Link></li>
+          <li><Link href={'/toOwners'}>Para proprietários</Link></li>
+          <li><Link href={'#'}>Quem somos</Link></li>
         </div>
       </div>
 
@@ -23,7 +21,6 @@ function Footer() {
         <hr />
         <p>
           Copyright 2023 &copy; Por 3A1,5M Ltda. Todos os direitos reservados.
-          HEROKU
         </p>
       </div>
     </div>
