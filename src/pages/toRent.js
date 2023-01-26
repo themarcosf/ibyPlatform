@@ -73,5 +73,6 @@ export const getStaticProps = async () => {
 
   return {
     props: { realtyData },
+    revalidate: 10,
   };
 };
