@@ -1,8 +1,9 @@
 .content{
     padding: 1rem;
-    max-width: 1300px;
-    min-width: 1000px;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
 
     h1{
         color: #2E65BC;
@@ -14,8 +15,9 @@
 .title{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-between!important;
     align-items: center;
+    width: 100%;
 }
 
 .filters{
@@ -48,5 +50,6 @@
 .cardsContainer{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly
+    justify-content: space-evenly;
+    max-width: 980px;
 }
