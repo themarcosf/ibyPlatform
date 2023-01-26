@@ -12,7 +12,7 @@ function BiddedBuildingCard(props) {
     <Link href={`/buildings/${props.id}`}>
       <div className={styles.buildingCard}>
         <div className={styles.imgCard}>
-          <img src={`/${props.image}`} alt="build-image" />
+          <img src={`/${props.id}/image-1.jpg`} alt="build-image" />
         </div>
 
         <div className={styles.streetBx}>

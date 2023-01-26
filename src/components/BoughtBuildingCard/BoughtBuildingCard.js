@@ -26,7 +26,7 @@ function BoughtBuildingCard(props) {
       <div className={styles.buildingCard}>
         <div className={styles.imgCard}>
           <Image
-            src={`/${props.image}`}
+            src={`/${props.id}/image-1.jpg`}
             width={256}
             height={256}
             priority

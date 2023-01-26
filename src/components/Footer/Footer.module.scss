@@ -36,7 +36,7 @@
 
   
   p{
-    color: white;
+    color: white!important;
     font-weight: 700;
     margin-bottom: 10px;
     text-align: center;
@@ -44,11 +44,15 @@
   li{
     text-align: center;
     width: max-content;
-    color: white;
+    color: white!important;
     margin-bottom: 5px;
     padding: 5px;
     font-size: 13px;
     cursor: pointer;
+
+    a:hover{
+      color: white!important;
+    }
   }
 }
 
