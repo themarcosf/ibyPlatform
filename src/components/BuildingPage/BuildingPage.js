@@ -21,6 +21,8 @@ function BuildingPage(props) {
   const [buildingStatus, setbuildingStatus] = useState("Pronto para morar!");
   const [bidValue, setBidVaule] = useState();
   const [showModal, setShowModal] = useState();
+  const [brlCurrentValue, setBrlCurrentValue] = useState(formatToCurrency.format(props.currentValue));
+  const [brlFlashPrice, setBrlFlashPrice] = useState(formatToCurrency.format(props.flashPrice));
 
   const currencyConfig = {
     locale: "pt-BR",
@@ -35,9 +37,6 @@ function BuildingPage(props) {
       },
     },
   };
-
-  const brlCurrentValue = formatToCurrency.format(props.currentValue);
-  const brlFlashPrice = formatToCurrency.format(props.flashPrice);
 
   useEffect(() => {
     if (props.inConstruction == true) {
@@ -159,17 +158,10 @@ function BuildingPage(props) {
         </div>
         <div className={styles.infoContainer}>
           <p className={styles.currentValue}>
-            {!props.active ? "Valor Atual:" : "Valor Final:"} {brlCurrentValue}
+            Valor Atual: {brlCurrentValue}
           </p>
           <p className={styles.p}>
-            {props.expired ? (
-              <>
-                <p>Esse leilão se encerrou.</p>
-                <p>Verifique seus contratos</p>
-              </>
-            ) : (
-              `Encerramento do leilão: ${auctionEndDate}`
-            )}
+              Encerramento do leilão: {auctionEndDate}
           </p>
           {showModal && (
             <InfoModal>

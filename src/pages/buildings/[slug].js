@@ -10,11 +10,11 @@ function build({ realtyData }) {
   let realtyAuction = realtyData?.auctions[0];
 
   let currentValue;
-  let lastBidChecking = realtyAuction.bids.slice(-1)[0].bidValue;
+  let lastBidChecking = realtyAuction.bids.at(-1).bidValue;
 
   lastBidChecking
     ? (currentValue = lastBidChecking)
-    : (currentValue = realtyAuction.minAskValue);
+    : (currentValue = realtyAuction.minPrice);
 
   let realtyAuctionEndDate = new Date(realtyAuction.auctionEndDate).getTime();
 
@@ -42,7 +42,6 @@ function build({ realtyData }) {
           auctionId={realtyAuction.id}
           minPrice={realtyAuction.minPrice}
           flashPrice={realtyAuction.flashPrice}
-          active={realtyAuction.active}
           auctionEndDate={realtyAuctionEndDate}
           leaseBeginDate={realtyAuction.leaseBeginDate}
           leaseEndDate={realtyAuction.leaseEndDate}
