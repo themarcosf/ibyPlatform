@@ -56,7 +56,7 @@ function myContracts({ realtyData }) {
 
                   const buildIndex = realtyData.indexOf(build);
 
-                  if (winningBid && realtyAuction.active) {
+                  if (winningBid && !realtyAuction.active) {
                     if (!content) {
                       setContent(true);
                     }

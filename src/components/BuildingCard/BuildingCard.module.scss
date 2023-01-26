@@ -3,7 +3,9 @@
   transition: 300ms;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   max-width: 230px;
+  min-height: 295px;
 
   &:hover {
     scale: 1.03;
@@ -24,11 +26,6 @@
     background-color: #fff;
     padding: 0.6rem;
     border-radius: 1rem;
-
-    p {
-      color: #cc0000;
-      font-weight: 600;
-    }
   }
 
   img {
@@ -81,15 +78,5 @@
   p,
   sup {
     color: #2e65bc;
-  }
-}
-
-.expiradedText {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  p {
-    font-weight: 600;
   }
 }

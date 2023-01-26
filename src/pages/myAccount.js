@@ -13,13 +13,14 @@ import InfoModal from "../components/InfoModal/InfoModal";
 import styles from "../styles/myAccount.module.scss";
 import { editUserData } from "../functions/editUserData";
 import { deleteUserData } from "../functions/deleteUserData";
+import DeleteModal from "../components/DeleteModal/DeleteModal";
 
 function myAccount(session) {
   const [userData, setUserData] = useState();
   const [value, setValue] = useState();
   const { status } = useSession();
   const [isEditing, setIsEditing] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const nameInputRef = useRef();
   const mobileInputRef = useRef();
@@ -32,7 +33,7 @@ function myAccount(session) {
   }, []);
 
   function deleteHandler() {
-    setShowModal(true);
+    setShowDeleteModal(true);
   }
 
   async function deleteConfirmedHandler() {
@@ -79,23 +80,25 @@ function myAccount(session) {
   if (userData) {
     return (
       <>
-        {showModal && (
-          <div className={styles.deleteContainer}>
-            <p>
-              Deseja realmente <b>DELETAR</b> sua conta?
-            </p>
-            <div>
-              <a
-                onClick={() => {
-                  setShowModal(false);
-                }}
-              >
-                Não
-              </a>
-              <a onClick={deleteConfirmedHandler}>Sim</a>
-            </div>
+        <DeleteModal
+          showDeleteModal={showDeleteModal}
+          setShowDeleteModal={setShowDeleteModal}
+        >
+          <p>
+            Deseja realmente <b>DELETAR</b> sua conta?
+          </p>
+          <div className={styles.buttonContainer}>
+            <a
+              onClick={() => {
+                setShowDeleteModal(false);
+              }}
+            >
+              Não
+            </a>
+            <a onClick={deleteConfirmedHandler}>Sim</a>
           </div>
-        )}
+          ;
+        </DeleteModal>
         <Head>
           <title>Iby Platform | Minha conta</title>
         </Head>
@@ -149,11 +152,14 @@ function myAccount(session) {
                             <p>
                               Caso possua sua própria wallet, basta registrá-la.
                               Caso <br />
-                              não tenha, use uma dessas: <br />  <br />
-                              0x340d100601D934C0321Ef417167314b66007d4e4 <br />  <br />
+                              não tenha, use uma dessas: <br /> <br />
+                              0x340d100601D934C0321Ef417167314b66007d4e4 <br />{" "}
+                              <br />
                               0x0a54a762A26c2739217Bebc160Fc532561DCcE61
                             </p>
-                            <AiOutlineClose onClick={() => setShowInfoModal(!showInfoModal)} />
+                            <AiOutlineClose
+                              onClick={() => setShowInfoModal(!showInfoModal)}
+                            />
                           </InfoModal>
                         )}
                       </div>

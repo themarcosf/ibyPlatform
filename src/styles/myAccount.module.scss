@@ -30,50 +30,11 @@
   }
 }
 
-.deleteContainer {
-  background: rgba(247, 247, 247);
-  border: 1px solid rgba(112, 112, 112, 0.46);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  padding: 5rem;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
+.buttonContainer {
   display: flex;
-  flex-direction: column;
-  border-radius: 1rem;
-  transition: 400ms ;
-
-  b {
-    color: red;
-  }
-
-  div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    a {
-      all:unset;
-      margin: 3rem 1rem 0rem;
-      border-radius: 1rem;
-      padding: 1rem;
-      background-color: red;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-
-      &:first-of-type {
-        background-color: green;
-        color: white;
-        border: none;
-      }
-
-      &:hover {
-        transform: scale(0.97);
-      }
-    }
-  }
+  flex-direction: row!important;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .imageBx {
@@ -117,12 +78,12 @@
 .column {
   margin-right: 4rem;
 
-  input{
+  input {
     width: 500px;
   }
 }
 
-.row{
+.row {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -161,17 +122,17 @@
   position: relative;
   width: 500px;
 
-  div{
+  div {
     top: -2.5rem;
     right: -80%;
     padding: 0.2rem 0.6rem 0.2rem 0.2rem;
   }
 
-  svg{
+  svg {
     transition: 200ms;
     cursor: pointer;
 
-    &:hover{
+    &:hover {
       scale: 1.1;
     }
   }
