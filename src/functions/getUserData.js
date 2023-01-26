@@ -3,7 +3,7 @@ import cookieCutter from "cookie-cutter";
 export async function getUserData() {
   const jwtCookie = cookieCutter.get("jwt");
 
-  const response = await fetch(`${process.env.BASEURL}/user/me`, {
+  const response = await fetch(`https://enigmatic-cove-57254.herokuapp.com/api/v1/user/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
