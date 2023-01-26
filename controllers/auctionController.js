@@ -46,7 +46,7 @@ exports.eventTransferToken = async function () {
 /** ROUTE HANDLERS */
 exports.getAllAuction = asyncHandler(async function (req, res, next) {
   // get all auctions from collection
-  const _auction = await Auction.find().populate("bids");
+  const _auction = await Auction.find({ status: "active" }).populate("bids");
 
   // end request
   res
