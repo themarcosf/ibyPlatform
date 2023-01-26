@@ -71,7 +71,7 @@ function myBids({ realtyData }) {
                 );
               }
             })}
-            {!content && <NoContent page={"myContracts"} />}
+            {!content && <NoContent page={"myBids"} />}
           </div>
         </main>
         <Footer />
@@ -101,6 +101,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: { realtyData },
+    revalidate: 10,
   };
 }
 
