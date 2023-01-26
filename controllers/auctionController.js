@@ -2,6 +2,7 @@ const fs = require("fs");
 const ethers = require("ethers");
 const { provider } = require("./../scripts/config");
 const Auction = require("../models/auctionModel");
+const Realty = require("./../models/realtyModel");
 const { CustomError } = require("../utils/errors");
 const { asyncHandler } = require("../utils/handlers");
 
@@ -23,9 +24,16 @@ exports.eventTransferToken = async function () {
 
   contract.on(
     "transferToken",
-    asyncHandler(async (tokenId) => {
+    asyncHandler(async (tokenId, timestamp) => {
       console.log("tokenId: ", tokenId);
-      const _auction = await Auction.find({ index: tokenId });
+      console.log("timestamp: ", timestamp);
+
+      const _realty = await Realty.find({ tokenId });
+
+      const _auction = await Auction.find({
+        realtyId: _realty._id,
+        status: "active",
+      });
       console.log("_auction: ", _auction);
 
       await _auction.update({ $set: { status: "inactive" } });
