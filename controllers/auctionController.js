@@ -30,10 +30,13 @@ exports.eventTransferToken = async function () {
 
       const _realty = await Realty.find({ tokenId: parseInt(tokenId) });
 
-      const [_auction] = await Auction.find({
+      console.log("_realty: ", _realty);
+
+      const _auction = await Auction.find({
         realtyId: _realty._id,
         status: "active",
       });
+
       console.log("_auction: ", _auction);
 
       await _auction.update({ $set: { status: "inactive" } });
