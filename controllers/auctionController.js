@@ -28,11 +28,11 @@ exports.eventTransferToken = async function () {
       console.log("tokenId: ", tokenId);
       console.log("timestamp: ", timestamp);
 
-      const _realty = await Realty.find({ tokenId: parseInt(tokenId) });
+      const [_realty] = await Realty.find({ tokenId: parseInt(tokenId) });
 
       console.log("_realty: ", _realty);
 
-      const _auction = await Auction.find({
+      const [_auction] = await Auction.find({
         realtyId: _realty._id,
         status: "active",
       });
