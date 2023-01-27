@@ -19,28 +19,23 @@ function Home() {
       <div className={styles.body}>
         <Header />
         <CarouselIndex />
-        <div id="video" className={styles.video}>
-          <h2 id="howStarted">Conheça a Iby Platform</h2>
-          <Video />
-        </div>
         <div className={styles.firstInfo}>
           <div className={styles.texts}>
-            <h2>O que é a plataforma Iby?</h2>
+            <h2 id="howStarted">O que é a plataforma Iby?</h2>
             <p>
-              Nossa solução busca facilitar a destinação de imóveis da União
-              através da venda de NFTs para
-              <br /> empresas e fundos de investimento imobiliário por um
-              período fixo de 10 anos. Cada NFT dá
-              <br /> direito ao uso semestral do imóvel a que faz referência e
-              podem ser revendidas para pessoas <br />
-              físicas ou empresas que queiram alugar residências ou imóveis
-              comerciais. Acreditamos que a<br /> proposta de valor esteja
-              direcionada para empresas do setor imobiliário e fundos que adotem
-              <br /> um modelo de negócios de reforma e valorização de imóveis.
-              Como possui valor de revenda,
-              <br /> as pessoas físicas ou empresas que comprarem tais NFT
-              poderão observar ganhos em seus
-              <br /> investimentos no momento da revenda
+              Nossa solução busca facilitar o aluguel de imóveis através da
+              transferência de NFTs por um determinado <br />
+              período de tempo definido pelo dono do imóvel. Cada NFT dá direito
+              ao uso semestral do imóvel a que faz <br />
+              referência. Além disso, os tokens podem ser revendidos para
+              pessoas físicas ou empresas que queiram <br />
+              alugar residências ou imóveis comerciais. Acreditamos que a
+              principal proposta de valor da Iby esteja <br />
+              intrinsecamente direcionada para indivíduos com interesse de
+              permanência longa ou em ganhos com <br />
+              a valorização dos imóveis. Como as NFTs possuem valor, as pessoas
+              que as comprarem poderão observar <br />
+              ganhos em seus investimentos no momento da revenda.
             </p>
             <h2>Qual o nosso objetivo?</h2>
             <p>
@@ -64,13 +59,17 @@ function Home() {
             <Lottie animationData={blueNft} />
           </div>
         </div>
+        <div id="video" className={styles.video}>
+          <h2>Saiba mais sobre a Platforma Iby</h2>
+          <Video />
+        </div>
         <div className={styles.howItWorks}>
           <h2>Como a Iby funciona?</h2>
           <div className={styles.steps}>
             <div>
               <h3>1° Passo</h3>
               <p>
-                Acesse nosso painel com todos imóveis que <br /> estão
+                Acesse nosso painel no qual apresenta todos imóveis <br />que  estão
                 disponíveis para serem alugados. Você <br /> pode favoritar os
                 imóveis que mais gostar.
                 <br /> Clique em uma propriedade para ter uma <br /> descrição
@@ -104,7 +103,7 @@ function Home() {
               <h3>2° Passo</h3>
               <p>
                 Se você ainda não tiver um perfil na plataforma,
-                <br /> irá ser redirecionado para a um pequeno
+                <br /> você será redirecionado para a um pequeno
                 <br /> cadastro e após isso fará a confirmação da sua
                 <br /> oferta. Se o seu lance for o vencedor os NFT’s <br />
                 serão enviados automaticamente para sua <br />
@@ -120,7 +119,7 @@ function Home() {
                 <br /> os benefícios que a Iby oferece. Desta forma, você <br />
                 pode revender suas NFT’s por um determinado
                 <br /> período de tempo escolhido para que deste
-                <br /> modo o mesmo se valorize.
+                <br /> modo as mesmas se valorizem.
               </p>
             </div>
             <div

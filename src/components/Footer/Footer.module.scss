@@ -4,11 +4,10 @@
   padding: 1.5rem 3rem 0.7rem;
 }
 
-.row{
+.row {
   display: flex;
   flex-direction: row;
   align-items: center;
-
 }
 
 .imgBx {
@@ -20,52 +19,55 @@
     width: 10%;
     min-width: 10rem;
   }
-  p{
+  p {
     color: white;
     font-weight: 600;
     margin-bottom: 5px;
   }
 }
 
-.links{
+.links {
   list-style: none;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 
-  
-  p{
-    color: white!important;
+  p {
+    color: white !important;
     font-weight: 700;
     margin-bottom: 10px;
     text-align: center;
   }
-  li{
+  li {
     text-align: center;
     width: max-content;
-    color: white!important;
+    color: white !important;
     margin-bottom: 5px;
     padding: 5px;
     font-size: 13px;
     cursor: pointer;
 
-    a:hover{
-      color: white!important;
+    a {
+      &:hover {
+        color: white !important;
+      }
+
+      &:visited {
+        color: white !important;
+      }
     }
   }
 }
 
-.copyRight{
+.copyRight {
   text-align: center;
-  hr{
+  hr {
     background-color: aliceblue;
     margin-bottom: 10px;
   }
-  p{
-   
+  p {
     color: rgb(216, 216, 216);
     font-size: 11px;
   }
 }
-

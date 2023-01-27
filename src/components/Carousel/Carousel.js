@@ -10,10 +10,13 @@ export default function CarouselIndex() {
     <div>
       <Carousel indicators={false}>
         <Carousel.Item className={styles.carrouselItem}>
-          <img src="/carousel1.png" alt="Image One" />
+          <img src="/carousel1.svg" alt="Image_One" />
         </Carousel.Item>
         <Carousel.Item className={styles.carrouselItem}>
-          <img src="/carousel2.png" alt="Image Two" />
+          <img src="/carousel2.svg" alt="Image_Two" />
+        </Carousel.Item>
+        <Carousel.Item className={styles.carrouselItem}>
+          <img src="/carousel3.svg" alt="Image_Three" />
         </Carousel.Item>
       </Carousel>
       <Link to="howStarted">
