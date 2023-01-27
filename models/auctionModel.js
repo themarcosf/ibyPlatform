@@ -47,7 +47,6 @@ const auctionSchema = new mongoose.Schema(
         values: ["active", "inactive"],
         message: "Invalid status",
       },
-      select: false,
     },
     createdAt: {
       type: Date,
