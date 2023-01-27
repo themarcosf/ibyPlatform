@@ -1,11 +1,11 @@
 [
   {
-    "realtyId": "63bbc4fe06023b5bc31e8fba",
-    "index": 1,
-    "minPrice": 360000,
-    "flashPrice": 400000,
-    "auctionEndDate": 1677330753,
+    "realtyId": "63bbc4fe06023b5bc31e8fb9",
+    "index": 11,
+    "minPrice": 672000,
+    "flashPrice": 770000,
+    "auctionEndDate": 1677375865,
     "leaseBeginDate": "March 01, 2023 00:00:00",
-    "leaseEndDate": "February 28, 2033 00:00:00"
+    "leaseEndDate": "February 28, 2031 00:00:00"
   }
 ]

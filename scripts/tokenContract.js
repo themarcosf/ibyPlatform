@@ -19,6 +19,7 @@ const ownerOf = async function (_tokenId) {
   return await _tokenContract.ownerOf(_tokenId);
 };
 
+// @dev fromMnemonic(<MNEMONIC>, `m/44'/60'/0'/0/1`) to get second HD account
 const approve = async function (_mnemonic, _tokenId) {
   const wallet = new ethers.Wallet.fromMnemonic(_mnemonic).connect(provider);
 
@@ -40,13 +41,9 @@ const getApproved = async function (_tokenId) {
 /**
  * EXAMPLE CALLS :
  *
- * const currentTimestampInSeconds = Math.round(Date.now() / 1000);
- * const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
- * const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
- *
- * totalSupply().then((x) => console.log(x));
+ * totalSupply().then((nrTokens) => console.log("total supply: ", parseInt(nrTokens)));
+ * safeMint("<ACCOUNT_ADDRESS>", "");
+ * ownerOf(<TOKEN_ID>).then((tokenId) => console.log("Owner of: ", tokenId));
+ * approve("<MNEMONIC>", <TOKEN_ID>);
+ * getApproved(<TOKEN_ID>).then((tokenId) => console.log("Get approved: ", tokenId));
  */
-// safeMint("0x340d100601D934C0321Ef417167314b66007d4e4", "");
-ownerOf(0).then((x) => console.log("Owner of: ", x));
-// getApproved(1).then((x) => console.log("Get approved: ", x));
-// approve("nose bird flame start comic discover hammer palace click sniff casino above", 1);

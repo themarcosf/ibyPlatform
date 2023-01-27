@@ -33,16 +33,9 @@ const getAuction = async function (_auctionId) {
  * const currentTimestampInSeconds = Math.round(Date.now() / 1000);
  * const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
  * const endTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
- * auction(0, 10000, endTime, 20000).then((x) => console.log(x));
+ * auction(<TOKEN_ID>, <MIN_PRICE>, endTime, <FLASH_PRICE>).then((auction) => console.log(auction));
  *
- * getAuction(0).then((x) => console.log(x));
+ * getAuction(<AUCTION_ID>).then((auction) => console.log(auction));
  *
- * bid(0, 10001, "0x340d100601D934C0321Ef417167314b66007d4e4");
+ * bid(<AUCTION_ID>, <AMOUNT>, "<BIDDER>");
  */
-
-// const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-// const ONE_MONTH_IN_SECS = 30 * 24 * 60 * 60;
-// const endTime = currentTimestampInSeconds + ONE_MONTH_IN_SECS;
-// auction(1, 360000, endTime, 400000).then((x) => console.log(x));
-
-getAuction(0).then((x) => console.log(x));
