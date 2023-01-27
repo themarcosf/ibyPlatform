@@ -21,33 +21,28 @@ function BiddedBuildingCard(props) {
         <p className={styles.address}>
           {props.district}, {props.state}
         </p>
-        {props.expired ? (
-          <div className={styles.expiradedBx}>
-            <p>Leilão expirado</p>
+
+        <div className={styles.buildingInfos}>
+          <div className={styles.valuesContainer}>
+            <span>Seu lance:</span>
+            <p>{brluserBid}</p>
+            <span>Valor Atual:</span>
+            <p>{brlCurrentValue}</p>
           </div>
-        ) : (
-          <div className={styles.buildingInfos}>
-            <div className={styles.valuesContainer}>
-              <span>Seu lance:</span>
-              <p>{brluserBid}</p>
-              <span>Valor Atual:</span>
-              <p>{brlCurrentValue}</p>
+          {props.winningBid ? (
+            <div className={styles.winningBidTrue}>
+              <p>
+                Seu lance está <br /> na frente
+              </p>
             </div>
-            {props.winningBid ? (
-              <div className={styles.winningBidTrue}>
-                <p>
-                  Seu lance está <br /> na frente
-                </p>
-              </div>
-            ) : (
-              <div className={styles.winningBidFalse}>
-                <p>
-                  Seu lance não <br /> está na frente
-                </p>
-              </div>
-            )}
-          </div>
-        )}
+          ) : (
+            <div className={styles.winningBidFalse}>
+              <p>
+                Seu lance não <br /> está na frente
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </Link>
   );

@@ -66,7 +66,7 @@ function ContactForm(props) {
           <label>Nome completo</label>
           <input
             type="text"
-            placeholder={props.userData.username}
+            placeholder={props.userData.name}
             ref={nameInputRef}
           />
         </div>
