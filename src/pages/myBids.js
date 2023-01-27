@@ -52,23 +52,24 @@ function myBids({ realtyData }) {
                   ? (currentValue = lastBidChecking)
                   : (currentValue = realtyAuction.minPrice);
 
-                if (!content) {
-                  setContent(true);
+                if (userLastBid.bidValue < realtyAuction.flashPrice) {
+                  if (!content) {
+                    setContent(true);
+                  }
+                  return (
+                    <BiddedBuildingCard
+                      image={build.images[0]}
+                      address={build.address}
+                      district={build.district}
+                      state={build.state}
+                      currentValue={currentValue}
+                      key={build.id}
+                      id={build.id}
+                      winningBid={winningBid}
+                      userBid={userLastBid.bidValue}
+                    />
+                  );
                 }
-                return (
-                  <BiddedBuildingCard
-                    image={build.images[0]}
-                    address={build.address}
-                    district={build.district}
-                    state={build.state}
-                    currentValue={currentValue}
-                    key={build.id}
-                    id={build.id}
-                    winningBid={winningBid}
-                    expired={build.active}
-                    userBid={userLastBid.bidValue}
-                  />
-                );
               }
             })}
             {!content && <NoContent page={"myBids"} />}

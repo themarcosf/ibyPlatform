@@ -150,12 +150,20 @@ function myAccount(session) {
                         {showInfoModal && (
                           <InfoModal>
                             <p>
-                              Caso possua sua própria wallet, basta registrá-la.
-                              Caso <br />
-                              não tenha, use uma dessas: <br /> <br />
+                              Caso possua sua própria wallet, basta informa-la.
+                              Caso não tenha,
+                              <br />
+                              use uma dessas por enquanto:
+                              <br /> <br />
                               0x340d100601D934C0321Ef417167314b66007d4e4 <br />{" "}
                               <br />
-                              0x0a54a762A26c2739217Bebc160Fc532561DCcE61
+                              0x0a54a762A26c2739217Bebc160Fc532561DCcE61 <br />
+                              <br />
+                              Está no nosso pipeline a criação de uma solução de
+                              wallet própria.
+                              <br />
+                              Com isso, seremos capazes de criar e armazenar
+                              carteiras para os clientes.
                             </p>
                             <AiOutlineClose
                               onClick={() => setShowInfoModal(!showInfoModal)}

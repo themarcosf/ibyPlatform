@@ -56,10 +56,10 @@ function myContracts({ realtyData }) {
 
                   const buildIndex = realtyData.indexOf(build);
 
-                  if (winningBid && !realtyAuction.active) {
-                    if (!content) {
-                      setContent(true);
-                    }
+                  if (winningBid /*&& realtyAuction.status == "inactive"*/) {
+                    // if (!content) {
+                    //   setContent(true);
+                    // }
                     return (
                       <BoughtBuildingCard
                         image={build.images[0]}
@@ -78,7 +78,7 @@ function myContracts({ realtyData }) {
                   }
                 }
               })}
-              {!content && <NoContent page={"myContracts"} />}
+              {!content && <NoContent page={"dev"} />}
             </div>
             {/* {showModal ? (
               <SaleModal

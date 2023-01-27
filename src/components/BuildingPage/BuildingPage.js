@@ -13,16 +13,18 @@ import { formatToCurrency } from "../../functions/formatToCurrency";
 import { getUserData } from "../../functions/getUserData";
 
 import styles from "./BuildingPage.module.scss";
-import InfoModal from "../InfoModal/InfoModal";
 
 function BuildingPage(props) {
   const router = useRouter();
   const { data: session } = useSession();
   const [buildingStatus, setbuildingStatus] = useState("Pronto para morar!");
   const [bidValue, setBidVaule] = useState();
-  const [showModal, setShowModal] = useState();
-  const [brlCurrentValue, setBrlCurrentValue] = useState(formatToCurrency.format(props.currentValue));
-  const [brlFlashPrice, setBrlFlashPrice] = useState(formatToCurrency.format(props.flashPrice));
+  const [brlCurrentValue, setBrlCurrentValue] = useState(
+    formatToCurrency.format(props.currentValue)
+  );
+  const [brlFlashPrice, setBrlFlashPrice] = useState(
+    formatToCurrency.format(props.flashPrice)
+  );
 
   const currencyConfig = {
     locale: "pt-BR",
@@ -59,6 +61,20 @@ function BuildingPage(props) {
     });
   }
 
+  function infoHandler() {
+    toast.success(
+      "Preço de arremate é o valor estipulado pelo proprietário para venda imediata. Faça seu lance nesse valor para garantir o seu imóvel.",
+      {
+        duration: 3000,
+        position: "bottom-right",
+        iconTheme: {
+          primary: "#2e65bc",
+          secondary: "#fff",
+        },
+      }
+    );
+  }
+
   async function handleSubmit(event, value) {
     event.preventDefault();
 
@@ -78,6 +94,7 @@ function BuildingPage(props) {
 
         const auctionData = {
           minPrice: props.minPrice,
+          flashPrice: props.flashPrice,
           currentValue: props.currentValue,
           auctionId: props.auctionId,
         };
@@ -155,34 +172,25 @@ function BuildingPage(props) {
         <div className={styles.descriptionContainer}>
           <h3>Descrição</h3>
           <p>{props.description}</p>
+          <a 
+            className={`${styles.blockchainBtn} ${styles.stroke}`}
+            href="https://goerli.etherscan.io/address/0x815B5cEA41e62BEE311baeDB22E52DD8ecB9861c"
+            target={"_blank"}
+          >
+            Veja mais sobre esse contrato na blockchain!
+          </a>
         </div>
         <div className={styles.infoContainer}>
-          <p className={styles.currentValue}>
-            Valor Atual: {brlCurrentValue}
-          </p>
-          <p className={styles.p}>
-              Encerramento do leilão: {auctionEndDate}
-          </p>
-          {showModal && (
-            <InfoModal>
-              <p>
-                Preço de arremate é o valor estipulado pelo proprietário para venda imediata. Faça seu lance nesse valor para garantir o seu imóvel.
-              </p>
-              <AiOutlineClose onClick={() => setShowModal(!showModal)} />
-            </InfoModal>
-          )}
-
+          <p className={styles.currentValue}>Valor Atual: {brlCurrentValue}</p>
+          <p className={styles.p}>Encerramento do leilão: {auctionEndDate}</p>
           <p className={styles.p}>Início do contrato: {leaseBeginDate}</p>
-
           <p className={styles.p}>
             Período do contrato: {props.contractPeriod} anos
           </p>
-
           <p className={styles.p}>
             Preço de arremate: {brlFlashPrice}
-            <AiOutlineQuestionCircle onClick={() => setShowModal(!showModal)} />
+            <AiOutlineQuestionCircle onClick={infoHandler} />
           </p>
-
           {!props.expired && (
             <form className={styles.moneyContainer} onSubmit={handleSubmit}>
               <IntlCurrencyInput

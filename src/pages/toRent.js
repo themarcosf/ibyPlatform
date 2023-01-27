@@ -25,33 +25,39 @@ function pf({ realtyData }) {
             let realtyAuction = build?.auctions[0];
 
             if (realtyAuction) {
-              let currentMonthValue;
-              let lastBidChecking = realtyAuction.bids.at(-1)?.bidValue;
+              if (realtyAuction.status == "active") {
+                let currentMonthValue;
+                let lastBidChecking = realtyAuction.bids.at(-1)?.bidValue;
 
-              lastBidChecking
-                ? (currentMonthValue =
-                    lastBidChecking / realtyAuction.LeaseDurationMonths)
-                : (currentMonthValue =
-                    realtyAuction.minPrice / realtyAuction.LeaseDurationMonths);
+                lastBidChecking
+                  ? (currentMonthValue =
+                      lastBidChecking / realtyAuction.LeaseDurationMonths)
+                  : (currentMonthValue =
+                      realtyAuction.minPrice /
+                      realtyAuction.LeaseDurationMonths);
 
-              if (build.toRetrofit == false && build.inConstruction == false) {
-                return (
-                  <BuildingCard
-                    image={build.images[0]}
-                    inConstruction={build.inConstruction}
-                    toRetrofit={build.toRetrofit}
-                    address={build.address}
-                    district={build.district}
-                    state={build.state}
-                    currentMonthValue={currentMonthValue}
-                    sqMeters={build.sqMeters}
-                    key={build.id}
-                    id={build.id}
-                    active={realtyAuction.active}
-                  />
-                );
-              } else {
-                return <NoContent page="dev" />;
+                if (
+                  build.toRetrofit == false &&
+                  build.inConstruction == false
+                ) {
+                  return (
+                    <BuildingCard
+                      image={build.images[0]}
+                      inConstruction={build.inConstruction}
+                      toRetrofit={build.toRetrofit}
+                      address={build.address}
+                      district={build.district}
+                      state={build.state}
+                      currentMonthValue={currentMonthValue}
+                      sqMeters={build.sqMeters}
+                      key={build.id}
+                      id={build.id}
+                      active={realtyAuction.active}
+                    />
+                  );
+                } else {
+                  return <NoContent page="dev" />;
+                }
               }
             }
           })}
