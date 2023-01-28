@@ -36,6 +36,7 @@ function myContracts({ realtyData }) {
           </div>
           <div className={styles.cardsWrapper}>
             <div className={styles.cardsContainer}>
+              {/*
               {realtyData.map((build) => {
                 let realtyAuction = build?.auctions[0];
 
@@ -56,7 +57,7 @@ function myContracts({ realtyData }) {
 
                   const buildIndex = realtyData.indexOf(build);
 
-                  if (winningBid /*&& realtyAuction.status == "inactive"*/) {
+                  if (winningBid && realtyAuction.status == "inactive") {
                     // if (!content) {
                     //   setContent(true);
                     // }
@@ -78,6 +79,7 @@ function myContracts({ realtyData }) {
                   }
                 }
               })}
+              */}
               {!content && <NoContent page={"dev"} />}
             </div>
             {/* {showModal ? (

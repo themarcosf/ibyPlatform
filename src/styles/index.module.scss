@@ -57,16 +57,9 @@
 
 .steps {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
   align-items: center;
-
-  div {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
+  justify-content: center;
 
   h3 {
     color: #2e65bc;
@@ -75,7 +68,16 @@
     margin-top: 2rem;
   }
 
-  p {
-    max-width: 40%;
+  p{
+    width: 65%;
   }
+
+}
+
+.stepBx {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
 }

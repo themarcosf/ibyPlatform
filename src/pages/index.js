@@ -67,8 +67,8 @@ function Home() {
         <div className={styles.howItWorks}>
           <h2>Como a Iby funciona?</h2>
           <div className={styles.steps}>
-            <h3>1° Passo</h3>
-            <div>
+            <div className={styles.stepBx}>
+              <h3>1° Passo</h3>
               <p>
                 Acesse a página de imóveis disponíveis e confira os detalhes dos
                 que você mais gostar. Lembre de favoritar os imóveis que mais
@@ -78,32 +78,32 @@ function Home() {
                 da proposta oferecida e o preço faça sentido para você, faça o
                 seu lance ou garanta o imóvel pelo preço de arremate.
               </p>
-              <div
-                style={{
-                  width: "30%",
-                  position: "relative",
-                  left: "3%",
-                }}
-              >
-                <Lottie animationData={BlueHouse} />
-              </div>
+            </div>
+            <div
+              style={{
+                width: "30%",
+                position: "relative",
+                left: "3%",
+              }}
+            >
+              <Lottie animationData={BlueHouse} />
             </div>
           </div>
           <div className={styles.steps}>
-            <h3>2° Passo</h3>
-            <div>
-              <div
-                style={{
-                  width: "25%",
-                  position: "relative",
-                  left: "1%",
-                  marginRight: "100px",
-                  margin: "2rem 100px 2rem 0"
-                }}
-              >
-                <Lottie animationData={Nft} />
-              </div>
-              <p style={{textAlign: "end"}}>
+            <div
+              style={{
+                width: "25%",
+                position: "relative",
+                left: "1%",
+                marginRight: "100px",
+                margin: "2rem 100px 2rem 0",
+              }}
+            >
+              <Lottie animationData={Nft} />
+            </div>
+            <div className={styles.stepBx}>
+              <h3>2° Passo</h3>
+              <p style={{ textAlign: "end" }}>
                 Se você ainda não tiver um perfil na plataforma, não tem
                 problema. Pensando na sua segurança, você será redirecionado
                 para realizar seu login com seu conta do Google. É seguro, fácil
@@ -115,8 +115,8 @@ function Home() {
             </div>
           </div>
           <div className={styles.steps}>
-            <h3>3° Passo</h3>
-            <div>
+            <div className={styles.stepBx}>
+              <h3>3° Passo</h3>
               <p>
                 Pronto! Agora é só pensar em deixar o seu cantinho pronto para
                 receber os amigos, família e quem mais você quiser. Aproveite
@@ -126,16 +126,16 @@ function Home() {
                 explorar o mundo, lembre que pode colocar seu token para revenda
                 na nossa plataforma. Vamos juntos!
               </p>
-              <div
-                style={{
-                  width: "35%",
-                  position: "relative",
-                  left: "3%",
-                  marginBottom: "3rem"
-                }}
-              >
-                <Lottie animationData={Relax} />
-              </div>
+            </div>
+            <div
+              style={{
+                width: "35%",
+                position: "relative",
+                left: "3%",
+                marginBottom: "3rem",
+              }}
+            >
+              <Lottie animationData={Relax} />
             </div>
           </div>
         </div>
