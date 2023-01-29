@@ -106,7 +106,7 @@ function Home() {
               <p style={{ textAlign: "end" }}>
                 Se você ainda não tiver um perfil na plataforma, não tem
                 problema. Pensando na sua segurança, você será redirecionado
-                para realizar seu login com seu conta do Google. É seguro, fácil
+                para realizar seu login com sua conta do Google. É seguro, fácil
                 e após isso você poderá confirmar seus dados cadastrais, que
                 serão submetidos a uma análise de crédito rápida e simples. Se o
                 seu lance for o vencedor, o token será enviado automaticamente

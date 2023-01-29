@@ -96,6 +96,7 @@ function BuildingPage(props) {
           minPrice: props.minPrice,
           flashPrice: props.flashPrice,
           currentValue: props.currentValue,
+          contractPeriod: props.contractPeriod,
           auctionId: props.auctionId,
         };
 

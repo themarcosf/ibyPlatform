@@ -58,13 +58,14 @@ function FinishingBid(props) {
     const brlLastBidValue = formatToCurrency.format(props.bidData.lastBidValue);
     const brlMinPrice = formatToCurrency.format(auctionData.minPrice);
     const brlCurrentValue = formatToCurrency.format(auctionData.currentValue);
+
     return (
       <>
         <div className={styles.content}>
           <h1>Finalizar lance</h1>
           <div className={styles.infoContainer}>
             <p>Valor mínimo: {brlMinPrice}</p>
-            <p>Período: 10 anos</p>
+            <p>Período: {auctionData.contractPeriod} anos</p>
             <h3>Valor atual: {brlCurrentValue}</h3>
             <h2>Seu Lance é: {brlLastBidValue}</h2>
           </div>
