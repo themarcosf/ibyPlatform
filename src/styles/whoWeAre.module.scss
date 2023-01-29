@@ -1,0 +1,75 @@
+.wrapperContainer {
+  padding: 2rem 4rem;
+  h1 {
+    color: #2e65bc;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.texts {
+  width: 80%;
+
+  p {
+    margin: 1.5rem 0 !important;
+  }
+}
+
+.ourTeamWrapper {
+  h1 {
+    margin-bottom: 2rem;
+  }
+
+  strong{
+    margin: 0.5rem 0;
+  }
+}
+
+.memberBx {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 560px;
+  margin-bottom: 3rem;
+}
+
+.imgBx {
+  width: 200px;
+
+  img {
+    width: 100%;
+    border-radius: 50%;
+  }
+}
+
+.memberBio {
+  p {
+    text-align: center;
+    margin: 0.5rem 0!important;
+  }
+}
+
+.links{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: 0.5rem 0;
+
+    svg{
+        scale: 1.5;
+        fill: #2e65bc;
+        transition: 200ms;
+
+        &:hover{
+            scale: 1.6;
+        }
+
+    }
+}

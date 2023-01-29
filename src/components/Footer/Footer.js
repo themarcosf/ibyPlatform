@@ -22,7 +22,7 @@ function Footer() {
             <Link href={"/toOwners"}>Para proprietários</Link>
           </li>
           <li>
-            <Link href={"#"}>Quem somos</Link>
+            <Link href={"/whoWeAre"}>Quem somos</Link>
           </li>
         </div>
       </div>
