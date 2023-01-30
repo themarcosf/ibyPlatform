@@ -17,7 +17,7 @@ function whoWeAre() {
             <h1>Quem Somos</h1>
             <p>
               A Iby surgiu no começo de dezembro de 2022 durante a participação
-              em um hackathon promovido pela Secretária do Patrimônio da União,
+              em um hackathon promovido pela Secretaria do Patrimônio da União,
               no qual fomos premiados no Desafio “Destinação dos bens da União”
               pela nossa proposta de alienação dos imóveis por meio de NFT com
               registro imobiliário e garantia de legitimidade por parte da
