@@ -24,6 +24,9 @@ function Footer() {
           <li>
             <Link href={"/whoWeAre"}>Quem somos</Link>
           </li>
+            <li>
+              <Link href={"/pdf/privacyPolicy.pdf"}>Política de privacidade</Link>
+            </li>
         </div>
       </div>
 
