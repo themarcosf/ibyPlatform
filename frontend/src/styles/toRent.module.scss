@@ -1,0 +1,55 @@
+.content{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+
+    h1{
+        color: #2E65BC;
+        font-weight: 600;
+    }
+
+}
+
+.title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between!important;
+    align-items: center;
+    width: 100%;
+}
+
+.filters{
+    margin: 1rem;
+    right: 3rem;
+    display: flex;
+    justify-content: flex-end;
+
+    img{
+        width: 22px;
+    }
+    button{
+        
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 0.3rem;
+        border-radius: 0.5rem;
+        border: 1px solid rgba(46, 101, 188, 0.25);
+        background-color: #F8F8F8;
+    }
+    p{
+        margin-top: 3px;
+        margin-left: 8px;
+        font-weight: 600;
+        color: #2E65BC;
+    }
+}
+
+.cardsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    max-width: 980px;
+}

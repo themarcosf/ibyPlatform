@@ -1,0 +1,49 @@
+.content {
+  text-align: center;
+  h1 {
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: #2e65bc;
+    margin: 2rem 0 1.5rem;
+  }
+}
+
+.infoContainer {
+  background: rgba(217, 217, 217, 0.13);
+  border: 2px solid #c1c1c1;
+  border-radius: 1.8rem;
+  padding: 1rem 2.5rem;
+
+  p {
+    font-weight: 500;
+    font-size: 1rem;
+    color: #525151;
+    margin: 0.7rem 0;
+  }
+
+  h3 {
+    font-weight: 500;
+    font-size: 1.4rem;
+    color: #2e65bc;
+    margin: 0.7rem 0;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #2e65bc;
+    margin: 0.7rem 0;
+  }
+}
+
+.bidBtnBx {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 6rem;
+
+  button {
+    width: max-content;
+  }
+}

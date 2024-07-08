@@ -1,0 +1,16 @@
+.main {
+  padding: 3rem 1.5rem;
+
+  h1{
+    color: #2E65BC;
+    font-weight: 600;
+}
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  justify-content: space-evenly;
+}

@@ -1,0 +1,20 @@
+.bar {
+  height: 2;
+  width: 300px;
+}
+
+.step {
+  color: white;
+  width: 1.6rem;
+  height: 1.6rem;
+  font-size: 12px;
+  background-color: rgba(211, 211, 211);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.step.complete {
+  background-color: #2e65bc;
+}

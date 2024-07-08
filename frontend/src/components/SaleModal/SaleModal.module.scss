@@ -1,0 +1,120 @@
+.cardContainer {
+  background: #f5f5f5;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 1.8rem;
+  height: min-content;
+  padding: 1rem;
+  transition: 300ms;
+  position: absolute;
+  right: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h3 {
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+}
+
+.content {
+  display: flex;
+}
+
+.firstColumn {
+  img {
+    border-radius: 1.8rem;
+    margin: 1rem 1rem 1rem 0;
+  }
+}
+
+.infosBx {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  p {
+    color: #747474;
+    font-size: 0.8rem;
+    font-weight: 600;
+
+    span {
+      color: #747474;
+      text-transform: capitalize;
+    }
+  }
+}
+
+.secondColumn {
+  margin-top: 1rem;
+}
+
+.calendar {
+  p {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  div {
+    border: #747474 1px solid;
+    border-radius: 1rem;
+    height: 2rem;
+    width: 100%;
+    margin: 1rem 0rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.salesBx {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+
+  p {
+    font-size: 0.8rem;
+    font-weight: 600;
+    align-self: flex-start;
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    background: rgba(247, 247, 247, 0.96);
+    border: 1px solid rgba(105, 105, 105, 0.18);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-bottom: 2.5rem;
+
+    &::placeholder {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #6f6f6f;
+    }
+  }
+
+  button {
+    background: #2e65bc;
+    border-radius: 1rem;
+    padding: 1rem;
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+
+    transition: 300ms;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}

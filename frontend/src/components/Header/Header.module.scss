@@ -1,0 +1,24 @@
+.headerContainer {
+  height: 64px;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.imgBx {
+  height: 64px;
+  margin-left: 5rem;
+
+  img {
+    height: 100%;
+    padding: 0.15rem 0;
+  }
+}
+
+.bxShadowNone {
+  box-shadow: none !important;
+}
