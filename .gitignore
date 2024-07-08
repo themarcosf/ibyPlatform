@@ -1,3 +1,7 @@
+# hardhat artifacts
+artifacts/
+cache/
+
 # dependencies
 node_modules/
 .next/
