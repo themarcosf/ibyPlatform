@@ -5,7 +5,7 @@ const {
   readAll,
   updateOne,
   deleteOne,
-} = require("./../utils/handlers");
+} = require("../backend/utils/handlers");
 //////////////////////////////////////////////////////////////////
 
 const populateOptions = {

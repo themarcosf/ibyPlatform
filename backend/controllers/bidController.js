@@ -1,7 +1,7 @@
 const Bid = require("../models/bidModel");
 const Auction = require("./../models/auctionModel");
-const { asyncHandler } = require("../utils/handlers");
-const { auctionContract } = require("./../scripts/accessContracts");
+const { asyncHandler } = require("../backend/utils/handlers");
+const { auctionContract } = require("../backend/scripts/accessContracts");
 
 /** ROUTE HANDLERS */
 exports.getAllBid = asyncHandler(async function (req, res, next) {

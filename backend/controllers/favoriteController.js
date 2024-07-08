@@ -1,5 +1,5 @@
 const Favorite = require("../models/favoriteModel");
-const { asyncHandler } = require("../utils/handlers");
+const { asyncHandler } = require("../backend/utils/handlers");
 
 /** specific-purpose route handlers */
 exports.toggleFavorite = asyncHandler(async function (req, res, next) {

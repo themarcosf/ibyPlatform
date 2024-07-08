@@ -1,10 +1,10 @@
 const fs = require("fs");
 const ethers = require("ethers");
-const { provider } = require("./../scripts/config");
+const { provider } = require("../backend/scripts/config");
 const Auction = require("../models/auctionModel");
 const Realty = require("./../models/realtyModel");
-const { CustomError } = require("../utils/errors");
-const { asyncHandler } = require("../utils/handlers");
+const { CustomError } = require("../backend/utils/errors");
+const { asyncHandler } = require("../backend/utils/handlers");
 
 /** BLOCKCHAIN EVENT LISTENER */
 exports.eventTransferToken = async function () {

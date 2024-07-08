@@ -1,5 +1,5 @@
 const User = require("../models/userModel");
-const { setupResponse } = require("./../utils/utils");
+const { setupResponse } = require("../backend/utils/utils");
 const {
   asyncHandler,
   createOne,
@@ -7,7 +7,7 @@ const {
   readAll,
   updateOne,
   deleteOne,
-} = require("../utils/handlers");
+} = require("../backend/utils/handlers");
 
 /** specific-purpose route handlers */
 exports.readCurrentUser = (req, res, next) => {

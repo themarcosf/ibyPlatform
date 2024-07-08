@@ -10,7 +10,7 @@ const userRouter = require("./routers/userRouter");
 const realtyRouter = require("./routers/realtyRouter");
 const auctionRouter = require("./routers/auctionRouter");
 const favoriteRouter = require("./routers/favoriteRouter");
-const errController = require("./controllers/errController");
+const errController = require("../controllers/errController");
 //////////////////////////////////////////////////////////////////
 
 const app = express();

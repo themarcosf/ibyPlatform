@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 const User = require("./../models/userModel");
-const { CustomError } = require("./../utils/errors");
-const { asyncHandler } = require("./../utils/handlers");
-const { jwtTokenGenerator, setupResponse } = require("./../utils/utils");
+const { CustomError } = require("../backend/utils/errors");
+const { asyncHandler } = require("../backend/utils/handlers");
+const { jwtTokenGenerator, setupResponse } = require("../backend/utils/utils");
 
 /**
  * username & password validation is done by next-auth

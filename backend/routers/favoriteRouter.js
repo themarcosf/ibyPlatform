@@ -1,5 +1,5 @@
 const express = require("express");
-const favoriteController = require("../controllers/favoriteController");
+const favoriteController = require("../../controllers/favoriteController");
 
 // @dev mergeParms default: false
 const router = express.Router({ mergeParams: true });
